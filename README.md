@@ -1,11 +1,12 @@
 # One Stop Solutions: pitch websites
 
-Three single-file websites for **One Stop Solutions**, each with its CSS and JavaScript inline:
+Four single-file websites for **One Stop Solutions**, each with its CSS and JavaScript inline:
 
 | Page | File | Who it is for |
 | --- | --- | --- |
 | Agency OS pitch deck | `index.html` | Investors |
 | Client pitch | `pitch/index.html` | Clients and leads |
+| Beere Kesava ERP deck | `beere-kesava/index.html` | Beere Kesava, investors and silk businesses |
 | Team playbook | `playbook/index.html` | The One Stop team only |
 
 ## View them
@@ -31,6 +32,29 @@ A short, visual pitch for clients. Every line is a few words.
 | Working together | Six promises and what guides us |
 | Start | Discovery call, proposal, kickoff, and contact details with copy buttons |
 
+## Beere Kesava ERP deck (`beere-kesava/`)
+
+A pitch for the ERP One Stop built for Beere Kesava & Brothers Silks, Dharmavaram. It uses the ERP's own wine, gold and cream colours, its Fraunces headings and its brand photos, on the same layout as the other pages. Every line is a few words, and every product fact comes from the ERP's code. The images are embedded, so the file works on its own.
+
+| Section | What it shows |
+| --- | --- |
+| Hero | "From yarn to sale. One portal." with a rotating ring of the twelve steps and a stat bar |
+| Walkthrough | A twelve-step player, one ERP screen per step |
+| Built for | Who it is for, and simplified ERP screens in a slider |
+| Before and after | Paper books flip into ERP screens, plus eight questions answered |
+| Journey | Buy, Make, Check, Sell as a clickable diagram, draggable step cards, and who, what and what it replaces for each step |
+| One scan | Scan a sample saree tag and its whole story appears |
+| Six portals | Flick cards for every role, each opening what that role uses and what is kept from them |
+| Night shift | A 24-hour dial with the overnight checks and WhatsApp reports |
+| Documents | Eight GST-ready documents in a fan, and WhatsApp delivery |
+| Control | OTP sign-in, sign-in location, hidden money, approvals, signatures and the audit log |
+| What it gives back | Work removed, a savings estimator with drag sliders, leaks plugged, and the one-time investment |
+| Built to last | Data tables, modules, tests and the stack, for investors |
+| Paper to portal | A six-step roll-out trail, ideas for later, and other silk towns |
+| See it live | Walkthrough steps and contact details with copy buttons |
+
+The savings estimator only uses the numbers the visitor sets. No prices are quoted anywhere.
+
 ## Team playbook (`playbook/`)
 
 The team's process and library in one place: search everything with `/` or Ctrl+K.
@@ -45,7 +69,7 @@ The shared version of the playbook is a Claude artifact with a shared database, 
 
 - HTML, CSS and vanilla JavaScript, one file per page
 - [GSAP 3.13](https://gsap.com/) (Draggable, InertiaPlugin, ScrollTrigger, CustomEase) and [Lenis 1.3.4](https://lenis.darkroom.engineering/) from jsDelivr
-- Geist, Geist Mono and Caveat from Google Fonts
+- Geist, Geist Mono and Caveat from Google Fonts, plus Fraunces for the Beere Kesava deck
 - Keyboard support for sliders and dialogs, and reduced motion for visitors who ask for it
 
 `assets/onestop-logo.svg` is the Onestop wordmark used on every page.
