@@ -1,16 +1,56 @@
-# Agency OS Pitch Deck
+# One Stop Solutions: pitch websites
 
-An investor pitch deck website for **Agency OS** by **One Stop Solutions**: one operating system for freelancers and agencies, from getting found to the final handoff.
+Three single-file websites for **One Stop Solutions**, each with its CSS and JavaScript inline:
 
-The whole site is one file, `index.html`, with its CSS and JavaScript inline.
+| Page | File | Who it is for |
+| --- | --- | --- |
+| Agency OS pitch deck | `index.html` | Investors |
+| Client pitch | `pitch/index.html` | Clients and leads |
+| Team playbook | `playbook/index.html` | The One Stop team only |
 
-## View it
+## View them
 
-Open `index.html` in a browser. Fonts and the animation libraries load from public CDNs, so an internet connection gives the full experience. Without one, every section still renders and the sliders fall back to native scrolling.
+Open any of the files in a browser. Fonts and the animation libraries load from public CDNs, so an internet connection gives the full experience. Without one, every section still renders and the sliders fall back to native scrolling.
 
-To host it, publish the repository with GitHub Pages (Settings → Pages → Deploy from a branch) or drop `index.html` on any static host.
+To host the investor deck or the client pitch, publish the repository with GitHub Pages (Settings → Pages → Deploy from a branch) or drop the file on any static host. **Keep `playbook/` off public hosting**: it is internal. If you publish the repository with GitHub Pages, everything in it becomes public, the playbook included.
 
-## What the deck covers
+## Client pitch (`pitch/`)
+
+A short, visual pitch for clients. Every line is a few words.
+
+| Section | What it shows |
+| --- | --- |
+| Hero | "Build once. Earn for years." with a rotating ring of all sixteen services |
+| Process reel | A seven-phase walkthrough player |
+| Our work | Who we are, and four products we have built |
+| Why one team | Hiring separately versus One Stop (flip between the two) and five differences |
+| Services | Five practices and sixteen services. Each card opens its delivery route, deliverables and phases |
+| How we work | The Double Diamond as a clickable diagram, draggable phase cards, and what we do, what you get and what we need in each phase |
+| Research pack | Ten research documents as flick cards, each with what is inside |
+| What you keep | Twenty-one deliverables, phase by phase |
+| Working together | Six promises and what guides us |
+| Start | Discovery call, proposal, kickoff, and contact details with copy buttons |
+
+## Team playbook (`playbook/`)
+
+The team's process and library in one place: search everything with `/` or Ctrl+K.
+
+- **Process**: the seven phases with a step checklist, files produced, exit gate, and the tools, prompts and research linked to each phase.
+- **Services**: the delivery route for each of the sixteen services.
+- **Research, Prompts, Tools, Knowledge**: libraries the team can add to, edit and delete from. The Tools tab pins the simple everyday core stack at the top.
+
+The shared version of the playbook is a Claude artifact with a shared database, so anything a teammate adds appears for everyone. The copy in this repository has no shared database: it starts from the same starter library and saves changes only in the browser that made them.
+
+## Built with
+
+- HTML, CSS and vanilla JavaScript, one file per page
+- [GSAP 3.13](https://gsap.com/) (Draggable, InertiaPlugin, ScrollTrigger, CustomEase) and [Lenis 1.3.4](https://lenis.darkroom.engineering/) from jsDelivr
+- Geist, Geist Mono and Caveat from Google Fonts
+- Keyboard support for sliders and dialogs, and reduced motion for visitors who ask for it
+
+`assets/onestop-logo.svg` is the Onestop wordmark used on every page.
+
+## Agency OS pitch deck (`index.html`)
 
 | Section | What it shows |
 | --- | --- |
@@ -34,18 +74,9 @@ To host it, publish the repository with GitHub Pages (Settings → Pages → Dep
 | Open questions | Six decisions to settle before design |
 | Invest | Contact details with copy buttons |
 
-## Built with
-
-- HTML, CSS and vanilla JavaScript in a single file
-- [GSAP 3.13](https://gsap.com/) (Draggable, InertiaPlugin, ScrollTrigger, CustomEase) and [Lenis 1.3.4](https://lenis.darkroom.engineering/) from jsDelivr
-- Geist, Geist Mono and Caveat from Google Fonts
-- Keyboard support for sliders and dialogs, and reduced motion for visitors who ask for it
-
-`assets/onestop-logo.svg` is the Onestop wordmark used in the deck.
-
 ## Contact
 
-- Phone: +91 90149 52056
-- Email: leeladharabburi2032@gmail.com
+- Phone / WhatsApp: +91 90149 52056
 - Agency: workwithonestop@gmail.com
+- Email: leeladharabburi2032@gmail.com
 - Website: https://onestopsolutions.framer.website/
