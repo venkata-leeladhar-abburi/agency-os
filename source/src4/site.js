@@ -137,6 +137,10 @@ const MK = {
     <div class="mk-aos__main"><div class="mk__top"><b>Agency OS</b><em>Owner</em></div>
     <div class="mk-aos__kpis"><span><small>Leads</small><b>24</b></span><span><small>Projects</small><b>8</b></span><span class="is-hot"><small>Invoices due</small><b>3</b></span></div>
     <div class="mk-aos__pipe">${['Lead', 'Proposal', 'Design', 'Build', 'Launch'].map((t, i) => `<span style="--h:${[78, 56, 64, 46, 34][i]}%;--i:${i}"><i></i>${t}</span>`).join('')}</div></div></div>`,
+  scampus: () => `<div class="mk mk-sc"><aside><span class="mk-sc__logo"><i>S</i>S-Campus</span>${['Dashboard', 'Admissions', 'Exams', 'Hostel', 'Transport', 'Finance'].map((t, i) => `<span class="${i === 4 ? 'is-on' : ''}">${t}</span>`).join('')}</aside>
+    <div class="mk-sc__main"><div class="mk__top"><b>Transport</b><em>Admin portal</em></div>
+    <div class="mk-sc__kpis"><span class="is-hot"><small>Students</small><b>1,240</b></span><span><small>Routes</small><b>18</b></span><span><small>Portals</small><b>9</b></span></div>
+    <div class="mk-sc__rows">${[['Route 03 · North loop', 'Live'], ['Route 07 · City', 'Done'], ['Route 11 · East', 'Next']].map(([t, st], i) => `<span><i style="--i:${i}"></i>${t}<em class="is-${st.toLowerCase()}">${st}</em></span>`).join('')}</div></div></div>`,
   silkerp: () => `<div class="mk mk-erp"><div class="mk-erp__nav">${CREST}<b>BEERE KESAVA</b><em class="is-on">Overview</em><em>Production</em><em>Finance</em></div>
     <div class="mk-erp__hero"><small>SINCE 1999 · SUPERADMIN</small><b>From yarn <i>to sale.</i><br>One portal.</b></div>
     <div class="mk-erp__stats"><span><small>Active weavers</small><b>41</b></span><span><small>In production</small><b>12</b></span><span class="is-gold"><small>Dispatched</small><b>118</b></span></div></div>`
@@ -146,15 +150,10 @@ const RES = [
   { mk: 'playbook', tag: 'Inside the team', name: 'The playbook', line: 'Every phase has a checklist, files and an exit gate.', href: 'playbook/', cta: 'Open the playbook' },
   { mk: 'pitch', tag: 'For clients', name: 'Client pitch', line: 'What we do, how we work and what you keep.', href: 'pitch/', cta: 'Open the pitch' }
 ];
-const DECKS = [
-  { mk: 'agencyos', name: 'Agency OS', line: 'The platform we built to run an agency.', href: 'agency-os/' },
-  { mk: 'silkerp', name: 'Silk ERP', line: 'Yarn to sale for a silk saree business.', href: 'beere-kesava/' },
-  { mk: 'pitch', name: 'Client pitch', line: 'One Stop, start to finish.', href: 'pitch/' }
-];
 const PRODS = [
-  { name: 'Silk ERP', from: 'Built for Beere Kesava & Brothers Silks', line: 'Run a textile business from yarn to sale. Six role portals, GST billing, WhatsApp reports.', img: 'img/bk-dash.webp', logo: `${CREST}Silk ERP`, status: 'Live', deck: 'beere-kesava/', p: 'bk' },
-  { name: 'Agency OS', from: 'Our own product', line: 'Run a whole agency in one place. Leads, projects, client portals and the playbook.', mark: `${GLYPH}Agency OS`, status: 'Live', deck: 'agency-os/', p: 'agencyos' },
-  { name: 'S-Campus', from: 'College management SaaS', line: 'Admissions to transport. Nine portals, one platform for the whole college.', mark: '<i class="sc">S</i>S-Campus', status: 'Design ready', p: 'scampus' }
+  { name: 'Silk ERP', from: 'Built for Beere Kesava & Brothers Silks', line: 'Run a textile business from yarn to sale. Six role portals, GST billing, WhatsApp reports.', mk: 'silkerp', status: 'Live', deck: 'beere-kesava/', p: 'bk' },
+  { name: 'Agency OS', from: 'Our own product', line: 'Run a whole agency in one place. Leads, projects, client portals and the playbook.', mk: 'agencyos', status: 'Live', deck: 'agency-os/', p: 'agencyos' },
+  { name: 'S-Campus', from: 'College management SaaS', line: 'Admissions to transport. Nine portals, one platform for the whole college.', mk: 'scampus', status: 'Design ready', p: 'scampus' }
 ];
 
 const STAGES = [
@@ -183,7 +182,8 @@ const FAQ = [
 const initials = n => n.replace(/[^A-Za-z ]/g, '').split(' ').filter(Boolean).slice(0, 2).map(w => w[0]).join('').toUpperCase();
 const face = (n, file) => `<span class="face"><b>${initials(n)}</b><img src="${FR}${file}?scale-down-to=512" alt="" loading="lazy" referrerpolicy="no-referrer" data-remote></span>`;
 const imgSrc = (p, n) => (typeof n === 'string' ? `img/${n}.webp` : IMG(p.key, n));
-const thumbOf = p => (p.key ? `<img src="${imgSrc(p, p.cover)}" alt="" loading="lazy">` : p.logo ? `<span class="tile is--logo"><img src="img/logo-${p.logo}.webp" alt="" loading="lazy"></span>` : `<span class="tile"><b>${esc(p.mark || p.name)}</b></span>`);
+const coverKind = p => (p.imgs ? (p.imgs.find(i => i[0] === p.cover) || p.imgs[0])[1] : '');
+const thumbOf = p => (p.key ? (coverKind(p) === 'phone' ? `<span class="thumb-phone"><img src="${imgSrc(p, p.cover)}" alt="" loading="lazy"></span>` : `<img src="${imgSrc(p, p.cover)}" alt="" loading="lazy">`) : p.logo ? `<span class="tile is--logo"><img src="img/logo-${p.logo}.webp" alt="" loading="lazy"></span>` : `<span class="tile"><b>${esc(p.mark || p.name)}</b></span>`);
 const ext = u => (/^https?:/.test(u) ? ' target="_blank" rel="noopener"' : '');
 const arrow = '<svg class="btn__icon" viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-ur"/></svg>';
 
@@ -340,11 +340,13 @@ function renderServices() {
     <div class="svc__foot"><span class="svc__work">Seen in ${esc(c.work)}</span><a class="link-arrow" href="#contact" data-need="${esc(c.need)}">Start this project <svg viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-r"/></svg></a></div></div></article>`).join('');
   $('#also').innerHTML = ALSO.map(([t, l], i) => `<div class="also__item"><span class="eyebrow tnum">${pad(i + 1)}</span><b>${esc(t)}</b><span>${esc(l)}</span></div>`).join('');
   $('#res').innerHTML = RES.map((r, i) => `<a class="res${i === 1 ? ' is--hot' : ''}" href="${r.href}"><span class="res__view">${MK[r.mk]()}</span><span class="res__body"><span class="eyebrow">${esc(r.tag)}</span><b class="h-s">${esc(r.name)}</b><span class="res__line">${esc(r.line)}</span><span class="res__cta">${esc(r.cta)} <svg viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-ur"/></svg></span></span></a>`).join('');
-  $('#decks').innerHTML = DECKS.map(d => `<a class="deck" href="${d.href}"><span class="deck__view">${MK[d.mk]()}</span><span class="deck__body"><b>${esc(d.name)}</b><span>${esc(d.line)}</span></span><span class="deck__open">Open deck <svg viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-ur"/></svg></span></a>`).join('');
-  $('#prods').innerHTML = PRODS.map(x => `<article class="prod"><div class="prod__img${x.img ? '' : ' is--mark'}">${x.img ? `<img src="${x.img}" alt="" loading="lazy"><span class="prod__logo">${x.logo}</span>` : `<span class="prod__mark">${x.mark}</span>`}<span class="tag" data-theme="${x.status === 'Live' ? 'volt' : 'white'}" data-shape="round">${x.status}</span></div>
+  $('#prods').innerHTML = PRODS.map(x => {
+    const live = byId(x.p).live;
+    return `<article class="prod"><div class="prod__view">${MK[x.mk]()}<span class="tag" data-theme="${x.status === 'Live' ? 'volt' : 'white'}" data-shape="round">${x.status}</span></div>
     <div class="prod__body"><p class="eyebrow">${esc(x.from)}</p><h3 class="h-s">${esc(x.name)}</h3><p class="p-s">${esc(x.line)}</p>
-    <div class="prod__acts">${x.deck ? `<a class="btn" data-theme="volt" data-size="s" href="${x.deck}"><span class="btn__label">Pitch deck</span>${arrow}</a>` : ''}${byId(x.p).live ? `<button class="btn" type="button" data-theme="glass" data-shape="round" data-size="s" data-live="${x.p}"><span class="btn__label">Preview</span></button>` : ''}</div>
-    <a class="link-arrow is--light" href="#contact" data-need="Something like your products" data-product="${esc(x.name)}">Build something like this <svg viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-r"/></svg></a></div></article>`).join('');
+    <div class="prod__acts">${x.deck ? `<a class="btn" data-theme="volt" href="${x.deck}"><span class="btn__label">Open pitch deck</span>${arrow}</a>` : ''}${live ? `<button class="btn" type="button" data-theme="${x.deck ? 'glass' : 'volt'}" data-shape="round" data-live="${x.p}"><span class="btn__label">${x.deck ? 'Preview' : 'Preview the design'}</span></button>` : ''}</div>
+    <a class="link-arrow is--light" href="#contact" data-need="Something like your products" data-product="${esc(x.name)}">Build something like this <svg viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-r"/></svg></a></div></article>`;
+  }).join('');
 }
 
 /* ---------- Process: stages + draggable phase cards ---------- */
@@ -679,7 +681,7 @@ function initHero() {
 /* Case visuals tilt toward the pointer and drift on scroll */
 function initDepth() {
   if (reduce) return;
-  if (finePointer) $$('.case__stage, .res, .deck').forEach(el => {
+  if (finePointer) $$('.case__stage, .res, .prod').forEach(el => {
     el.addEventListener('pointermove', e => {
       const r = el.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
       el.style.setProperty('--ry', (x * 6).toFixed(2) + 'deg');

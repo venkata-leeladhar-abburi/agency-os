@@ -16,7 +16,7 @@ Each page has its own colours:
 | --- | --- |
 | Agency website and client pitch | Black, white and signal orange (the One Stop brand) |
 | Agency OS deck | Concrete, volt green and violet |
-| Team playbook | Cool paper, cobalt and mint |
+| Team playbook | Warm paper, forest green and highlighter yellow |
 | Beere Kesava ERP deck | Wine, gold and cream |
 
 The pitch and the playbook share their sources with the Agency OS deck; `source/build2.py` recolours them (`PALETTES`), so the deck keeps its own look.

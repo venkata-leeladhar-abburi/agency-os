@@ -45,10 +45,10 @@ PALETTES = {
     'pitch': {'accents': {'#a1ff62': '#ff5a1f', '#6840ff': '#c2410c', '#a491ff': '#ff9466', '#2b1d7a': '#7c2d12',
                           '#f84131': '#e8470e', '#201d1d': '#111111', '#151313': '#0b0b0b', '#f4f4f4': '#f2f2f2'},
               'grey': lambda L: (L, L, L)},
-    # The team workspace: cool paper, cobalt and mint
-    'playbook': {'accents': {'#a1ff62': '#7ee8c3', '#6840ff': '#2f4ff0', '#a491ff': '#9db0ff', '#2b1d7a': '#16226e',
-                             '#f84131': '#e5484d', '#201d1d': '#161b2b', '#151313': '#0e1220', '#f4f4f4': '#eef2fb'},
-                 'grey': lambda L: (L - 7, L - 3, L + 8)},
+    # The team workspace, like a notebook: warm paper, forest green and highlighter yellow
+    'playbook': {'accents': {'#a1ff62': '#ffd84a', '#6840ff': '#1e4d3b', '#a491ff': '#8fc4a8', '#2b1d7a': '#123326',
+                             '#f84131': '#b8432c', '#201d1d': '#1c211e', '#151313': '#121614', '#f4f4f4': '#f5f1e8'},
+                 'grey': lambda L: (L + 2, L, L - 8) if L > 140 else (L - 2, L + 1, L - 2)},
 }
 
 
