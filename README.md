@@ -10,6 +10,17 @@ Five websites for **One Stop Solutions**. Each page has its CSS and JavaScript i
 | Beere Kesava ERP deck | `beere-kesava/index.html` | Beere Kesava, investors and silk businesses |
 | Team playbook | `playbook/index.html` | The One Stop team only |
 
+Each page has its own colours:
+
+| Page | Palette |
+| --- | --- |
+| Agency website and client pitch | Black, white and signal orange (the One Stop brand) |
+| Agency OS deck | Concrete, volt green and violet |
+| Team playbook | Cool paper, cobalt and mint |
+| Beere Kesava ERP deck | Wine, gold and cream |
+
+The pitch and the playbook share their sources with the Agency OS deck; `source/build2.py` recolours them (`PALETTES`), so the deck keeps its own look.
+
 ## View them
 
 Open `index.html` in a browser for the agency website, or any page's `index.html`. Fonts and the animation libraries load from public CDNs, so an internet connection gives the full experience. Without one, every section still renders and the sliders fall back to native scrolling.

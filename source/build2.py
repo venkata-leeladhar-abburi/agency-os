@@ -38,6 +38,44 @@ GLYPH_SVG = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80"><g fil
 FAVICON = 'data:image/svg+xml,' + GLYPH_SVG.replace('"', "'").replace('#', '%23').replace('<', '%3C').replace('>', '%3E')
 
 
+# Each page has its own palette. The shared sources use the Agency OS colours (volt green and violet on warm
+# greys); the pitch and the playbook are recoloured here, so the Agency OS deck stays exactly as it is.
+PALETTES = {
+    # One Stop Solutions brand, matching the agency website: neutral greys, signal orange and ember
+    'pitch': {'accents': {'#a1ff62': '#ff5a1f', '#6840ff': '#c2410c', '#a491ff': '#ff9466', '#2b1d7a': '#7c2d12',
+                          '#f84131': '#e8470e', '#201d1d': '#111111', '#151313': '#0b0b0b', '#f4f4f4': '#f2f2f2'},
+              'grey': lambda L: (L, L, L)},
+    # The team workspace: cool paper, cobalt and mint
+    'playbook': {'accents': {'#a1ff62': '#7ee8c3', '#6840ff': '#2f4ff0', '#a491ff': '#9db0ff', '#2b1d7a': '#16226e',
+                             '#f84131': '#e5484d', '#201d1d': '#161b2b', '#151313': '#0e1220', '#f4f4f4': '#eef2fb'},
+                 'grey': lambda L: (L - 7, L - 3, L + 8)},
+}
+
+
+def recolor(text, name):
+    """Swap the shared accent colours for this page's palette and re-tint the warm greys."""
+    pal = PALETTES[name]
+    rgb = lambda h: tuple(int(h[i:i + 2], 16) for i in (1, 3, 5))
+    acc = {rgb(k): rgb(v) for k, v in pal['accents'].items()}
+
+    def swap(c):
+        if c in acc:
+            return acc[c]
+        if max(c) - min(c) > 14 or sum(c) / 3 >= 250:
+            return c  # a real colour (status greens and reds) or white: keep it
+        return tuple(max(0, min(255, v)) for v in pal['grey'](round(sum(c) / 3)))
+
+    def hex_sub(m):
+        return '#%02x%02x%02x' % swap(rgb(m.group(0).lower()))
+
+    def rgba_sub(m):
+        r, g, b = swap((int(m.group(2)), int(m.group(3)), int(m.group(4))))
+        return f'{m.group(1)}({r},{g},{b}{m.group(5)})'
+
+    text = re.sub(r'#[0-9a-fA-F]{6}\b', hex_sub, text)
+    text = re.sub(r'(?<=[\s:(,])#eee\b', lambda m: '#%02x%02x%02x' % swap((238, 238, 238)), text)
+    return re.sub(r'(rgba?)\((\d+),\s*(\d+),\s*(\d+)((?:,\s*(?:[\d.]+|var\(--[\w-]+\)))?)\)', rgba_sub, text)
+
 def read(*parts):
     with open(os.path.join(*parts), encoding='utf-8') as f:
         return f.read()
@@ -186,8 +224,9 @@ def build():
     full, tags = page(title, desc, css, body, js, GSAP + [LENIS],
                       f'<meta property="og:title" content="{title}">\n<meta property="og:description" content="{desc}">\n'
                       '<meta property="og:type" content="website">\n')
+    full = recolor(full, 'pitch')
     write(os.path.join(REPO, 'pitch', 'index.html'), full)
-    write(os.path.join(ART_DIR, 'one-stop-pitch.html'), fragment(title, css, body, tags, js))
+    write(os.path.join(ART_DIR, 'one-stop-pitch.html'), recolor(fragment(title, css, body, tags, js), 'pitch'))
     print(f'pitch: {len(full.encode()):,} bytes')
 
     # ---------- Team playbook ----------
@@ -216,11 +255,12 @@ def build():
         ptitle = 'One Stop Playbook'
         pdesc = 'The One Stop Solutions team playbook: process, services, research, prompts, tools and knowledge.'
         full, tags = page(ptitle, pdesc, pcss, pbody, pjs, [LENIS], '<meta name="robots" content="noindex, nofollow">\n')
+        full = recolor(full, 'playbook')
         if variant == 'repo':
             write(os.path.join(REPO, 'playbook', 'index.html'), full)
             print(f'playbook (repo): {len(full.encode()):,} bytes, {len(seed)} starter items')
         else:
-            frag = fragment(ptitle, pcss, pbody, tags, pjs)
+            frag = recolor(fragment(ptitle, pcss, pbody, tags, pjs), 'playbook')
             for s in seed:
                 if s['section'] == 'prompts':
                     assert s['body'][:60] not in frag, 'seed text leaked into the artifact page'
