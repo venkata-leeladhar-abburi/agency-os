@@ -27,15 +27,18 @@ __SPRITE__
                 <a href="#services">Services <span class="eyebrow">02</span></a>
                 <a href="#products">Products <span class="eyebrow">03</span></a>
                 <a href="#process">How we work <span class="eyebrow">04</span></a>
+                <a href="#team">Team <span class="eyebrow">05</span></a>
+                <button type="button" class="nav__all" data-all-open>All projects <span class="eyebrow tnum" data-count-all>21</span></button>
               </nav>
             </div>
             <div>
-              <span class="nav__col-title eyebrow">More</span>
-              <nav class="nav__links" aria-label="More">
-                <a href="#team">Team <span class="eyebrow">05</span></a>
-                <a href="#faq">Questions <span class="eyebrow">06</span></a>
-                <a href="#contact">Start a project <span class="eyebrow">07</span></a>
-                <button type="button" class="nav__all" data-all-open>All projects <span class="eyebrow tnum" data-count-all>21</span></button>
+              <span class="nav__col-title eyebrow">Open</span>
+              <nav class="nav__links" aria-label="Our process, playbook and decks">
+                <a href="pitch/#process">Our process <span class="eyebrow">↗</span></a>
+                <a href="playbook/">The playbook <span class="eyebrow">↗</span></a>
+                <a href="pitch/">Client pitch <span class="eyebrow">↗</span></a>
+                <a href="agency-os/">Agency OS deck <span class="eyebrow">↗</span></a>
+                <a href="beere-kesava/">Silk ERP deck <span class="eyebrow">↗</span></a>
               </nav>
             </div>
             <a class="nav__banner" href="#contact">
@@ -86,6 +89,14 @@ __SPRITE__
         </div>
       </div>
     </div>
+    <nav class="oh__links" aria-label="Open our process, playbook and decks" data-hero-fade>
+      <span class="eyebrow">Open</span>
+      <a href="pitch/#process"><i></i>Our process</a>
+      <a href="playbook/"><i></i>The playbook</a>
+      <a href="pitch/"><i></i>Client pitch</a>
+      <a href="agency-os/"><i></i>Agency OS deck</a>
+      <a href="beere-kesava/"><i></i>Silk ERP deck</a>
+    </nav>
   </div>
   <div class="oh__reel marquee-wrap" aria-label="Recent projects" role="region">
     <div class="marquee" style="--marquee-dur:60s" id="hero-reel"></div>
@@ -110,7 +121,7 @@ __SPRITE__
         <h2 class="h-xl" data-reveal>Our selected work<sup class="tnum">(05)</sup></h2>
       </div>
       <div class="work__intro">
-        <p class="p-l">Real products. Real screens. Open any of them live.</p>
+        <p class="p-l">Real products for real businesses. Open the case study, or try it live.</p>
         <button class="btn" type="button" data-theme="ink" data-shape="round" data-all-open><span class="btn__label">See all <span data-count-all>21</span> projects</span></button>
       </div>
     </div>
@@ -119,7 +130,7 @@ __SPRITE__
       <div class="allband__thumbs" id="allband-thumbs" aria-hidden="true"></div>
       <div class="allband__text">
         <h3 class="h-m"><span class="tnum" data-count-all>21</span> projects. Websites, ERPs, dashboards and apps.</h3>
-        <p class="p-m">Timelly, S-Campus, Lumora, Sapience S2P, BigLogic and more.</p>
+        <p class="p-m">S-Campus, Timelly, Lumora, Sapience S2P, BigLogic, Bookaholic and more.</p>
       </div>
       <button class="btn" type="button" data-theme="volt" data-size="l" data-all-open><span class="btn__label">View all projects</span><svg class="btn__icon" viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-ur"/></svg></button>
     </div>
@@ -132,7 +143,7 @@ __SPRITE__
     <div class="section-head">
       <div class="tag-pair"><span class="tag">Services</span><span class="tag" data-theme="haze" data-shape="round">What we do best</span></div>
       <h2 class="h-l" data-reveal>Four things. Done very well.</h2>
-      <p class="p-l" data-reveal>Design, build, launch. Then we stay to scale it.</p>
+      <p class="p-l" data-reveal>We design, build and launch. Then we stay to help it grow.</p>
     </div>
     <div class="core" id="core" data-reveal-group></div>
     <div class="also">
@@ -150,18 +161,17 @@ __SPRITE__
 <section class="section is--dark products" id="products">
   <div class="container">
     <div class="section-head">
-      <div class="tag-pair"><span class="tag" data-theme="glass">Products</span><span class="tag" data-theme="volt" data-shape="round">Ready to run</span></div>
+      <div class="tag-pair"><span class="tag" data-theme="glass">Products</span><span class="tag" data-theme="volt" data-shape="round">Built by us</span></div>
       <h2 class="h-l" data-reveal>Products we’ve built. Make one yours.</h2>
-      <p class="p-l" data-reveal>License one. Customise it. Or get your own built the same way.</p>
+      <p class="p-l" data-reveal>Like one? We’ll build your own version, shaped around your business.</p>
     </div>
     <div class="prods" id="prods" data-reveal-group></div>
-    <div class="decks">
-      <p class="eyebrow">Open our product decks</p>
-      <div class="btn-row">
-        <a class="btn" data-theme="glass" data-shape="round" href="agency-os/"><span class="btn__label">Agency OS deck</span><svg class="btn__icon" viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
-        <a class="btn" data-theme="glass" data-shape="round" href="beere-kesava/"><span class="btn__label">Silk ERP deck</span><svg class="btn__icon" viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
-        <a class="btn" data-theme="glass" data-shape="round" href="pitch/"><span class="btn__label">Our client pitch</span><svg class="btn__icon" viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+    <div class="decks-wrap">
+      <div class="decks-wrap__head">
+        <div><p class="scribble">Take the full tour…</p><h3 class="h-m">Open our product decks</h3></div>
+        <p class="p-m">Each deck walks through a product, screen by screen.</p>
       </div>
+      <div class="decks" id="decks"></div>
     </div>
   </div>
 </section>
@@ -185,17 +195,13 @@ __SPRITE__
   </div>
   <div class="container">
     <div class="stage-detail" id="phase-detail-wrap"><div id="phase-detail" aria-live="polite"></div></div>
-    <div class="play">
-      <div class="play__text">
-        <span class="tag" data-theme="volt">The One Stop playbook</span>
-        <h3 class="h-m">Every phase has a checklist, files and a sign-off.</h3>
-        <p class="p-m">Our team runs each project from one playbook. Tools, prompts, research templates. Nothing is guessed.</p>
-        <div class="btn-row">
-          <a class="btn" data-theme="volt" href="pitch/#process"><span class="btn__label">See our full process</span></a>
-          <a class="btn" data-theme="glass" data-shape="round" href="playbook/"><span class="btn__label">Open the playbook</span><svg class="btn__icon" viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
-        </div>
+    <div class="res-wrap">
+      <div class="res-wrap__head">
+        <div><span class="tag" data-theme="volt">See how we work</span><h3 class="h-l">Open our process, playbook and pitch</h3></div>
+        <p class="p-l">Nothing is guessed. Every phase has a checklist, files and your sign-off.</p>
       </div>
-      <ul class="play__facts">
+      <div class="res-grid" id="res"></div>
+      <ul class="facts-mini">
         <li><b class="tnum">4–7</b><span>days for a website</span></li>
         <li><b class="tnum">2–8</b><span>weeks for a full product</span></li>
         <li><b>Weekly</b><span>updates: done, next, needed</span></li>
@@ -263,30 +269,29 @@ __SPRITE__
     <div class="contact__side">
       <div class="tag-pair"><span class="tag" data-theme="glass">Let’s connect</span><span class="avail"><i></i>Available for work</span></div>
       <h2 class="h-l">Have a project in mind?</h2>
-      <p class="p-l">Tell us about it. Website, ERP, dashboard, app or a product of ours.</p>
+      <p class="p-l">Answer five quick questions. Your brief builds itself as you go.</p>
+      <div class="bdoc" id="bdoc" aria-live="polite">
+        <div class="bdoc__head"><span class="bdoc__logo"><svg viewBox="0 0 80 80" aria-hidden="true"><use href="#i-glyph"/></svg></span><b>Project brief</b><em id="bdoc-date"></em></div>
+        <dl>
+          <div><dt>Building</dt><dd data-b="needs">—</dd></div>
+          <div><dt>Stage</dt><dd data-b="stage">—</dd></div>
+          <div><dt>Launch</dt><dd data-b="when">—</dd></div>
+          <div><dt>About</dt><dd data-b="message">—</dd></div>
+          <div><dt>From</dt><dd data-b="name">—</dd></div>
+        </dl>
+        <p class="bdoc__time" id="bdoc-time"></p>
+        <span class="bdoc__stamp" aria-hidden="true">Sent</span>
+      </div>
       <ul class="contact-list" aria-label="Contact details">
         <li><span class="eyebrow">Phone · WhatsApp</span><span class="contact-list__value">+91 90149 52056</span><button class="copy" type="button" data-copy="+91 9014952056" aria-label="Copy phone number"><svg viewBox="0 0 16 16"><use href="#i-copy"/></svg><span>Copy</span></button></li>
-        <li><span class="eyebrow">Agency email</span><span class="contact-list__value">workwithonestop@gmail.com</span><button class="copy" type="button" data-copy="workwithonestop@gmail.com" aria-label="Copy agency email"><svg viewBox="0 0 16 16"><use href="#i-copy"/></svg><span>Copy</span></button></li>
-        <li><span class="eyebrow">Founder</span><span class="contact-list__value">leeladharabburi2032@gmail.com</span><button class="copy" type="button" data-copy="leeladharabburi2032@gmail.com" aria-label="Copy founder email"><svg viewBox="0 0 16 16"><use href="#i-copy"/></svg><span>Copy</span></button></li>
-        <li><span class="eyebrow">LinkedIn</span><a class="contact-list__value" href="https://www.linkedin.com/company/onestop-solutions-studio" target="_blank" rel="noopener">onestop-solutions-studio</a><span class="copy is--static" aria-hidden="true"><svg viewBox="0 0 12 12"><use href="#i-arrow-ur"/></svg></span></li>
+        <li><span class="eyebrow">Email</span><span class="contact-list__value">workwithonestop@gmail.com</span><button class="copy" type="button" data-copy="workwithonestop@gmail.com" aria-label="Copy email"><svg viewBox="0 0 16 16"><use href="#i-copy"/></svg><span>Copy</span></button></li>
       </ul>
     </div>
-    <form class="form" id="brief" novalidate>
-      <p class="eyebrow form__label">I need</p>
-      <div class="chips form__chips" id="needs" role="group" aria-label="What you need"></div>
-      <p class="form__hint" id="hint" aria-live="polite">Pick what you need. We’ll suggest a timeline.</p>
-      <div class="form__row">
-        <label><span>Name</span><input name="name" autocomplete="name" placeholder="Your name"></label>
-        <label><span>Phone</span><input name="phone" type="tel" autocomplete="tel" placeholder="+91"></label>
-      </div>
-      <label><span>Email</span><input name="email" type="email" autocomplete="email" placeholder="you@company.com"></label>
-      <label><span>Message</span><textarea name="msg" rows="4" placeholder="A few lines about your idea"></textarea></label>
-      <div class="btn-row">
-        <button class="btn" type="submit" data-theme="volt" data-size="l" data-via="wa"><span class="btn__label">Send on WhatsApp</span></button>
-        <button class="btn" type="submit" data-theme="white" data-shape="round" data-size="l" data-via="mail"><span class="btn__label">Send by email</span></button>
-      </div>
-      <p class="form__note">Opens WhatsApp or your email app with your message filled in.</p>
-    </form>
+    <div class="qz" id="qz">
+      <div class="qz__top"><button class="qz__back" type="button" data-qz-back hidden>← Back</button><span class="eyebrow tnum" id="qz-count">01 / 05</span></div>
+      <div class="qz__bar"><i id="qz-bar"></i></div>
+      <form class="qz__body" id="qz-body" novalidate></form>
+    </div>
   </div>
 </section>
 
@@ -306,14 +311,14 @@ __SPRITE__
         </div>
         <div class="footer__cols">
           <div><h3 class="h-xs">Studio</h3><ul><li><a href="#work">Work</a></li><li><a href="#services">Services</a></li><li><a href="#products">Products</a></li><li><a href="#team">Team</a></li></ul></div>
-          <div><h3 class="h-xs">How we work</h3><ul><li><a href="#process">Process</a></li><li><a href="playbook/">Playbook</a></li><li><a href="pitch/">Client pitch</a></li><li><a href="#faq">Questions</a></li></ul></div>
-          <div><h3 class="h-xs">Decks</h3><ul><li><a href="agency-os/">Agency OS</a></li><li><a href="beere-kesava/">Silk ERP</a></li><li><button type="button" data-all-open>All projects</button></li><li><a href="#contact">Start a project</a></li></ul></div>
+          <div><h3 class="h-xs">How we work</h3><ul><li><a href="pitch/#process">Our process</a></li><li><a href="playbook/">The playbook</a></li><li><a href="pitch/">Client pitch</a></li><li><a href="#faq">Questions</a></li></ul></div>
+          <div><h3 class="h-xs">Decks</h3><ul><li><a href="agency-os/">Agency OS deck</a></li><li><a href="beere-kesava/">Silk ERP deck</a></li><li><button type="button" data-all-open>All projects</button></li><li><a href="#contact">Start a project</a></li></ul></div>
         </div>
       </div>
       <div class="footer__bottom">
         <p class="eyebrow">© <span data-year>2026</span> One Stop Solutions. All rights reserved.</p>
         <p class="eyebrow">Andhra Pradesh, India · Remote worldwide</p>
-        <a class="eyebrow footer__up" href="#top">Back to top ↑</a>
+        <span class="footer__end"><button type="button" class="footer__leads" data-leads-open><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Leads</button><a class="eyebrow footer__up" href="#top">Back to top ↑</a></span>
       </div>
       <div class="footer__logo" aria-label="Onestop"><svg viewBox="0 0 1573 365" aria-hidden="true"><use href="#i-logo"/></svg><sup>®</sup></div>
     </div>
@@ -342,6 +347,14 @@ __SPRITE__
         <div class="ap__grid" id="ap-grid"></div>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="modal is--center lead-m" data-modal="leads" aria-hidden="true">
+  <div class="modal__bg" data-modal-close></div>
+  <div class="modal__panel lead-m__panel" role="dialog" aria-modal="true" aria-labelledby="leads-title" tabindex="-1">
+    <button class="modal__close" type="button" data-modal-close><span class="modal__close-x"><svg viewBox="0 0 10 10"><use href="#i-x"/></svg></span>Close</button>
+    <div class="modal__scroll" data-lenis-prevent id="leads-body"></div>
   </div>
 </div>
 

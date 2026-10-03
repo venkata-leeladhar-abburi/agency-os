@@ -47,7 +47,7 @@ Every page is generated from the files in `source/`. Edit a source file, then ru
 | Client pitch and playbook | `python3 source/build2.py` | `source/src2/` |
 | Beere Kesava deck | `python3 source/build3.py` | `source/src3/`, `source/bk/img/` |
 
-The builders need Python 3 only. Project screenshots and logos for the agency website are WebP files in `img/`; the project list, services, products and team are at the top of `source/src4/site.js`.
+The builders need Python 3 only. `api/leads.js` needs no packages. Project screenshots and logos for the agency website are WebP files in `img/`; the project list, services, products and team are at the top of `source/src4/site.js`.
 
 ## Agency website (`index.html`)
 
@@ -55,17 +55,31 @@ One Stop Solutions’ own website: our work, services, products, process and tea
 
 | Section | What it shows |
 | --- | --- |
-| Hero | The Onestop wordmark, what we do, and a reel of real project screens |
+| Hero | The Onestop wordmark, what we do, shortcuts to our process, playbook, client pitch and product decks, and a reel of real project screens |
 | Brands | Logos of the brands we’ve built for |
-| Selected work | Beere Kesava ERP, Ornate ’26, Aaravi Collectives, NGB and LimitX, each with its real screens, a case study and a live preview |
+| Selected work | Beere Kesava ERP, Ornate ’26, Aaravi Collectives, NGB and LimitX: what each one is, its real screens, a live preview, and a case study from research to launch (competitor analysis, user research, empathy map, users and flows, a wireframe-to-UI slider, build, test and launch, result) |
 | All projects | Every project, filtered by type, with live previews and links |
-| Services | Four core services, plus what we help with around a product |
-| Products | Products a business can license, customise or have built for itself, with links to the decks |
-| How we work | Three stages, seven draggable phase cards, and the playbook |
+| Services | Four core services with what each includes, plus what we help with around a product |
+| Products | Silk ERP, Agency OS and S-Campus, with pitch decks, previews and “Build something like this” |
+| Product decks | Built previews of the Agency OS deck, the Silk ERP deck and the client pitch |
+| How we work | Three stages, seven draggable phase cards, and built previews of our process, playbook and client pitch |
 | Proof, team, questions | A client quote, facts, the team and answers |
-| Contact | A brief form that opens WhatsApp or email with the message filled in |
+| Have a project in mind? | Five quick questions; the brief fills in beside them and is saved to our leads |
+| Footer | Links, and **Leads**: enter the code to see, search, export or delete every brief |
 
 Live previews load a project’s real website inside the page when someone clicks. A site that blocks this shows a blank box, so the preview always has an **Open site** button. Team photos load from the current Framer site and fall back to initials.
+
+### Leads setup (one time, in Vercel)
+
+Briefs are saved by `api/leads.js`, a Vercel function, in an Upstash Redis database.
+
+1. In the Vercel project, open **Storage → Create Database**, choose **Upstash for Redis** (free plan), and connect it to this project. That adds `KV_REST_API_URL` and `KV_REST_API_TOKEN`.
+2. In **Settings → Environment Variables**, add `LEADS_CODE` with your 6-digit code, for Production and Preview.
+3. Redeploy. Then use **Leads** in the footer and enter the code.
+
+The code is checked on the server, never in the page. After 8 wrong codes from one network, unlocking pauses for 15 minutes. Without the database, the form offers to send the brief on WhatsApp instead.
+
+To try the whole site locally, with working leads in memory, run `node source/tools/dev-server.js` from the repository root and open `http://localhost:4173/` (local code `123456`, or set `LEADS_CODE`).
 
 ## Client pitch (`pitch/`)
 
