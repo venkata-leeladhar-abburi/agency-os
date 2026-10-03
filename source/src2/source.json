@@ -1,0 +1,1693 @@
+{
+ "PHASES": [
+  {
+   "id": "connect",
+   "n": "00",
+   "name": "Connect",
+   "tag": "Find the fit",
+   "gate": "You accept the proposal",
+   "c": {
+    "intro": "A short call to understand your business, goals and customers, and to check we are the right team for it.",
+    "do": [
+     "Discovery call about your business, customers and goals",
+     "Quick review of your website, social presence and competitors",
+     "Recommendation of the services that fit now, and what can wait"
+    ],
+    "get": [
+     "Call recap with goals and next steps",
+     "Proposal with scope, phases and timeline"
+    ],
+    "need": [
+     "45 minutes of your time",
+     "Links to what exists today: website, app, socials, brand files"
+    ]
+   },
+   "t": {
+    "purpose": "Qualify the lead, understand the business, and send a proposal they say yes to.",
+    "steps": [
+     "Research the lead before the call: website, socials, Google reviews, 3 competitors",
+     "Send the discovery questionnaire 24 hours before the call",
+     "Run the call with the question list; record with permission",
+     "Log the lead and call notes in Notion → Leads",
+     "Send the recap email within 24 hours",
+     "Draft the proposal: problem, goals, scope by phase, deliverables, timeline",
+     "Walk the client through the proposal on a call, not only by email",
+     "On acceptance, duplicate the project template in Notion and book the kickoff"
+    ],
+    "outputs": [
+     "lead-brief.md",
+     "call-notes.md",
+     "Proposal / SOW",
+     "Kickoff agenda"
+    ],
+    "tools": [
+     "Notion",
+     "Claude",
+     "Google Forms"
+    ],
+    "prompts": [
+     "lead",
+     "recap"
+    ],
+    "exit": "Proposal accepted, kickoff booked, project page created in Notion."
+   }
+  },
+  {
+   "id": "discover",
+   "n": "01",
+   "name": "Discover",
+   "tag": "Research before pixels",
+   "dd": "Diamond 1",
+   "c": {
+    "intro": "We study your business, market, competitors and customers so every later decision rests on evidence instead of guesses.",
+    "do": [
+     "Kickoff workshop with you and your team",
+     "Business and market research (secondary research)",
+     "Customer interviews and surveys (primary research)",
+     "Competitor analysis: feature-by-feature comparison, what each competitor does best, and the gap you can own",
+     "UX audit of your current website or app, if you have one",
+     "Review of your analytics and current numbers"
+    ],
+    "get": [
+     "Competitor analysis",
+     "Research findings from your customers",
+     "UX audit report with prioritised fixes (existing products)"
+    ],
+    "need": [
+     "Access to analytics, website and social accounts",
+     "3 to 5 customers we can talk to",
+     "Time from you and key team members for interviews"
+    ]
+   },
+   "t": {
+    "purpose": "Understand the business, the market and the users well enough to define the right problem.",
+    "steps": [
+     "Run the kickoff: goals, success metrics, stakeholders, constraints",
+     "Duplicate the project template in Notion: User Research gallery with one page per research document, all set to Not started",
+     "Collect access: analytics, hosting, domain, socials, ad accounts",
+     "Secondary research: market, trends, reviews, forums",
+     "Competitor Analysis page: overview, feature matrix, what to borrow, strategies to apply, the gap, top 3 moves",
+     "Recruit 5 users; interview with a script; record and transcribe",
+     "Send a short survey when the audience is large",
+     "UX audit if a product exists: heuristics, accessibility, performance, funnel",
+     "Start the Design Inspirations page: Refero and Mobbin references grouped by section",
+     "Synthesise interviews in Miro: affinity map → themes → insights"
+    ],
+    "outputs": [
+     "Competitor Analysis",
+     "interview notes",
+     "ux-audit.pdf",
+     "Design Inspirations (started)",
+     "Miro affinity board"
+    ],
+    "tools": [
+     "Notion",
+     "Miro",
+     "Google Forms",
+     "Claude",
+     "Microsoft Clarity",
+     "PageSpeed Insights",
+     "Refero",
+     "Mobbin"
+    ],
+    "prompts": [
+     "competitor",
+     "interviews",
+     "audit"
+    ],
+    "exit": "Competitor Analysis set to Done in Notion; interview insights synthesised and stored."
+   }
+  },
+  {
+   "id": "define",
+   "n": "02",
+   "name": "Define",
+   "tag": "Turn research into a plan",
+   "dd": "Diamond 1",
+   "gate": "Strategy and scope sign-off",
+   "c": {
+    "intro": "We turn the research into a clear strategy and scope that you approve before any design starts.",
+    "do": [
+     "User personas: goals, pain points, what makes them buy, and how to attract each one",
+     "User flows covering every path, including drop-offs, failures and automations",
+     "Attraction strategy: what each page section must do and which channel brings which customer",
+     "UX strategy: mobile layout rules, the order of trust signals, and where calls to action go",
+     "Sitemap, feature scope and roadmap: what goes into version 1 and what comes later",
+     "Strategy brief, and a research presentation that walks you through everything"
+    ],
+    "get": [
+     "User personas",
+     "User flows",
+     "Attraction strategy",
+     "UX strategy",
+     "Strategy brief",
+     "UX research presentation"
+    ],
+    "need": [
+     "One review session",
+     "Written approval of strategy and scope"
+    ]
+   },
+   "t": {
+    "purpose": "Turn research into personas, flows and rules, agreed in writing before design.",
+    "steps": [
+     "User Personas page: 3 to 4 personas with decision levers and how to attract each",
+     "Userflows page: zone-by-zone flow with every decision, failure and automation",
+     "Attraction Strategy page: sections × personas × copy direction; channels × personas",
+     "UX Strategy page: mobile anatomy, layout rules, trust ladder, CTAs and scroll depth",
+     "Sitemap and MVP scope with MoSCoW",
+     "Strategy Brief page; PRD.md for every build project",
+     "Build the UX Research Presentation from the pages above",
+     "Present to the client, record changes, get written sign-off"
+    ],
+    "outputs": [
+     "User Personas",
+     "Userflows",
+     "Attraction Strategy",
+     "UX Strategy",
+     "Strategy Brief",
+     "UX Research Presentation",
+     "PRD.md"
+    ],
+    "tools": [
+     "FigJam",
+     "Miro",
+     "Notion",
+     "Claude"
+    ],
+    "prompts": [
+     "personas",
+     "userflows",
+     "attraction",
+     "uxstrategy",
+     "sitemap",
+     "brief",
+     "presentation"
+    ],
+    "exit": "Signed-off brief, sitemap and scope. Anything new after this goes through a change request."
+   }
+  },
+  {
+   "id": "design",
+   "n": "03",
+   "name": "Design",
+   "tag": "Brand and experience",
+   "dd": "Diamond 2",
+   "gate": "Design sign-off",
+   "c": {
+    "intro": "We give your business a clear identity and design every screen in Figma, grounded in UX laws, accessibility and your story.",
+    "do": [
+     "Design inspirations: curated references and 2 to 3 directions to choose from",
+     "Brand system when needed: logo, colours, typography, visual style, graphic elements, voice, icons, layout and mockups",
+     "Wireframes of your key pages, following the UX strategy",
+     "High-fidelity UI design in Figma for desktop and mobile",
+     "Clickable prototype to try the product before it is built",
+     "Design system of reusable components, documented in Storybook",
+     "Copywriting that tells your story to your customers",
+     "Checks for accessibility (WCAG), UX laws and design psychology"
+    ],
+    "get": [
+     "Brand system and logo files",
+     "Wireframes",
+     "Figma designs and prototype",
+     "Design system (Figma and Storybook)"
+    ],
+    "need": [
+     "Feedback within 2 to 3 working days per round",
+     "Content: product details, photos, testimonials"
+    ]
+   },
+   "t": {
+    "purpose": "Design the right solution and hand developers a system, not just screens.",
+    "steps": [
+     "Finish Design Inspirations: references by section; present 2 to 3 directions",
+     "Branding page (when in scope): logo system, colour system, typography, visual style, graphic elements, brand voice, iconography, layout design, mockups",
+     "Wireframes page: one per key page, in the section order from UX Strategy",
+     "Set up Figma variables: colour, type, spacing, radius",
+     "High-fidelity UI with auto layout, desktop and mobile",
+     "Write the UX copy from the Attraction Strategy copy directions",
+     "Check contrast (WCAG AA), tap targets and the UX Strategy layout rules",
+     "Prototype the main flows; test with 3 to 5 users when possible",
+     "Build components in Storybook from the tokens",
+     "Developer handoff: Dev Mode links, DESIGN.md, exported assets"
+    ],
+    "outputs": [
+     "Design Inspirations",
+     "Branding",
+     "Wireframes",
+     "Figma file",
+     "prototype link",
+     "DESIGN.md",
+     "Storybook"
+    ],
+    "tools": [
+     "Figma",
+     "Refero",
+     "Mobbin",
+     "Toolfolio",
+     "Laws of UX",
+     "WebAIM Contrast Checker",
+     "Storybook",
+     "UI UX Pro Max"
+    ],
+    "prompts": [
+     "direction",
+     "branding",
+     "wireframe",
+     "storybook"
+    ],
+    "exit": "Client signs off the designs; DESIGN.md and tokens are ready for build."
+   }
+  },
+  {
+   "id": "build",
+   "n": "04",
+   "name": "Build",
+   "tag": "Engineering that lasts",
+   "dd": "Diamond 2",
+   "gate": "User acceptance sign-off",
+   "c": {
+    "intro": "We engineer the product with the right architecture and stack, clean code, built-in security and a CMS you control.",
+    "do": [
+     "System design and architecture planned for your scale",
+     "A tech stack chosen for your needs",
+     "Front-end, back-end and database development",
+     "Integrations: payments, WhatsApp, email, CRM and AI features",
+     "A content management system so you can edit content yourself",
+     "Security from day one: logins, roles, data protection",
+     "Testing on real devices and browsers",
+     "Weekly progress updates with a staging link"
+    ],
+    "get": [
+     "Staging link to follow progress",
+     "Weekly updates",
+     "Technical documentation",
+     "QA report"
+    ],
+    "need": [
+     "Final content and images",
+     "Quick answers to questions",
+     "Testing and feedback on staging"
+    ]
+   },
+   "t": {
+    "purpose": "Ship clean, documented, secure code that matches the signed-off design.",
+    "steps": [
+     "Write ARCHITECTURE.md: stack, data model, roles, integrations",
+     "Create the repo with README, CLAUDE.md and .env.example",
+     "Set up local, staging and production environments",
+     "Build in weekly sprints; demo on staging every week",
+     "Code review on every pull request",
+     "Integrate CMS, payments, WhatsApp, email and analytics",
+     "Run the security checklist: auth, roles, validation, secrets, rate limits",
+     "QA: cross-browser, mobile, accessibility, Lighthouse",
+     "Client tests on staging (UAT); fix and re-test"
+    ],
+    "outputs": [
+     "ARCHITECTURE.md",
+     "CLAUDE.md",
+     "README.md",
+     "SECURITY.md",
+     "QA report",
+     "Staging URL"
+    ],
+    "tools": [
+     "Claude Code",
+     "GitHub",
+     "Storybook",
+     "Framer",
+     "Webflow",
+     "Moodle",
+     "Razorpay",
+     "Vercel",
+     "frontend-design",
+     "UI UX Pro Max",
+     "Figma MCP"
+    ],
+    "prompts": [
+     "claudemd",
+     "architecture",
+     "security"
+    ],
+    "exit": "UAT passed with no open critical or high-severity bugs."
+   }
+  },
+  {
+   "id": "launch",
+   "n": "05",
+   "name": "Launch",
+   "tag": "Go live and hand over",
+   "gate": "Handover accepted",
+   "c": {
+    "intro": "We launch carefully, set up SEO and analytics, and hand everything over in your name.",
+    "do": [
+     "Production deployment with a launch checklist",
+     "Domain, SSL and email setup",
+     "SEO foundations: page titles, meta descriptions, sitemap, structured data",
+     "Google Search Console and Google Analytics connected",
+     "Redirects from old pages when redesigning, so you keep your rankings",
+     "Training on your CMS and admin panel"
+    ],
+    "get": [
+     "Your live product",
+     "Handover kit: code, accounts, documentation",
+     "CMS training video",
+     "Analytics you can open any time"
+    ],
+    "need": [
+     "Access to domain and hosting accounts",
+     "A launch date that suits your business"
+    ]
+   },
+   "t": {
+    "purpose": "Go live without surprises and leave the client fully in control.",
+    "steps": [
+     "Run the pre-launch checklist",
+     "Deploy to production; verify SSL and DNS",
+     "Set up 301 redirects (redesigns)",
+     "Verify Search Console and submit sitemap.xml",
+     "Set up GA4 key events and conversions; Meta Pixel if ads are planned",
+     "Move every account into the client's name and email",
+     "Record a CMS and admin walkthrough video",
+     "Write HANDOVER.md and send the handover email",
+     "Book a post-launch check two weeks out"
+    ],
+    "outputs": [
+     "HANDOVER.md",
+     "Handover email",
+     "Training video",
+     "GA4 + Search Console access"
+    ],
+    "tools": [
+     "Vercel",
+     "Google Search Console",
+     "Google Analytics 4",
+     "Claude"
+    ],
+    "prompts": [
+     "seo",
+     "handover"
+    ],
+    "exit": "Client confirms access to everything and accepts the handover."
+   }
+  },
+  {
+   "id": "grow",
+   "n": "06",
+   "name": "Grow",
+   "tag": "Automate, market, maintain",
+   "c": {
+    "intro": "After launch we help the product earn: automations, AI agents, ads, SEO, and ongoing care.",
+    "do": [
+     "Workflow automations with n8n: leads, emails, reports, follow-ups",
+     "WhatsApp agents and broadcasts on the official API (AiSensy)",
+     "Website and Telegram chatbots",
+     "AI voice agents that answer and make calls",
+     "Meta ads for e-commerce and lead generation",
+     "Ongoing SEO and content",
+     "Maintenance: updates, backups, monitoring and fixes"
+    ],
+    "get": [
+     "Monthly performance report",
+     "Support channel with agreed response times",
+     "Quarterly growth review"
+    ],
+    "need": [
+     "Feedback on lead and sales quality",
+     "Approval for campaigns and new automations"
+    ]
+   },
+   "t": {
+    "purpose": "Make the product pay back, and keep it healthy.",
+    "steps": [
+     "Review analytics monthly and write the report",
+     "Run Meta campaigns: pixel and Conversions API, audiences, creatives, weekly optimisation",
+     "Map manual work and build n8n automations with error alerts",
+     "Build WhatsApp flows and templates; get Meta template approval",
+     "Build and test voice agents; review call transcripts weekly",
+     "Maintenance: dependency updates, backups, uptime monitoring, security patches",
+     "Quarterly review with the client: results and next opportunities"
+    ],
+    "outputs": [
+     "monthly-report",
+     "automation docs",
+     "campaign reports",
+     "maintenance log"
+    ],
+    "tools": [
+     "n8n",
+     "AiSensy",
+     "Telegram Bot API",
+     "Twilio",
+     "Vapi",
+     "Retell AI",
+     "Claude API",
+     "Meta Ads Manager",
+     "Google Analytics 4",
+     "Google Search Console"
+    ],
+    "prompts": [
+     "n8n",
+     "whatsapp",
+     "voice",
+     "ads"
+    ],
+    "exit": "Ongoing. Each quarter ends with a review and a plan for the next one."
+   }
+  }
+ ],
+ "COMPARE": [
+  [
+   "You explain your business again to every freelancer",
+   "You explain it once; research is shared by the whole team"
+  ],
+  [
+   "Designer and developer work from different ideas",
+   "Designs and code come from the same design system"
+  ],
+  [
+   "Website, ads and automations are built separately",
+   "Every piece is planned to work together"
+  ],
+  [
+   "Nobody owns the business result",
+   "We plan around your goals and track them after launch"
+  ],
+  [
+   "Support ends when the work is delivered",
+   "Maintenance and growth support continue after launch"
+  ]
+ ],
+ "PILLARS": [
+  {
+   "name": "Brand & strategy",
+   "line": "Know the market before building for it.",
+   "items": [
+    "Business & market research",
+    "Competitor analysis",
+    "User research & interviews",
+    "User personas",
+    "Attraction strategy",
+    "UX strategy",
+    "Brand positioning",
+    "Brand systems & logo design"
+   ]
+  },
+  {
+   "name": "Product design",
+   "line": "Screens people understand and enjoy using.",
+   "items": [
+    "UX audit",
+    "User personas & flows",
+    "Sitemaps & wireframes",
+    "UI design in Figma",
+    "Design systems in Storybook",
+    "Prototypes & usability tests",
+    "Landing pages"
+   ]
+  },
+  {
+   "name": "Build",
+   "line": "Software engineered to run for years.",
+   "items": [
+    "Websites & redesigns",
+    "SaaS products & dashboards",
+    "ERP systems",
+    "E-commerce",
+    "Mobile apps",
+    "Learning management (custom & Moodle)",
+    "Framer & Webflow sites",
+    "CMS setup"
+   ]
+  },
+  {
+   "name": "Automate & AI",
+   "line": "Let software handle the repetitive work.",
+   "items": [
+    "n8n workflow automation",
+    "Email automation",
+    "WhatsApp agents (AiSensy)",
+    "Website & Telegram chatbots",
+    "AI voice calling agents",
+    "AI features inside your product"
+   ]
+  },
+  {
+   "name": "Grow",
+   "line": "Get found, get customers, stay healthy.",
+   "items": [
+    "Meta ads",
+    "SEO",
+    "Search Console & Analytics",
+    "Maintenance & support"
+   ]
+  }
+ ],
+ "DOCS": [
+  [
+   "connect",
+   "Proposal & scope",
+   "What we will build, in which phases, and when"
+  ],
+  [
+   "discover",
+   "Competitor analysis",
+   "What competitors do well, feature by feature, and the gap you can own"
+  ],
+  [
+   "discover",
+   "Research findings",
+   "What your customers told us, grouped into clear insights"
+  ],
+  [
+   "discover",
+   "UX audit report",
+   "Prioritised list of what blocks your users today (existing products)"
+  ],
+  [
+   "define",
+   "User personas",
+   "Who your customers are, what makes them buy, and how to attract each one"
+  ],
+  [
+   "define",
+   "User flows",
+   "Every path customers take, including where they drop off and what happens automatically"
+  ],
+  [
+   "define",
+   "Attraction strategy",
+   "What each page section must do, and which channel brings which customer"
+  ],
+  [
+   "define",
+   "UX strategy",
+   "Mobile-first layout, trust and call-to-action rules the design follows"
+  ],
+  [
+   "define",
+   "Strategy brief",
+   "Goals, positioning and scope on two pages"
+  ],
+  [
+   "define",
+   "UX research presentation",
+   "A walkthrough of the findings and recommendations for your sign-off"
+  ],
+  [
+   "design",
+   "Brand system & logo files",
+   "Logo, colours, typography, visual style, voice, icons and mockups"
+  ],
+  [
+   "design",
+   "Wireframes",
+   "Layouts of your key pages, agreed before visual design"
+  ],
+  [
+   "design",
+   "Figma designs & prototype",
+   "Every screen, and a clickable version to try"
+  ],
+  [
+   "design",
+   "Design system (Storybook)",
+   "Reusable components that keep the product consistent as it grows"
+  ],
+  [
+   "build",
+   "Weekly updates & staging link",
+   "Progress you can see every week"
+  ],
+  [
+   "build",
+   "Technical documentation",
+   "How the system works, so any developer can maintain it"
+  ],
+  [
+   "build",
+   "QA report",
+   "Proof the product was tested on devices and browsers"
+  ],
+  [
+   "launch",
+   "Live product",
+   "Your website, app or platform, deployed and secured"
+  ],
+  [
+   "launch",
+   "Handover kit",
+   "Code, accounts and documents, all in your name"
+  ],
+  [
+   "launch",
+   "CMS training video",
+   "How to update your content yourself"
+  ],
+  [
+   "grow",
+   "Monthly performance report",
+   "Traffic, leads, sales and what we will improve next"
+  ]
+ ],
+ "TOGETHER": [
+  [
+   "One point of contact",
+   "A project lead answers your questions and coordinates the whole team."
+  ],
+  [
+   "Weekly updates",
+   "Every week: what was done, what comes next, and anything we need from you."
+  ],
+  [
+   "Shared workspace",
+   "Research in Notion, designs in Figma, progress on a staging link. Look any time."
+  ],
+  [
+   "Approval at each gate",
+   "Nothing moves to the next phase until you sign it off."
+  ],
+  [
+   "Clear change process",
+   "New ideas are welcome. We estimate them and you decide when they go in."
+  ],
+  [
+   "You own everything",
+   "Code, designs, accounts and content are yours and set up in your name."
+  ]
+ ],
+ "PRINCIPLES": [
+  [
+   "Your story first",
+   "Every product carries the founder's and the brand's story to the customer. We find it in research and carry it through copy, visuals and flows."
+  ],
+  [
+   "Research before pixels",
+   "Personas, competitor analysis and user flows come before any screen, so design decisions have reasons."
+  ],
+  [
+   "Industry-standard process",
+   "Double Diamond for design, weekly sprints for development, checklists for launch and handover."
+  ],
+  [
+   "Built to last",
+   "Clean architecture, documented code and security from day one. Easy to maintain, easy to extend."
+  ],
+  [
+   "Ideas beyond the brief",
+   "We suggest what you did not ask for when it helps your goals: an automation, a feature, a better flow."
+  ],
+  [
+   "A long-term partner",
+   "We want to work on your next phase too, so we earn it on this one."
+  ]
+ ],
+ "WORK": [
+  [
+   "SaaS · Dashboards",
+   "Institution management systems",
+   "Hostel, school, college and university management platforms with role-based dashboards."
+  ],
+  [
+   "Learning",
+   "Learning management systems",
+   "Course platforms for colleges and schools, custom-built and on Moodle."
+  ],
+  [
+   "ERP",
+   "ERP for a handloom saree production house",
+   "Operations software for a saree production business, from materials to orders."
+  ],
+  [
+   "Brand · Web",
+   "Story-led website for handloom sarees",
+   "A website that tells the weavers' and the brand's story, with e-commerce next."
+  ]
+ ],
+ "TOOLS": {
+  "Notion": {
+   "g": "Research & planning",
+   "u": "https://www.notion.so",
+   "d": "Knowledge base: leads, projects, research library, templates"
+  },
+  "Miro": {
+   "g": "Research & planning",
+   "u": "https://miro.com",
+   "d": "Affinity maps, journey maps, workshops"
+  },
+  "FigJam": {
+   "g": "Research & planning",
+   "u": "https://www.figma.com/figjam/",
+   "d": "User flows and sitemaps with the client"
+  },
+  "Google Forms": {
+   "g": "Research & planning",
+   "u": "https://www.google.com/forms/about/",
+   "d": "Discovery questionnaires and user surveys"
+  },
+  "Claude": {
+   "g": "Research & planning",
+   "u": "https://claude.ai",
+   "d": "Lead research, synthesis, briefs, documents"
+  },
+  "Microsoft Clarity": {
+   "g": "Research & planning",
+   "u": "https://clarity.microsoft.com",
+   "d": "Heatmaps and session recordings for UX audits"
+  },
+  "PageSpeed Insights": {
+   "g": "Research & planning",
+   "u": "https://pagespeed.web.dev",
+   "d": "Performance and Core Web Vitals checks"
+  },
+  "Refero": {
+   "g": "Design references",
+   "u": "https://refero.design",
+   "d": "Real web and iOS screens and flows; Styles as DESIGN.md files"
+  },
+  "Mobbin": {
+   "g": "Design references",
+   "u": "https://mobbin.com",
+   "d": "App and web screens and user flows, searchable by pattern"
+  },
+  "Toolfolio": {
+   "g": "Design references",
+   "u": "https://toolfolio.io",
+   "d": "Curated directory of design, AI, no-code and marketing tools"
+  },
+  "Laws of UX": {
+   "g": "Design references",
+   "u": "https://lawsofux.com",
+   "d": "UX laws to explain design decisions to clients"
+  },
+  "WebAIM Contrast Checker": {
+   "g": "Design references",
+   "u": "https://webaim.org/resources/contrastchecker/",
+   "d": "WCAG colour contrast checks"
+  },
+  "Figma": {
+   "g": "Design & design system",
+   "u": "https://www.figma.com",
+   "d": "UI design, variables, prototypes, Dev Mode handoff"
+  },
+  "Storybook": {
+   "g": "Design & design system",
+   "u": "https://storybook.js.org",
+   "d": "Component library and design system documentation"
+  },
+  "Claude Code": {
+   "g": "Build & deploy",
+   "u": "https://docs.claude.com/en/docs/claude-code/overview",
+   "d": "Building, refactoring and reviewing code with skills"
+  },
+  "GitHub": {
+   "g": "Build & deploy",
+   "u": "https://github.com",
+   "d": "Repos, pull requests, code review"
+  },
+  "Framer": {
+   "g": "Build & deploy",
+   "u": "https://www.framer.com",
+   "d": "No-code marketing sites with CMS"
+  },
+  "Webflow": {
+   "g": "Build & deploy",
+   "u": "https://webflow.com",
+   "d": "No-code sites with CMS for content-heavy clients"
+  },
+  "Moodle": {
+   "g": "Build & deploy",
+   "u": "https://moodle.org",
+   "d": "Learning management for colleges and schools"
+  },
+  "Vercel": {
+   "g": "Build & deploy",
+   "u": "https://vercel.com",
+   "d": "Hosting, preview links and production deploys"
+  },
+  "Razorpay": {
+   "g": "Build & deploy",
+   "u": "https://razorpay.com",
+   "d": "Payments and UPI for Indian clients; webhooks into n8n"
+  },
+  "n8n": {
+   "g": "Automation & AI agents",
+   "u": "https://n8n.io",
+   "d": "Workflow automation: leads, emails, reports, AI steps"
+  },
+  "AiSensy": {
+   "g": "Automation & AI agents",
+   "u": "https://www.aisensy.com",
+   "d": "WhatsApp Business API: broadcasts, chatbot flows, AI agents, Shopify and Razorpay integrations"
+  },
+  "Telegram Bot API": {
+   "g": "Automation & AI agents",
+   "u": "https://core.telegram.org/bots",
+   "d": "Telegram chatbots"
+  },
+  "Twilio": {
+   "g": "Automation & AI agents",
+   "u": "https://www.twilio.com",
+   "d": "Phone numbers and calling for voice agents"
+  },
+  "Vapi": {
+   "g": "Automation & AI agents",
+   "u": "https://vapi.ai",
+   "d": "Developer-first voice agent platform (more control)"
+  },
+  "Retell AI": {
+   "g": "Automation & AI agents",
+   "u": "https://www.retellai.com",
+   "d": "Voice agents with a visual builder (faster setup)"
+  },
+  "Claude API": {
+   "g": "Automation & AI agents",
+   "u": "https://docs.claude.com",
+   "d": "AI features inside client products"
+  },
+  "Meta Ads Manager": {
+   "g": "Growth & analytics",
+   "u": "https://www.facebook.com/adsmanager",
+   "d": "Facebook and Instagram campaigns"
+  },
+  "Google Search Console": {
+   "g": "Growth & analytics",
+   "u": "https://search.google.com/search-console",
+   "d": "Indexing, sitemaps, search performance"
+  },
+  "Google Analytics 4": {
+   "g": "Growth & analytics",
+   "u": "https://analytics.google.com",
+   "d": "Audience, traffic sources, conversions"
+  },
+  "UI UX Pro Max": {
+   "g": "Claude skills & MCP",
+   "u": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+   "d": "Design knowledge for Claude Code: UI styles, palettes, font pairings, UX guidelines across stacks",
+   "cmd": "npm install -g uipro-cli\nuipro init --ai claude"
+  },
+  "frontend-design": {
+   "g": "Claude skills & MCP",
+   "u": "https://github.com/anthropics/skills",
+   "d": "Anthropic's skill for distinctive, non-templated front-end design"
+  },
+  "Vercel deploy": {
+   "g": "Claude skills & MCP",
+   "u": "https://github.com/vercel-labs/agent-skills",
+   "d": "Lets Claude Code deploy previews and production to Vercel",
+   "cmd": "npx -y skills add vercel-labs/agent-skills --skill vercel-deploy --agent claude-code"
+  },
+  "Refero MCP": {
+   "g": "Claude skills & MCP",
+   "u": "https://doc.refero.design/mcp/getting-started",
+   "d": "Gives Claude Code access to Refero's screens and flows while designing (needs a Refero Pro plan)"
+  },
+  "Figma MCP": {
+   "g": "Claude skills & MCP",
+   "u": "https://developers.figma.com",
+   "d": "Gives Claude Code the selected Figma frames, variables and components"
+  },
+  "skill-creator": {
+   "g": "Claude skills & MCP",
+   "u": "https://github.com/anthropics/skills",
+   "d": "Turn our own SOPs (UX audit, proposal, handover) into reusable Claude skills"
+  }
+ },
+ "TOOL_GROUPS": [
+  "Research & planning",
+  "Design references",
+  "Design & design system",
+  "Build & deploy",
+  "Automation & AI agents",
+  "Growth & analytics",
+  "Claude skills & MCP"
+ ],
+ "PROMPTS": [
+  {
+   "id": "lead",
+   "p": "connect",
+   "tool": "Claude",
+   "title": "Lead research before a discovery call",
+   "text": "You are a business analyst at a digital product agency. Research this lead before our discovery call.\nBusiness: [name, website, Instagram]\nIndustry and city: [ ]\n\nGive me:\n1) What they sell and to whom\n2) How they get customers today\n3) 3 visible problems in their website or social presence\n4) 3 direct competitors\n5) 8 sharp questions for a 30-minute discovery call\n6) Which of our services fit (brand, UX, web/SaaS/ERP build, automation, WhatsApp or voice agents, Meta ads, SEO) and why"
+  },
+  {
+   "id": "recap",
+   "p": "connect",
+   "tool": "Claude",
+   "title": "Discovery call recap and scope",
+   "text": "Here is the transcript of a discovery call: [paste]\n\nWrite:\na) A recap email to the client, under 200 words, plain language, confirming goals, problems and next steps\nb) An internal summary: goals, users, constraints, timeline, risks, open questions\nc) A recommended scope split into Phase 1 (must-have) and later phases, with the deliverables for each"
+  },
+  {
+   "id": "competitor",
+   "p": "discover",
+   "tool": "Claude",
+   "title": "Competitor Analysis page",
+   "text": "Act as a UX and market researcher. Compare [client / product] with these competitors: [names + urls].\n\nStructure the output exactly like this:\n1) Competitor overview: one card per competitor with positioning, business model, audience, key numbers, platform or tech\n2) Feature comparison matrix: rows = [features that matter for this product], columns = competitors, values ✓ / ✗ / partial, plus fees\n3) What each competitor does brilliantly: one idea per competitor to borrow, and why it works\n4) High-converting strategies to apply to [client], each with how to implement it\n5) The gap [client] should own: one positioning paragraph\n6) The three highest-ROI moves for this specific situation\n\nMark anything you could not verify, and cite sources."
+  },
+  {
+   "id": "interviews",
+   "p": "discover",
+   "tool": "Claude",
+   "title": "User interview synthesis",
+   "text": "Below are notes from [n] user interviews for [product]: [paste]\n\nGroup the findings into themes (affinity mapping). For each theme give: the insight, 2 supporting quotes, how many participants mentioned it, and one \"How might we\" question.\n\nThen rank the top 5 pain points by frequency and severity."
+  },
+  {
+   "id": "audit",
+   "p": "discover",
+   "tool": "Claude",
+   "title": "UX audit of a page or flow",
+   "text": "Audit this as a senior UX designer: [url or screenshots]\n\nUse Nielsen's 10 usability heuristics, WCAG 2.2 AA basics (contrast, focus, labels, alt text) and conversion best practice.\n\nOutput a table: issue | where | heuristic or UX law broken | severity (1-4) | evidence | recommended fix | effort (S/M/L).\nFinish with the 5 quick wins."
+  },
+  {
+   "id": "personas",
+   "p": "define",
+   "tool": "Claude",
+   "title": "User Personas page",
+   "text": "Using this research: [interview notes / survey results / competitor findings], create [3-4] user personas for [product].\n\nFor each persona:\n- Name and archetype (e.g. \"The Hungry Learner\"), role, age, city, main device\n- 3-4 tags and main traffic source\n- Goals (4), pain points (4), online behaviour (4)\n- One quote in their own words\n- Decision levers ranked by weight (e.g. social proof, price, preview, design), each scored out of 10\n- How to attract them on [product]: 5 specific design or copy moves\n\nBase each point on the research and flag anything that is an assumption."
+  },
+  {
+   "id": "userflows",
+   "p": "define",
+   "tool": "Claude",
+   "title": "Userflows page",
+   "text": "Map the complete user flow for [product], from first click to repeat purchase.\n\nOrganise it in zones: Entry → Browse → [Product page] → Checkout → Delivery → Return.\nFor each zone list: the screens or system steps, every decision point with both outcomes (e.g. interested / not convinced), failure and exit paths (bounce, payment failed, link expired), and automation steps (webhooks, n8n, emails).\nAdd the post-purchase loop (review, subscribe, buy again) and any background system (e.g. download protection).\n\nOutput: 1) a Mermaid flowchart, 2) a zone-by-zone walkthrough in plain language."
+  },
+  {
+   "id": "attraction",
+   "p": "define",
+   "tool": "Claude",
+   "title": "Attraction Strategy page",
+   "text": "Write an attraction strategy for [product] using these personas: [paste].\n\n1) For each website section in order ([hero, social proof, product grid, credibility, preview, urgency + CTA, FAQ, newsletter]): its job, which personas it serves and why, and one line of copy direction\n2) Traffic acquisition: for each channel ([Instagram Reels, Google SEO, LinkedIn, newsletter]) the persona it reaches and the exact tactic\n3) How the page answers three questions within 8 seconds: What is this? Is it for me? Can I trust it?\n4) The trust hierarchy for each persona: what they need first, second and third\n5) Key insights, and one tactical move to make now"
+  },
+  {
+   "id": "uxstrategy",
+   "p": "define",
+   "tool": "Claude",
+   "title": "UX Strategy page",
+   "text": "Create a mobile-first UX strategy for [page / product], based on these personas and this attraction strategy: [paste].\n\nPart 1, Mobile anatomy: the section order at 375px, with one do and one don't for each section.\nPart 2, Layout rules: a table of horizontal padding, minimum tap target, CTA height, body and heading font sizes, line height, section gap and sticky bar height; plus a do / don't list.\nPart 3, Trust ladder: the trust signals in the order they must appear, and why.\nPart 4, CTA strategy: each CTA's position, colour and the persona it targets; expected conversion by scroll depth.\nPart 5, Performance UX and typography hierarchy.\nEnd with the 3 rules designers most often break on this kind of page."
+  },
+  {
+   "id": "sitemap",
+   "p": "define",
+   "tool": "Claude",
+   "title": "Sitemap and MVP scope",
+   "text": "For a [product type] serving these personas: [paste], propose:\n\n1) A sitemap as an indented list, with the purpose of each page\n2) The MVP feature list using MoSCoW (must, should, could, won't)\n3) What moves to phase 2, and why"
+  },
+  {
+   "id": "brief",
+   "p": "define",
+   "tool": "Claude",
+   "title": "Strategy Brief page",
+   "text": "Write a strategy brief for [client] from these research pages: [paste Competitor Analysis, User Personas, Attraction Strategy, UX Strategy]\n\nSections: business goals and KPIs, audience, problem statement, positioning statement, brand story (how the founder's story reaches the end customer), attraction strategy (how users discover, trust and convert), experience principles, scope and roadmap, risks.\n\nKeep it under 2 pages."
+  },
+  {
+   "id": "presentation",
+   "p": "define",
+   "tool": "Claude",
+   "title": "UX Research Presentation",
+   "text": "Turn this research pack into a client presentation: [paste or summarise Competitor Analysis, User Personas, Userflows, Attraction Strategy, UX Strategy, Strategy Brief].\n\n12 slides at most. For each slide: title, 3 bullet points in plain language, and the visual to show (matrix, persona card, flow diagram, mobile anatomy). Open with the client's goal; end with recommendations and the decisions we need from them. Explain any UX term in one line."
+  },
+  {
+   "id": "direction",
+   "p": "design",
+   "tool": "Claude",
+   "title": "Design Inspirations and direction",
+   "text": "Create a design direction brief for [client].\nBrand values: [ ]\nAudience / personas: [ ]\nCompetitors: [ ]\nReferences saved on the Design Inspirations page (Refero, Mobbin, Dribbble): [describe]\n\nGive 3 distinct directions. For each: mood keywords, colour palette with roles, type pairing, imagery style, key UI patterns, and one sentence on how it tells the client's story. Recommend one and explain why."
+  },
+  {
+   "id": "branding",
+   "p": "design",
+   "tool": "Claude",
+   "title": "Branding page",
+   "text": "Create a brand system brief for [client], using this strategy brief and these personas: [paste].\n\nCover all nine parts:\n1. Logo system (primary, secondary, icon, usage rules)\n2. Colour system (roles and hex values, contrast-checked)\n3. Typography (display, body, scale)\n4. Visual style\n5. Graphic elements\n6. Brand voice (tone, do / don't, sample lines)\n7. Iconography\n8. Layout design (grid, spacing)\n9. Mockups to produce\nTie each choice back to the brand story."
+  },
+  {
+   "id": "wireframe",
+   "p": "design",
+   "tool": "Claude",
+   "title": "Wireframes page",
+   "text": "Write a wireframe spec for the [page name] of [product], following this UX strategy: [paste section order and rules].\n\nFor each section in order: purpose, content blocks, real copy direction (no lorem ipsum), primary and secondary actions, mobile vs desktop differences, and states (empty, loading, error). Keep it ready to draw in Figma."
+  },
+  {
+   "id": "storybook",
+   "p": "design",
+   "tool": "Claude Code",
+   "title": "Design system in Storybook",
+   "text": "Read DESIGN.md and the tokens in /design/tokens.json. Set up Storybook for this React project.\n\nCreate these components using the tokens only, with no hard-coded colours: [Button, Input, Select, Card, Modal, Table, Badge].\nEach component needs: props for variants and sizes, accessible states (focus, disabled, error), and a story file showing every variant with docs.\n\nDo not invent new tokens. Ask me if one is missing."
+  },
+  {
+   "id": "claudemd",
+   "p": "build",
+   "tool": "Claude Code",
+   "title": "CLAUDE.md for a new repo",
+   "text": "Create CLAUDE.md for this repo. Include:\n- Project summary and who it is for\n- Tech stack and versions\n- Folder structure\n- How to run, test and build\n- Coding conventions\n- Design system rules: use tokens from DESIGN.md and components from /components/ui\n- Security rules: no secrets in code, validate all input, auth check on every protected route\n- Definition of done\n- Things to never change without asking"
+  },
+  {
+   "id": "architecture",
+   "p": "build",
+   "tool": "Claude",
+   "title": "Architecture document",
+   "text": "Act as a solutions architect. From this PRD: [paste]\n\nPropose: system architecture (as a Mermaid diagram), tech stack with reasons, data model (tables, key fields, relations), roles and permissions matrix, API endpoints, third-party integrations, hosting and environments, backup and scaling plan, and security risks with mitigations.\n\nWrite it as ARCHITECTURE.md."
+  },
+  {
+   "id": "security",
+   "p": "build",
+   "tool": "Claude Code",
+   "title": "Pre-launch security review",
+   "text": "Review this codebase for security before launch. Check:\nsecrets in code or git history, auth and session handling, role checks on every route, input validation and injection, XSS, CSRF, file uploads, rate limiting, CORS, dependency vulnerabilities (npm audit), error messages that leak data, and environment setup.\n\nList findings by severity with file paths and the fix. Do not change code until I approve."
+  },
+  {
+   "id": "seo",
+   "p": "launch",
+   "tool": "Claude",
+   "title": "SEO launch pack",
+   "text": "Prepare SEO for the launch of [site]. For each page in this sitemap: [paste]\ngive: title (max 60 characters), meta description (max 155), H1, primary and secondary keywords, schema type, and internal links.\n\nAlso give: a robots.txt, a sitemap.xml checklist, a 301 redirect map from these old URLs: [list], and the Search Console and GA4 setup steps."
+  },
+  {
+   "id": "handover",
+   "p": "launch",
+   "tool": "Claude",
+   "title": "Handover email",
+   "text": "Write a project handover email for [client]. Include:\n- Live URL and repo link\n- Where the admin/CMS login is (not the passwords)\n- Every account now in their name: domain, hosting, analytics, Search Console, WhatsApp API, n8n\n- Documentation links and the training video link\n- Support plan and how to raise an issue\n- Our recommended next growth steps"
+  },
+  {
+   "id": "n8n",
+   "p": "grow",
+   "tool": "Claude",
+   "title": "n8n workflow design",
+   "text": "Design an n8n workflow for this manual process: [describe]\n\nGive: the trigger, every node in order (node type, purpose, key settings), data mapping between nodes, error handling and retries, where credentials are stored, a test plan with sample data, and how we will be alerted when it fails."
+  },
+  {
+   "id": "whatsapp",
+   "p": "grow",
+   "tool": "Claude",
+   "title": "WhatsApp agent on AiSensy",
+   "text": "Design a WhatsApp agent for [business] on AiSensy.\n\nOutput: use cases (FAQ, lead capture, order status, booking), conversation flows with buttons and lists, message templates that need Meta approval (category and text with variables), when to hand over to a human, data to save to the CRM, opt-in wording, and 5 test conversations including edge cases."
+  },
+  {
+   "id": "voice",
+   "p": "grow",
+   "tool": "Claude",
+   "title": "AI voice agent script",
+   "text": "Write the system prompt and call script for an AI voice agent for [business].\nDirection: [inbound / outbound]. Goal: [book appointment / qualify lead / support].\n\nInclude: greeting, disclosure that it is an AI assistant, qualification questions, objection handling, tool calls needed (calendar, CRM), when to transfer to a human, voicemail script, and when to end the call. Keep sentences short for speech."
+  },
+  {
+   "id": "ads",
+   "p": "grow",
+   "tool": "Claude",
+   "title": "Meta ads launch plan",
+   "text": "Plan a Meta ads launch for [brand / product].\n\nGive: campaign objective and structure, 3 audience sets (interest, lookalike, retargeting), 5 creative concepts (hook, visual, primary text), landing page checks, pixel and Conversions API events to track, a 30-day test budget split in percentages, and the KPIs to review every week."
+  }
+ ],
+ "TRACKS": [
+  {
+   "name": "Branding",
+   "goal": "Give the business an identity people remember and trust.",
+   "steps": [
+    "Brand discovery workshop",
+    "Competitor brand audit",
+    "Positioning and brand story",
+    "Logo concepts, then refine one",
+    "Colour, type and visual language",
+    "Brand guidelines",
+    "Brand assets for web and social"
+   ],
+   "deliv": "Logo files, brand guidelines, asset kit",
+   "ph": [
+    "discover",
+    "define",
+    "design"
+   ]
+  },
+  {
+   "name": "UX audit",
+   "goal": "Find what blocks users and conversions in an existing product.",
+   "steps": [
+    "Agree goals, pages and user tasks in scope",
+    "Collect analytics, heatmaps and search data",
+    "Heuristic review (Nielsen's 10)",
+    "Accessibility check (WCAG 2.2 AA)",
+    "Performance and SEO scan",
+    "Funnel and conversion review",
+    "Rate every issue by severity and effort",
+    "Report with quick wins and a roadmap",
+    "Walkthrough call with the client"
+   ],
+   "deliv": "Audit report with severity-rated issues and quick wins",
+   "ph": [
+    "discover",
+    "define"
+   ]
+  },
+  {
+   "name": "Landing page",
+   "goal": "One page, one offer, one action.",
+   "steps": [
+    "Define the offer, audience and single call to action",
+    "Message hierarchy and copy first",
+    "Wireframe the sections",
+    "UI design in Figma",
+    "Build in Framer, Webflow or code",
+    "Pixel, GA4 events, form to CRM or WhatsApp",
+    "Launch and plan A/B tests"
+   ],
+   "deliv": "Live landing page with tracking",
+   "ph": [
+    "define",
+    "design",
+    "build",
+    "launch"
+   ]
+  },
+  {
+   "name": "Website design & redesign",
+   "goal": "A site that explains the business and turns visitors into leads.",
+   "steps": [
+    "Audit the current site and analytics (redesigns)",
+    "Content inventory: keep, rewrite, remove",
+    "Sitemap and a goal for each page",
+    "Wireframes, then UI design",
+    "Build with a CMS",
+    "301 redirect map to protect SEO",
+    "SEO, Search Console and GA4 setup",
+    "Launch and post-launch check"
+   ],
+   "deliv": "Live website, CMS, SEO setup, handover kit",
+   "ph": [
+    "discover",
+    "define",
+    "design",
+    "build",
+    "launch"
+   ]
+  },
+  {
+   "name": "No-code sites (Framer / Webflow)",
+   "goal": "Fast, editable marketing sites the client can run alone.",
+   "steps": [
+    "Choose the platform by CMS needs and who will edit",
+    "Design in Figma or straight in the builder",
+    "Set up CMS collections",
+    "Responsive breakpoints and interactions",
+    "SEO settings on every page",
+    "Connect domain, forms and analytics",
+    "Train the client on editing"
+   ],
+   "deliv": "Live site the client can edit",
+   "ph": [
+    "design",
+    "build",
+    "launch"
+   ]
+  },
+  {
+   "name": "SaaS, apps & dashboards",
+   "goal": "Role-based products such as hostel, school, college or university management.",
+   "steps": [
+    "Map user roles and permissions",
+    "List modules and core tasks per role",
+    "Data model and PRD",
+    "User flows per role",
+    "Wireframes for dashboards and tables",
+    "Design system first, then screens",
+    "MVP in weekly sprints with demos",
+    "UAT with real users",
+    "Onboarding, training and rollout"
+   ],
+   "deliv": "Working MVP, admin guide, roadmap",
+   "ph": [
+    "discover",
+    "define",
+    "design",
+    "build",
+    "launch",
+    "grow"
+   ]
+  },
+  {
+   "name": "ERP systems",
+   "goal": "Digitise operations end to end, for example a saree production house from raw material to sale.",
+   "steps": [
+    "Map the current process end to end (as-is)",
+    "Design the improved process (to-be)",
+    "Modules: inventory, production, orders, billing, HR, reports",
+    "Roles, approvals and audit trail",
+    "Data migration plan from sheets or old software",
+    "Build and roll out one module at a time",
+    "Staff training and support"
+   ],
+   "deliv": "ERP modules, migration, training material",
+   "ph": [
+    "discover",
+    "define",
+    "design",
+    "build",
+    "launch",
+    "grow"
+   ]
+  },
+  {
+   "name": "E-commerce & digital product stores",
+   "goal": "A store that tells the brand story and sells, from handloom sarees to e-books.",
+   "steps": [
+    "Research pack: competitors, personas, attraction and UX strategy",
+    "Brand story and product storytelling",
+    "Catalogue structure and filters",
+    "Product page: preview, reviews, credibility, trust badges",
+    "Checkout with UPI and Razorpay or Stripe",
+    "Delivery: shipping setup, or n8n for digital downloads (unique, time-limited links)",
+    "WhatsApp and email order updates, abandoned-cart recovery",
+    "Pixel and Conversions API, then Meta ads"
+   ],
+   "deliv": "Live store, delivery automation, tracking, launch campaign",
+   "ph": [
+    "discover",
+    "define",
+    "design",
+    "build",
+    "launch",
+    "grow"
+   ]
+  },
+  {
+   "name": "Learning management (custom or Moodle)",
+   "goal": "Courses, assessments and reports for colleges and schools.",
+   "steps": [
+    "Roles: admin, teacher, student, parent",
+    "Course structure, content types and assessments",
+    "Decide Moodle or custom build",
+    "Theme and branding",
+    "Plugins: payments, video, certificates",
+    "Enrolment and reports",
+    "Train admins and teachers"
+   ],
+   "deliv": "Configured LMS, admin and teacher guides",
+   "ph": [
+    "define",
+    "design",
+    "build",
+    "launch"
+   ]
+  },
+  {
+   "name": "n8n automations",
+   "goal": "Remove repetitive manual work.",
+   "steps": [
+    "Map the manual process and the hours it costs",
+    "Define trigger, steps and outputs",
+    "Build the workflow; store credentials securely",
+    "Error handling, retries and alerts",
+    "Test with real sample data",
+    "Document the workflow",
+    "Review and improve monthly"
+   ],
+   "deliv": "Running workflow with documentation",
+   "ph": [
+    "define",
+    "build",
+    "grow"
+   ]
+  },
+  {
+   "name": "WhatsApp & chat agents",
+   "goal": "Answer, qualify and sell on WhatsApp, the website and Telegram.",
+   "steps": [
+    "WhatsApp Business API onboarding on AiSensy",
+    "Use cases: FAQ, leads, orders, bookings",
+    "Conversation flows and message templates",
+    "Template approval from Meta",
+    "AI agent knowledge base and human handover",
+    "Integrations: CRM, Shopify, payments",
+    "Opt-in, broadcasts and analytics"
+   ],
+   "deliv": "Live agent, templates, flow map",
+   "ph": [
+    "define",
+    "build",
+    "grow"
+   ]
+  },
+  {
+   "name": "AI voice agents",
+   "goal": "Answer calls, book appointments and qualify leads by phone.",
+   "steps": [
+    "Use case: inbound support, booking or outbound qualification",
+    "Script and system prompt",
+    "Platform (Vapi or Retell) and phone number (Twilio)",
+    "Tools: calendar, CRM, transfer to a human",
+    "Test calls and edge cases",
+    "Consent, AI disclosure and local calling rules",
+    "Launch and weekly transcript review"
+   ],
+   "deliv": "Live voice agent and call reports",
+   "ph": [
+    "define",
+    "build",
+    "grow"
+   ]
+  },
+  {
+   "name": "Meta ads",
+   "goal": "Paid traffic that turns into leads and sales.",
+   "steps": [
+    "Pixel and Conversions API setup",
+    "Audience research",
+    "Creative concepts and copy",
+    "Campaign structure and test budget",
+    "Launch",
+    "Weekly optimisation",
+    "Monthly report"
+   ],
+   "deliv": "Running campaigns and monthly report",
+   "ph": [
+    "grow"
+   ]
+  },
+  {
+   "name": "SEO",
+   "goal": "Get found on Google for the searches that matter.",
+   "steps": [
+    "Technical audit",
+    "Keyword research",
+    "On-page optimisation",
+    "Content plan",
+    "Google Business Profile for local search",
+    "Search Console monitoring",
+    "Monthly report"
+   ],
+   "deliv": "SEO plan, fixes, monthly report",
+   "ph": [
+    "launch",
+    "grow"
+   ]
+  }
+ ],
+ "KB": [
+  {
+   "t": "Agency HQ",
+   "c": [
+    {
+     "t": "Leads",
+     "db": true,
+     "n": "Status, source, services of interest, call date, proposal link"
+    },
+    {
+     "t": "Projects",
+     "db": true,
+     "n": "Client, type (Website, SaaS, ERP, E-commerce, LMS, Automation, Ads), current phase, owner",
+     "c": [
+      {
+       "t": "[Project] page, e.g. Bookaholic",
+       "n": "Duplicated from the project template; cover image and icon per client",
+       "c": [
+        {
+         "t": "User Research",
+         "db": true,
+         "n": "Gallery view · property: Status (Not started / In progress / Done)",
+         "c": [
+          {
+           "t": "Competitor Analysis"
+          },
+          {
+           "t": "User Personas"
+          },
+          {
+           "t": "Userflows"
+          },
+          {
+           "t": "Attraction Strategy"
+          },
+          {
+           "t": "UX Strategy"
+          },
+          {
+           "t": "Strategy Brief"
+          },
+          {
+           "t": "UX Research Presentation"
+          },
+          {
+           "t": "Design Inspirations"
+          },
+          {
+           "t": "Branding"
+          },
+          {
+           "t": "Wireframes"
+          }
+         ]
+        },
+        {
+         "t": "Discovery notes & access"
+        },
+        {
+         "t": "Build: repo, ARCHITECTURE.md, PRD.md"
+        },
+        {
+         "t": "Launch checklist & handover"
+        },
+        {
+         "t": "Grow: monthly reports"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "t": "Inspiration library",
+     "db": true,
+     "n": "Shared across projects: screenshot, source, pattern, industry"
+    },
+    {
+     "t": "Templates",
+     "n": "One template per research page, plus questionnaire, proposal, audit report, handover email"
+    },
+    {
+     "t": "Prompt & skill library",
+     "n": "Mirror of the prompt tab, with what worked"
+    },
+    {
+     "t": "Tool stack",
+     "db": true,
+     "n": "Tool, use, cost, login owner"
+    }
+   ]
+  }
+ ],
+ "MDKIT": [
+  [
+   "README.md",
+   "How to install, run and deploy"
+  ],
+  [
+   "CLAUDE.md",
+   "Rules and context for Claude Code"
+  ],
+  [
+   "PRD.md",
+   "Features, user stories, acceptance criteria"
+  ],
+  [
+   "ARCHITECTURE.md",
+   "Stack, data model, roles, integrations"
+  ],
+  [
+   "DESIGN.md",
+   "Tokens, components, design rules"
+  ],
+  [
+   "SECURITY.md",
+   "Auth, data handling, checklist results"
+  ],
+  [
+   "HANDOVER.md",
+   "Accounts, access, support plan"
+  ],
+  [
+   "CHANGELOG.md",
+   "What changed and when"
+  ]
+ ],
+ "KBTAGS": [
+  "Phase: Discover / Define / Design",
+  "Owner",
+  "Client-visible: Yes / No",
+  "Due date",
+  "Last reviewed",
+  "Prompt used"
+ ],
+ "RESEARCH": [
+  {
+   "id": "competitor",
+   "name": "Competitor Analysis",
+   "ph": "discover",
+   "prompt": "competitor",
+   "purpose": "Where competitors are strong, what to borrow, and the gap the client can own.",
+   "client": "Competitors compared feature by feature, what each does best, and the gap you can own.",
+   "sections": [
+    "Competitor overview: positioning, model, audience and key numbers",
+    "Feature comparison matrix (✓ / ✗ / partial), including fees",
+    "What each competitor does brilliantly: ideas to borrow",
+    "High-converting strategies to apply to this project",
+    "The gap we should own: one positioning paragraph",
+    "The three highest-ROI moves"
+   ],
+   "ex": "ZebraLearn, Gumroad, Payhip and Podia compared on 10 features, from chapter previews to timed download links and platform fees."
+  },
+  {
+   "id": "personas",
+   "name": "User Personas",
+   "ph": "define",
+   "prompt": "personas",
+   "purpose": "Who we design for, what moves them to buy, and how to attract each one.",
+   "client": "Each customer type with goals, pain points, what makes them buy, and how to attract them.",
+   "sections": [
+    "Name and archetype, role, age, city, main device",
+    "Tags and main traffic source",
+    "Goals, pain points, online behaviour",
+    "One quote in their own words",
+    "Decision levers, ranked by weight",
+    "How to attract this persona: specific design and copy moves"
+   ],
+   "ex": "4 personas, each tied to a traffic source: Google and YouTube, LinkedIn, Instagram Reels, newsletter."
+  },
+  {
+   "id": "userflows",
+   "name": "Userflows",
+   "ph": "define",
+   "prompt": "userflows",
+   "purpose": "Every path a visitor can take, from first click to repeat purchase.",
+   "client": "Every path your customer can take, including drop-offs, failures and repeat purchases.",
+   "sections": [
+    "Zones in order: entry, browse, product page, checkout, delivery, return",
+    "Entry sources: social, search, referral",
+    "Every decision point with both outcomes",
+    "Failure and exit paths: bounce, payment failed, link expired",
+    "Automation steps: webhooks, n8n, emails",
+    "Post-purchase loop: review, subscribe, buy again",
+    "Background systems, such as download protection",
+    "Written zone-by-zone walkthrough"
+   ],
+   "ex": "8 zones from Instagram, Google or referral to download, with Razorpay/Stripe checkout and n8n delivery."
+  },
+  {
+   "id": "attraction",
+   "name": "Attraction Strategy",
+   "ph": "define",
+   "prompt": "attraction",
+   "purpose": "What each page section must do, for whom, and which channel brings which persona.",
+   "client": "What every section of your site must do, for which customer, and where your traffic comes from.",
+   "sections": [
+    "Each website section: its job, personas served, copy direction",
+    "Traffic acquisition: channel → persona → tactic",
+    "The 8-second rule: What is this? Is it for me? Can I trust it?",
+    "Trust hierarchy for each persona",
+    "Key insights and one tactical move to make now"
+   ],
+   "ex": "8 landing-page sections mapped to 4 personas; Reels, SEO, LinkedIn and newsletter mapped to who they reach."
+  },
+  {
+   "id": "uxstrategy",
+   "name": "UX Strategy",
+   "ph": "define",
+   "prompt": "uxstrategy",
+   "purpose": "The rule system the design must follow, mobile first.",
+   "client": "The layout, trust and call-to-action rules your design will follow, mobile first.",
+   "sections": [
+    "Mobile anatomy: section order with a do and don't for each",
+    "Layout rules: padding, tap targets, CTA height, type sizes, section gaps",
+    "Do and don't list for layout decisions",
+    "Trust ladder: the order trust signals appear",
+    "CTA positions, colours and conversion by scroll depth",
+    "Performance UX: images, fonts, PageSpeed target, checkout",
+    "Typography hierarchy"
+   ],
+   "ex": "375px mobile anatomy, a 7-step trust ladder, and four CTAs, each aimed at a different persona."
+  },
+  {
+   "id": "brief",
+   "name": "Strategy Brief",
+   "ph": "define",
+   "prompt": "brief",
+   "purpose": "The research condensed into the decisions everyone signs off.",
+   "client": "Goals, audience, positioning and scope on two pages, signed off before design.",
+   "sections": [
+    "Business goals and KPIs",
+    "Audience and problem statement",
+    "Positioning and brand story",
+    "Experience principles",
+    "Scope and roadmap",
+    "Risks"
+   ],
+   "ex": ""
+  },
+  {
+   "id": "presentation",
+   "name": "UX Research Presentation",
+   "ph": "define",
+   "prompt": "presentation",
+   "purpose": "The client-facing walkthrough of the research, used to get sign-off.",
+   "client": "A presentation that walks you through the findings and recommendations.",
+   "sections": [
+    "The client's goal and what we researched",
+    "Competitor gap",
+    "Personas",
+    "Key user flow",
+    "Attraction and UX strategy highlights",
+    "Recommendations and decisions needed"
+   ],
+   "ex": "UX Research Presentation for the e-book website."
+  },
+  {
+   "id": "inspiration",
+   "name": "Design Inspirations",
+   "ph": "design",
+   "prompt": "direction",
+   "purpose": "Curated references for each page and pattern, with what to borrow.",
+   "client": "Curated references from leading products that set the visual direction.",
+   "sections": [
+    "References grouped by page or section",
+    "Source (Refero, Mobbin, Dribbble) and link",
+    "What to borrow from each",
+    "2 to 3 directions for the client to choose from"
+   ],
+   "ex": ""
+  },
+  {
+   "id": "branding",
+   "name": "Branding",
+   "ph": "design",
+   "prompt": "branding",
+   "purpose": "The full brand system, not only a logo.",
+   "client": "A complete brand system: logo, colours, type, voice, icons and mockups.",
+   "sections": [
+    "Logo system",
+    "Colour system",
+    "Typography",
+    "Visual style",
+    "Graphic elements",
+    "Brand voice",
+    "Iconography",
+    "Layout design",
+    "Mockups"
+   ],
+   "ex": "The same 9-part checklist on every project."
+  },
+  {
+   "id": "wireframes",
+   "name": "Wireframes",
+   "ph": "design",
+   "prompt": "wireframe",
+   "purpose": "Page layouts built from the UX Strategy, before visual polish.",
+   "client": "Layouts of your key pages, agreed before visual design.",
+   "sections": [
+    "One wireframe per key page",
+    "Section order follows the UX Strategy",
+    "Real copy direction instead of placeholder text",
+    "Mobile and desktop versions",
+    "Notes on interactions and states"
+   ],
+   "ex": "Landing page and book page."
+  }
+ ]
+}

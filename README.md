@@ -4,19 +4,52 @@ Five websites for **One Stop Solutions**. Each page has its CSS and JavaScript i
 
 | Page | File | Who it is for |
 | --- | --- | --- |
-| Agency website | `site/index.html` (images in `site/img/`) | Clients, partners and hires |
-| Agency OS pitch deck | `index.html` | Investors |
+| Agency website (home page) | `index.html` (images in `img/`) | Clients, partners and hires |
+| Agency OS pitch deck | `agency-os/index.html` | Investors |
 | Client pitch | `pitch/index.html` | Clients and leads |
 | Beere Kesava ERP deck | `beere-kesava/index.html` | Beere Kesava, investors and silk businesses |
 | Team playbook | `playbook/index.html` | The One Stop team only |
 
 ## View them
 
-Open any of the files in a browser. Fonts and the animation libraries load from public CDNs, so an internet connection gives the full experience. Without one, every section still renders and the sliders fall back to native scrolling.
+Open `index.html` in a browser for the agency website, or any page's `index.html`. Fonts and the animation libraries load from public CDNs, so an internet connection gives the full experience. Without one, every section still renders and the sliders fall back to native scrolling.
 
-To host the investor deck or the client pitch, publish the repository with GitHub Pages (Settings → Pages → Deploy from a branch) or drop the file on any static host. **Keep `playbook/` off public hosting**: it is internal. If you publish the repository with GitHub Pages, everything in it becomes public, the playbook included.
+## Host on Vercel
 
-## Agency website (`site/`)
+The repository is ready to deploy as a static site. There is no build step.
+
+1. In Vercel, choose **Add New → Project** and import `venkata-leeladhar-abburi/agency-os`.
+2. Leave **Framework Preset** on **Other**, the root directory as `./`, and the build and output settings empty.
+3. Choose **Deploy**. Every branch gets its own preview link; the production branch (usually `main`) gets the main link.
+
+Once deployed, the pages live at:
+
+| Path | Page |
+| --- | --- |
+| `/` | Agency website |
+| `/agency-os/` | Agency OS pitch deck |
+| `/pitch/` | Client pitch |
+| `/beere-kesava/` | Beere Kesava ERP deck |
+| `/playbook/` | Team playbook |
+
+`vercel.json` adds clean URLs with trailing slashes, a week of browser caching for images, and basic security headers. `.vercelignore` keeps the `source/` folder off the live site.
+
+**The playbook is internal.** It is deployed with a `noindex` header, so search engines skip it, but anyone with the link can open it. To keep it off the live site entirely, add `playbook` to `.vercelignore` and remove the playbook links from the agency website.
+
+## Edit and rebuild
+
+Every page is generated from the files in `source/`. Edit a source file, then run its builder from the repository root:
+
+| Page | Builder | Main sources |
+| --- | --- | --- |
+| Agency website | `python3 source/build4.py` | `source/src4/` |
+| Agency OS deck | `python3 source/build.py` | `source/src/` |
+| Client pitch and playbook | `python3 source/build2.py` | `source/src2/` |
+| Beere Kesava deck | `python3 source/build3.py` | `source/src3/`, `source/bk/img/` |
+
+The builders need Python 3 only. Project screenshots and logos for the agency website are WebP files in `img/`; the project list, services, products and team are at the top of `source/src4/site.js`.
+
+## Agency website (`index.html`)
 
 One Stop Solutions’ own website: our work, services, products, process and team, in black, white and signal orange on the same layout as the other pages.
 
@@ -93,7 +126,7 @@ The shared version of the playbook is a Claude artifact with a shared database, 
 
 `assets/onestop-logo.svg` is the Onestop wordmark used on every page.
 
-## Agency OS pitch deck (`index.html`)
+## Agency OS pitch deck (`agency-os/`)
 
 | Section | What it shows |
 | --- | --- |

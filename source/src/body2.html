@@ -1,0 +1,716 @@
+<!-- ============ PORTALS ============ -->
+<section class="section is--dark portals" id="portals">
+  <div class="container">
+    <div class="portals__title" aria-label="Nine portals, one OS">
+      <h2 class="h-xl" aria-hidden="true">Nine</h2>
+      <h2 class="h-xl" aria-hidden="true">portals,</h2>
+      <h2 class="h-xl" aria-hidden="true">one OS</h2>
+    </div>
+    <p class="p-l portals__lead">Every role gets its own login and its own portal. Freelancers start in the Solo workspace and move to the agency portals when they hire, without losing any records.</p>
+
+    <div class="flick" data-flick data-cursor="drag" data-cursor-tone="light">
+      <div class="flick__bg" aria-hidden="true">
+        <svg class="dots-circle" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5"/></svg>
+      </div>
+      <div class="flick__list" id="portal-cards" role="list" aria-label="Portals"></div>
+      <div class="flick__scribble" aria-hidden="true">
+        <svg class="arrow-scribble" viewBox="0 0 40 40" style="transform:scaleX(-1) rotate(-10deg)"><use href="#i-scribble-arrow-up"/></svg>
+        <p class="scribble">Drag, or tap a card<br>to open its sitemap</p>
+      </div>
+    </div>
+
+    <div class="portals__controls">
+      <button class="icon-btn" type="button" data-theme="steel" data-shape="round" data-flick-prev aria-label="Previous portal"><svg viewBox="0 0 12 12"><use href="#i-arrow-l"/></svg></button>
+      <p class="portals__count eyebrow tnum" id="portal-count" aria-live="polite">01 / 09</p>
+      <button class="icon-btn" type="button" data-theme="steel" data-flick-next aria-label="Next portal"><svg viewBox="0 0 12 12"><use href="#i-arrow-r"/></svg></button>
+      <button class="btn" type="button" data-theme="volt" data-shape="round" data-flick-open><span class="btn__label">Open this sitemap</span></button>
+    </div>
+    <div class="legend portals__legend">
+      <span><i class="mk mk--b"></i>Live today</span>
+      <span><i class="mk mk--c"></i>On the roadmap</span>
+      <span><i class="mk mk--n"></i>New, our edge</span>
+      <span><i class="free">Free</i>Proposed free tier</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PLAYBOOK ============ -->
+<section class="section playbook" id="playbook">
+  <div class="container is--m">
+    <div class="section-head">
+      <div class="tag-pair"><span class="tag">Playbook</span><span class="tag" data-theme="haze" data-shape="round">Knowledge base</span></div>
+      <h2 class="h-l" data-reveal>Everything an agency knows, saved once and used everywhere</h2>
+      <p class="p-l" data-reveal>Nine kinds of items, each with its own fields. Every item can stay private, be shared with the team, be shared into one client’s portal, or be shown publicly on the profile. The public parts are what make one freelancer’s profile different from the next.</p>
+    </div>
+
+    <div class="pb-grid">
+      <div class="pb-slider" data-vslider data-autoplay="3800" data-fade>
+        <div class="pb-slider__frame" data-cursor="drag" data-cursor-tone="light">
+          <div class="pb-slider__top">
+            <p class="p-m u-fw-500"><span class="u-volt">Nine item types</span><br>one Playbook</p>
+            <p class="eyebrow tnum pb-slider__count" data-vslider-count>01 / 09</p>
+          </div>
+          <div class="vslider__list" id="kb-slides"></div>
+          <div class="vslider__bullets" data-vslider-bullets></div>
+          <div class="vslider__nav">
+            <button type="button" data-vslider-prev aria-label="Previous item type"></button>
+            <button type="button" data-vslider-next aria-label="Next item type"></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pb-side">
+        <div class="vis-panel">
+          <div>
+            <h3 class="h-xs">Who can see this item?</h3>
+            <p class="p-s u-muted">Example: a saved prompt for writing case studies</p>
+          </div>
+          <div class="seg vis-panel__seg" role="group" aria-label="Visibility">
+            <button type="button" data-v="private" aria-pressed="false">Private</button>
+            <button type="button" data-v="team" aria-pressed="true">Team</button>
+            <button type="button" data-v="client" aria-pressed="false">Client</button>
+            <button type="button" data-v="public" aria-pressed="false">Public</button>
+          </div>
+          <div class="vis-panel__body">
+            <div class="rings" data-level="2" aria-hidden="true">
+              <span class="rings__r is--4"><em>Public</em></span>
+              <span class="rings__r is--3"><em>Client</em></span>
+              <span class="rings__r is--2"><em>Team</em></span>
+              <span class="rings__r is--1"><em>You</em></span>
+            </div>
+            <p class="vis-panel__desc p-m" id="vis-desc" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <article class="profile">
+          <div class="profile__cover">
+            <span class="tag" data-theme="glass">Example profile</span>
+          </div>
+          <div class="profile__body">
+            <div class="profile__av"><svg viewBox="0 0 80 80" aria-hidden="true"><use href="#i-glyph"/></svg></div>
+            <h4 class="h-xs">One Stop Solutions</h4>
+            <p class="p-s u-muted">Design &amp; development agency · Andhra Pradesh</p>
+            <div class="profile__tabs" aria-hidden="true"><span>Work</span><span class="is--on">How we work</span><span>Toolkit</span><span>Reviews</span></div>
+            <ol class="profile__steps">
+              <li><i>01</i><div><b>Discovery</b> <span>· goals, users, scope</span></div></li>
+              <li><i>02</i><div><b>UX &amp; UI design</b> <span>· flows, wireframes, Figma screens</span></div></li>
+              <li><i>03</i><div><b>Build</b> <span>· weekly demos in your portal</span></div></li>
+              <li><i>04</i><div><b>QA &amp; launch</b> <span>· checklist, approval, go-live</span></div></li>
+              <li><i>05</i><div><b>Handoff</b> <span>· repo, stack, docs, sign-off</span></div></li>
+            </ol>
+            <ul class="profile__tools"><li>Figma</li><li>React</li><li>Node.js</li><li>Supabase</li><li>Razorpay</li><li>Vercel</li></ul>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="pb-common">
+      <span class="eyebrow">On every item</span>
+      <ul><li>Tags &amp; folders</li><li>Search across everything</li><li>Link to a client or project</li><li>Version history</li><li>Copy into a project</li><li>Visibility per item</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DOCUMENTS ============ -->
+<section class="section docs" id="documents">
+  <div class="container is--m">
+    <div class="section-head">
+      <div class="tag-pair"><span class="tag">Document studio</span><span class="tag" data-theme="haze" data-shape="round">14 documents</span></div>
+      <h2 class="h-l" data-reveal>Paperwork that looks like a big agency made it</h2>
+      <p class="p-l" data-reveal>Fourteen documents across the journey, built from the agency’s brand kit and filled from client data. Foreign and high-value clients get the formal versions.</p>
+    </div>
+
+    <div class="docs-grid">
+      <div class="paper-stage">
+        <div class="paper-fan" aria-hidden="true">
+          <div class="paper-ghost is--1"><span class="eyebrow">Proposal</span><b>Website redesign</b></div>
+          <div class="paper-ghost is--2"><span class="eyebrow">Mutual NDA</span><b>Before discovery</b></div>
+          <div class="paper-ghost is--3"><span class="eyebrow">Tax invoice</span><b>INV-2026-031</b></div>
+        </div>
+        <article class="paper" id="sow" data-mode="fields" aria-label="Example statement of work">
+          <div class="paper__lh">
+            <div class="paper__brand"><span class="paper__logo"><svg viewBox="0 0 80 80" aria-hidden="true"><use href="#i-glyph"/></svg></span><div><b>One Stop Solutions</b><span>Design &amp; development</span></div></div>
+            <div class="paper__ref">SOW-2026-014<br>v2 · <span class="mf" data-f="issue.date" data-v="2 Oct 2026">{{issue.date}}</span></div>
+          </div>
+          <h4 class="paper__title">Statement of Work</h4>
+          <p class="paper__intro">Prepared for <span class="mf" data-f="client.company" data-v="Northwind Studio Ltd">{{client.company}}</span>, attention <span class="mf" data-f="client.contact" data-v="Anika Rao">{{client.contact}}</span>. Total fee <span class="mf" data-f="quote.total" data-v="6,000">{{quote.total}}</span> in <span class="mf" data-f="client.currency" data-v="USD">{{client.currency}}</span>.</p>
+          <table class="paper__tbl">
+            <thead><tr><th>Phase</th><th>Deliverable</th><th>Due</th></tr></thead>
+            <tbody>
+              <tr><td>Discovery</td><td>Research summary &amp; sitemap</td><td><span class="mf" data-f="p1.due" data-v="16 Oct">{{p1.due}}</span></td></tr>
+              <tr><td>Design</td><td>UI screens in Figma</td><td><span class="mf" data-f="p2.due" data-v="13 Nov">{{p2.due}}</span></td></tr>
+              <tr><td>Build</td><td>Production release</td><td><span class="mf" data-f="p3.due" data-v="18 Dec">{{p3.due}}</span></td></tr>
+            </tbody>
+          </table>
+          <div class="paper__sig">
+            <div>For One Stop Solutions<small class="is--ok">e-signed · audit trail</small></div>
+            <div>For <span class="mf" data-f="client.company" data-v="Northwind Studio Ltd">{{client.company}}</span><small>awaiting signature</small></div>
+          </div>
+        </article>
+        <div class="paper-stage__controls">
+          <div class="seg" role="group" aria-label="Document view">
+            <button type="button" aria-pressed="true" data-paper-mode="fields">Merge fields</button>
+            <button type="button" aria-pressed="false" data-paper-mode="filled">Filled in</button>
+          </div>
+          <p class="scribble">Filled from client data!</p>
+        </div>
+      </div>
+
+      <div class="ledger">
+        <div class="ledger__head"><span class="eyebrow">Document</span><span class="eyebrow">Stage</span><span class="eyebrow">Who acts</span></div>
+        <ol class="ledger__list" id="docs-rows"></ol>
+      </div>
+    </div>
+
+    <div class="engine">
+      <h3 class="h-s">What every document gets</h3>
+      <ul class="engine__grid" id="engine"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PREMIUM ============ -->
+<section class="section premium" id="premium">
+  <div class="container is--m">
+    <div class="section-head">
+      <div class="tag-pair"><span class="tag">Premium &amp; foreign clients</span><span class="tag" data-theme="haze" data-shape="round">International mode</span></div>
+      <h2 class="h-l" data-reveal>Every detail a high-value client notices</h2>
+      <p class="p-l" data-reveal>Switch on international mode for a client and the platform adjusts money, paperwork, time and communication for them. The same switch works for any VIP client in India.</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="globe-row" data-vslider data-autoplay="5200" data-fade id="globe-slider">
+      <div class="globe-col">
+        <p class="p-m u-fw-500 globe-col__label"><span class="u-violet">Team in India</span><br>clients everywhere</p>
+        <div class="globe">
+          <svg class="globe__ring" viewBox="0 0 380 380" aria-hidden="true">
+            <circle class="globe__ring-track" cx="190" cy="190" r="184"/>
+            <circle class="globe__ring-progress" cx="190" cy="190" r="184" pathLength="1000" data-vslider-ring/>
+          </svg>
+          <canvas class="globe__canvas" id="globe" aria-label="Globe showing the agency team in India and a client city" role="img"></canvas>
+        </div>
+        <p class="scribble globe-col__scribble">Overlap hours,<br>found for you</p>
+      </div>
+      <div class="globe-slides" data-cursor="drag">
+        <div class="vslider__list" id="city-slides"></div>
+        <div class="vslider__bullets" data-vslider-bullets></div>
+        <div class="vslider__nav">
+          <button type="button" data-vslider-prev aria-label="Previous city"></button>
+          <button type="button" data-vslider-next aria-label="Next city"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container is--m">
+    <div class="tz">
+      <div class="tz__head">
+        <h3 class="h-xs">Overlap-hours finder</h3>
+        <p class="p-s u-muted">Team works 10:00–19:00 IST. Clients work 9:00–18:00 local. Early October.</p>
+      </div>
+      <div id="tz-rows"></div>
+      <div class="tz__axis" id="tz-axis" aria-hidden="true"></div>
+      <div class="tz__key"><span><i style="background:var(--c-ink)"></i>Your team</span><span><i style="background:var(--c-cloud)"></i>Client hours</span><span><i style="background:var(--c-volt);box-shadow:inset 0 0 0 1px var(--c-ink)"></i>Overlap you can meet in</span></div>
+    </div>
+    <div class="prem-grid" id="prem-grid"></div>
+  </div>
+</section>
+
+<!-- ============ HANDOFF ============ -->
+<section class="section handoff" id="handoff">
+  <div class="container is--m">
+    <div class="section-head">
+      <div class="tag-pair"><span class="tag">Handoff</span><span class="tag" data-theme="haze" data-shape="round">One package</span></div>
+      <h2 class="h-l" data-reveal>One package, signed and done</h2>
+      <p class="p-l" data-reveal>The client gets one page in their portal with everything they need to own the project: a link to the GitHub repo, the tech stack, live URLs, docs and a signed acceptance. No zip files over email.</p>
+    </div>
+
+    <div class="hand-grid">
+      <div class="package">
+        <div class="package__head">
+          <h3 class="h-xs">Handoff package</h3>
+          <span class="tag" data-theme="glass" data-shape="round">Shown in the client portal</span>
+        </div>
+        <ul class="package__grid" id="pkg"></ul>
+        <div class="package__then">
+          <span class="eyebrow">Then</span>
+          <ol class="chain"><li>Verified review</li><li>Case study draft</li><li>Referral link</li><li>Maintenance retainer</li></ol>
+        </div>
+      </div>
+      <div class="stackd">
+        <h3 class="h-xs">Tech stack, from pasted text</h3>
+        <label class="p-s u-muted" for="stack-in">Paste a README, package.json or a plain list. The stack sheet builds itself.</label>
+        <textarea id="stack-in" spellcheck="false" data-lenis-prevent></textarea>
+        <div class="btn-row">
+          <button class="btn" type="button" data-theme="ink" data-size="s" id="stack-sample"><span class="btn__label">Load example</span></button>
+          <button class="btn" type="button" data-theme="bone" data-size="s" data-shape="round" id="stack-clear"><span class="btn__label">Clear</span></button>
+          <span class="stackd__count eyebrow" id="stack-count"></span>
+        </div>
+        <div class="stackd__out" id="stack-out" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OUR EDGE ============ -->
+<section class="section edge" id="edge">
+  <div class="container is--m">
+    <div class="section-head">
+      <div class="tag-pair"><span class="tag">Our edge</span><span class="tag" data-theme="haze" data-shape="round">Feature ledger</span></div>
+      <h2 class="h-l" data-reveal>What only Agency OS does</h2>
+      <p class="p-l" data-reveal>Five things set Agency OS apart. Below them, every feature in the plan, with where it stands today and what the build order adds.</p>
+    </div>
+
+    <ol class="edge-list" data-reveal-group>
+      <li class="edge-card is--violet"><span class="edge-card__n eyebrow">01</span><h3 class="h-s">Playbook</h3><p class="p-m">Process, prompts, tools and boards, saved once and reused on every project.</p></li>
+      <li class="edge-card"><span class="edge-card__n eyebrow">02</span><h3 class="h-s">Profiles that show how you work</h3><p class="p-m">Process and toolkit on the profile, not only reviews and a price.</p></li>
+      <li class="edge-card"><span class="edge-card__n eyebrow">03</span><h3 class="h-s">Projects from your own phases</h3><p class="p-m">Phase templates with client approval gates at every step.</p></li>
+      <li class="edge-card is--dark"><span class="edge-card__n eyebrow">04</span><h3 class="h-s">Portals for every role</h3><p class="p-m">Project Lead, Team and HR portals, attendance and Gantt.</p></li>
+      <li class="edge-card is--volt"><span class="edge-card__n eyebrow">05</span><h3 class="h-s">Studio, handoff, foreign mode</h3><p class="p-m">Document studio, handoff packages and international client mode.</p></li>
+    </ol>
+
+    <div class="coverage" id="coverage"></div>
+
+    <div class="ledger-bar">
+      <div class="legend">
+        <span><i class="mk mk--b"></i>Live today</span>
+        <span><i class="mk mk--c"></i>On the roadmap</span>
+        <span><i class="mk mk--n"></i>New, our edge</span>
+      </div>
+      <div class="chips" role="group" aria-label="Highlight features" data-filter-for="feature-ledger">
+        <button class="chip" type="button" aria-pressed="true" data-f="all">Everything</button>
+        <button class="chip" type="button" aria-pressed="false" data-f="b"><i class="mk mk--b"></i>Live today</button>
+        <button class="chip" type="button" aria-pressed="false" data-f="c"><i class="mk mk--c"></i>Roadmap</button>
+        <button class="chip" type="button" aria-pressed="false" data-f="n"><i class="mk mk--n"></i>Our edge</button>
+      </div>
+    </div>
+    <div class="lg" id="feature-ledger"></div>
+  </div>
+</section>
+
+<!-- ============ PLANS ============ -->
+<section class="section is--dark plans" id="plans" data-tier="starter">
+  <div class="container is--m">
+    <div class="plans__head">
+      <div class="tag-pair"><span class="tag" data-theme="glass">Plans</span><span class="tag" data-theme="glass" data-shape="round">Draft</span></div>
+      <h2 class="h-ml" data-reveal>Free forever, then Solo or Agency</h2>
+      <p class="p-l">Two paid tracks, because a freelancer working alone does not need HR or project-lead portals. One account moves from Solo to Agency and keeps everything.</p>
+    </div>
+    <div class="plans__toggle">
+      <div class="seg" role="group" aria-label="Agency tier">
+        <button type="button" aria-pressed="true" data-tier-set="starter">Starter</button>
+        <button type="button" aria-pressed="false" data-tier-set="growth">Growth</button>
+        <button type="button" aria-pressed="false" data-tier-set="enterprise">Enterprise</button>
+      </div>
+      <div class="plans__scribble">
+        <svg class="arrow-scribble" viewBox="0 0 40 40" style="transform:scaleX(-1) rotate(10deg)"><use href="#i-scribble-arrow-up"/></svg>
+        <p class="scribble">Zero commission.<br>Ever.</p>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="plan-cards">
+      <article class="plan is--violet">
+        <span class="tag" data-theme="glass">Everyone</span>
+        <h3 class="plan__title">Free forever</h3>
+        <div class="plan__price"><span class="plan__amount">₹0</span><span class="p-s">no card, no commission</span></div>
+        <ul class="ticks">
+          <li>Public profile &amp; marketplace listing</li>
+          <li>Verified reviews &amp; embeddable badge</li>
+          <li>Every free tool</li>
+          <li>Starter Playbook</li>
+          <li>Leads pipeline with a starter limit</li>
+          <li>One active client with a portal</li>
+        </ul>
+      </article>
+      <article class="plan is--ink">
+        <div class="tag-pair"><span class="tag" data-theme="glass">Freelancers</span><span class="tag" data-theme="volt" data-shape="round">Draft</span></div>
+        <h3 class="plan__title">Solo</h3>
+        <div class="plan__price"><span class="plan__amount is--text">To decide</span><span class="p-s">the Solo plan ships in R3</span></div>
+        <ul class="ticks">
+          <li>Everything in Free</li>
+          <li>Unlimited leads, clients &amp; projects</li>
+          <li>Full Playbook with public &amp; private control</li>
+          <li>Client portal for every client</li>
+          <li>Quotes, proposals, invoices &amp; payments</li>
+          <li>Google Calendar &amp; Meet</li>
+          <li>Upgrade to Agency any day, data stays</li>
+        </ul>
+      </article>
+      <article class="plan is--light">
+        <span class="tag" data-theme="haze">Agencies with a team</span>
+        <h3 class="plan__title">Agency</h3>
+        <div class="plan__price">
+          <span class="plan__amount">₹<span class="roller" aria-hidden="true"><span class="roller__track"><span>1,499</span><span>3,499</span><span>7,999</span></span></span><span class="sr-only" id="tier-price-sr">1,499</span></span>
+          <span class="p-s">per month · <span class="roller is--text" aria-hidden="true"><span class="roller__track"><span>Starter</span><span>Growth</span><span>Enterprise</span></span></span></span>
+        </div>
+        <div class="tier-limits">
+          <span class="roller is--text" aria-hidden="true"><span class="roller__track"><span>Up to 5 members, 10 clients</span><span>Up to 20 members, unlimited clients</span><span>Unlimited, multi-branch</span></span></span>
+          <span class="sr-only" id="tier-limit-sr">Up to 5 members, 10 clients</span>
+        </div>
+        <ul class="tiers">
+          <li data-tier="starter"><b>Starter</b><span class="tnum">₹1,499/mo</span></li>
+          <li data-tier="growth"><b>Growth</b><span class="tnum">₹3,499/mo</span></li>
+          <li data-tier="enterprise"><b>Enterprise</b><span class="tnum">₹7,999/mo</span></li>
+        </ul>
+        <ul class="ticks">
+          <li>Project Lead, Team, HR &amp; Client portals</li>
+          <li>Phase templates &amp; approval gates</li>
+          <li>Document studio &amp; handoff packages</li>
+          <li>International client mode</li>
+        </ul>
+      </article>
+    </div>
+    <ul class="never">
+      <li><b>No commission</b> on any project</li>
+      <li><b>Hirers never pay</b> to browse or contact</li>
+      <li><b>Listings never expire</b></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ BUILD ORDER ============ -->
+<section class="section roadmap" id="roadmap">
+  <div class="container is--m">
+    <div class="section-head">
+      <div class="tag-pair"><span class="tag">Build order</span><span class="tag" data-theme="haze" data-shape="round">Now → R7</span></div>
+      <h2 class="h-l" data-reveal>What to build, in what order</h2>
+      <p class="p-l" data-reveal>We run our own agency on it first, then fill the gaps we found, then build the parts nobody else has.</p>
+    </div>
+    <ol class="road" id="road">
+      <li class="road__item is--now">
+        <div class="road__label"><span class="road__code">NOW</span><span class="h-xs">Use it ourselves</span></div>
+        <div class="road__dot" aria-hidden="true"></div>
+        <div class="road__body">
+          <ul class="mods is--light"><li>Run One Stop Solutions projects on Agency OS</li><li>Fill our Playbook: process, prompts, tools</li><li>Log every friction point</li></ul>
+          <p class="road__why"><span class="scribble">Why first:</span> we sell what we use, and our own profile becomes the first showcase.</p>
+        </div>
+      </li>
+      <li class="road__item">
+        <div class="road__label"><span class="road__code">R1</span><span class="h-xs">Grow</span></div>
+        <div class="road__dot" aria-hidden="true"></div>
+        <div class="road__body">
+          <ul class="mods is--light"><li>Leads pipeline &amp; sources</li><li>Lead → client in one click</li><li>Quotations &amp; proposals</li><li>Intake forms</li><li>Google Calendar &amp; Meet</li></ul>
+          <p class="road__why"><span class="scribble">Why:</span> the gap we found. Without it, onboarding starts with retyping.</p>
+        </div>
+      </li>
+      <li class="road__item">
+        <div class="road__label"><span class="road__code">R2</span><span class="h-xs">Playbook</span></div>
+        <div class="road__dot" aria-hidden="true"></div>
+        <div class="road__body">
+          <ul class="mods is--light"><li>All nine item types</li><li>Private, Team, Client, Public</li><li>Phase templates → projects</li><li>Figma &amp; Miro boards</li></ul>
+          <p class="road__why"><span class="scribble">Why:</span> our edge, and the content that makes profiles worth visiting.</p>
+        </div>
+      </li>
+      <li class="road__item">
+        <div class="road__label"><span class="road__code">R3</span><span class="h-xs">Get found</span></div>
+        <div class="road__dot" aria-hidden="true"></div>
+        <div class="road__body">
+          <ul class="mods is--light"><li>Public profiles &amp; How-we-work pages</li><li>Verified reviews &amp; badge</li><li>Free tools</li><li>Hirer sign-up &amp; marketplace</li><li>Solo plan</li></ul>
+          <p class="road__why"><span class="scribble">Why now:</span> profiles need Playbook content and portal reviews before hirers arrive.</p>
+        </div>
+      </li>
+      <li class="road__item">
+        <div class="road__label"><span class="road__code">R4</span><span class="h-xs">Deliver+</span></div>
+        <div class="road__dot" aria-hidden="true"></div>
+        <div class="road__body">
+          <ul class="mods is--light"><li>Document studio: PRD, SOW, NDA, MSA</li><li>Approval gates &amp; change requests</li><li>Time tracking &amp; payouts</li><li>Expenses, retainers &amp; GST</li></ul>
+          <p class="road__why"><span class="scribble">Why:</span> deepens daily use once teams are inside.</p>
+        </div>
+      </li>
+      <li class="road__item">
+        <div class="road__label"><span class="road__code">R5</span><span class="h-xs">Premium &amp; handoff</span></div>
+        <div class="road__dot" aria-hidden="true"></div>
+        <div class="road__body">
+          <ul class="mods is--light"><li>Handoff package</li><li>International client mode</li><li>Weekly status reports</li><li>Portal on own domain</li></ul>
+          <p class="road__why"><span class="scribble">Why:</span> what justifies agency pricing.</p>
+        </div>
+      </li>
+      <li class="road__item">
+        <div class="road__label"><span class="road__code">R6</span><span class="h-xs">Scale</span></div>
+        <div class="road__dot" aria-hidden="true"></div>
+        <div class="road__body">
+          <ul class="mods is--light"><li>AI first drafts</li><li>Android app, installable web app first</li><li>Meta, Google Ads &amp; IndiaMART sync</li><li>Requirement briefs from hirers</li></ul>
+          <p class="road__why"><span class="scribble">Why last:</span> growth features once the core loop works.</p>
+        </div>
+      </li>
+      <li class="road__item is--future">
+        <div class="road__label"><span class="road__code">R7</span><span class="h-xs">Mobile apps</span><span class="tag" data-theme="violet" data-shape="round">Future scope</span></div>
+        <div class="road__dot" aria-hidden="true"></div>
+        <div class="road__body">
+          <ul class="mods is--light"><li>Native Android &amp; iOS apps</li><li>Push notifications</li><li>Offline drafts that sync</li><li>Camera capture for receipts &amp; assets</li><li>Home-screen widgets</li></ul>
+          <p class="road__why"><span class="scribble">Why:</span> leads, approvals, payments and check-ins happen away from a desk.</p>
+          <a class="btn" href="#mobile" data-theme="ink" data-shape="round" data-size="s"><span class="btn__label">See the mobile scope</span><svg class="btn__icon" viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ MOBILE ============ -->
+<section class="section is--dark mobile" id="mobile">
+  <div class="container is--m">
+    <div class="mobile__head">
+      <div class="tag-pair"><span class="tag" data-theme="violet">Future scope</span><span class="tag" data-theme="glass" data-shape="round">After R6</span></div>
+      <h2 class="h-xl" data-reveal>In your pocket</h2>
+      <p class="p-l">Not part of the current build. R6 starts with an installable web app; native apps follow, designed around the moments that happen away from a desk: a new lead, an approval, a payment, a check-in.</p>
+    </div>
+
+    <div class="phones" data-reveal-group>
+      <figure class="phone-fig">
+        <div class="phone"><div class="phone__notch"></div><div class="phone__screen"><div class="mui is--phone" data-visual="phoneOwner"></div></div></div>
+        <figcaption><span class="tag" data-theme="glass">Agency owner</span><span class="p-s">Leads, approvals, money</span></figcaption>
+      </figure>
+      <figure class="phone-fig is--center">
+        <div class="phone"><div class="phone__notch"></div><div class="phone__screen"><div class="mui is--phone" data-visual="phoneTeam"></div></div></div>
+        <figcaption><span class="tag" data-theme="volt">Team member</span><span class="p-s">Check-in, tasks, timer</span></figcaption>
+      </figure>
+      <figure class="phone-fig">
+        <div class="phone"><div class="phone__notch"></div><div class="phone__screen"><div class="mui is--phone" data-visual="phoneClient"></div></div></div>
+        <figcaption><span class="tag" data-theme="glass" data-shape="round">Client</span><span class="p-s">Progress, approvals, payments</span></figcaption>
+      </figure>
+      <p class="scribble phones__scribble">Concept screens</p>
+    </div>
+
+    <div class="roles">
+      <article class="role">
+        <h3 class="h-xs">Agency owner &amp; project lead</h3>
+        <p class="eyebrow">Must see on the phone</p>
+        <ul class="ticks is--dark">
+          <li>New-lead alerts with one-tap reply and a call-booking link</li>
+          <li>Today: meetings, follow-ups and dues</li>
+          <li>Revenue, pending and overdue at a glance</li>
+          <li>Approve quotes, change requests and leave</li>
+          <li>Projects at risk and team load</li>
+          <li>Request a client approval at a phase gate</li>
+        </ul>
+      </article>
+      <article class="role">
+        <h3 class="h-xs">Team member &amp; HR</h3>
+        <p class="eyebrow">Must see on the phone</p>
+        <ul class="ticks is--dark">
+          <li>Attendance check-in</li>
+          <li>Today’s tasks and a time-log timer</li>
+          <li>Daily update form in under a minute</li>
+          <li>Team chat and files</li>
+          <li>Leave, payslips and notices</li>
+          <li>Leave approvals for HR</li>
+        </ul>
+      </article>
+      <article class="role">
+        <h3 class="h-xs">Client</h3>
+        <p class="eyebrow">Must see on the phone</p>
+        <ul class="ticks is--dark">
+          <li>Progress, dues and what needs them</li>
+          <li>Approve or comment at each phase gate</li>
+          <li>Pay invoices inside the app</li>
+          <li>View and sign contracts</li>
+          <li>Chat with the agency</li>
+          <li>Handoff page and acceptance sign-off</li>
+        </ul>
+      </article>
+      <article class="role">
+        <h3 class="h-xs">Hirer</h3>
+        <p class="eyebrow">Must see on the phone</p>
+        <ul class="ticks is--dark">
+          <li>Browse by service, city, budget and rating</li>
+          <li>Saved agencies and shortlists</li>
+          <li>Enquiries and replies in one inbox</li>
+          <li>Request a quote in two steps</li>
+          <li>Same login becomes their client portal</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="caps">
+      <span class="eyebrow caps__label">Built into every app</span>
+      <ul class="caps__list">
+        <li>Push notifications, with email &amp; WhatsApp fallbacks</li>
+        <li>Offline drafts that sync</li>
+        <li>Two-factor &amp; biometric login</li>
+        <li>Camera capture for receipts, brand assets &amp; documents</li>
+        <li>Home-screen widgets for today &amp; the timer</li>
+        <li>Deep links from every notification</li>
+        <li>In-app payments via Razorpay</li>
+      </ul>
+    </div>
+
+    <ol class="phases">
+      <li><span class="eyebrow">Step 01 · R6</span><b class="h-xs">Installable web app</b><span class="p-s">Works on any phone from the browser, added to the home screen.</span></li>
+      <li><span class="eyebrow">Step 02 · R7</span><b class="h-xs">Native Android app</b><span class="p-s">Push, camera and offline for India’s Android-first users.</span></li>
+      <li><span class="eyebrow">Step 03 · R7</span><b class="h-xs">iOS app</b><span class="p-s">For clients and hirers abroad, alongside international mode.</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ OPEN QUESTIONS ============ -->
+<section class="section questions" id="questions">
+  <div class="container is--m">
+    <div class="section-head">
+      <div class="tag-pair"><span class="tag">Open questions</span><span class="tag" data-theme="haze" data-shape="round">Q1–Q6</span></div>
+      <h2 class="h-l" data-reveal>Six questions we are settling before design</h2>
+      <p class="p-l" data-reveal>We know what we have not decided yet. These are the calls we will make next, with users.</p>
+    </div>
+    <ol class="qs" data-reveal-group>
+      <li class="q"><span class="q__n">Q1</span><h3 class="h-xs">What exactly goes into Free?</h3><p class="p-m">How many leads, projects, Playbook items and client portals before someone has to upgrade.</p><span class="tag" data-theme="haze" data-shape="round">Open</span></li>
+      <li class="q"><span class="q__n">Q2</span><h3 class="h-xs">What does Solo cost?</h3><p class="p-m">Our Agency Starter is ₹1,499 a month, so Solo sits below it. The exact price is still open.</p><span class="tag" data-theme="haze" data-shape="round">Open</span></li>
+      <li class="q"><span class="q__n">Q3</span><h3 class="h-xs">Bring GST forward?</h3><p class="p-m">V1 skipped tax logic. Indian clients expect GST-ready invoices and foreign clients need export invoices. Pull tax into R4?</p><span class="tag" data-theme="haze" data-shape="round">Open</span></li>
+      <li class="q"><span class="q__n">Q4</span><h3 class="h-xs">How do hirers reach agencies?</h3><p class="p-m">Contact profiles only, or also post a requirement brief that agencies respond to?</p><span class="tag" data-theme="haze" data-shape="round">Open</span></li>
+      <li class="q"><span class="q__n">Q5</span><h3 class="h-xs">What earns the verified badge?</h3><p class="p-m">A reviewed portal project, business proof such as GST registration, or both.</p><span class="tag" data-theme="haze" data-shape="round">Open</span></li>
+      <li class="q"><span class="q__n">Q6</span><h3 class="h-xs">Mobile app or mobile web?</h3><p class="p-m">An installable web app first, or a native Android app straight away. Today’s plan: web app in R6, native apps in R7.</p><span class="tag" data-theme="haze" data-shape="round">Open</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ INVEST ============ -->
+<section class="section invest" id="invest">
+  <div class="container is--m">
+    <div class="invest__card">
+      <div class="invest__start">
+        <div class="tag-pair"><span class="tag" data-theme="steel">Investors</span><span class="tag" data-theme="steel" data-shape="round">Let’s talk</span></div>
+        <div class="invest__text">
+          <p class="p-l">Want the full product walkthrough?</p>
+          <h2 class="h-ml">Build Agency OS with us</h2>
+          <div class="btn-row">
+            <a class="btn" data-theme="volt" data-size="l" href="mailto:leeladharabburi2032@gmail.com?subject=Agency%20OS%20%E2%80%94%20investor%20conversation"><span class="btn__label">Email us</span><svg class="btn__icon" viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+            <a class="btn" data-theme="glass" data-shape="round" data-size="l" href="tel:+919014952056"><span class="btn__label">Call +91 90149 52056</span></a>
+          </div>
+          <div class="invest__scribble">
+            <svg class="arrow-scribble" viewBox="0 0 40 40" style="transform:rotate(-80deg) scaleY(-1)"><use href="#i-scribble-arrow"/></svg>
+            <p class="scribble">We run our own<br>agency on it!</p>
+          </div>
+        </div>
+        <ul class="contact-list" aria-label="Contact details">
+          <li><span class="eyebrow">Direct line</span><span class="contact-list__value">+91 90149 52056</span><button class="copy" type="button" data-copy="+91 9014952056" aria-label="Copy phone number"><svg viewBox="0 0 16 16"><use href="#i-copy"/></svg><span>Copy</span></button></li>
+          <li><span class="eyebrow">Email</span><span class="contact-list__value">leeladharabburi2032@gmail.com</span><button class="copy" type="button" data-copy="leeladharabburi2032@gmail.com" aria-label="Copy email address"><svg viewBox="0 0 16 16"><use href="#i-copy"/></svg><span>Copy</span></button></li>
+          <li><span class="eyebrow">Agency</span><span class="contact-list__value">workwithonestop@gmail.com</span><button class="copy" type="button" data-copy="workwithonestop@gmail.com" aria-label="Copy agency email address"><svg viewBox="0 0 16 16"><use href="#i-copy"/></svg><span>Copy</span></button></li>
+          <li><span class="eyebrow">Website</span><a class="contact-list__value" href="https://onestopsolutions.framer.website/" target="_blank" rel="noopener">onestopsolutions.framer.website</a><span class="copy is--static" aria-hidden="true"><svg viewBox="0 0 12 12"><use href="#i-arrow-ur"/></svg></span></li>
+        </ul>
+      </div>
+      <div class="invest__end" data-theme-preview="dark">
+        <div class="invest__switches" role="group" aria-label="Preview theme">
+          <button class="icon-btn" type="button" data-theme="steel" data-shape="round" data-preview="dark" aria-pressed="true" aria-label="Dark preview"><svg viewBox="0 0 24 24"><use href="#i-moon"/></svg></button>
+          <button class="icon-btn" type="button" data-theme="steel" data-shape="round" data-preview="light" aria-pressed="false" aria-label="Light preview"><svg viewBox="0 0 24 24"><use href="#i-sun"/></svg></button>
+        </div>
+        <div class="invest__visual">
+          <div class="mini-dash" id="mini-dash" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer" id="contact">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__contact">
+        <h2 class="h-xs"><strong>Talk to One Stop Solutions</strong></h2>
+        <ul class="footer__rows">
+          <li><span class="eyebrow">Call</span><a href="tel:+919014952056">+91 90149 52056</a></li>
+          <li><span class="eyebrow">Email</span><a href="mailto:leeladharabburi2032@gmail.com">leeladharabburi2032@gmail.com</a></li>
+          <li><span class="eyebrow">Agency</span><a href="mailto:workwithonestop@gmail.com">workwithonestop@gmail.com</a></li>
+          <li><span class="eyebrow">Web</span><a href="https://onestopsolutions.framer.website/" target="_blank" rel="noopener">onestopsolutions.framer.website ↗</a></li>
+        </ul>
+      </div>
+      <div class="footer__cols">
+        <div>
+          <h3 class="h-xs">Product</h3>
+          <ul><li><a href="#platform">The platform</a></li><li><a href="#layers">Three layers</a></li><li><a href="#journey">The journey</a></li><li><a href="#portals">Nine portals</a></li><li><a href="#playbook">Playbook</a></li><li><a href="#documents">Document studio</a></li></ul>
+        </div>
+        <div>
+          <h3 class="h-xs">Business</h3>
+          <ul><li><a href="#problem">The problem</a></li><li><a href="#strategy">Strategy</a></li><li><a href="#edge">Our edge</a></li><li><a href="#plans">Plans</a></li><li><a href="#roadmap">Build order</a></li><li><a href="#mobile">Mobile app</a></li></ul>
+        </div>
+        <div>
+          <h3 class="h-xs">Company</h3>
+          <ul><li><a href="https://onestopsolutions.framer.website/" target="_blank" rel="noopener">Website ↗</a></li><li><button type="button" data-modal-open="about">About us</button></li><li><a href="#questions">Open questions</a></li><li><a href="#invest">Invest</a></li></ul>
+        </div>
+      </div>
+      <div class="footer__buttons">
+        <button class="btn" type="button" data-theme="ink" data-shape="round" data-modal-open="about"><span class="btn__label">About us</span></button>
+        <a class="btn" data-theme="volt" href="#invest"><span class="btn__label">Invest</span></a>
+      </div>
+    </div>
+    <div class="footer__logo" aria-label="One Stop Solutions">
+      <svg viewBox="0 0 1573 365" aria-hidden="true"><use href="#i-logo"/></svg>
+    </div>
+    <div class="footer__bottom">
+      <div class="tag-pair"><span class="tag">Agency OS</span><span class="tag" data-shape="round">Pitch deck</span></div>
+      <p class="eyebrow">© <span data-year>2026</span> One Stop Solutions</p>
+      <div class="footer__made"><span class="eyebrow">Product of</span><div class="tag-pair"><span class="tag" data-theme="violet">One Stop</span><span class="tag" data-theme="violet" data-shape="round">Solutions</span></div></div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ MODALS ============ -->
+<div class="modal" data-modal="about" aria-hidden="true">
+  <div class="modal__bg" data-modal-close></div>
+  <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="about-title" tabindex="-1">
+    <button class="modal__close" type="button" data-modal-close><span class="modal__close-x"><svg viewBox="0 0 10 10"><use href="#i-x"/></svg></span>Close</button>
+    <div class="modal__scroll" data-lenis-prevent>
+      <div class="about">
+        <div class="about__logo"><svg viewBox="0 0 1573 365" aria-hidden="true"><use href="#i-logo"/></svg></div>
+        <h2 class="h-l" id="about-title">A product by One Stop Solutions</h2>
+        <p class="p-l about__lead">We are a design and development agency in Andhra Pradesh. Agency OS is the platform we built to run our own client work, from the first enquiry to the final handoff. Now we are opening it to every freelancer and agency.</p>
+        <div class="about__stats">
+          <div><span class="h-l tnum">10</span><span class="p-s">journey stages</span></div>
+          <div><span class="h-l tnum">9</span><span class="p-s">role portals</span></div>
+          <div><span class="h-l tnum">134</span><span class="p-s">features mapped</span></div>
+          <div><span class="h-l tnum">14</span><span class="p-s">documents</span></div>
+        </div>
+        <div class="about__cols">
+          <div>
+            <h3 class="h-xs">How we work</h3>
+            <ol class="profile__steps is--large">
+              <li><i>01</i><div><b>Discovery</b> <span>· goals, users, scope</span></div></li>
+              <li><i>02</i><div><b>UX &amp; UI design</b> <span>· flows, wireframes, Figma screens</span></div></li>
+              <li><i>03</i><div><b>Build</b> <span>· weekly demos in your portal</span></div></li>
+              <li><i>04</i><div><b>QA &amp; launch</b> <span>· checklist, approval, go-live</span></div></li>
+              <li><i>05</i><div><b>Handoff</b> <span>· repo, stack, docs, sign-off</span></div></li>
+            </ol>
+            <ul class="profile__tools"><li>Figma</li><li>React</li><li>Node.js</li><li>Supabase</li><li>Razorpay</li><li>Vercel</li></ul>
+          </div>
+          <div>
+            <h3 class="h-xs">Contact</h3>
+            <ul class="contact-list is--light">
+              <li><span class="eyebrow">Direct line</span><span class="contact-list__value">+91 90149 52056</span><button class="copy" type="button" data-copy="+91 9014952056" aria-label="Copy phone number"><svg viewBox="0 0 16 16"><use href="#i-copy"/></svg><span>Copy</span></button></li>
+              <li><span class="eyebrow">Email</span><span class="contact-list__value">leeladharabburi2032@gmail.com</span><button class="copy" type="button" data-copy="leeladharabburi2032@gmail.com" aria-label="Copy email address"><svg viewBox="0 0 16 16"><use href="#i-copy"/></svg><span>Copy</span></button></li>
+              <li><span class="eyebrow">Agency</span><span class="contact-list__value">workwithonestop@gmail.com</span><button class="copy" type="button" data-copy="workwithonestop@gmail.com" aria-label="Copy agency email address"><svg viewBox="0 0 16 16"><use href="#i-copy"/></svg><span>Copy</span></button></li>
+            </ul>
+            <div class="btn-row" style="margin-top:1.25rem">
+              <a class="btn" data-theme="ink" data-shape="round" href="https://onestopsolutions.framer.website/" target="_blank" rel="noopener"><span class="btn__label">Visit our website</span><svg class="btn__icon" viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+              <a class="btn" data-theme="volt" href="#invest" data-modal-close><span class="btn__label">Invest</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" data-modal="portal" aria-hidden="true">
+  <div class="modal__bg" data-modal-close></div>
+  <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="portal-title" tabindex="-1">
+    <button class="modal__close" type="button" data-modal-close><span class="modal__close-x"><svg viewBox="0 0 10 10"><use href="#i-x"/></svg></span>Close</button>
+    <div class="modal__scroll" data-lenis-prevent id="portal-modal-body"></div>
+  </div>
+</div>
+
+<div class="modal is--center is--dark" data-modal="reel" aria-hidden="true">
+  <div class="modal__bg" data-modal-close></div>
+  <div class="modal__panel player" role="dialog" aria-modal="true" aria-label="Client journey walkthrough" tabindex="-1">
+    <button class="modal__close" type="button" data-modal-close><span class="modal__close-x"><svg viewBox="0 0 10 10"><use href="#i-x"/></svg></span>Close</button>
+    <div class="player__screen" id="player-frames"></div>
+    <div class="player__controls">
+      <button class="icon-btn" type="button" data-theme="glass" data-shape="round" id="player-pp" aria-label="Pause"><svg viewBox="0 0 12 12"><use href="#i-pause"/></svg></button>
+      <div class="player__progress" id="player-progress"></div>
+      <span class="eyebrow tnum player__count" id="player-count">01 / 10</span>
+      <button class="icon-btn" type="button" data-theme="glass" id="player-prev" aria-label="Previous stage"><svg viewBox="0 0 12 12"><use href="#i-arrow-l"/></svg></button>
+      <button class="icon-btn" type="button" data-theme="glass" id="player-next" aria-label="Next stage"><svg viewBox="0 0 12 12"><use href="#i-arrow-r"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>

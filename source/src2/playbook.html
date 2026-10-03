@@ -1,0 +1,186 @@
+<a class="skip-link" href="#lib">Skip to the playbook</a>
+
+__SPRITE__
+
+<header class="nav" data-open="false">
+  <div class="nav__shade" data-nav-close></div>
+  <div class="nav__wrap">
+    <div class="nav__bar">
+      <div class="nav__top">
+        <button class="nav-menu" type="button" aria-expanded="false" aria-controls="nav-panel" data-nav-toggle>
+          <span class="nav-menu__burger" aria-hidden="true"><i></i><i></i></span>
+          <span>Menu</span>
+        </button>
+        <a class="nav__logo" href="#top" aria-label="One Stop Solutions team playbook, back to top"><svg viewBox="0 0 1573 365" aria-hidden="true"><use href="#i-logo"/></svg></a>
+        <div class="nav__buttons">
+          <button class="btn" type="button" data-theme="steel" data-shape="round" data-search-open data-hide-mobile><svg class="btn__icon is--lead" viewBox="0 0 16 16" aria-hidden="true"><use href="#i-search"/></svg><span class="btn__label">Search</span></button>
+          <button class="icon-btn pb-nav-search" type="button" data-theme="steel" data-shape="round" data-search-open aria-label="Search the playbook"><svg viewBox="0 0 16 16"><use href="#i-search"/></svg></button>
+          <button class="btn" type="button" data-theme="volt" data-add data-write><svg class="btn__icon is--lead" viewBox="0 0 12 12" aria-hidden="true"><use href="#i-plus"/></svg><span class="btn__label">Add</span></button>
+        </div>
+      </div>
+      <div class="nav__panel" id="nav-panel">
+        <div class="nav__panel-inner">
+          <div class="nav__panel-grid">
+            <div>
+              <span class="nav__col-title eyebrow">How we work</span>
+              <nav class="nav__links" aria-label="How we work">
+                <a href="#lib" data-tab-link="process">Process <span class="eyebrow">01</span></a>
+                <a href="#lib" data-tab-link="services">Services <span class="eyebrow">02</span></a>
+                <a href="#lib" data-tab-link="research">Research <span class="eyebrow">03</span></a>
+              </nav>
+            </div>
+            <div>
+              <span class="nav__col-title eyebrow">Library</span>
+              <nav class="nav__links" aria-label="Library">
+                <a href="#lib" data-tab-link="prompts">Prompts <span class="eyebrow">04</span></a>
+                <a href="#lib" data-tab-link="tools">Tools <span class="eyebrow">05</span></a>
+                <a href="#lib" data-tab-link="kb">Knowledge <span class="eyebrow">06</span></a>
+              </nav>
+            </div>
+            <button class="nav__banner pb-banner" type="button" data-add data-write>
+              <span class="tag-pair"><span class="tag" data-theme="glass">Shared</span><span class="tag" data-theme="glass" data-shape="round">Live</span></span>
+              <span>
+                <span class="h-s pb-banner__title">Add to the playbook</span>
+                <span class="p-s pb-banner__line">A prompt, a tool, a link. Everyone sees it.</span>
+              </span>
+              <span class="btn" data-theme="white" data-shape="round" data-size="s"><span class="btn__label">Add something</span></span>
+              <svg class="pb-banner__glyph" viewBox="0 0 80 80" aria-hidden="true"><use href="#i-glyph"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<div class="undernav">
+  <div class="undernav__inner marquee-wrap" aria-hidden="true">
+    <div class="marquee" style="--marquee-dur:38s">
+      <div class="marquee__list">
+        <span class="marquee__item eyebrow">Team playbook · Internal · Not for clients <svg viewBox="0 0 80 80"><use href="#i-glyph"/></svg></span>
+        <span class="marquee__item eyebrow">Add what you learn. Everyone sees it <svg viewBox="0 0 80 80"><use href="#i-glyph"/></svg></span>
+        <span class="marquee__item eyebrow">One Stop Solutions <svg viewBox="0 0 80 80"><use href="#i-glyph"/></svg></span>
+      </div>
+      <div class="marquee__list">
+        <span class="marquee__item eyebrow">Team playbook · Internal · Not for clients <svg viewBox="0 0 80 80"><use href="#i-glyph"/></svg></span>
+        <span class="marquee__item eyebrow">Add what you learn. Everyone sees it <svg viewBox="0 0 80 80"><use href="#i-glyph"/></svg></span>
+        <span class="marquee__item eyebrow">One Stop Solutions <svg viewBox="0 0 80 80"><use href="#i-glyph"/></svg></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="pb-hero" id="top">
+  <div class="container is--m">
+    <div class="pb-hero__head">
+      <div class="tag-pair"><span class="tag">Team playbook</span><span class="tag" data-theme="violet" data-shape="round">Internal</span></div>
+      <h1 class="h-l pb-hero__title">How we work.<br>In one place.</h1>
+      <p class="p-l pb-hero__line">Process, prompts, tools and research. Add what you learn. Everyone sees it.</p>
+      <button class="pb-search" type="button" data-search-open>
+        <svg viewBox="0 0 16 16" aria-hidden="true"><use href="#i-search"/></svg>
+        <span>Search prompts, tools, research…</span>
+        <kbd>/</kbd>
+      </button>
+      <p class="pb-sync" id="pb-sync" role="status" data-state="loading"><i aria-hidden="true"></i><span>Connecting…</span></p>
+    </div>
+    <div class="pb-stats" id="pb-stats"></div>
+  </div>
+</section>
+
+<!-- ============ TABS ============ -->
+<div class="pb-tabs-wrap" id="lib">
+  <div class="container is--m">
+    <div class="pb-tabs" id="pb-tabs" role="tablist" aria-label="Playbook sections"></div>
+  </div>
+</div>
+
+<section class="pb-panel" id="pb-panel" role="tabpanel" tabindex="-1">
+  <div class="container is--m" id="pb-panel-inner"></div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer pb-footer">
+  <div class="container is--m">
+    <div class="pb-footer__top">
+      <div>
+        <p class="h-xs"><strong>Team playbook</strong></p>
+        <p class="p-m pb-footer__line">Internal. Please don’t share this link with clients.</p>
+      </div>
+      <div class="btn-row">
+        <a class="btn" data-theme="ink" data-shape="round" id="pb-pitch-link" href="#" target="_blank" rel="noopener" hidden><span class="btn__label">Open the client pitch</span><svg class="btn__icon" viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+        <button class="btn" type="button" data-theme="volt" data-add data-write><span class="btn__label">Add to the playbook</span></button>
+      </div>
+    </div>
+    <div class="footer__logo" aria-label="One Stop Solutions">
+      <svg viewBox="0 0 1573 365" aria-hidden="true"><use href="#i-logo"/></svg>
+    </div>
+    <div class="footer__bottom">
+      <div class="tag-pair"><span class="tag">Team</span><span class="tag" data-shape="round">Playbook</span></div>
+      <p class="eyebrow">© <span data-year>2026</span> One Stop Solutions</p>
+      <div class="footer__made"><span class="eyebrow">Internal</span><div class="tag-pair"><span class="tag" data-theme="violet">Not for</span><span class="tag" data-theme="violet" data-shape="round">clients</span></div></div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ MODALS ============ -->
+<div class="modal" data-modal="item" aria-hidden="true">
+  <div class="modal__bg" data-modal-close></div>
+  <div class="modal__panel pb-sheet" role="dialog" aria-modal="true" aria-labelledby="item-title" tabindex="-1">
+    <button class="modal__close" type="button" data-modal-close><span class="modal__close-x"><svg viewBox="0 0 10 10"><use href="#i-x"/></svg></span>Close</button>
+    <div class="modal__scroll" data-lenis-prevent id="item-body"></div>
+  </div>
+</div>
+
+<div class="modal" data-modal="form" aria-hidden="true">
+  <div class="modal__bg" data-modal-close></div>
+  <div class="modal__panel pb-sheet is--form" role="dialog" aria-modal="true" aria-labelledby="form-title" tabindex="-1">
+    <button class="modal__close" type="button" data-modal-close><span class="modal__close-x"><svg viewBox="0 0 10 10"><use href="#i-x"/></svg></span>Close</button>
+    <div class="modal__scroll" data-lenis-prevent>
+      <form class="pf" id="pf" novalidate>
+        <div class="pf__head">
+          <div class="tag-pair"><span class="tag" id="pf-mode">New</span><span class="tag" data-theme="violet" data-shape="round" id="pf-where">Shared with the team</span></div>
+          <h2 class="h-m" id="form-title">Add to the playbook</h2>
+        </div>
+        <fieldset class="pf__kinds" id="pf-kinds">
+          <legend class="eyebrow">What are you adding?</legend>
+          <div class="pf__kind-grid" id="pf-kind-grid"></div>
+        </fieldset>
+        <div class="pf__grid" id="pf-fields"></div>
+        <p class="pf__error" id="pf-error" role="alert" hidden></p>
+        <div class="pf__actions">
+          <div class="pf__danger" id="pf-danger" hidden>
+            <button class="btn" type="button" data-theme="haze" id="pf-delete"><svg class="btn__icon is--lead" viewBox="0 0 16 16" aria-hidden="true"><use href="#i-trash"/></svg><span class="btn__label">Delete</span></button>
+            <div class="pf__confirm" id="pf-confirm" hidden>
+              <span class="p-s">Delete for everyone?</span>
+              <button class="btn" type="button" data-theme="bone" data-size="s" id="pf-confirm-no"><span class="btn__label">Keep</span></button>
+              <button class="btn pf__del-yes" type="button" data-size="s" id="pf-confirm-yes"><span class="btn__label">Delete</span></button>
+            </div>
+          </div>
+          <div class="btn-row pf__save">
+            <button class="btn" type="button" data-theme="bone" data-modal-close><span class="btn__label">Cancel</span></button>
+            <button class="btn" type="submit" data-theme="volt" id="pf-submit"><span class="btn__label">Save</span></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal is--center pb-search-modal" data-modal="search" aria-hidden="true">
+  <div class="modal__bg" data-modal-close></div>
+  <div class="modal__panel pb-palette" role="dialog" aria-modal="true" aria-label="Search the playbook" tabindex="-1">
+    <div class="pb-palette__bar">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><use href="#i-search"/></svg>
+      <input class="pb-palette__input" id="pb-q" type="search" placeholder="Search prompts, tools, research, steps…" autocomplete="off" spellcheck="false" aria-controls="pb-results" aria-label="Search the playbook" data-autofocus>
+      <button class="pb-palette__esc" type="button" data-modal-close>Esc</button>
+    </div>
+    <div class="pb-palette__results" id="pb-results" role="listbox" aria-label="Results" data-lenis-prevent></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>

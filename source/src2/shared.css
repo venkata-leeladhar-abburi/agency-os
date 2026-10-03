@@ -1,0 +1,20 @@
+/* ===== Shared by the pitch and the playbook: numbered routes, phase rails ===== */
+.modal__panel:focus-visible{outline:none}
+.route{position:relative;display:grid;gap:.5rem;counter-reset:none}
+.route::before{content:"";position:absolute;left:1.15rem;top:1.2rem;bottom:1.2rem;width:2px;background:var(--c-cloud)}
+.route li{position:relative;display:grid;grid-template-columns:2.3rem minmax(0,1fr);align-items:center;gap:.9rem;animation:route-in .6s var(--ease-out) both;animation-delay:calc(var(--k) * 45ms)}
+@keyframes route-in{from{opacity:0;transform:translateX(-.75rem)}}
+.route__n{position:relative;z-index:1;display:grid;place-items:center;width:2.3rem;height:2.3rem;border-radius:50%;background:var(--c-concrete);box-shadow:inset 0 0 0 1.5px var(--c-ink);font-family:var(--font-mono);font-size:.75rem}
+.route li:first-child .route__n{background:var(--c-volt)}
+.route li:last-child .route__n{background:var(--c-ink);color:var(--c-volt)}
+.route__t{padding:.7rem .95rem;border-radius:var(--r-m);background:var(--c-concrete);font-size:1rem;font-weight:500;letter-spacing:-.015em;line-height:1.25}
+.route.is--compact .route__t{font-weight:400}
+.svr{position:relative;display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
+.svr::before{content:"";position:absolute;left:7%;right:7%;top:.5rem;height:2px;background:var(--c-cloud)}
+.svr li{position:relative;display:flex;flex-direction:column;align-items:center;gap:.25rem;text-align:center;color:var(--c-steel)}
+.svr__dot{width:1.05rem;height:1.05rem;border-radius:50%;background:var(--c-concrete);border:2px solid var(--c-smoke)}
+.svr li.is--on{color:var(--c-ink)}
+.svr li.is--on .svr__dot{background:var(--c-volt);border-color:var(--c-ink)}
+.svr__n{font-family:var(--font-mono);font-size:.5625rem}
+.svr__name{font-size:.75rem;font-weight:500;letter-spacing:-.02em}
+@media (max-width:767px){.svr__name{font-size:.625rem}.route__t{font-size:.9375rem}}
