@@ -632,6 +632,10 @@ a.contact-list__value{user-select:auto;-webkit-user-select:auto}
 .frame__view{position:relative;display:block;aspect-ratio:16/10;overflow:hidden;background:#111;container-type:size}
 .frame__view img{position:absolute;left:0;top:0;width:100%;height:auto;min-height:100%;object-fit:cover;object-position:top}
 .frame.is--tall .frame__view img{height:auto;object-fit:initial;transition:transform 7s cubic-bezier(.45,0,.3,1)}
+/* A wide screen shown whole, with nothing cropped */
+.frame.is--wide .frame__view{aspect-ratio:1600/804}
+.cmp.is--wide{aspect-ratio:1600/804}
+.reel-card__img img[src$="bk-dash.webp"],.case__thumb img[src$="bk-dash.webp"],.ap__img img[src$="bk-dash.webp"],.allband__thumbs img[src$="bk-dash.webp"]{object-position:left top}
 .case__stage:hover .frame.is--tall .frame__view img,.cm__shot:hover .frame.is--tall .frame__view img{transform:translateY(calc(-100% + 100cqh))}
 .case__stage:hover .frame{transform:translateY(-.35rem)}
 
@@ -1159,42 +1163,97 @@ a.contact-list__value{user-select:auto;-webkit-user-select:auto}
 .contact__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:.75rem;align-items:stretch}
 .contact__list{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:2.5rem;margin-top:2.5rem}
 
-/* The project map */
-.pmap{position:relative;display:flex;flex-direction:column;gap:1rem;padding:1.4rem;border-radius:var(--r-xl);background:radial-gradient(rgba(242,242,242,.07) 1px,transparent 1.3px) 0 0/1.25rem 1.25rem,#161616;box-shadow:inset 0 0 0 1px rgba(242,242,242,.08);overflow:hidden}
+/* The project map: each answer becomes a small diagram */
+.pmap{position:relative;display:flex;flex-direction:column;gap:.85rem;padding:1.3rem 1.4rem 1.4rem;border-radius:var(--r-xl);background:radial-gradient(rgba(242,242,242,.07) 1px,transparent 1.3px) 0 0/1.25rem 1.25rem,#161616;box-shadow:inset 0 0 0 1px rgba(242,242,242,.08);overflow:hidden}
 .pmap__head{display:flex;justify-content:space-between;align-items:center;gap:1rem}
 .pmap__head .eyebrow{color:var(--c-volt)}
 .pmap__head em{font-style:normal;font-family:var(--font-mono);font-size:.75rem;color:var(--c-steel)}
-.pmap__orbit{position:relative;flex:1;min-height:18rem}
-.pmap__lines{position:absolute;inset:0;width:100%;height:100%}
-.pmap__lines ellipse{fill:none;stroke:rgba(242,242,242,.14);stroke-dasharray:3 6;vector-effect:non-scaling-stroke}
-.pmap__lines line{stroke:var(--c-volt);stroke-width:1.5;vector-effect:non-scaling-stroke}
-.pmap__lines line.is--new{animation:dg-fade .6s ease backwards}
-.pmap__core{position:absolute;z-index:1;left:50%;top:50%;translate:-50% -50%;display:grid;justify-items:center;align-content:center;gap:.35rem;width:8.5rem;height:8.5rem;padding:1rem;border-radius:50%;background:var(--c-volt);color:var(--c-ink);text-align:center;box-shadow:0 0 0 .6rem rgba(255,90,31,.14),0 0 0 1.3rem rgba(255,90,31,.06);transition:background-color .4s}
-.pmap__core svg{width:1.5rem;height:1.5rem}
-.pmap__core b{font-size:.9375rem;font-weight:500;line-height:1.15;letter-spacing:-.02em;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.pmap__node{position:absolute;z-index:2;translate:-50% -50%;display:inline-flex;align-items:center;gap:.4rem;height:2.2rem;padding:0 .85rem 0 .65rem;border-radius:var(--r-pill);background:var(--c-concrete);color:var(--c-ink);font-size:.8125rem;font-weight:500;white-space:nowrap;box-shadow:0 .5rem 1rem -.4rem rgba(0,0,0,.6);transition:left .6s var(--ease-out),top .6s var(--ease-out)}
-.pmap__node svg{width:1.05rem;height:1.05rem;flex:none;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-.pmap__node.is--new{animation:pm-pop .55s var(--ease-back)}
-.pmap__node.is--ghost{justify-content:center;width:2.4rem;height:2.4rem;padding:0;border-radius:50%;background:transparent;border:1.5px dashed rgba(242,242,242,.3);color:var(--c-steel);box-shadow:none;font-family:var(--font-mono)}
+.pmap__zone{position:relative;display:grid;gap:.5rem;align-content:start;min-width:0}
+.pmap__zl{display:flex;align-items:center;gap:.45rem;min-width:0;font-family:var(--font-mono);font-size:.625rem;letter-spacing:.06em;text-transform:uppercase;color:var(--c-graphite);transition:color .3s}
+.pmap__zl i{flex:none;width:.4rem;height:.4rem;border-radius:50%;background:currentColor;transition:background-color .3s}
+.pmap__zl em{margin-left:auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--font-sans);font-style:normal;font-size:.75rem;font-weight:500;letter-spacing:0;text-transform:none;color:var(--c-concrete)}
+.pmap__zone.is--set .pmap__zl{color:var(--c-smoke)}
+.pmap__zone.is--set .pmap__zl i{background:var(--c-volt)}
+.pmap__zone.is--now .pmap__zl{color:var(--c-volt)}
+.pmap__zone.is--now .pmap__zl i{background:var(--c-volt);animation:pm-blink 1.1s infinite}
+@keyframes pm-blink{50%{opacity:.15}}
 @keyframes pm-pop{from{opacity:0;transform:scale(.5)}}
-.pmap__about{min-height:1.6rem;font-family:var(--font-hand);font-size:1.6rem;line-height:1.05;color:var(--c-violet-lite);overflow-wrap:anywhere}
-.pmap__about:empty::before{content:"Your idea, in your words, lands here.";color:var(--c-graphite)}
-.pmap__path{position:relative;padding-top:2.4rem}
-.pmap__path ol{position:relative;display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
-.pmap__path ol::before{content:"";position:absolute;left:calc(100% / 14);right:calc(100% / 14);top:.45rem;height:2px;margin-top:-1px;background:rgba(242,242,242,.14)}
-.pmap__path li{position:relative;display:grid;justify-items:center;gap:.45rem;font-size:clamp(.5625rem,1.6vw,.6875rem);color:var(--c-graphite);text-align:center;transition:color .4s}
-.pmap__path li::after{content:"";position:absolute;left:50%;top:.45rem;width:100%;height:2px;margin-top:-1px;background:var(--c-volt);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease-out)}
-.pmap__path li.is--on:has(~ li.is--on)::after,.pmap__path li.is--on ~ li:has(~ li.is--on)::after{transform:scaleX(1)}
-.pmap__path li i{position:relative;z-index:1;width:.9rem;height:.9rem;border-radius:50%;background:#161616;box-shadow:inset 0 0 0 1.5px rgba(242,242,242,.28);transition:background-color .4s,box-shadow .4s,transform .4s var(--ease-back)}
-.pmap__path li.is--on{color:var(--c-concrete)}
-.pmap__path li.is--on i{background:var(--c-volt);box-shadow:none}
-.pmap__path li.is--first i{transform:scale(1.3);box-shadow:0 0 0 .3rem rgba(255,90,31,.25)}
-.pmap__flag{position:absolute;top:0;right:calc(100% * 1.5 / 7 - 1px);display:inline-flex;align-items:center;height:1.6rem;padding:0 .7rem;border-radius:.4rem .4rem 0 .4rem;background:#262626;color:var(--c-smoke);font-size:.75rem;font-weight:500;white-space:nowrap;transition:background-color .4s,color .4s}
-.pmap__flag::after{content:"";position:absolute;right:0;top:100%;width:2px;height:.8rem;background:inherit}
-.pmap__flag.is--set{background:var(--c-concrete);color:var(--c-ink)}
-.pmap__foot{display:flex;justify-content:space-between;align-items:center;gap:1rem;min-height:2.4rem;padding-top:.9rem;border-top:1px dashed rgba(242,242,242,.14)}
-.pmap__est{font-size:.875rem;color:var(--c-smoke)}
-.pmap__stamp{flex:none;padding:.25rem .75rem;border:2px solid var(--c-live);border-radius:.5rem;color:var(--c-live);font-size:.8125rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;opacity:0;transform:rotate(-8deg) scale(1.6);transition:opacity .3s,transform .5s var(--ease-back)}
+@keyframes pm-draw{to{stroke-dashoffset:0}}
+@keyframes pm-flow{to{stroke-dashoffset:-18}}
+@keyframes pm-grow{from{transform:scaleX(0)}}
+@keyframes pm-drop{from{opacity:0;transform:rotate(-9deg) translateY(-1.2rem) scale(1.06)}}
+
+/* 01 What: your project in the middle, what we build around it */
+.pmap__what{display:flex;flex-direction:column;flex:1}
+.pmap__what .pmap__zl{position:absolute;left:0;top:0;z-index:3}
+.pmap__orbit{position:relative;flex:1;min-height:13rem}
+.pmap__lines{position:absolute;inset:0;width:100%;height:100%}
+.pmap__lines ellipse{fill:none;stroke:rgba(242,242,242,.13);stroke-dasharray:3 6;vector-effect:non-scaling-stroke}
+.pmap__lines path{fill:none;stroke:var(--c-volt);stroke-width:1.6;stroke-dasharray:6 3;vector-effect:non-scaling-stroke;animation:pm-flow 1.1s linear infinite}
+.pmap__lines path.is--new{animation:dg-fade .6s ease backwards,pm-flow 1.1s linear infinite}
+.pmap__core{position:absolute;z-index:1;left:50%;top:50%;translate:-50% -50%;display:grid;justify-items:center;align-content:center;gap:.3rem;width:6.75rem;height:6.75rem;padding:.75rem;border-radius:50%;background:var(--c-volt);color:var(--c-ink);text-align:center;box-shadow:0 0 0 .55rem rgba(255,90,31,.14),0 0 0 1.2rem rgba(255,90,31,.06)}
+.pmap__core svg{width:1.3rem;height:1.3rem}
+.pmap__core b{font-size:.8125rem;font-weight:500;line-height:1.15;letter-spacing:-.02em;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pmap__node{position:absolute;z-index:2;translate:-50% -50%;width:max-content;display:grid;grid-template-columns:auto auto;align-items:center;column-gap:.5rem;padding:.45rem .8rem .45rem .45rem;border-radius:.8rem;background:var(--c-concrete);color:var(--c-ink);white-space:nowrap;box-shadow:0 .6rem 1.2rem -.5rem rgba(0,0,0,.7);transition:left .6s var(--ease-out),top .6s var(--ease-out)}
+.pmap__node svg{grid-row:span 2;box-sizing:content-box;width:1.05rem;height:1.05rem;padding:.4rem;border-radius:.55rem;background:var(--c-ink);color:var(--c-volt);fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.pmap__node b{font-size:.8125rem;font-weight:500;line-height:1.2}
+.pmap__node small{font-size:.6875rem;line-height:1.2;color:var(--c-steel)}
+.pmap__node small:empty{display:none}
+.pmap__orbit.is--many .pmap__node small{display:none}
+.pmap__node.is--new{animation:pm-pop .55s var(--ease-back)}
+.pmap__node.is--ghost{display:grid;place-items:center;width:2.4rem;height:2.4rem;padding:0;border-radius:50%;background:transparent;border:1.5px dashed rgba(242,242,242,.28);color:var(--c-steel);box-shadow:none;font-family:var(--font-mono);font-size:.8125rem}
+
+/* 02 Stage: your route through our seven phases, skipping what you already have */
+.pmap__route{position:relative;padding-top:1.5rem}
+.pmap__rl{position:absolute;left:0;top:0;width:100%;height:calc(1.5rem + .45rem);overflow:visible}
+.pmap__rl path{fill:none}
+.pmap__rl-base{stroke:rgba(242,242,242,.16);stroke-width:2;stroke-dasharray:5 5}
+#pmap-rl path{stroke:var(--c-volt);stroke-width:2.4;stroke-linecap:round;stroke-dasharray:1 1;stroke-dashoffset:1;animation:pm-draw .7s var(--ease-out) calc(var(--d, 0) * .14s) forwards}
+#pmap-path{position:relative;display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
+#pmap-path li{position:relative;display:grid;justify-items:center;gap:.4rem;font-size:clamp(.5625rem,1.6vw,.6875rem);color:var(--c-graphite);text-align:center;transition:color .4s}
+#pmap-path li i{position:relative;z-index:1;width:.9rem;height:.9rem;border-radius:50%;background:#161616;box-shadow:inset 0 0 0 1.5px rgba(242,242,242,.28);transition:background-color .4s,box-shadow .4s,transform .4s var(--ease-back)}
+#pmap-path li.is--on{color:var(--c-concrete)}
+#pmap-path li.is--on i{background:var(--c-volt);box-shadow:0 0 0 .25rem rgba(255,90,31,.18)}
+#pmap-path li.is--skip span{text-decoration:line-through;text-decoration-color:rgba(242,242,242,.35)}
+#pmap-path li.is--skip i{transform:scale(.7)}
+#pmap-path li.is--flag i::before{content:"";position:absolute;left:50%;bottom:100%;width:1.5px;height:1rem;margin-left:-.75px;background:var(--c-concrete)}
+#pmap-path li.is--flag i::after{content:"";position:absolute;left:50%;bottom:calc(100% + .45rem);width:.75rem;height:.55rem;background:var(--c-concrete);clip-path:polygon(0 0,100% 50%,0 100%);transform-origin:left center;animation:pm-pop .5s var(--ease-back)}
+.pmap__skip{position:absolute;top:-.05rem;translate:-50% 0;padding:0 .35rem;border-radius:.3rem;background:#161616;font-family:var(--font-mono);font-size:.5625rem;letter-spacing:.06em;text-transform:uppercase;color:var(--c-volt);white-space:nowrap;animation:dg-fade .5s ease .4s backwards}
+
+/* 03 Launch and 04 About side by side */
+.pmap__row{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:1.1rem;align-items:start}
+.pmap__cal{position:relative;padding-top:1rem}
+.pmap__months{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));height:2.3rem;border-radius:.5rem;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(242,242,242,.1)}
+.pmap__months span{display:flex;align-items:flex-end;padding:0 0 .3rem .4rem;border-left:1px solid rgba(242,242,242,.08);font-family:var(--font-mono);font-size:.5625rem;text-transform:uppercase;color:var(--c-steel)}
+.pmap__months span:first-child{border-left:0}
+.pmap__today{position:absolute;top:.15rem;height:3.15rem;width:0;border-left:1.5px dashed var(--c-concrete);z-index:1}
+.pmap__today b{position:absolute;left:.25rem;top:-.2rem;font-family:var(--font-mono);font-size:.5625rem;font-weight:400;text-transform:uppercase;color:var(--c-concrete);white-space:nowrap}
+.pmap__win{position:absolute;top:calc(1rem + .45rem);height:.7rem;border-radius:1rem;background:var(--c-volt);box-shadow:0 0 1rem rgba(255,90,31,.45);transform-origin:left;animation:pm-grow .8s var(--ease-out)}
+.pmap__win.is--asap{background:linear-gradient(90deg,var(--c-volt),rgba(255,90,31,0));box-shadow:none}
+.pmap__win.is--open{background:linear-gradient(90deg,var(--c-volt) 55%,rgba(255,90,31,0));box-shadow:none}
+.pmap__win i{position:absolute;right:0;bottom:50%;width:1.5px;height:1.1rem;background:var(--c-concrete)}
+.pmap__win i::after{content:"";position:absolute;left:1.5px;top:0;width:.7rem;height:.5rem;background:var(--c-concrete);clip-path:polygon(0 0,100% 50%,0 100%)}
+.pmap__win.is--open i{left:0;right:auto}
+.pmap__winl{display:block;margin-top:.45rem;font-size:.8125rem;font-weight:500;color:var(--c-concrete)}
+.pmap__winl.is--dim{font-weight:400;color:var(--c-graphite)}
+.pmap__est{font-size:.75rem;line-height:1.3;color:var(--c-smoke)}
+.pmap__est:empty{display:none}
+.pmap__note{position:relative;min-height:5.4rem;margin:.15rem .25rem 0 0;padding:.85rem .85rem .7rem;border-radius:.3rem;background:#f3eadb;color:#1b1b1b;font-family:var(--font-hand);font-size:1.3rem;line-height:1.02;transform:rotate(-2deg);box-shadow:0 .8rem 1.3rem -.6rem rgba(0,0,0,.75);overflow-wrap:anywhere}
+.pmap__note::before{content:"";position:absolute;left:50%;top:-.35rem;width:3rem;height:.8rem;margin-left:-1.5rem;background:rgba(255,90,31,.6);transform:rotate(4deg)}
+.pmap__note:empty{background:none;box-shadow:none;border:1.5px dashed rgba(242,242,242,.2);transform:none;color:var(--c-graphite)}
+.pmap__note:empty::before{display:none}
+.pmap__note:empty::after{content:"Your idea, in your words."}
+.pmap__note.is--drop{animation:pm-drop .65s var(--ease-back)}
+
+/* 05 You: the title block of the drawing, stamped when sent */
+.pmap__tb{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid rgba(242,242,242,.16);border-radius:.6rem;overflow:hidden}
+.pmap__tb div{display:grid;gap:.2rem;min-width:0;padding:.5rem .65rem;border-left:1px solid rgba(242,242,242,.16)}
+.pmap__tb div:first-child{border-left:0}
+.pmap__tb dt{font-family:var(--font-mono);font-size:.5625rem;letter-spacing:.06em;text-transform:uppercase;color:var(--c-steel)}
+.pmap__tb dd{margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.8125rem;font-weight:500;color:var(--c-concrete)}
+.pmap__tb dd.is--empty{color:var(--c-graphite)}
+.pmap.is--sent #pmap-tb-3{color:var(--c-live)}
+.pmap__stamp{position:absolute;right:.4rem;bottom:.35rem;padding:.2rem .7rem;border:2px solid var(--c-live);border-radius:.45rem;background:rgba(22,22,22,.85);color:var(--c-live);font-size:.8125rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;opacity:0;transform:rotate(-8deg) scale(1.7);transition:opacity .3s,transform .5s var(--ease-back);pointer-events:none}
 .pmap.is--sent .pmap__stamp{opacity:1;transform:rotate(-8deg) scale(1)}
 
 /* The chat */
@@ -1266,9 +1325,10 @@ a.contact-list__value{user-select:auto;-webkit-user-select:auto}
 .chat__err a{text-decoration:underline}
 .chat__dock.is--sending .btn{opacity:.6;pointer-events:none}
 .chat__dock .btn[disabled]{opacity:.4;pointer-events:none}
-@media (prefers-reduced-motion:reduce){.msg,.chat__dock > *,.pmap__node.is--new,.pmap__lines line.is--new{animation:none}}
+@media (prefers-reduced-motion:reduce){.msg,.chat__dock > *,.pmap *{animation:none!important}#pmap-rl path{stroke-dashoffset:0}}
 @media (max-width:991px){.contact__head,.contact__grid{grid-template-columns:minmax(0,1fr)}.chat{order:-1}}
-@media (max-width:767px){.pmap__orbit{min-height:20rem}.pmap__node{flex-direction:column;gap:.3rem;max-width:5.75rem;height:auto;padding:0;background:none;box-shadow:none;color:var(--c-concrete);font-size:.6875rem;line-height:1.15;white-space:normal;text-align:center}.pmap__node svg{box-sizing:content-box;width:1.05rem;height:1.05rem;padding:.55rem;border-radius:50%;background:var(--c-concrete);color:var(--c-ink);box-shadow:0 .4rem .8rem -.3rem rgba(0,0,0,.6)}.pmap__node.is--ghost{color:var(--c-steel)}}
+@media (max-width:991px){.pmap__orbit{min-height:17rem}}
+@media (max-width:767px){.pmap__orbit{min-height:18rem}.pmap__core{width:6rem;height:6rem}.pmap__node{display:flex;flex-direction:column;align-items:center;gap:.3rem;max-width:5.75rem;padding:0;background:none;box-shadow:none;color:var(--c-concrete);white-space:normal;text-align:center}.pmap__node b{font-size:.6875rem;line-height:1.15}.pmap__node small{display:none}.pmap__node svg{border-radius:50%;padding:.55rem;background:var(--c-concrete);color:var(--c-ink);box-shadow:0 .4rem .8rem -.3rem rgba(0,0,0,.6)}.pmap__node.is--ghost{color:var(--c-steel)}.pmap__row{grid-template-columns:minmax(0,1fr)}.pmap__tb{grid-template-columns:repeat(2,minmax(0,1fr))}.pmap__tb div:nth-child(3){border-left:0}.pmap__tb div:nth-child(n+3){border-top:1px solid rgba(242,242,242,.16)}}
 @media (max-width:767px){.contact{border-radius:var(--r-l) var(--r-l) 0 0}.contact__head{margin-bottom:1.75rem}.chat{height:auto;border-radius:var(--r-l)}.chat__log{flex:none;height:22rem}.chat__top,.chat__steps,.chat__log,.chat__dock{padding-inline:1rem}.chat__fields{grid-template-columns:minmax(0,1fr)}.chat__f input,.chat__ta{font-size:16px}.pmap{padding:1.1rem;border-radius:var(--r-l)}.pmap__core{width:7rem;height:7rem}.contact__list{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
@@ -1567,14 +1627,38 @@ a.contact-list__value{user-select:auto;-webkit-user-select:auto}
     <div class="contact__grid">
       <div class="pmap" id="pmap" aria-hidden="true">
         <div class="pmap__head"><span class="eyebrow">Your project map</span><em id="pmap-date"></em></div>
-        <div class="pmap__orbit">
-          <svg class="pmap__lines" viewBox="0 0 100 100" preserveAspectRatio="none"><ellipse cx="50" cy="50" rx="36" ry="33"/><g id="pmap-lines"></g></svg>
-          <span class="pmap__core"><svg viewBox="0 0 80 80"><use href="#i-glyph"/></svg><b id="pmap-name">Your project</b></span>
-          <div id="pmap-nodes"></div>
+        <div class="pmap__zone pmap__what" data-z="0">
+          <p class="pmap__zl"><i></i>01 What</p>
+          <div class="pmap__orbit">
+            <svg class="pmap__lines" viewBox="0 0 100 100" preserveAspectRatio="none"><ellipse cx="50" cy="50" rx="36" ry="33"/><g id="pmap-lines"></g></svg>
+            <span class="pmap__core"><svg viewBox="0 0 80 80"><use href="#i-glyph"/></svg><b id="pmap-name">Your project</b></span>
+            <div id="pmap-nodes"></div>
+          </div>
         </div>
-        <p class="pmap__about" id="pmap-about"></p>
-        <div class="pmap__path"><ol id="pmap-path"><li><i></i><span>Connect</span></li><li><i></i><span>Discover</span></li><li><i></i><span>Define</span></li><li><i></i><span>Design</span></li><li><i></i><span>Build</span></li><li><i></i><span>Launch</span></li><li><i></i><span>Grow</span></li></ol><span class="pmap__flag" id="pmap-flag">Launch</span></div>
-        <div class="pmap__foot"><span class="pmap__est" id="pmap-est"></span><span class="pmap__stamp">Sent ✓</span></div>
+        <div class="pmap__zone pmap__stage" data-z="1">
+          <p class="pmap__zl"><i></i>02 Stage<em id="pmap-stage"></em></p>
+          <div class="pmap__route">
+            <svg class="pmap__rl" viewBox="0 0 700 30" preserveAspectRatio="none"><path class="pmap__rl-base" d="M50 30H650"/><g id="pmap-rl"></g></svg>
+            <ol id="pmap-path"><li><i></i><span>Connect</span></li><li><i></i><span>Discover</span></li><li><i></i><span>Define</span></li><li><i></i><span>Design</span></li><li><i></i><span>Build</span></li><li><i></i><span>Launch</span></li><li><i></i><span>Grow</span></li></ol>
+            <div id="pmap-skips"></div>
+          </div>
+        </div>
+        <div class="pmap__row">
+          <div class="pmap__zone pmap__launch" data-z="2">
+            <p class="pmap__zl"><i></i>03 Launch<em id="pmap-when"></em></p>
+            <div class="pmap__cal" id="pmap-cal"></div>
+            <p class="pmap__est" id="pmap-est"></p>
+          </div>
+          <div class="pmap__zone pmap__about" data-z="3">
+            <p class="pmap__zl"><i></i>04 About</p>
+            <p class="pmap__note" id="pmap-about"></p>
+          </div>
+        </div>
+        <div class="pmap__zone pmap__you" data-z="4">
+          <p class="pmap__zl"><i></i>05 You</p>
+          <dl class="pmap__tb"><div><dt>Project</dt><dd id="pmap-tb-0">—</dd></div><div><dt>Client</dt><dd id="pmap-tb-1">—</dd></div><div><dt>Contact</dt><dd id="pmap-tb-2">—</dd></div><div><dt>Status</dt><dd id="pmap-tb-3">Draft</dd></div></dl>
+          <span class="pmap__stamp">Sent ✓</span>
+        </div>
       </div>
       <div class="chat" id="chat">
         <div class="chat__top">
@@ -1981,7 +2065,7 @@ const GLYPH = '<svg viewBox="0 0 80 80" aria-hidden="true"><use href="#i-glyph"/
 const P = [
   { id: 'bk', name: 'Beere Kesava ERP', what: 'An ERP for a silk saree business in Dharmavaram.',
     desc: 'Beere Kesava & Brothers Silks has made handloom silk sarees since 1999. Their whole business, from buying yarn to selling sarees, now runs in one portal.',
-    cat: 'product', key: 'bk', cover: 1, imgs: [[1, 'tall'], [2, 'tall'], [3, 'tall'], [4, 'tall']], url: 'erp.beere-kesava-and-brothers.org',
+    cat: 'product', key: 'bk', cover: 'bk-dash', imgs: [['bk-dash', 'wide'], [2, 'tall'], [3, 'tall'], [4, 'tall']], url: 'erp.beere-kesava-and-brothers.org',
     live: 'https://erp.beere-kesava-and-brothers.org/', liveName: 'Beere Kesava ERP',
     links: [['Live ERP', 'https://erp.beere-kesava-and-brothers.org/'], ['Pitch deck', 'beere-kesava/'], ['Design', 'https://beera-keshava-and-brothers-silks.figma.site/']],
     tags: ['ERP', '6 role portals', 'Live'], client: 'Beere Kesava & Brothers Silks', platform: 'Web app · 6 role portals', scope: 'Research, UX/UI, full-stack build, launch',
@@ -2192,7 +2276,7 @@ function shot(p, n, kind, url) {
   const src = imgSrc(p, n);
   if (kind === 'phone') return `<span class="phone"><img src="${src}" alt="" loading="lazy"></span>`;
   const tall = kind === 'tall';
-  return `<span class="frame${tall ? ' is--tall' : ''}"><span class="frame__bar"><i></i><i></i><i></i><em>${esc(url || p.url || '')}</em></span><span class="frame__view"><img src="${tall ? IMG(p.key, n, true) : src}" alt="" loading="lazy"></span></span>`;
+  return `<span class="frame${tall ? ' is--tall' : kind === 'wide' ? ' is--wide' : ''}"><span class="frame__bar"><i></i><i></i><i></i><em>${esc(url || p.url || '')}</em></span><span class="frame__view"><img src="${tall ? IMG(p.key, n, true) : src}" alt="" loading="lazy"></span></span>`;
 }
 function stage(p) {
   const phones = p.imgs.filter(i => i[1] === 'phone');
@@ -2246,7 +2330,7 @@ function compare(p) {
   const c = p.cs, phone = c.wire === 'phone';
   const [n, k] = p.imgs.find(i => i[0] === p.cover) || p.imgs[0];
   const src = k === 'tall' ? IMG(p.key, n) : imgSrc(p, n);
-  return `<div class="cmp${phone ? ' is--phone' : ''}" style="--x:62%"><img src="${src}" alt="Final ${esc(p.name)} screen"><div class="cmp__wire">${WIRE[c.wire]}</div>
+  return `<div class="cmp${phone ? ' is--phone' : k === 'wide' ? ' is--wide' : ''}" style="--x:62%"><img src="${src}" alt="Final ${esc(p.name)} screen"><div class="cmp__wire">${WIRE[c.wire]}</div>
     <span class="cmp__tag is--l">Wireframe</span><span class="cmp__tag is--r">Final UI</span><span class="cmp__handle" aria-hidden="true"><i></i></span>
     <input class="cmp__range" type="range" min="0" max="100" value="62" aria-label="Slide between the wireframe and the final screen"></div>`;
 }
@@ -2457,7 +2541,7 @@ const STEPS = [
 ];
 /* Which of the seven phases a project goes through, by where it starts */
 const STAGE_PATH = { 'Just an idea': [0, 1, 2, 3, 4, 5, 6], 'I have designs': [0, 4, 5, 6], 'I have a product to improve': [0, 1, 3, 4, 5, 6], 'I need it live fast': [0, 3, 4, 5] };
-const EMPTY = { needs: [], stage: '', when: '', message: '', name: '', phone: '', email: '', company: '' };
+const EMPTY = { needs: [], stage: '', when: '', message: '', name: '', phone: '', email: '', company: '', product: '' };
 const brief = { ...EMPTY, needs: [] };
 let qStep = 0, sending = false, done = false, asking = 0;
 const chatLog = () => $('#chat-log'), dock = () => $('#chat-dock');
@@ -2469,24 +2553,30 @@ function timeHint() {
   return '';
 }
 const SHORT = { 'ERP or dashboard': 'ERP / dashboard', 'SaaS or web app': 'SaaS / web app', 'Something like your products': 'Like your products', 'Brand or pitch deck': 'Brand / deck' };
-/* Keep every node inside the map, and draw its line from the centre */
+/* What each choice usually includes, from our service pages */
+const DELIV = { 'Website': 'Live site · CMS · SEO', 'ERP or dashboard': 'Modules · Training', 'SaaS or web app': 'MVP · Roadmap', 'Mobile app': 'Android · iOS', 'UI/UX design': 'Figma · Prototype', 'Brand or pitch deck': 'Identity · Deck', 'Not sure yet': 'A call · A plan' };
+const delivOf = v => (v === 'Something like your products' ? (brief.product ? 'Like our ' + brief.product : 'Your own version') : DELIV[v] || '');
+const projectName = () => brief.company || (brief.name ? brief.name.split(' ')[0] + '’s project' : '');
+const drawn = {};
+/* 01 What: keep every node inside the map, with a curved line to it from the centre */
 function placeNodes(fresh = []) {
   const wrap = $('#pmap-nodes'), W = wrap.parentNode.clientWidth;
-  const nodes = $$('.pmap__node[data-v]', wrap);
   if (!W) return;
-  $('#pmap-lines').innerHTML = nodes.map(el => {
-    const half = el.offsetWidth / 2, x = clamp(+el.dataset.x / 100 * W, half + 6, W - half - 6);
+  $('#pmap-lines').innerHTML = $$('.pmap__node[data-v]', wrap).map(el => {
+    const half = el.offsetWidth / 2, x = clamp(+el.dataset.x / 100 * W, half + 6, W - half - 6), px = x / W * 100, py = +el.dataset.y;
     el.style.left = x + 'px';
-    el.style.top = el.dataset.y + '%';
-    return `<line x1="50" y1="50" x2="${(x / W * 100).toFixed(1)}" y2="${el.dataset.y}"${fresh.includes(el.dataset.v) ? ' class="is--new"' : ''}/>`;
+    el.style.top = py + '%';
+    const cx = (50 + px) / 2 - (py - 50) * 0.2, cy = (50 + py) / 2 + (px - 50) * 0.2;
+    return `<path d="M50 50Q${cx.toFixed(1)} ${cy.toFixed(1)} ${px.toFixed(1)} ${py.toFixed(1)}"${fresh.includes(el.dataset.v) ? ' class="is--new"' : ''}/>`;
   }).join('');
 }
-function paintMap() {
-  const needs = brief.needs, n = needs.length;
-  const narrow = $('.pmap__orbit').clientWidth < 480, rx = narrow ? 34 : 36, ry = narrow ? 37 : 33;
+function paintNodes() {
+  const needs = brief.needs, n = needs.length, orbit = $('.pmap__orbit');
+  const narrow = orbit.clientWidth < 480, rx = narrow ? 34 : 36, ry = narrow ? 37 : 33;
   const pos = needs.map((_, i) => { const a = ((n < 3 ? 0 : -90) + i * 360 / n) * Math.PI / 180; return [50 + Math.cos(a) * rx, 50 + Math.sin(a) * ry]; });
   const iconOf = v => (STEPS[0].opts.find(o => o[0] === v) || [])[1] || 'unsure';
   const wrap = $('#pmap-nodes'), fresh = [];
+  orbit.classList.toggle('is--many', n > 4);
   if (!n) {
     wrap.innerHTML = [[14, 50], [86, 50], [50, 12]].map(([x, y]) => `<span class="pmap__node is--ghost" style="left:${x}%;top:${y}%">?</span>`).join('');
   } else {
@@ -2500,23 +2590,62 @@ function paintMap() {
         el = document.createElement('span');
         el.className = 'pmap__node is--new';
         el.dataset.v = v;
-        el.innerHTML = `<svg viewBox="0 0 32 32" aria-hidden="true">${ICON[iconOf(v)]}</svg>${esc(SHORT[v] || v)}`;
+        el.innerHTML = `<svg viewBox="0 0 32 32" aria-hidden="true">${ICON[iconOf(v)]}</svg><b>${esc(SHORT[v] || v)}</b><small></small>`;
         wrap.appendChild(el);
         fresh.push(v);
       }
+      $('small', el).textContent = delivOf(v);
       el.dataset.x = pos[i][0].toFixed(1);
       el.dataset.y = pos[i][1].toFixed(1);
     });
   }
   placeNodes(fresh);
-  $('#pmap-name').textContent = brief.company || (brief.name ? brief.name.split(' ')[0] + '’s project' : 'Your project');
-  const on = STAGE_PATH[brief.stage] || [];
-  $$('#pmap-path li').forEach((li, i) => { li.classList.toggle('is--on', on.includes(i)); li.classList.toggle('is--first', on[0] === i); });
-  const flag = $('#pmap-flag');
-  flag.textContent = brief.when ? 'Launch · ' + brief.when : 'Launch';
-  flag.classList.toggle('is--set', !!brief.when);
-  $('#pmap-est').textContent = timeHint() || (n ? 'We plan the timeline with you.' : 'Your timeline appears as you answer.');
-  $('#pmap-about').textContent = brief.message ? '“' + brief.message.trim().slice(0, 90) + (brief.message.trim().length > 90 ? '…”' : '”') : '';
+}
+/* 02 Stage: the phases you go through; arcs jump over the ones you skip */
+function paintRoute() {
+  const on = STAGE_PATH[brief.stage] || [], X = i => 50 + i * 100, segs = [];
+  let skips = '';
+  for (let k = 1; k < on.length; k++) {
+    const a = on[k - 1], b = on[k], gap = b - a - 1;
+    if (!gap) { segs.push(`M${X(a)} 30H${X(b)}`); continue; }
+    segs.push(`M${X(a)} 30C${X(a)} 2 ${X(b)} 2 ${X(b)} 30`);
+    skips += `<span class="pmap__skip" style="left:${((X(a) + X(b)) / 14).toFixed(2)}%">Skips ${gap} phase${gap > 1 ? 's' : ''}</span>`;
+  }
+  $('#pmap-rl').innerHTML = segs.map((d, k) => `<path d="${d}" pathLength="1" style="--d:${k}"/>`).join('');
+  $('#pmap-skips').innerHTML = skips;
+  $$('#pmap-path li').forEach((li, i) => {
+    li.classList.toggle('is--on', on.includes(i));
+    li.classList.toggle('is--skip', on.length > 0 && !on.includes(i) && i > on[0] && i < on[on.length - 1]);
+  });
+}
+/* 03 Launch: today and your launch window on a five-month strip */
+function paintCal() {
+  const now = new Date(), y = now.getFullYear(), m = now.getMonth(), day = Math.min(now.getDate(), 28);
+  const start = +new Date(y, m, 1), span = +new Date(y, m + 5, 1) - start;
+  const at = d => clamp((d - start) / span * 100, 0, 100);
+  const plus = k => new Date(y, m + k, day);
+  const fmt = d => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+  const w = { 'As soon as possible': ['asap', at(now), at(plus(1)), 'As soon as we can'], 'In 1–2 months': ['win', at(plus(1)), at(plus(2)), fmt(plus(1)) + ' – ' + fmt(plus(2))], 'In 3+ months': ['open', at(plus(3)), 100, 'From ' + fmt(plus(3))] }[brief.when];
+  const months = Array.from({ length: 5 }, (_, i) => `<span>${new Date(y, m + i, 1).toLocaleDateString('en-GB', { month: 'short' })}</span>`).join('');
+  const label = w ? w[3] : brief.when === 'Just exploring' ? 'No date yet. We plan it together.' : 'Your launch window shows here.';
+  $('#pmap-cal').innerHTML = `<div class="pmap__months">${months}</div><span class="pmap__today" style="left:${at(now).toFixed(1)}%"><b>Today</b></span>${w ? `<span class="pmap__win is--${w[0]}" style="left:${w[1].toFixed(1)}%;width:${(w[2] - w[1]).toFixed(1)}%">${w[0] === 'asap' ? '' : '<i></i>'}</span>` : ''}<span class="pmap__winl${w ? '' : ' is--dim'}">${esc(label)}</span>`;
+}
+function paintMap() {
+  paintNodes();
+  const name = projectName(), msg = brief.message.trim();
+  $('#pmap-name').textContent = name || 'Your project';
+  if (drawn.stage !== brief.stage) { drawn.stage = brief.stage; paintRoute(); }
+  if (drawn.when !== brief.when) { drawn.when = brief.when; paintCal(); }
+  $$('#pmap-path li')[5].classList.toggle('is--flag', !!brief.when && brief.when !== 'Just exploring');
+  $('#pmap-stage').textContent = brief.stage;
+  $('#pmap-when').textContent = brief.when;
+  $('#pmap-est').textContent = timeHint();
+  /* 04 About: your words on a note; 05 You: the title block */
+  const note = $('#pmap-about'), had = !!note.textContent;
+  note.textContent = msg.length > 120 ? msg.slice(0, 120) + '…' : msg;
+  if (msg && !had && !reduce) { note.classList.remove('is--drop'); void note.offsetWidth; note.classList.add('is--drop'); }
+  [name, brief.name, brief.phone || brief.email, done ? 'Sent' : 'Draft'].forEach((t, i) => { const dd = $('#pmap-tb-' + i); dd.textContent = t || '—'; dd.classList.toggle('is--empty', !t); });
+  [brief.needs.length, brief.stage, brief.when, msg, brief.name && (brief.phone || brief.email)].forEach((v, i) => $(`#pmap [data-z="${i}"]`).classList.toggle('is--set', !!v));
 }
 function scrollLog() { const l = chatLog(); l.scrollTo({ top: l.scrollHeight, behavior: reduce ? 'auto' : 'smooth' }); }
 function say(html, who = 'bot') { const m = document.createElement('div'); m.className = 'msg is--' + who; m.innerHTML = html; chatLog().appendChild(m); scrollLog(); return m; }
@@ -2530,6 +2659,7 @@ function botSay(html) {
 function paintSteps() {
   $$('#chat-steps li').forEach((li, i) => { li.classList.toggle('is--on', i === qStep && !done); li.classList.toggle('is--done', done || i < qStep); });
   $('[data-chat-reset]').hidden = qStep === 0 && !done;
+  $$('#pmap [data-z]').forEach(z => z.classList.toggle('is--now', +z.dataset.z === qStep && !done));
 }
 function dockHTML(s) {
   if (s.opts) {
@@ -2592,6 +2722,7 @@ async function sendBrief(form) {
   answer([brief.name, brief.phone || brief.email].join(' · '));
   dock().innerHTML = '';
   $('#pmap').classList.add('is--sent');
+  paintMap();
   await botSay(`Thanks, ${esc(brief.name.split(' ')[0])}. Your brief is with us.<ol class="msg__then"><li><b>01</b>We read your brief.</li><li><b>02</b>We call you to talk it through.</li><li><b>03</b>You get a clear plan and timeline.</li></ol>`);
   dock().innerHTML = `<div class="chat__send is--end"><button class="btn" type="button" data-theme="ink" data-shape="round" data-chat-reset-btn><span class="btn__label">Send another brief</span></button><a class="btn" data-theme="bone" data-shape="round" href="#work"><span class="btn__label">Look at our work</span></a></div>`;
   initButtons(dock());
@@ -2646,6 +2777,7 @@ function initBrief() {
     const a = e.target.closest('[data-need]');
     if (!a || done) return;
     if (!brief.needs.includes(a.dataset.need)) brief.needs = brief.needs.concat(a.dataset.need);
+    if (a.dataset.product) brief.product = a.dataset.product;
     if (a.dataset.product && !brief.message) brief.message = `I’d like something like your ${a.dataset.product}.`;
     if (qStep === 0 && $('.chat__opts', d)) { d.innerHTML = dockHTML(STEPS[0]); initButtons(d); }
     paintMap();

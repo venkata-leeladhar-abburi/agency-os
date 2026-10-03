@@ -11,7 +11,7 @@ const GLYPH = '<svg viewBox="0 0 80 80" aria-hidden="true"><use href="#i-glyph"/
 const P = [
   { id: 'bk', name: 'Beere Kesava ERP', what: 'An ERP for a silk saree business in Dharmavaram.',
     desc: 'Beere Kesava & Brothers Silks has made handloom silk sarees since 1999. Their whole business, from buying yarn to selling sarees, now runs in one portal.',
-    cat: 'product', key: 'bk', cover: 1, imgs: [[1, 'tall'], [2, 'tall'], [3, 'tall'], [4, 'tall']], url: 'erp.beere-kesava-and-brothers.org',
+    cat: 'product', key: 'bk', cover: 'bk-dash', imgs: [['bk-dash', 'wide'], [2, 'tall'], [3, 'tall'], [4, 'tall']], url: 'erp.beere-kesava-and-brothers.org',
     live: 'https://erp.beere-kesava-and-brothers.org/', liveName: 'Beere Kesava ERP',
     links: [['Live ERP', 'https://erp.beere-kesava-and-brothers.org/'], ['Pitch deck', 'beere-kesava/'], ['Design', 'https://beera-keshava-and-brothers-silks.figma.site/']],
     tags: ['ERP', '6 role portals', 'Live'], client: 'Beere Kesava & Brothers Silks', platform: 'Web app · 6 role portals', scope: 'Research, UX/UI, full-stack build, launch',
@@ -222,7 +222,7 @@ function shot(p, n, kind, url) {
   const src = imgSrc(p, n);
   if (kind === 'phone') return `<span class="phone"><img src="${src}" alt="" loading="lazy"></span>`;
   const tall = kind === 'tall';
-  return `<span class="frame${tall ? ' is--tall' : ''}"><span class="frame__bar"><i></i><i></i><i></i><em>${esc(url || p.url || '')}</em></span><span class="frame__view"><img src="${tall ? IMG(p.key, n, true) : src}" alt="" loading="lazy"></span></span>`;
+  return `<span class="frame${tall ? ' is--tall' : kind === 'wide' ? ' is--wide' : ''}"><span class="frame__bar"><i></i><i></i><i></i><em>${esc(url || p.url || '')}</em></span><span class="frame__view"><img src="${tall ? IMG(p.key, n, true) : src}" alt="" loading="lazy"></span></span>`;
 }
 function stage(p) {
   const phones = p.imgs.filter(i => i[1] === 'phone');
@@ -276,7 +276,7 @@ function compare(p) {
   const c = p.cs, phone = c.wire === 'phone';
   const [n, k] = p.imgs.find(i => i[0] === p.cover) || p.imgs[0];
   const src = k === 'tall' ? IMG(p.key, n) : imgSrc(p, n);
-  return `<div class="cmp${phone ? ' is--phone' : ''}" style="--x:62%"><img src="${src}" alt="Final ${esc(p.name)} screen"><div class="cmp__wire">${WIRE[c.wire]}</div>
+  return `<div class="cmp${phone ? ' is--phone' : k === 'wide' ? ' is--wide' : ''}" style="--x:62%"><img src="${src}" alt="Final ${esc(p.name)} screen"><div class="cmp__wire">${WIRE[c.wire]}</div>
     <span class="cmp__tag is--l">Wireframe</span><span class="cmp__tag is--r">Final UI</span><span class="cmp__handle" aria-hidden="true"><i></i></span>
     <input class="cmp__range" type="range" min="0" max="100" value="62" aria-label="Slide between the wireframe and the final screen"></div>`;
 }
@@ -487,7 +487,7 @@ const STEPS = [
 ];
 /* Which of the seven phases a project goes through, by where it starts */
 const STAGE_PATH = { 'Just an idea': [0, 1, 2, 3, 4, 5, 6], 'I have designs': [0, 4, 5, 6], 'I have a product to improve': [0, 1, 3, 4, 5, 6], 'I need it live fast': [0, 3, 4, 5] };
-const EMPTY = { needs: [], stage: '', when: '', message: '', name: '', phone: '', email: '', company: '' };
+const EMPTY = { needs: [], stage: '', when: '', message: '', name: '', phone: '', email: '', company: '', product: '' };
 const brief = { ...EMPTY, needs: [] };
 let qStep = 0, sending = false, done = false, asking = 0;
 const chatLog = () => $('#chat-log'), dock = () => $('#chat-dock');
@@ -499,24 +499,30 @@ function timeHint() {
   return '';
 }
 const SHORT = { 'ERP or dashboard': 'ERP / dashboard', 'SaaS or web app': 'SaaS / web app', 'Something like your products': 'Like your products', 'Brand or pitch deck': 'Brand / deck' };
-/* Keep every node inside the map, and draw its line from the centre */
+/* What each choice usually includes, from our service pages */
+const DELIV = { 'Website': 'Live site · CMS · SEO', 'ERP or dashboard': 'Modules · Training', 'SaaS or web app': 'MVP · Roadmap', 'Mobile app': 'Android · iOS', 'UI/UX design': 'Figma · Prototype', 'Brand or pitch deck': 'Identity · Deck', 'Not sure yet': 'A call · A plan' };
+const delivOf = v => (v === 'Something like your products' ? (brief.product ? 'Like our ' + brief.product : 'Your own version') : DELIV[v] || '');
+const projectName = () => brief.company || (brief.name ? brief.name.split(' ')[0] + '’s project' : '');
+const drawn = {};
+/* 01 What: keep every node inside the map, with a curved line to it from the centre */
 function placeNodes(fresh = []) {
   const wrap = $('#pmap-nodes'), W = wrap.parentNode.clientWidth;
-  const nodes = $$('.pmap__node[data-v]', wrap);
   if (!W) return;
-  $('#pmap-lines').innerHTML = nodes.map(el => {
-    const half = el.offsetWidth / 2, x = clamp(+el.dataset.x / 100 * W, half + 6, W - half - 6);
+  $('#pmap-lines').innerHTML = $$('.pmap__node[data-v]', wrap).map(el => {
+    const half = el.offsetWidth / 2, x = clamp(+el.dataset.x / 100 * W, half + 6, W - half - 6), px = x / W * 100, py = +el.dataset.y;
     el.style.left = x + 'px';
-    el.style.top = el.dataset.y + '%';
-    return `<line x1="50" y1="50" x2="${(x / W * 100).toFixed(1)}" y2="${el.dataset.y}"${fresh.includes(el.dataset.v) ? ' class="is--new"' : ''}/>`;
+    el.style.top = py + '%';
+    const cx = (50 + px) / 2 - (py - 50) * 0.2, cy = (50 + py) / 2 + (px - 50) * 0.2;
+    return `<path d="M50 50Q${cx.toFixed(1)} ${cy.toFixed(1)} ${px.toFixed(1)} ${py.toFixed(1)}"${fresh.includes(el.dataset.v) ? ' class="is--new"' : ''}/>`;
   }).join('');
 }
-function paintMap() {
-  const needs = brief.needs, n = needs.length;
-  const narrow = $('.pmap__orbit').clientWidth < 480, rx = narrow ? 34 : 36, ry = narrow ? 37 : 33;
+function paintNodes() {
+  const needs = brief.needs, n = needs.length, orbit = $('.pmap__orbit');
+  const narrow = orbit.clientWidth < 480, rx = narrow ? 34 : 36, ry = narrow ? 37 : 33;
   const pos = needs.map((_, i) => { const a = ((n < 3 ? 0 : -90) + i * 360 / n) * Math.PI / 180; return [50 + Math.cos(a) * rx, 50 + Math.sin(a) * ry]; });
   const iconOf = v => (STEPS[0].opts.find(o => o[0] === v) || [])[1] || 'unsure';
   const wrap = $('#pmap-nodes'), fresh = [];
+  orbit.classList.toggle('is--many', n > 4);
   if (!n) {
     wrap.innerHTML = [[14, 50], [86, 50], [50, 12]].map(([x, y]) => `<span class="pmap__node is--ghost" style="left:${x}%;top:${y}%">?</span>`).join('');
   } else {
@@ -530,23 +536,62 @@ function paintMap() {
         el = document.createElement('span');
         el.className = 'pmap__node is--new';
         el.dataset.v = v;
-        el.innerHTML = `<svg viewBox="0 0 32 32" aria-hidden="true">${ICON[iconOf(v)]}</svg>${esc(SHORT[v] || v)}`;
+        el.innerHTML = `<svg viewBox="0 0 32 32" aria-hidden="true">${ICON[iconOf(v)]}</svg><b>${esc(SHORT[v] || v)}</b><small></small>`;
         wrap.appendChild(el);
         fresh.push(v);
       }
+      $('small', el).textContent = delivOf(v);
       el.dataset.x = pos[i][0].toFixed(1);
       el.dataset.y = pos[i][1].toFixed(1);
     });
   }
   placeNodes(fresh);
-  $('#pmap-name').textContent = brief.company || (brief.name ? brief.name.split(' ')[0] + '’s project' : 'Your project');
-  const on = STAGE_PATH[brief.stage] || [];
-  $$('#pmap-path li').forEach((li, i) => { li.classList.toggle('is--on', on.includes(i)); li.classList.toggle('is--first', on[0] === i); });
-  const flag = $('#pmap-flag');
-  flag.textContent = brief.when ? 'Launch · ' + brief.when : 'Launch';
-  flag.classList.toggle('is--set', !!brief.when);
-  $('#pmap-est').textContent = timeHint() || (n ? 'We plan the timeline with you.' : 'Your timeline appears as you answer.');
-  $('#pmap-about').textContent = brief.message ? '“' + brief.message.trim().slice(0, 90) + (brief.message.trim().length > 90 ? '…”' : '”') : '';
+}
+/* 02 Stage: the phases you go through; arcs jump over the ones you skip */
+function paintRoute() {
+  const on = STAGE_PATH[brief.stage] || [], X = i => 50 + i * 100, segs = [];
+  let skips = '';
+  for (let k = 1; k < on.length; k++) {
+    const a = on[k - 1], b = on[k], gap = b - a - 1;
+    if (!gap) { segs.push(`M${X(a)} 30H${X(b)}`); continue; }
+    segs.push(`M${X(a)} 30C${X(a)} 2 ${X(b)} 2 ${X(b)} 30`);
+    skips += `<span class="pmap__skip" style="left:${((X(a) + X(b)) / 14).toFixed(2)}%">Skips ${gap} phase${gap > 1 ? 's' : ''}</span>`;
+  }
+  $('#pmap-rl').innerHTML = segs.map((d, k) => `<path d="${d}" pathLength="1" style="--d:${k}"/>`).join('');
+  $('#pmap-skips').innerHTML = skips;
+  $$('#pmap-path li').forEach((li, i) => {
+    li.classList.toggle('is--on', on.includes(i));
+    li.classList.toggle('is--skip', on.length > 0 && !on.includes(i) && i > on[0] && i < on[on.length - 1]);
+  });
+}
+/* 03 Launch: today and your launch window on a five-month strip */
+function paintCal() {
+  const now = new Date(), y = now.getFullYear(), m = now.getMonth(), day = Math.min(now.getDate(), 28);
+  const start = +new Date(y, m, 1), span = +new Date(y, m + 5, 1) - start;
+  const at = d => clamp((d - start) / span * 100, 0, 100);
+  const plus = k => new Date(y, m + k, day);
+  const fmt = d => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+  const w = { 'As soon as possible': ['asap', at(now), at(plus(1)), 'As soon as we can'], 'In 1–2 months': ['win', at(plus(1)), at(plus(2)), fmt(plus(1)) + ' – ' + fmt(plus(2))], 'In 3+ months': ['open', at(plus(3)), 100, 'From ' + fmt(plus(3))] }[brief.when];
+  const months = Array.from({ length: 5 }, (_, i) => `<span>${new Date(y, m + i, 1).toLocaleDateString('en-GB', { month: 'short' })}</span>`).join('');
+  const label = w ? w[3] : brief.when === 'Just exploring' ? 'No date yet. We plan it together.' : 'Your launch window shows here.';
+  $('#pmap-cal').innerHTML = `<div class="pmap__months">${months}</div><span class="pmap__today" style="left:${at(now).toFixed(1)}%"><b>Today</b></span>${w ? `<span class="pmap__win is--${w[0]}" style="left:${w[1].toFixed(1)}%;width:${(w[2] - w[1]).toFixed(1)}%">${w[0] === 'asap' ? '' : '<i></i>'}</span>` : ''}<span class="pmap__winl${w ? '' : ' is--dim'}">${esc(label)}</span>`;
+}
+function paintMap() {
+  paintNodes();
+  const name = projectName(), msg = brief.message.trim();
+  $('#pmap-name').textContent = name || 'Your project';
+  if (drawn.stage !== brief.stage) { drawn.stage = brief.stage; paintRoute(); }
+  if (drawn.when !== brief.when) { drawn.when = brief.when; paintCal(); }
+  $$('#pmap-path li')[5].classList.toggle('is--flag', !!brief.when && brief.when !== 'Just exploring');
+  $('#pmap-stage').textContent = brief.stage;
+  $('#pmap-when').textContent = brief.when;
+  $('#pmap-est').textContent = timeHint();
+  /* 04 About: your words on a note; 05 You: the title block */
+  const note = $('#pmap-about'), had = !!note.textContent;
+  note.textContent = msg.length > 120 ? msg.slice(0, 120) + '…' : msg;
+  if (msg && !had && !reduce) { note.classList.remove('is--drop'); void note.offsetWidth; note.classList.add('is--drop'); }
+  [name, brief.name, brief.phone || brief.email, done ? 'Sent' : 'Draft'].forEach((t, i) => { const dd = $('#pmap-tb-' + i); dd.textContent = t || '—'; dd.classList.toggle('is--empty', !t); });
+  [brief.needs.length, brief.stage, brief.when, msg, brief.name && (brief.phone || brief.email)].forEach((v, i) => $(`#pmap [data-z="${i}"]`).classList.toggle('is--set', !!v));
 }
 function scrollLog() { const l = chatLog(); l.scrollTo({ top: l.scrollHeight, behavior: reduce ? 'auto' : 'smooth' }); }
 function say(html, who = 'bot') { const m = document.createElement('div'); m.className = 'msg is--' + who; m.innerHTML = html; chatLog().appendChild(m); scrollLog(); return m; }
@@ -560,6 +605,7 @@ function botSay(html) {
 function paintSteps() {
   $$('#chat-steps li').forEach((li, i) => { li.classList.toggle('is--on', i === qStep && !done); li.classList.toggle('is--done', done || i < qStep); });
   $('[data-chat-reset]').hidden = qStep === 0 && !done;
+  $$('#pmap [data-z]').forEach(z => z.classList.toggle('is--now', +z.dataset.z === qStep && !done));
 }
 function dockHTML(s) {
   if (s.opts) {
@@ -622,6 +668,7 @@ async function sendBrief(form) {
   answer([brief.name, brief.phone || brief.email].join(' · '));
   dock().innerHTML = '';
   $('#pmap').classList.add('is--sent');
+  paintMap();
   await botSay(`Thanks, ${esc(brief.name.split(' ')[0])}. Your brief is with us.<ol class="msg__then"><li><b>01</b>We read your brief.</li><li><b>02</b>We call you to talk it through.</li><li><b>03</b>You get a clear plan and timeline.</li></ol>`);
   dock().innerHTML = `<div class="chat__send is--end"><button class="btn" type="button" data-theme="ink" data-shape="round" data-chat-reset-btn><span class="btn__label">Send another brief</span></button><a class="btn" data-theme="bone" data-shape="round" href="#work"><span class="btn__label">Look at our work</span></a></div>`;
   initButtons(dock());
@@ -676,6 +723,7 @@ function initBrief() {
     const a = e.target.closest('[data-need]');
     if (!a || done) return;
     if (!brief.needs.includes(a.dataset.need)) brief.needs = brief.needs.concat(a.dataset.need);
+    if (a.dataset.product) brief.product = a.dataset.product;
     if (a.dataset.product && !brief.message) brief.message = `I’d like something like your ${a.dataset.product}.`;
     if (qStep === 0 && $('.chat__opts', d)) { d.innerHTML = dockHTML(STEPS[0]); initButtons(d); }
     paintMap();

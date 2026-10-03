@@ -269,14 +269,38 @@ __SPRITE__
     <div class="contact__grid">
       <div class="pmap" id="pmap" aria-hidden="true">
         <div class="pmap__head"><span class="eyebrow">Your project map</span><em id="pmap-date"></em></div>
-        <div class="pmap__orbit">
-          <svg class="pmap__lines" viewBox="0 0 100 100" preserveAspectRatio="none"><ellipse cx="50" cy="50" rx="36" ry="33"/><g id="pmap-lines"></g></svg>
-          <span class="pmap__core"><svg viewBox="0 0 80 80"><use href="#i-glyph"/></svg><b id="pmap-name">Your project</b></span>
-          <div id="pmap-nodes"></div>
+        <div class="pmap__zone pmap__what" data-z="0">
+          <p class="pmap__zl"><i></i>01 What</p>
+          <div class="pmap__orbit">
+            <svg class="pmap__lines" viewBox="0 0 100 100" preserveAspectRatio="none"><ellipse cx="50" cy="50" rx="36" ry="33"/><g id="pmap-lines"></g></svg>
+            <span class="pmap__core"><svg viewBox="0 0 80 80"><use href="#i-glyph"/></svg><b id="pmap-name">Your project</b></span>
+            <div id="pmap-nodes"></div>
+          </div>
         </div>
-        <p class="pmap__about" id="pmap-about"></p>
-        <div class="pmap__path"><ol id="pmap-path"><li><i></i><span>Connect</span></li><li><i></i><span>Discover</span></li><li><i></i><span>Define</span></li><li><i></i><span>Design</span></li><li><i></i><span>Build</span></li><li><i></i><span>Launch</span></li><li><i></i><span>Grow</span></li></ol><span class="pmap__flag" id="pmap-flag">Launch</span></div>
-        <div class="pmap__foot"><span class="pmap__est" id="pmap-est"></span><span class="pmap__stamp">Sent ✓</span></div>
+        <div class="pmap__zone pmap__stage" data-z="1">
+          <p class="pmap__zl"><i></i>02 Stage<em id="pmap-stage"></em></p>
+          <div class="pmap__route">
+            <svg class="pmap__rl" viewBox="0 0 700 30" preserveAspectRatio="none"><path class="pmap__rl-base" d="M50 30H650"/><g id="pmap-rl"></g></svg>
+            <ol id="pmap-path"><li><i></i><span>Connect</span></li><li><i></i><span>Discover</span></li><li><i></i><span>Define</span></li><li><i></i><span>Design</span></li><li><i></i><span>Build</span></li><li><i></i><span>Launch</span></li><li><i></i><span>Grow</span></li></ol>
+            <div id="pmap-skips"></div>
+          </div>
+        </div>
+        <div class="pmap__row">
+          <div class="pmap__zone pmap__launch" data-z="2">
+            <p class="pmap__zl"><i></i>03 Launch<em id="pmap-when"></em></p>
+            <div class="pmap__cal" id="pmap-cal"></div>
+            <p class="pmap__est" id="pmap-est"></p>
+          </div>
+          <div class="pmap__zone pmap__about" data-z="3">
+            <p class="pmap__zl"><i></i>04 About</p>
+            <p class="pmap__note" id="pmap-about"></p>
+          </div>
+        </div>
+        <div class="pmap__zone pmap__you" data-z="4">
+          <p class="pmap__zl"><i></i>05 You</p>
+          <dl class="pmap__tb"><div><dt>Project</dt><dd id="pmap-tb-0">—</dd></div><div><dt>Client</dt><dd id="pmap-tb-1">—</dd></div><div><dt>Contact</dt><dd id="pmap-tb-2">—</dd></div><div><dt>Status</dt><dd id="pmap-tb-3">Draft</dd></div></dl>
+          <span class="pmap__stamp">Sent ✓</span>
+        </div>
       </div>
       <div class="chat" id="chat">
         <div class="chat__top">
