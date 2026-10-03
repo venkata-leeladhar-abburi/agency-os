@@ -1,9 +1,10 @@
 # One Stop Solutions: pitch websites
 
-Four single-file websites for **One Stop Solutions**, each with its CSS and JavaScript inline:
+Five websites for **One Stop Solutions**. Each page has its CSS and JavaScript inline:
 
 | Page | File | Who it is for |
 | --- | --- | --- |
+| Agency website | `site/index.html` (images in `site/img/`) | Clients, partners and hires |
 | Agency OS pitch deck | `index.html` | Investors |
 | Client pitch | `pitch/index.html` | Clients and leads |
 | Beere Kesava ERP deck | `beere-kesava/index.html` | Beere Kesava, investors and silk businesses |
@@ -14,6 +15,24 @@ Four single-file websites for **One Stop Solutions**, each with its CSS and Java
 Open any of the files in a browser. Fonts and the animation libraries load from public CDNs, so an internet connection gives the full experience. Without one, every section still renders and the sliders fall back to native scrolling.
 
 To host the investor deck or the client pitch, publish the repository with GitHub Pages (Settings → Pages → Deploy from a branch) or drop the file on any static host. **Keep `playbook/` off public hosting**: it is internal. If you publish the repository with GitHub Pages, everything in it becomes public, the playbook included.
+
+## Agency website (`site/`)
+
+One Stop Solutions’ own website: our work, services, products, process and team, in black, white and signal orange on the same layout as the other pages.
+
+| Section | What it shows |
+| --- | --- |
+| Hero | The Onestop wordmark, what we do, and a reel of real project screens |
+| Brands | Logos of the brands we’ve built for |
+| Selected work | Beere Kesava ERP, Ornate ’26, Aaravi Collectives, NGB and LimitX, each with its real screens, a case study and a live preview |
+| All projects | Every project, filtered by type, with live previews and links |
+| Services | Four core services, plus what we help with around a product |
+| Products | Products a business can license, customise or have built for itself, with links to the decks |
+| How we work | Three stages, seven draggable phase cards, and the playbook |
+| Proof, team, questions | A client quote, facts, the team and answers |
+| Contact | A brief form that opens WhatsApp or email with the message filled in |
+
+Live previews load a project’s real website inside the page when someone clicks. A site that blocks this shows a blank box, so the preview always has an **Open site** button. Team photos load from the current Framer site and fall back to initials.
 
 ## Client pitch (`pitch/`)
 
