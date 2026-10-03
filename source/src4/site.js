@@ -120,40 +120,70 @@ const CORE = [
 ];
 const ALSO = [['Research & strategy', 'Know the market before you build.'], ['Brand & pitch decks', 'Identity, decks and booklets.'], ['Automation & AI agents', 'n8n flows, WhatsApp and voice agents.'], ['SEO & Meta ads', 'Get found. Get customers.'], ['Hosting & care', 'Domains, uptime, backups, fixes.'], ['Scale & new features', 'Grow the product you already have.']];
 
-/* ---------- Built mockups for our decks, process and playbook ---------- */
+/* ---------- Diagrams for our products, process, playbook and pitch ---------- */
 const PHASES7 = ['Connect', 'Discover', 'Define', 'Design', 'Build', 'Launch', 'Grow'];
-const MK = {
-  process: () => `<div class="mk mk-proc"><div class="mk__top"><span class="mk__logo">${GLYPH}One Stop</span><em>7 phases</em></div>
-    <div class="mk-proc__dd"><svg viewBox="0 0 220 72" preserveAspectRatio="none" aria-hidden="true"><polygon points="4,36 57,4 110,36 57,68"/><polygon points="110,36 163,4 216,36 163,68"/></svg><span>Find the right problem</span><span>Build the right solution</span></div>
-    <ol class="mk-proc__rail">${PHASES7.map((t, i) => `<li style="--i:${i}"><i></i>${t}</li>`).join('')}</ol></div>`,
-  playbook: () => `<div class="mk mk-pb"><aside><span class="mk__logo">${GLYPH}Playbook</span>${PHASES7.map((t, i) => `<span class="${i === 1 ? 'is-on' : ''}">${t}</span>`).join('')}</aside>
-    <div class="mk-pb__main"><div class="mk-pb__search">Search everything <kbd>⌘K</kbd></div><b class="mk-pb__h">Discover · checklist</b>
-    <ul>${['Kickoff: goals and metrics', 'Competitor analysis', 'Interview 5 users', 'UX audit', 'Synthesise insights'].map((t, i) => `<li style="--i:${i}"><i></i>${t}</li>`).join('')}</ul>
-    <div class="mk-pb__files"><span>competitors.md</span><span>interviews.md</span><span>ux-audit.pdf</span></div></div></div>`,
-  pitch: () => `<div class="mk mk-pt"><div class="mk__top"><span class="mk__logo">${GLYPH}One Stop</span><em class="mk-pt__cta">Book a call</em></div>
-    <b class="mk-pt__h">Build once.<br>Earn for years.</b><div class="mk-pt__pills">${['Research', 'Brand', 'Design', 'Build', 'Grow'].map((t, i) => `<span style="--i:${i}">${t}</span>`).join('')}</div>
-    <div class="mk-pt__cards"><i></i><i></i><i></i><i></i></div></div>`,
-  agencyos: () => `<div class="mk mk-aos"><aside><span class="mk-aos__g">${GLYPH}</span><i class="is-on"></i><i></i><i></i><i></i><i></i></aside>
-    <div class="mk-aos__main"><div class="mk__top"><b>Agency OS</b><em>Owner</em></div>
-    <div class="mk-aos__kpis"><span><small>Leads</small><b>24</b></span><span><small>Projects</small><b>8</b></span><span class="is-hot"><small>Invoices due</small><b>3</b></span></div>
-    <div class="mk-aos__pipe">${['Lead', 'Proposal', 'Design', 'Build', 'Launch'].map((t, i) => `<span style="--h:${[78, 56, 64, 46, 34][i]}%;--i:${i}"><i></i>${t}</span>`).join('')}</div></div></div>`,
-  scampus: () => `<div class="mk mk-sc"><aside><span class="mk-sc__logo"><i>S</i>S-Campus</span>${['Dashboard', 'Admissions', 'Exams', 'Hostel', 'Transport', 'Finance'].map((t, i) => `<span class="${i === 4 ? 'is-on' : ''}">${t}</span>`).join('')}</aside>
-    <div class="mk-sc__main"><div class="mk__top"><b>Transport</b><em>Admin portal</em></div>
-    <div class="mk-sc__kpis"><span class="is-hot"><small>Students</small><b>1,240</b></span><span><small>Routes</small><b>18</b></span><span><small>Portals</small><b>9</b></span></div>
-    <div class="mk-sc__rows">${[['Route 03 · North loop', 'Live'], ['Route 07 · City', 'Done'], ['Route 11 · East', 'Next']].map(([t, st], i) => `<span><i style="--i:${i}"></i>${t}<em class="is-${st.toLowerCase()}">${st}</em></span>`).join('')}</div></div></div>`,
-  silkerp: () => `<div class="mk mk-erp"><div class="mk-erp__nav">${CREST}<b>BEERE KESAVA</b><em class="is-on">Overview</em><em>Production</em><em>Finance</em></div>
-    <div class="mk-erp__hero"><small>SINCE 1999 · SUPERADMIN</small><b>From yarn <i>to sale.</i><br>One portal.</b></div>
-    <div class="mk-erp__stats"><span><small>Active weavers</small><b>41</b></span><span><small>In production</small><b>12</b></span><span class="is-gold"><small>Dispatched</small><b>118</b></span></div></div>`
+/* A smooth line through points (Catmull-Rom as cubic Béziers) */
+const smooth = pts => pts.map(([x, y], i) => {
+  if (!i) return `M${x} ${y}`;
+  const [x0, y0] = pts[Math.max(0, i - 2)], [x1, y1] = pts[i - 1], [x3, y3] = pts[Math.min(pts.length - 1, i + 1)];
+  return `C${(x1 + (x - x0) / 6).toFixed(1)} ${(y1 + (y - y0) / 6).toFixed(1)} ${(x - (x3 - x1) / 6).toFixed(1)} ${(y - (y3 - y1) / 6).toFixed(1)} ${x} ${y}`;
+}).join(' ');
+const LINE_ICON = {
+  yarn: '<circle cx="12" cy="12" r="8"/><path d="M6.5 8c4 1 7.5 5 8.5 11M9.5 4.7c3 2 6 6.5 7 12M5 13.5c3 0 6 2 8 6"/>',
+  loom: '<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 4v16M12 4v16M16 4v16M4 12h16"/>',
+  check: '<circle cx="12" cy="12" r="8"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/>',
+  tag: '<path d="M4 12V5a1 1 0 0 1 1-1h7l8 8-8 8z"/><circle cx="8.5" cy="8.5" r="1.4"/>'
+};
+const lineIcon = k => `<svg viewBox="0 0 24 24" aria-hidden="true">${LINE_ICON[k]}</svg>`;
+const DG = {
+  /* Silk ERP: one gold thread from yarn to sale */
+  silk: () => `<div class="dg dg-silk"><div class="dg-silk__top">${CREST}<span>Beere Kesava · Dharmavaram</span></div>
+    <b class="dg-silk__h">From yarn <i>to sale.</i></b>
+    <div class="dg-silk__thread"><span class="dg-silk__line"></span>${[['yarn', 'Buy yarn'], ['loom', 'Weave'], ['check', 'Check'], ['tag', 'Sell']].map(([k, t], i) => `<span class="dg-silk__node" style="--i:${i}"><i>${lineIcon(k)}</i><em>${t}</em></span>`).join('')}</div></div>`,
+  /* Agency OS: three layers on one playbook */
+  aos: () => `<div class="dg dg-aos"><div class="dg-aos__brand">${GLYPH}<b>Agency OS</b><em>Three layers, one playbook</em></div>
+    <div class="dg-aos__stack">${[['Get found', 'Profiles · Marketplace · Free tools', 'found'], ['Grow', 'Leads · Proposals · Lead → client', 'grow'], ['Deliver & run', 'Projects · Client portal · Finance', 'run'], ['Playbook', 'Sits under all three', 'pb']].map(([t, l, k], i) => `<div class="dg-aos__slab is--${k}" style="--i:${i}"><b>${esc(t)}</b><span>${esc(l)}</span></div>`).join('')}<span class="dg-aos__drop" aria-hidden="true"></span></div></div>`,
+  /* S-Campus: one platform, nine portals */
+  scampus: () => {
+    const roles = ['Admin', 'HOD', 'Faculty', 'Student', 'Parent', 'Exam Cell', 'Finance', 'Warden', 'Driver'];
+    const pos = roles.map((_, i) => { const a = (-90 + i * 40) * Math.PI / 180; return [50 + Math.cos(a) * 38, 50 + Math.sin(a) * 36]; });
+    return `<div class="dg dg-sc"><svg class="dg-sc__lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><ellipse cx="50" cy="50" rx="38" ry="36"/>${pos.map(([x, y]) => `<line x1="50" y1="50" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}"/>`).join('')}</svg>
+      <span class="dg-sc__core"><i>S</i><b>S-Campus</b></span>${roles.map((r, i) => `<span class="dg-sc__node" style="left:${pos[i][0].toFixed(1)}%;top:${pos[i][1].toFixed(1)}%;--i:${i}">${r}</span>`).join('')}</div>`;
+  },
+  /* Our process: seven phases on one line, with your sign-off at the gates */
+  process: () => {
+    const pts = [[34, 196], [88, 128], [146, 84], [204, 124], [262, 176], [318, 128], [370, 74]];
+    const d = smooth(pts);
+    return `<div class="dg dg-proc"><svg viewBox="0 0 400 250" aria-hidden="true">
+      <polygon class="dg-proc__dd" points="58,150 146,62 234,150 146,238"/><polygon class="dg-proc__dd is--2" points="178,150 262,66 346,150 262,234"/>
+      <path class="dg-proc__track" d="${d}"/><path class="dg-proc__run" d="${d}" pathLength="1"/>
+      ${pts.map(([x, y], i) => `<g class="dg-proc__st" style="--i:${i}">${PH[i] && PH[i].gate ? `<path class="dg-proc__flag" d="M${x} ${y - 12}v-17l11 4.5-11 4.5"/>` : ''}<circle cx="${x}" cy="${y}" r="10"/><text x="${x}" y="${y + 3.4}" class="dg-proc__n">${pad(i)}</text><text x="${x}" y="${y + 27}" class="dg-proc__t">${PHASES7[i]}</text></g>`).join('')}
+      <circle class="dg-proc__dot" r="5.5"><animateMotion dur="8s" repeatCount="indefinite" path="${d}"/></circle>
+      <text x="22" y="32" class="dg-proc__cap">7 phases</text><text x="22" y="48" class="dg-proc__sub">Flags mark your sign-off</text></svg></div>`;
+  },
+  /* The playbook: the library, fanned out */
+  playbook: () => `<div class="dg dg-pb">${[['Process', 7, 'phases'], ['Services', 16, 'routes'], ['Research', 10, 'documents'], ['Prompts', 25, 'ready to copy'], ['Tools', 37, 'in the stack'], ['Knowledge', 17, 'notes']].map(([t, n, l], i) => `<span class="dg-pb__card is--${i}" style="--i:${i}"><em>${t}</em><b class="tnum">${n}</b><small>${l}</small></span>`).join('')}</div>`,
+  /* Client pitch: five practices, sixteen services, one team */
+  pitch: () => {
+    const P5 = [['Brand & strategy', 2], ['Product design', 3], ['Build', 6], ['Automate & AI', 3], ['Grow', 2]];
+    const cx = 180, cy = 110, r = 56, C = 2 * Math.PI * r;
+    let at = 0, k = 0;
+    const arcs = P5.map(([, n], i) => { const len = n / 16 * C, s = at; at += len; return `<circle class="dg-pt__arc is--${i}" cx="${cx}" cy="${cy}" r="${r}" stroke-dasharray="${(len - 3).toFixed(1)} ${C.toFixed(1)}" stroke-dashoffset="${(-s).toFixed(1)}" style="--i:${i}"/>`; }).join('');
+    const labels = P5.map(([t, n]) => { const mid = (k + n / 2) / 16 * 2 * Math.PI - Math.PI / 2; k += n; const c = Math.cos(mid); return `<text x="${(cx + c * 94).toFixed(1)}" y="${(cy + Math.sin(mid) * 88 + 3).toFixed(1)}" text-anchor="${c > .2 ? 'start' : c < -.2 ? 'end' : 'middle'}" class="dg-pt__t">${esc(t)}</text>`; }).join('');
+    const dots = Array.from({ length: 16 }, (_, i) => { const a = (i + .5) / 16 * 2 * Math.PI - Math.PI / 2; return `<circle class="dg-pt__dot" cx="${(cx + Math.cos(a) * 75).toFixed(1)}" cy="${(cy + Math.sin(a) * 75).toFixed(1)}" r="2.6" style="--i:${i}"/>`; }).join('');
+    return `<div class="dg dg-pt"><svg viewBox="0 0 360 220" aria-hidden="true"><g transform="rotate(-90 ${cx} ${cy})">${arcs}</g>${dots}${labels}
+      <use href="#i-glyph" x="${cx - 13}" y="${cy - 24}" width="26" height="26" class="dg-pt__glyph"/><text x="${cx}" y="${cy + 19}" class="dg-pt__c">16 services</text></svg></div>`;
+  }
 };
 const RES = [
-  { mk: 'process', tag: 'How we work', name: 'Our process', line: 'Seven phases. Your sign-off at every gate.', href: 'pitch/#process', cta: 'See the process' },
-  { mk: 'playbook', tag: 'Inside the team', name: 'The playbook', line: 'Every phase has a checklist, files and an exit gate.', href: 'playbook/', cta: 'Open the playbook' },
-  { mk: 'pitch', tag: 'For clients', name: 'Client pitch', line: 'What we do, how we work and what you keep.', href: 'pitch/', cta: 'Open the pitch' }
+  { dg: 'process', tag: 'How we work', name: 'Our process', line: 'Seven phases. Your sign-off at every gate.', href: 'pitch/#process', cta: 'See the process' },
+  { dg: 'playbook', tag: 'Inside the team', name: 'The playbook', line: 'Every phase has a checklist, files and an exit gate.', href: 'playbook/', cta: 'Open the playbook' },
+  { dg: 'pitch', tag: 'For clients', name: 'Client pitch', line: 'What we do, how we work and what you keep.', href: 'pitch/', cta: 'Open the pitch' }
 ];
 const PRODS = [
-  { name: 'Silk ERP', from: 'Built for Beere Kesava & Brothers Silks', line: 'Run a textile business from yarn to sale. Six role portals, GST billing, WhatsApp reports.', mk: 'silkerp', status: 'Live', deck: 'beere-kesava/', p: 'bk' },
-  { name: 'Agency OS', from: 'Our own product', line: 'Run a whole agency in one place. Leads, projects, client portals and the playbook.', mk: 'agencyos', status: 'Live', deck: 'agency-os/', p: 'agencyos' },
-  { name: 'S-Campus', from: 'College management SaaS', line: 'Admissions to transport. Nine portals, one platform for the whole college.', mk: 'scampus', status: 'Design ready', p: 'scampus' }
+  { name: 'Silk ERP', from: 'Built for Beere Kesava & Brothers Silks', line: 'Run a textile business from yarn to sale. Six role portals, GST billing, WhatsApp reports.', dg: 'silk', status: 'Live', deck: 'beere-kesava/', p: 'bk' },
+  { name: 'Agency OS', from: 'Our own product', line: 'Run a whole agency in one place. Leads, projects, client portals and the playbook.', dg: 'aos', status: 'Live', deck: 'agency-os/', p: 'agencyos' },
+  { name: 'S-Campus', from: 'College management SaaS', line: 'Admissions to transport. Nine portals, one platform for the whole college.', dg: 'scampus', status: 'Design ready', p: 'scampus' }
 ];
 
 const STAGES = [
@@ -339,14 +369,27 @@ function renderServices() {
     <ul class="ticks">${c.inc.map(t => `<li>${esc(t)}</li>`).join('')}</ul>
     <div class="svc__foot"><span class="svc__work">Seen in ${esc(c.work)}</span><a class="link-arrow" href="#contact" data-need="${esc(c.need)}">Start this project <svg viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-r"/></svg></a></div></div></article>`).join('');
   $('#also').innerHTML = ALSO.map(([t, l], i) => `<div class="also__item"><span class="eyebrow tnum">${pad(i + 1)}</span><b>${esc(t)}</b><span>${esc(l)}</span></div>`).join('');
-  $('#res').innerHTML = RES.map((r, i) => `<a class="res${i === 1 ? ' is--hot' : ''}" href="${r.href}"><span class="res__view">${MK[r.mk]()}</span><span class="res__body"><span class="eyebrow">${esc(r.tag)}</span><b class="h-s">${esc(r.name)}</b><span class="res__line">${esc(r.line)}</span><span class="res__cta">${esc(r.cta)} <svg viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-ur"/></svg></span></span></a>`).join('');
+  $('#res').innerHTML = RES.map((r, i) => `<a class="res${i === 1 ? ' is--hot' : ''}" href="${r.href}"><span class="res__view">${DG[r.dg]()}</span><span class="res__body"><span class="eyebrow">${esc(r.tag)}</span><b class="h-s">${esc(r.name)}</b><span class="res__line">${esc(r.line)}</span><span class="res__cta">${esc(r.cta)} <svg viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-ur"/></svg></span></span></a>`).join('');
   $('#prods').innerHTML = PRODS.map(x => {
     const live = byId(x.p).live;
-    return `<article class="prod"><div class="prod__view">${MK[x.mk]()}<span class="tag" data-theme="${x.status === 'Live' ? 'volt' : 'white'}" data-shape="round">${x.status}</span></div>
+    return `<article class="prod"><div class="prod__view">${DG[x.dg]()}<span class="tag" data-theme="${x.status === 'Live' ? 'volt' : 'white'}" data-shape="round">${x.status}</span></div>
     <div class="prod__body"><p class="eyebrow">${esc(x.from)}</p><h3 class="h-s">${esc(x.name)}</h3><p class="p-s">${esc(x.line)}</p>
     <div class="prod__acts">${x.deck ? `<a class="btn" data-theme="volt" href="${x.deck}"><span class="btn__label">Open pitch deck</span>${arrow}</a>` : ''}${live ? `<button class="btn" type="button" data-theme="${x.deck ? 'glass' : 'volt'}" data-shape="round" data-live="${x.p}"><span class="btn__label">${x.deck ? 'Preview' : 'Preview the design'}</span></button>` : ''}</div>
     <a class="link-arrow is--light" href="#contact" data-need="Something like your products" data-product="${esc(x.name)}">Build something like this <svg viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-r"/></svg></a></div></article>`;
   }).join('');
+}
+
+/* Diagrams come alive in view and rest when they leave it */
+function initDiagrams() {
+  $$('.dg').forEach(el => {
+    const svgs = $$('svg', el).filter(x => x.pauseAnimations);
+    if (reduce) { el.classList.add('is--in'); svgs.forEach(x => x.pauseAnimations()); return; }
+    onVisible(el, v => {
+      if (v) el.classList.add('is--in');
+      el.classList.toggle('is--live', v);
+      svgs.forEach(x => (v ? x.unpauseAnimations() : x.pauseAnimations()));
+    }, { threshold: 0.3 });
+  });
 }
 
 /* ---------- Process: stages + draggable phase cards ---------- */
@@ -424,7 +467,7 @@ function initImages() {
   });
 }
 
-/* ---------- The brief: five questions, saved to our leads ---------- */
+/* ---------- The brief: a short chat that draws your project map, saved to our leads ---------- */
 const ICON = {
   web: '<rect x="3" y="5" width="26" height="22" rx="3"/><path d="M3 11h26M8 8h.01M12 8h.01"/>',
   erp: '<rect x="4" y="4" width="10" height="10" rx="2"/><rect x="18" y="4" width="10" height="10" rx="2"/><rect x="4" y="18" width="10" height="10" rx="2"/><path d="M18 23h10M23 18v10"/>',
@@ -436,142 +479,213 @@ const ICON = {
   unsure: '<circle cx="16" cy="16" r="12"/><path d="M12.5 12.5a3.6 3.6 0 1 1 5 3.3c-1 .5-1.5 1.2-1.5 2.2v1M16 23h.01"/>'
 };
 const STEPS = [
-  { id: 'needs', q: 'What are we building together?', hint: 'Pick all that apply.', multi: true, opts: [['Website', 'web'], ['ERP or dashboard', 'erp'], ['SaaS or web app', 'saas'], ['Mobile app', 'app'], ['UI/UX design', 'ux'], ['Something like your products', 'prod'], ['Brand or pitch deck', 'brand'], ['Not sure yet', 'unsure']] },
-  { id: 'stage', q: 'Where are you today?', hint: 'Pick one.', opts: [['Just an idea'], ['I have designs'], ['I have a product to improve'], ['I need it live fast']] },
-  { id: 'when', q: 'When do you want to launch?', hint: 'Pick one.', opts: [['As soon as possible'], ['In 1–2 months'], ['In 3+ months'], ['Just exploring']] },
-  { id: 'message', q: 'Tell us a little about it', hint: 'Optional. A few lines is plenty.', type: 'text', prompts: ['Who is it for?', 'What problem does it solve?', 'A site or app you like?'] },
-  { id: 'contact', q: 'Where can we reach you?', hint: 'Your name, plus a phone number or email.', type: 'contact' }
+  { id: 'needs', label: 'What', q: 'Hi! What are we building together?', hint: 'Pick all that apply.', multi: true, opts: [['Website', 'web'], ['ERP or dashboard', 'erp'], ['SaaS or web app', 'saas'], ['Mobile app', 'app'], ['UI/UX design', 'ux'], ['Something like your products', 'prod'], ['Brand or pitch deck', 'brand'], ['Not sure yet', 'unsure']] },
+  { id: 'stage', label: 'Stage', q: 'Nice. Where are you today?', opts: [['Just an idea'], ['I have designs'], ['I have a product to improve'], ['I need it live fast']] },
+  { id: 'when', label: 'Launch', q: 'When do you want to launch?', opts: [['As soon as possible'], ['In 1–2 months'], ['In 3+ months'], ['Just exploring']] },
+  { id: 'message', label: 'About', q: 'Tell us a little about it. Who is it for, and what should it do?', type: 'text', prompts: ['It’s for…', 'It should help people…', 'A site or app we like:'] },
+  { id: 'contact', label: 'You', q: 'Last one. Where can we reach you?', type: 'contact' }
 ];
-const brief = { needs: [], stage: '', when: '', message: '', name: '', phone: '', email: '', company: '' };
-let qStep = 0, sending = false;
-const qBody = () => $('#qz-body');
+/* Which of the seven phases a project goes through, by where it starts */
+const STAGE_PATH = { 'Just an idea': [0, 1, 2, 3, 4, 5, 6], 'I have designs': [0, 4, 5, 6], 'I have a product to improve': [0, 1, 3, 4, 5, 6], 'I need it live fast': [0, 3, 4, 5] };
+const EMPTY = { needs: [], stage: '', when: '', message: '', name: '', phone: '', email: '', company: '' };
+const brief = { ...EMPTY, needs: [] };
+let qStep = 0, sending = false, done = false, asking = 0;
+const chatLog = () => $('#chat-log'), dock = () => $('#chat-dock');
+const DAY = '<p class="chat__day">Today</p>';
 function timeHint() {
   const big = ['ERP or dashboard', 'SaaS or web app', 'Mobile app', 'Something like your products'];
   if (brief.needs.some(n => big.includes(n))) return 'Typical time: 2–8 weeks for a full product.';
   if (brief.needs.includes('Website')) return 'Typical time: 4–7 days for a simple website.';
   return '';
 }
-function paintDoc() {
-  const set = (k, v) => { const el = $(`#bdoc [data-b="${k}"]`); if (!el) return; el.textContent = v || '—'; el.classList.toggle('is--set', !!v); };
-  set('needs', brief.needs.join(', '));
-  set('stage', brief.stage);
-  set('when', brief.when);
-  set('message', brief.message);
-  set('name', [brief.name, brief.company].filter(Boolean).join(' · '));
-  $('#bdoc-time').textContent = timeHint();
+const SHORT = { 'ERP or dashboard': 'ERP / dashboard', 'SaaS or web app': 'SaaS / web app', 'Something like your products': 'Like your products', 'Brand or pitch deck': 'Brand / deck' };
+/* Keep every node inside the map, and draw its line from the centre */
+function placeNodes(fresh = []) {
+  const wrap = $('#pmap-nodes'), W = wrap.parentNode.clientWidth;
+  const nodes = $$('.pmap__node[data-v]', wrap);
+  if (!W) return;
+  $('#pmap-lines').innerHTML = nodes.map(el => {
+    const half = el.offsetWidth / 2, x = clamp(+el.dataset.x / 100 * W, half + 6, W - half - 6);
+    el.style.left = x + 'px';
+    el.style.top = el.dataset.y + '%';
+    return `<line x1="50" y1="50" x2="${(x / W * 100).toFixed(1)}" y2="${el.dataset.y}"${fresh.includes(el.dataset.v) ? ' class="is--new"' : ''}/>`;
+  }).join('');
 }
-function renderStep() {
-  const s = STEPS[qStep];
-  $('#qz-count').textContent = `${pad(qStep + 1)} / ${pad(STEPS.length)}`;
-  $('#qz-bar').style.transform = `scaleX(${(qStep + 1) / STEPS.length})`;
-  $('[data-qz-back]').hidden = qStep === 0;
-  let inner = `<h3 class="qz__q">${esc(s.q)}</h3><p class="qz__hint">${esc(s.hint)}</p>`;
+function paintMap() {
+  const needs = brief.needs, n = needs.length;
+  const narrow = $('.pmap__orbit').clientWidth < 480, rx = narrow ? 34 : 36, ry = narrow ? 37 : 33;
+  const pos = needs.map((_, i) => { const a = ((n < 3 ? 0 : -90) + i * 360 / n) * Math.PI / 180; return [50 + Math.cos(a) * rx, 50 + Math.sin(a) * ry]; });
+  const iconOf = v => (STEPS[0].opts.find(o => o[0] === v) || [])[1] || 'unsure';
+  const wrap = $('#pmap-nodes'), fresh = [];
+  if (!n) {
+    wrap.innerHTML = [[14, 50], [86, 50], [50, 12]].map(([x, y]) => `<span class="pmap__node is--ghost" style="left:${x}%;top:${y}%">?</span>`).join('');
+  } else {
+    $$('.is--ghost', wrap).forEach(g => g.remove());
+    const have = new Map($$('.pmap__node', wrap).map(el => [el.dataset.v, el]));
+    have.forEach((el, v) => { if (!needs.includes(v)) el.remove(); });
+    needs.forEach((v, i) => {
+      let el = have.get(v);
+      if (el) el.classList.remove('is--new');
+      else {
+        el = document.createElement('span');
+        el.className = 'pmap__node is--new';
+        el.dataset.v = v;
+        el.innerHTML = `<svg viewBox="0 0 32 32" aria-hidden="true">${ICON[iconOf(v)]}</svg>${esc(SHORT[v] || v)}`;
+        wrap.appendChild(el);
+        fresh.push(v);
+      }
+      el.dataset.x = pos[i][0].toFixed(1);
+      el.dataset.y = pos[i][1].toFixed(1);
+    });
+  }
+  placeNodes(fresh);
+  $('#pmap-name').textContent = brief.company || (brief.name ? brief.name.split(' ')[0] + '’s project' : 'Your project');
+  const on = STAGE_PATH[brief.stage] || [];
+  $$('#pmap-path li').forEach((li, i) => { li.classList.toggle('is--on', on.includes(i)); li.classList.toggle('is--first', on[0] === i); });
+  const flag = $('#pmap-flag');
+  flag.textContent = brief.when ? 'Launch · ' + brief.when : 'Launch';
+  flag.classList.toggle('is--set', !!brief.when);
+  $('#pmap-est').textContent = timeHint() || (n ? 'We plan the timeline with you.' : 'Your timeline appears as you answer.');
+  $('#pmap-about').textContent = brief.message ? '“' + brief.message.trim().slice(0, 90) + (brief.message.trim().length > 90 ? '…”' : '”') : '';
+}
+function scrollLog() { const l = chatLog(); l.scrollTo({ top: l.scrollHeight, behavior: reduce ? 'auto' : 'smooth' }); }
+function say(html, who = 'bot') { const m = document.createElement('div'); m.className = 'msg is--' + who; m.innerHTML = html; chatLog().appendChild(m); scrollLog(); return m; }
+function botSay(html) {
+  return new Promise(res => {
+    if (reduce) { say(html); res(); return; }
+    const t = say('<i></i><i></i><i></i>', 'typing');
+    setTimeout(() => { t.remove(); say(html); res(); }, 700);
+  });
+}
+function paintSteps() {
+  $$('#chat-steps li').forEach((li, i) => { li.classList.toggle('is--on', i === qStep && !done); li.classList.toggle('is--done', done || i < qStep); });
+  $('[data-chat-reset]').hidden = qStep === 0 && !done;
+}
+function dockHTML(s) {
   if (s.opts) {
     const val = brief[s.id];
-    inner += `<div class="qz__opts${s.multi ? '' : ' is--list'}">${s.opts.map(([label, ic]) => {
+    return `<div class="chat__opts${s.multi ? '' : ' is--one'}">${s.opts.map(([label, ic]) => {
       const on = s.multi ? val.includes(label) : val === label;
-      return `<button type="button" class="qz__opt" data-v="${esc(label)}" aria-pressed="${on}">${ic ? `<svg viewBox="0 0 32 32" aria-hidden="true">${ICON[ic]}</svg>` : ''}<b>${esc(label)}</b><i class="qz__tick" aria-hidden="true"></i></button>`;
-    }).join('')}</div>`;
-    if (s.multi) inner += `<div class="qz__next"><p class="qz__time">${esc(timeHint())}</p><button class="btn" type="submit" data-theme="volt" data-size="l"${val.length ? '' : ' disabled'}><span class="btn__label">Continue</span></button></div>`;
-  } else if (s.type === 'text') {
-    inner += `<textarea class="qz__ta" name="message" rows="5" maxlength="2000" placeholder="We run a … and want to …">${esc(brief.message)}</textarea><div class="qz__prompts">${s.prompts.map(t => `<button type="button" class="chip" data-prompt="${esc(t)}">+ ${esc(t)}</button>`).join('')}</div>
-      <div class="qz__next"><span></span><button class="btn" type="submit" data-theme="volt" data-size="l"><span class="btn__label">${brief.message ? 'Continue' : 'Skip for now'}</span></button></div>`;
-  } else {
-    const f = (name, label, type, ac, ph) => `<label class="qz__f"><span>${label}</span><input name="${name}" type="${type}" autocomplete="${ac}" placeholder="${ph}" value="${esc(brief[name])}" maxlength="${name === 'phone' ? 30 : 120}"></label>`;
-    inner += `<div class="qz__fields">${f('name', 'Your name', 'text', 'name', 'Full name')}${f('company', 'Company', 'text', 'organization', 'Optional')}${f('phone', 'Phone / WhatsApp', 'tel', 'tel', '+91')}${f('email', 'Email', 'email', 'email', 'you@company.com')}</div>
-      <label class="qz__hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
-      <p class="qz__err" role="alert" id="qz-err"></p>
-      <div class="qz__next"><span class="qz__time">We reply on the number or email you give.</span><button class="btn" type="submit" data-theme="volt" data-size="l"><span class="btn__label">Send my brief</span>${arrow}</button></div>`;
+      return `<button type="button" class="chat__opt" data-v="${esc(label)}" aria-pressed="${on}">${ic ? `<svg viewBox="0 0 32 32" aria-hidden="true">${ICON[ic]}</svg>` : ''}<span>${esc(label)}</span></button>`;
+    }).join('')}</div>${s.multi ? `<div class="chat__send"><span class="chat__hint">${esc(timeHint())}</span><button class="btn" type="submit" data-theme="volt"${val.length ? '' : ' disabled'}><span class="btn__label">Continue</span>${arrow}</button></div>` : ''}`;
   }
-  const body = qBody();
-  body.innerHTML = `<div class="qz__step">${inner}</div>`;
-  initButtons(body);
-  paintDoc();
+  if (s.type === 'text') {
+    return `<textarea class="chat__ta" name="message" rows="3" maxlength="2000" aria-label="About your project" placeholder="We run a … and want to …">${esc(brief.message)}</textarea>
+      <div class="chat__prompts">${s.prompts.map(t => `<button type="button" class="chat__chip" data-prompt="${esc(t)}">+ ${esc(t)}</button>`).join('')}</div>
+      <div class="chat__send"><button type="button" class="chat__skip" data-skip>Skip</button><button class="btn" type="submit" data-theme="volt"><span class="btn__label">Send</span>${arrow}</button></div>`;
+  }
+  const f = (name, label, type, ac, ph) => `<label class="chat__f"><span>${label}</span><input name="${name}" type="${type}" autocomplete="${ac}" placeholder="${ph}" value="${esc(brief[name])}" maxlength="${name === 'phone' ? 30 : 120}"></label>`;
+  return `<div class="chat__fields">${f('name', 'Your name', 'text', 'name', 'Full name')}${f('company', 'Company', 'text', 'organization', 'Optional')}${f('phone', 'Phone / WhatsApp', 'tel', 'tel', '+91')}${f('email', 'Email', 'email', 'email', 'you@company.com')}</div>
+    <label class="chat__hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
+    <p class="chat__err" role="alert" id="chat-err"></p>
+    <div class="chat__send"><span class="chat__hint">A name, plus a phone number or email.</span><button class="btn" type="submit" data-theme="volt"><span class="btn__label">Send my brief</span>${arrow}</button></div>`;
 }
-function goStep(n) { qStep = clamp(n, 0, STEPS.length - 1); renderStep(); const f = $('.qz__opt, textarea, input', qBody()); if (f && !isMobile()) f.focus({ preventScroll: true }); }
+async function ask(i) {
+  const me = ++asking;
+  qStep = i; paintSteps();
+  dock().innerHTML = '';
+  const s = STEPS[i];
+  await botSay(`${esc(s.q)}${s.hint ? `<small>${esc(s.hint)}</small>` : ''}`);
+  if (me !== asking) return;
+  dock().innerHTML = dockHTML(s);
+  initButtons(dock());
+  scrollLog();
+  const f = $('.chat__opt, textarea, input', dock());
+  if (f && i > 0 && !isMobile() && chatLog().getBoundingClientRect().top < innerHeight) f.focus({ preventScroll: true });
+}
+const answer = text => say(esc(text), 'me');
 function waText() {
   return ['Hi One Stop Solutions,', brief.message || 'I have a project in mind.', brief.needs.length ? 'Building: ' + brief.needs.join(', ') : '', brief.stage ? 'Stage: ' + brief.stage : '', brief.when ? 'Launch: ' + brief.when : '', brief.name ? 'Name: ' + brief.name : ''].filter(Boolean).join('\n');
 }
 async function sendBrief(form) {
   const v = k => String(new FormData(form).get(k) || '').trim();
   ['name', 'company', 'phone', 'email'].forEach(k => { brief[k] = v(k); });
-  paintDoc();
-  const err = $('#qz-err');
+  paintMap();
+  const err = $('#chat-err');
   if (!brief.name) { err.textContent = 'Please add your name.'; return; }
   if (!brief.phone && !brief.email) { err.textContent = 'Please add a phone number or email, so we can reply.'; return; }
   if (brief.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(brief.email)) { err.textContent = 'That email doesn’t look right.'; return; }
   if (sending) return;
-  sending = true;
-  err.textContent = '';
-  form.classList.add('is--sending');
+  sending = true; err.textContent = ''; form.classList.add('is--sending');
   let ok = false, msg = '';
   try {
     const r = await fetch('/api/leads', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...brief, website: v('website') }) });
     ok = r.ok;
     if (!ok) msg = (await r.json().catch(() => ({}))).error || '';
   } catch (e) { msg = ''; }
-  sending = false;
-  form.classList.remove('is--sending');
+  sending = false; form.classList.remove('is--sending');
   if (!ok) {
     err.innerHTML = `${esc(msg || 'We couldn’t send your brief just now.')} <a href="https://wa.me/${WA}?text=${encodeURIComponent(waText())}" target="_blank" rel="noopener">Send it on WhatsApp instead →</a>`;
     return;
   }
-  $('#bdoc').classList.add('is--sent');
-  $('#qz-count').textContent = 'Sent';
-  $('#qz-bar').style.transform = 'scaleX(1)';
-  $('[data-qz-back]').hidden = true;
-  qBody().innerHTML = `<div class="qz__step qz__done"><span class="qz__check"><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#i-check"/></svg></span><h3 class="qz__q">Thanks, ${esc(brief.name.split(' ')[0])}. Your brief is with us.</h3>
-    <ol class="qz__then"><li><b>01</b>We read your brief.</li><li><b>02</b>We call you to talk it through.</li><li><b>03</b>You get a clear plan and timeline.</li></ol>
-    <div class="btn-row"><button class="btn" type="button" data-theme="white" data-shape="round" data-qz-again><span class="btn__label">Send another brief</span></button><a class="btn" data-theme="glass" data-shape="round" href="#work"><span class="btn__label">Look at our work</span></a></div></div>`;
-  initButtons(qBody());
+  done = true; paintSteps();
+  answer([brief.name, brief.phone || brief.email].join(' · '));
+  dock().innerHTML = '';
+  $('#pmap').classList.add('is--sent');
+  await botSay(`Thanks, ${esc(brief.name.split(' ')[0])}. Your brief is with us.<ol class="msg__then"><li><b>01</b>We read your brief.</li><li><b>02</b>We call you to talk it through.</li><li><b>03</b>You get a clear plan and timeline.</li></ol>`);
+  dock().innerHTML = `<div class="chat__send is--end"><button class="btn" type="button" data-theme="ink" data-shape="round" data-chat-reset-btn><span class="btn__label">Send another brief</span></button><a class="btn" data-theme="bone" data-shape="round" href="#work"><span class="btn__label">Look at our work</span></a></div>`;
+  initButtons(dock());
+  scrollLog();
+}
+function resetChat() {
+  Object.assign(brief, EMPTY, { needs: [] });
+  done = false; chatLog().innerHTML = DAY;
+  $('#pmap').classList.remove('is--sent');
+  paintMap(); ask(0);
 }
 function initBrief() {
-  const body = qBody();
-  renderStep();
-  body.addEventListener('click', e => {
-    const o = e.target.closest('.qz__opt');
+  const d = dock();
+  d.addEventListener('click', e => {
+    const o = e.target.closest('.chat__opt');
     if (o) {
       const s = STEPS[qStep], v = o.dataset.v;
       if (s.multi) {
         brief.needs = brief.needs.includes(v) ? brief.needs.filter(x => x !== v) : brief.needs.concat(v);
         o.setAttribute('aria-pressed', String(brief.needs.includes(v)));
-        $('.qz__next .btn', body).disabled = !brief.needs.length;
-        $('.qz__time', body).textContent = timeHint();
-        paintDoc();
+        $('.chat__send .btn', d).disabled = !brief.needs.length;
+        $('.chat__hint', d).textContent = timeHint();
+        paintMap();
       } else {
         brief[s.id] = v;
-        $$('.qz__opt', body).forEach(x => x.setAttribute('aria-pressed', String(x === o)));
-        paintDoc();
-        setTimeout(() => goStep(qStep + 1), reduce ? 0 : 260);
+        $$('.chat__opt', d).forEach(x => { x.setAttribute('aria-pressed', String(x === o)); x.disabled = true; });
+        paintMap(); answer(v);
+        ask(qStep + 1);
       }
       return;
     }
     const pr = e.target.closest('[data-prompt]');
-    if (pr) { const ta = $('textarea', body); ta.value = (ta.value ? ta.value.trim() + '\n' : '') + pr.dataset.prompt + ' '; ta.focus(); ta.dispatchEvent(new Event('input', { bubbles: true })); return; }
-    if (e.target.closest('[data-qz-again]')) { Object.assign(brief, { needs: [], stage: '', when: '', message: '', name: '', phone: '', email: '', company: '' }); $('#bdoc').classList.remove('is--sent'); goStep(0); }
+    if (pr) { const ta = $('textarea', d); ta.value = (ta.value.trim() ? ta.value.trim() + '\n' : '') + pr.dataset.prompt + ' '; ta.focus(); ta.dispatchEvent(new Event('input', { bubbles: true })); return; }
+    if (e.target.closest('[data-skip]')) { brief.message = ''; paintMap(); answer('Skip for now'); ask(4); return; }
+    if (e.target.closest('[data-chat-reset-btn]')) resetChat();
   });
-  body.addEventListener('input', e => {
-    const er = $('#qz-err', body); if (er && er.textContent) er.textContent = '';
-    if (e.target.name === 'message') { brief.message = e.target.value; const b = $('.qz__next .btn__label', body); if (b) b.textContent = brief.message.trim() ? 'Continue' : 'Skip for now'; paintDoc(); }
-    else if (['name', 'company'].includes(e.target.name)) { brief[e.target.name] = e.target.value; paintDoc(); }
+  d.addEventListener('input', e => {
+    const er = $('#chat-err', d); if (er && er.textContent) er.textContent = '';
+    if (e.target.name === 'message') { brief.message = e.target.value; paintMap(); }
+    else if (['name', 'company'].includes(e.target.name)) { brief[e.target.name] = e.target.value; paintMap(); }
   });
-  body.addEventListener('submit', e => {
+  d.addEventListener('submit', e => {
     e.preventDefault();
     const s = STEPS[qStep];
-    if (s.type === 'contact') sendBrief(body);
-    else if (!s.multi || brief.needs.length) goStep(qStep + 1);
+    if (s.multi) { if (!brief.needs.length) return; answer(brief.needs.join(', ')); ask(1); }
+    else if (s.type === 'text') { answer(brief.message.trim() || 'Skip for now'); ask(4); }
+    else if (s.type === 'contact') sendBrief(d);
   });
-  $('[data-qz-back]').addEventListener('click', () => goStep(qStep - 1));
-  /* Buttons elsewhere on the page that start a brief */
+  $('[data-chat-reset]').addEventListener('click', resetChat);
+  /* "Start this project" and "Build something like this" pre-fill the first answer */
   document.addEventListener('click', e => {
     const a = e.target.closest('[data-need]');
-    if (!a) return;
+    if (!a || done) return;
     if (!brief.needs.includes(a.dataset.need)) brief.needs = brief.needs.concat(a.dataset.need);
-    if (a.dataset.product) brief.message = brief.message || `I’d like something like your ${a.dataset.product}.`;
-    if (qStep === 0) renderStep(); else paintDoc();
+    if (a.dataset.product && !brief.message) brief.message = `I’d like something like your ${a.dataset.product}.`;
+    if (qStep === 0 && $('.chat__opts', d)) { d.innerHTML = dockHTML(STEPS[0]); initButtons(d); }
+    paintMap();
   });
-  const d = new Date();
-  $('#bdoc-date').textContent = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  $('#pmap-date').textContent = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  window.addEventListener('resize', () => requestAnimationFrame(paintMap));
+  paintMap(); paintSteps();
+  chatLog().innerHTML = DAY;
+  /* Start the chat when the section comes into view */
+  onVisible($('#contact'), (v, io) => { if (v) { io.disconnect(); ask(0); } }, { threshold: 0.15 });
 }
 
 /* ---------- Leads: footer button, code, list ---------- */
@@ -694,6 +808,7 @@ function initDepth() {
 
 /* ---------- Boot ---------- */
 safe('render', () => { renderReel(); renderCases(); renderServices(); renderProcess(); renderPeople(); renderAll(); });
+safe('diagrams', initDiagrams);
 safe('images', initImages);
 safe('buttons', () => initButtons());
 safe('lenis', initLenis);

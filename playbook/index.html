@@ -480,6 +480,9 @@ html:not(.pb-can-write) [data-write]{display:none!important}
 
 /* Tabs */
 .pb-tabs-wrap{position:sticky;top:calc(env(safe-area-inset-top,0px) + .75rem + var(--nav-h) + .4rem);z-index:60;padding-block:.5rem}
+.pb-tabs-wrap::before{content:"";position:absolute;left:calc(50% - 50vw);right:calc(50% - 50vw);bottom:0;top:calc(-1 * (env(safe-area-inset-top,0px) + .75rem + var(--nav-h) + .4rem));z-index:-1;background:var(--c-concrete);box-shadow:0 1px 0 var(--c-line),0 1rem 1.5rem -1.25rem rgba(28,33,30,.35);opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+.pb-tabs-wrap.is--stuck::before{opacity:1;visibility:visible}
+.pb-tabs-wrap.is--stuck .pb-tabs{background:var(--c-ash)}
 .pb-tabs{display:flex;gap:.25rem;padding:.3rem;border-radius:var(--r-m);background:rgba(236,234,226,.88);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:inset 0 0 0 1px var(--c-line);overflow-x:auto;scrollbar-width:none}
 .pb-tabs::-webkit-scrollbar{display:none}
 .pb-tab{flex:1 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;height:2.75rem;padding-inline:1rem;border-radius:var(--r-s);font-size:.9375rem;font-weight:500;color:var(--c-graphite);white-space:nowrap;transition:background-color .35s var(--ease-out),color .35s}
@@ -2060,6 +2063,16 @@ safe('lenis', initLenis);
 safe('nav', initNav);
 safe('events', initGlobalEvents);
 safe('playbook', initPlaybook);
+/* The tab bar gets a solid backing while it is stuck, so cards never show between it and the menu */
+safe('sticky-tabs', () => {
+  const wrap = $('.pb-tabs-wrap');
+  if (!wrap) return;
+  let ticking = false;
+  const check = () => { ticking = false; const top = parseFloat(getComputedStyle(wrap).top) || 0; wrap.classList.toggle('is--stuck', wrap.getBoundingClientRect().top <= top + 1); };
+  window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(check); } }, { passive: true });
+  window.addEventListener('resize', check);
+  check();
+});
 connect().catch(err => { console.error('[connect]', err); setMode('offline'); });
 })();
 </script>

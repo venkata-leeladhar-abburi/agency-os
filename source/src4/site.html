@@ -258,33 +258,41 @@ __SPRITE__
 
 <!-- ============ CONTACT ============ -->
 <section class="section is--dark contact" id="contact">
-  <div class="container contact__grid">
-    <div class="contact__side">
-      <div class="tag-pair"><span class="tag" data-theme="glass">Let’s connect</span><span class="avail"><i></i>Available for work</span></div>
-      <h2 class="h-l">Have a project in mind?</h2>
-      <p class="p-l">Answer five quick questions. Your brief builds itself as you go.</p>
-      <div class="bdoc" id="bdoc" aria-live="polite">
-        <div class="bdoc__head"><span class="bdoc__logo"><svg viewBox="0 0 80 80" aria-hidden="true"><use href="#i-glyph"/></svg></span><b>Project brief</b><em id="bdoc-date"></em></div>
-        <dl>
-          <div><dt>Building</dt><dd data-b="needs">—</dd></div>
-          <div><dt>Stage</dt><dd data-b="stage">—</dd></div>
-          <div><dt>Launch</dt><dd data-b="when">—</dd></div>
-          <div><dt>About</dt><dd data-b="message">—</dd></div>
-          <div><dt>From</dt><dd data-b="name">—</dd></div>
-        </dl>
-        <p class="bdoc__time" id="bdoc-time"></p>
-        <span class="bdoc__stamp" aria-hidden="true">Sent</span>
+  <div class="container">
+    <div class="contact__head">
+      <div>
+        <div class="tag-pair"><span class="tag" data-theme="glass">Let’s connect</span><span class="avail"><i></i>Available for work</span></div>
+        <h2 class="h-l">Have a project in mind?</h2>
       </div>
-      <ul class="contact-list" aria-label="Contact details">
-        <li><span class="eyebrow">Phone · WhatsApp</span><span class="contact-list__value">+91 90149 52056</span><button class="copy" type="button" data-copy="+91 9014952056" aria-label="Copy phone number"><svg viewBox="0 0 16 16"><use href="#i-copy"/></svg><span>Copy</span></button></li>
-        <li><span class="eyebrow">Email</span><span class="contact-list__value">workwithonestop@gmail.com</span><button class="copy" type="button" data-copy="workwithonestop@gmail.com" aria-label="Copy email"><svg viewBox="0 0 16 16"><use href="#i-copy"/></svg><span>Copy</span></button></li>
-      </ul>
+      <p class="p-l">Chat with us for a minute. Your project map draws itself as you answer.</p>
     </div>
-    <div class="qz" id="qz">
-      <div class="qz__top"><button class="qz__back" type="button" data-qz-back hidden>← Back</button><span class="eyebrow tnum" id="qz-count">01 / 05</span></div>
-      <div class="qz__bar"><i id="qz-bar"></i></div>
-      <form class="qz__body" id="qz-body" novalidate></form>
+    <div class="contact__grid">
+      <div class="pmap" id="pmap" aria-hidden="true">
+        <div class="pmap__head"><span class="eyebrow">Your project map</span><em id="pmap-date"></em></div>
+        <div class="pmap__orbit">
+          <svg class="pmap__lines" viewBox="0 0 100 100" preserveAspectRatio="none"><ellipse cx="50" cy="50" rx="36" ry="33"/><g id="pmap-lines"></g></svg>
+          <span class="pmap__core"><svg viewBox="0 0 80 80"><use href="#i-glyph"/></svg><b id="pmap-name">Your project</b></span>
+          <div id="pmap-nodes"></div>
+        </div>
+        <p class="pmap__about" id="pmap-about"></p>
+        <div class="pmap__path"><ol id="pmap-path"><li><i></i><span>Connect</span></li><li><i></i><span>Discover</span></li><li><i></i><span>Define</span></li><li><i></i><span>Design</span></li><li><i></i><span>Build</span></li><li><i></i><span>Launch</span></li><li><i></i><span>Grow</span></li></ol><span class="pmap__flag" id="pmap-flag">Launch</span></div>
+        <div class="pmap__foot"><span class="pmap__est" id="pmap-est"></span><span class="pmap__stamp">Sent ✓</span></div>
+      </div>
+      <div class="chat" id="chat">
+        <div class="chat__top">
+          <span class="chat__av"><svg viewBox="0 0 80 80" aria-hidden="true"><use href="#i-glyph"/></svg></span>
+          <div class="chat__who"><b>One Stop</b><small><i></i>Takes about a minute</small></div>
+          <button class="chat__reset" type="button" data-chat-reset hidden>Start over</button>
+        </div>
+        <ol class="chat__steps" id="chat-steps" aria-label="Steps"><li><i></i>What</li><li><i></i>Stage</li><li><i></i>Launch</li><li><i></i>About</li><li><i></i>You</li></ol>
+        <div class="chat__log" id="chat-log" role="log" aria-live="polite" data-lenis-prevent></div>
+        <form class="chat__dock" id="chat-dock" novalidate></form>
+      </div>
     </div>
+    <ul class="contact-list contact__list" aria-label="Contact details">
+      <li><span class="eyebrow">Phone · WhatsApp</span><span class="contact-list__value">+91 90149 52056</span><button class="copy" type="button" data-copy="+91 9014952056" aria-label="Copy phone number"><svg viewBox="0 0 16 16"><use href="#i-copy"/></svg><span>Copy</span></button></li>
+      <li><span class="eyebrow">Email</span><span class="contact-list__value">workwithonestop@gmail.com</span><button class="copy" type="button" data-copy="workwithonestop@gmail.com" aria-label="Copy email"><svg viewBox="0 0 16 16"><use href="#i-copy"/></svg><span>Copy</span></button></li>
+    </ul>
   </div>
 </section>
 

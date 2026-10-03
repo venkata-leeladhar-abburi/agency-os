@@ -694,16 +694,6 @@ a.contact-list__value{user-select:auto;-webkit-user-select:auto}
 .prods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem;margin-top:3.5rem}
 .prod{display:flex;flex-direction:column;border-radius:var(--r-l);background:#171717;box-shadow:0 0 0 1px rgba(242,242,242,.07);overflow:hidden;transition:transform .6s var(--ease-out)}
 .prod:hover{transform:translateY(-.35rem)}
-.prod__img{position:relative;display:grid;place-items:center;aspect-ratio:16/10;margin:.5rem;border-radius:var(--r-m);overflow:hidden;background:#222}
-.prod__img > img{width:100%;height:100%;object-fit:cover;object-position:top left}
-.prod__img .tag{position:absolute;right:.75rem;top:.75rem}
-.prod__logo{position:absolute;left:.75rem;bottom:.75rem;display:flex;align-items:center;gap:.5rem;height:2.75rem;padding:0 1rem 0 .4rem;border-radius:var(--r-pill);background:rgba(26,8,14,.82);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#f4e3c1;font-weight:500;font-size:1.05rem;letter-spacing:-.02em}
-.prod__logo .crest{width:2.1rem;height:2.1rem;object-fit:contain}
-.prod__img.is--mark{background:radial-gradient(80% 80% at 50% 120%,rgba(255,90,31,.35),transparent),#141414}
-.prod__mark{display:flex;align-items:center;gap:.75rem;font-size:2.6rem;letter-spacing:-.05em;font-weight:500;color:var(--c-volt)}
-.prod__mark svg{width:2.4rem;height:2.4rem}
-.prod__mark .sc{display:grid;place-items:center;width:2.6rem;height:2.6rem;border-radius:.65rem;background:#f54c02;color:#fff;font-style:normal;font-size:1.55rem;letter-spacing:0}
-.prod:nth-child(3) .prod__mark{color:var(--c-concrete)}
 .prod__body{display:grid;gap:.45rem;padding:.75rem 1.25rem 1.4rem;flex:1;align-content:start}
 .prod__body .eyebrow{color:var(--c-steel)}
 .prod__body .p-s{color:var(--c-smoke)}
@@ -823,70 +813,6 @@ a.contact-list__value{user-select:auto;-webkit-user-select:auto}
 
 /* ===== Contact: the brief ===== */
 .contact{border-radius:var(--r-xl) var(--r-xl) 0 0}
-.contact__grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.2fr);gap:2.5rem 4rem;align-items:start}
-.contact__side{display:grid;gap:1.25rem;align-content:start;position:sticky;top:calc(var(--nav-h) + 2rem)}
-.contact__side .p-l{color:var(--c-smoke)}
-.bdoc{position:relative;display:grid;gap:.9rem;padding:1.4rem;border-radius:var(--r-l);background:var(--c-concrete);color:var(--c-ink);transform:rotate(-1.5deg);box-shadow:0 2rem 3rem -1.5rem rgba(0,0,0,.6);transition:transform .7s var(--ease-out);overflow:hidden}
-.bdoc:hover{transform:rotate(0)}
-.bdoc__head{display:flex;align-items:center;gap:.6rem;padding-bottom:.8rem;border-bottom:1px dashed var(--c-line-strong)}
-.bdoc__logo svg{width:1.4rem;height:1.4rem;color:var(--c-volt)}
-.bdoc__head b{font-weight:500;margin-right:auto}
-.bdoc__head em{font-style:normal;font-family:var(--font-mono);font-size:.75rem;color:var(--c-steel)}
-.bdoc dl{display:grid;gap:.55rem}
-.bdoc dl div{display:grid;grid-template-columns:5.5rem minmax(0,1fr);gap:.75rem;align-items:baseline}
-.bdoc dt{font-family:var(--font-mono);font-size:.6875rem;text-transform:uppercase;letter-spacing:.04em;color:var(--c-steel)}
-.bdoc dd{margin:0;color:var(--c-smoke);font-size:.9375rem;line-height:1.35;white-space:pre-line;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.bdoc dd.is--set{color:var(--c-ink);font-weight:500;animation:bd-in .6s var(--ease-out)}
-@keyframes bd-in{from{background:rgba(255,90,31,.3)}}
-.bdoc__time{font-size:.8125rem;color:var(--c-violet);font-weight:500;min-height:1em}
-.bdoc__stamp{position:absolute;right:1rem;bottom:1rem;padding:.3rem .8rem;border:2px solid #16a34a;border-radius:.5rem;color:#16a34a;font-weight:600;letter-spacing:.1em;text-transform:uppercase;transform:rotate(-12deg) scale(1.6);opacity:0;transition:opacity .3s,transform .5s var(--ease-back)}
-.bdoc.is--sent .bdoc__stamp{opacity:1;transform:rotate(-12deg) scale(1)}
-.qz{display:grid;gap:1rem;padding:1.75rem;border-radius:var(--r-xl);background:var(--c-concrete);color:var(--c-ink);min-height:34rem;align-content:start}
-.qz__top{display:flex;justify-content:space-between;align-items:center;min-height:2rem}
-.qz__back{font-size:.875rem;font-weight:500;color:var(--c-graphite);padding:.3rem .6rem;border-radius:var(--r-pill)}
-.qz__back:hover{background:var(--c-ash)}
-.qz__top .eyebrow{margin-left:auto;color:var(--c-steel)}
-.qz__bar{height:.3rem;border-radius:1rem;background:var(--c-bone);overflow:hidden}
-.qz__bar i{display:block;height:100%;background:var(--c-volt);transform-origin:left;transform:scaleX(.2);transition:transform .7s var(--ease-out)}
-.qz__step{display:grid;gap:1rem;animation:qz-in .55s var(--ease-out)}
-@keyframes qz-in{from{opacity:0;transform:translateX(1.5rem)}}
-.qz__q{font-size:2.1rem;line-height:1.05;letter-spacing:-.04em;font-weight:500;margin-top:.5rem}
-.qz__hint{color:var(--c-steel);margin-top:-.4rem}
-.qz__opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem}
-.qz__opt{position:relative;display:flex;align-items:center;gap:.8rem;min-height:4.25rem;padding:.9rem 2.75rem .9rem 1rem;border-radius:var(--r-l);background:var(--c-white);box-shadow:inset 0 0 0 1px var(--c-line);text-align:left;transition:box-shadow .3s,background-color .3s,color .3s,transform .4s var(--ease-out)}
-.qz__opt:hover{box-shadow:inset 0 0 0 1.5px var(--c-ink);transform:translateY(-2px)}
-.qz__opt svg{width:1.6rem;height:1.6rem;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.qz__opt b{font-weight:500;line-height:1.2}
-.qz__tick{position:absolute;right:1rem;top:50%;width:1.2rem;height:1.2rem;margin-top:-.6rem;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--c-cloud);transition:background-color .3s,box-shadow .3s}
-.qz__opt[aria-pressed="true"]{background:var(--c-ink);color:var(--c-concrete);box-shadow:none}
-.qz__opt[aria-pressed="true"] .qz__tick{background:var(--c-volt) var(--check) center/62% no-repeat;box-shadow:none}
-.qz__opts.is--list{grid-template-columns:minmax(0,1fr)}
-.qz__opts.is--list .qz__opt{min-height:3.6rem}
-.qz__next{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.75rem;margin-top:.5rem}
-.qz__time{font-size:.875rem;color:var(--c-violet);font-weight:500}
-.qz__ta{width:100%;padding:1rem;border-radius:var(--r-l);border:1px solid var(--c-line-strong);background:var(--c-white);font:inherit;font-size:1.0625rem;resize:vertical;color:var(--c-ink)}
-.qz__ta:focus,.qz__f input:focus{outline:none;border-color:var(--c-ink);box-shadow:0 0 0 3px rgba(255,90,31,.25)}
-.qz__prompts{display:flex;flex-wrap:wrap;gap:.35rem}
-.qz__prompts .chip{justify-content:flex-start}
-.qz__fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem}
-.qz__f{display:grid;gap:.35rem;font-size:.8125rem;font-weight:500;color:var(--c-graphite)}
-.qz__f input{width:100%;padding:.85rem .95rem;border-radius:var(--r-m);border:1px solid var(--c-line-strong);background:var(--c-white);font:inherit;font-size:1rem;color:var(--c-ink)}
-.qz__hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-.qz__err{min-height:1.2em;font-size:.875rem;color:#b42318;font-weight:500}
-.qz__err a{text-decoration:underline}
-.qz__body.is--sending .btn{opacity:.6;pointer-events:none}
-.qz .btn[disabled]{opacity:.45;pointer-events:none}
-.qz [data-theme="white"]{--btn-bg:var(--c-ink);--btn-fg:var(--c-concrete)}
-.qz [data-theme="glass"]{--btn-bg:var(--c-ash);--btn-fg:var(--c-ink)}
-.qz__done{justify-items:start}
-.qz__check{display:grid;place-items:center;width:3.5rem;height:3.5rem;border-radius:50%;background:var(--c-volt);animation:pop .6s var(--ease-back)}
-.qz__check svg{width:1.6rem;height:1.6rem;color:var(--c-ink)}
-@keyframes pop{from{transform:scale(0)}}
-.qz__then{display:grid;gap:.4rem;width:100%}
-.qz__then li{display:flex;gap:.75rem;align-items:center;padding:.8rem 1rem;border-radius:var(--r-m);background:var(--c-white)}
-.qz__then b{font-family:var(--font-mono);font-size:.75rem;color:var(--c-violet)}
-@media (max-width:991px){.contact__grid{grid-template-columns:minmax(0,1fr)}.contact__side{position:static}}
-@media (max-width:767px){.contact{border-radius:var(--r-l) var(--r-l) 0 0}.qz{padding:1.1rem;min-height:0}.qz__q{font-size:1.6rem}.qz__opts,.qz__fields{grid-template-columns:minmax(0,1fr)}.qz__opt{min-height:3.5rem}.bdoc{transform:none}}
 
 /* ===== Footer ===== */
 .footer{background:var(--c-obsidian);padding-block:0 .75rem}
@@ -1037,81 +963,6 @@ a.contact-list__value{user-select:auto;-webkit-user-select:auto}
 .pills.is--dark li{background:var(--c-ink);color:var(--c-concrete);box-shadow:none}
 @media (max-width:767px){.case__what{font-size:1.25rem}}
 
-/* Built mockups of our decks, process and playbook */
-.mk{position:relative;width:100%;height:100%;font-size:2.6cqi;line-height:1.2;overflow:hidden}
-.mk__top{display:flex;justify-content:space-between;align-items:center;gap:1em}
-.mk__logo{display:inline-flex;align-items:center;gap:.4em;font-weight:500}
-.mk__logo svg{width:1.1em;height:1.1em;color:var(--c-volt)}
-.mk__top em{font-style:normal;font-size:.8em;opacity:.6}
-.mk-proc{display:grid;grid-template-rows:auto 1fr auto;gap:.9em;padding:1.2em;background:var(--c-concrete);color:var(--c-ink)}
-.mk-proc__dd{position:relative}
-.mk-proc__dd svg{position:absolute;inset:0;width:100%;height:100%}
-.mk-proc__dd polygon{fill:rgba(255,90,31,.14);stroke:var(--c-ink);stroke-width:1.2;vector-effect:non-scaling-stroke}
-.mk-proc__dd polygon + polygon{fill:rgba(17,17,17,.06)}
-.mk-proc__dd span{position:absolute;top:50%;width:34%;translate:-50% -50%;font-size:.78em;font-weight:500;text-align:center;line-height:1.15}
-.mk-proc__dd span:nth-of-type(1){left:25%}.mk-proc__dd span:nth-of-type(2){left:75%}
-.mk-proc__rail{position:relative;display:grid;grid-template-columns:repeat(7,1fr);font-size:.6em;text-align:center}
-.mk-proc__rail::before{content:"";position:absolute;left:7%;right:7%;top:.55em;height:2px;background:var(--c-cloud)}
-.mk-proc__rail li{position:relative;display:grid;justify-items:center;gap:.45em;color:var(--c-graphite)}
-.mk-proc__rail i{width:1.15em;height:1.15em;border-radius:50%;background:var(--c-concrete);box-shadow:inset 0 0 0 2px var(--c-ink);animation:mk-step 7s calc(var(--i) * 1s) infinite}
-@keyframes mk-step{0%,4%{background:var(--c-concrete);transform:scale(1)}8%,14%{background:var(--c-volt);transform:scale(1.4)}20%,100%{background:var(--c-ink);transform:scale(1)}}
-.mk-pb{display:grid;grid-template-columns:30% 1fr;background:#fff;color:var(--c-ink)}
-.mk-pb aside{display:grid;align-content:start;gap:.4em;padding:1em .9em;background:#151515;color:var(--c-smoke);font-size:.78em}
-.mk-pb aside .mk__logo{color:var(--c-concrete);margin-bottom:.6em}
-.mk-pb aside span.is-on{color:var(--c-ink);background:var(--c-volt);border-radius:.4em;padding:.15em .45em;margin-inline:-.45em}
-.mk-pb__main{display:grid;align-content:start;gap:.6em;padding:1em}
-.mk-pb__search{display:flex;justify-content:space-between;padding:.45em .65em;border-radius:.5em;background:var(--c-ash);font-size:.72em;color:var(--c-steel)}
-.mk-pb__search kbd{font-family:var(--font-mono);font-size:.9em}
-.mk-pb__h{font-size:.95em;font-weight:500}
-.mk-pb ul{display:grid;gap:.45em;font-size:.76em}
-.mk-pb li{display:flex;align-items:center;gap:.55em}
-.mk-pb li i{width:1.15em;height:1.15em;flex:none;border-radius:.3em;box-shadow:inset 0 0 0 1.5px var(--c-ink);animation:mk-tick 6s calc(var(--i) * .7s) infinite}
-@keyframes mk-tick{0%,8%{background-color:transparent}14%,86%{background:var(--c-volt) var(--check) center/72% no-repeat;box-shadow:inset 0 0 0 1.5px var(--c-volt)}100%{background-color:transparent}}
-.mk-pb__files{display:flex;flex-wrap:wrap;gap:.3em;font-family:var(--font-mono);font-size:.6em}
-.mk-pb__files span{padding:.3em .55em;border-radius:.3em;background:var(--c-ash)}
-.mk-pt{display:grid;grid-template-rows:auto auto auto 1fr;gap:.85em;padding:1.15em;background:radial-gradient(60% 70% at 90% 100%,rgba(255,90,31,.35),transparent 70%),#0e0e0e;color:var(--c-concrete)}
-.mk-pt__cta{background:var(--c-volt);color:var(--c-ink);opacity:1!important;padding:.3em .7em;border-radius:.4em}
-.mk-pt__h{font-size:2.4em;line-height:.95;letter-spacing:-.05em;font-weight:500}
-.mk-pt__pills{display:flex;flex-wrap:wrap;gap:.3em;font-size:.72em}
-.mk-pt__pills span{padding:.3em .65em;border-radius:99em;background:rgba(242,242,242,.1);animation:mk-pill 5s calc(var(--i) * .6s) infinite}
-@keyframes mk-pill{0%,8%{background:rgba(242,242,242,.1);color:var(--c-concrete)}14%,30%{background:var(--c-volt);color:var(--c-ink)}38%,100%{background:rgba(242,242,242,.1);color:var(--c-concrete)}}
-.mk-pt__cards{display:grid;grid-template-columns:repeat(4,1fr);gap:.45em;align-self:end}
-.mk-pt__cards i{aspect-ratio:3/3.6;border-radius:.5em;background:linear-gradient(160deg,#2a2a2a,#1a1a1a);box-shadow:inset 0 0 0 1px rgba(242,242,242,.08);transition:transform .6s var(--ease-out)}
-.mk-pt__cards i:nth-child(2){background:linear-gradient(160deg,var(--c-volt),#c2410c);transform:translateY(-.4em) rotate(-3deg)}
-.res:hover .mk-pt__cards i:nth-child(odd),.deck:hover .mk-pt__cards i:nth-child(odd){transform:translateY(-.3em)}
-.mk-aos{display:grid;grid-template-columns:12% 1fr;background:#f4f4f4;color:var(--c-ink)}
-.mk-aos aside{display:grid;align-content:start;justify-items:center;gap:.75em;padding:1em 0;background:#151515}
-.mk-aos__g svg{width:1.5em;height:1.5em;color:var(--c-volt)}
-.mk-aos aside i{width:1.2em;height:1.2em;border-radius:.3em;background:rgba(242,242,242,.16)}
-.mk-aos aside i.is-on{background:var(--c-volt)}
-.mk-aos__main{display:grid;grid-template-rows:auto auto 1fr;gap:.7em;padding:1em}
-.mk-aos__kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:.45em}
-.mk-aos__kpis span{display:grid;gap:.15em;padding:.55em .65em;border-radius:.5em;background:#fff;box-shadow:inset 0 0 0 1px var(--c-line)}
-.mk-aos__kpis small{font-size:.62em;color:var(--c-steel)}
-.mk-aos__kpis b{font-size:1.45em;font-weight:500;letter-spacing:-.04em}
-.mk-aos__kpis .is-hot{background:var(--c-volt);box-shadow:none}
-.mk-aos__kpis .is-hot small{color:var(--c-ink)}
-.mk-aos__pipe{display:grid;grid-template-columns:repeat(5,1fr);gap:.55em;align-items:end;padding:.65em;border-radius:.5em;background:#fff;box-shadow:inset 0 0 0 1px var(--c-line)}
-.mk-aos__pipe span{display:grid;grid-template-rows:1fr auto;gap:.35em;justify-items:center;height:100%;font-size:.58em;color:var(--c-steel)}
-.mk-aos__pipe i{align-self:end;width:100%;height:var(--h);min-height:1em;border-radius:.4em .4em .15em .15em;background:var(--c-ink);transform-origin:bottom;animation:mk-bar 3.5s calc(var(--i) * .2s) infinite alternate ease-in-out}
-.mk-aos__pipe span:nth-child(2) i{background:var(--c-volt)}
-@keyframes mk-bar{from{transform:scaleY(.6)}to{transform:scaleY(1)}}
-.mk-erp{display:grid;grid-template-rows:auto 1fr auto;background:radial-gradient(70% 90% at 85% 30%,rgba(200,155,71,.3),transparent 70%),#2a0b15;color:#f7f1e7}
-.mk-erp__nav{display:flex;align-items:center;gap:.7em;padding:.55em .9em;background:#4a0f22;font-size:.62em}
-.mk-erp__nav .crest{width:2.3em;height:2.3em;object-fit:contain}
-.mk-erp__nav b{font-family:Georgia,'Times New Roman',serif;letter-spacing:.05em;margin-right:auto;font-size:1.05em;font-weight:600}
-.mk-erp__nav em{font-style:normal;opacity:.7}
-.mk-erp__nav em.is-on{opacity:1;box-shadow:inset 0 -2px #e2be74}
-.mk-erp__hero{display:grid;align-content:center;gap:.45em;padding:0 1.15em}
-.mk-erp__hero small{font-size:.55em;letter-spacing:.25em;color:#e2be74}
-.mk-erp__hero b{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:1.95em;line-height:1.05}
-.mk-erp__hero i{color:#e2be74}
-.mk-erp__stats{display:grid;grid-template-columns:repeat(3,1fr);margin:0 .9em .9em;border-radius:.5em;overflow:hidden;background:#5a1428}
-.mk-erp__stats span{display:grid;gap:.1em;padding:.5em .65em;border-right:1px solid rgba(247,241,231,.12)}
-.mk-erp__stats small{font-size:.5em;letter-spacing:.12em;text-transform:uppercase;opacity:.75}
-.mk-erp__stats b{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:1.45em}
-.mk-erp__stats .is-gold{background:#c89b47;color:#2a0b15}
-
 /* Leads: code lock and list */
 .lead-m__panel{width:min(58rem,calc(100% - 2 * var(--gutter)));margin:0}
 .lk{display:grid;justify-items:center;gap:1rem;text-align:center;padding:2rem 0 1rem}
@@ -1149,22 +1000,6 @@ a.contact-list__value{user-select:auto;-webkit-user-select:auto}
 .ldc__del:hover{color:#b42318}
 @media (max-width:767px){.ld__head{padding-right:0;padding-top:1rem}.lk__boxes{gap:.35rem}.lk__boxes i{width:2.6rem;height:3.2rem}}
 
-/* Each deck preview wears its own deck's colours */
-.mk-aos__g svg{color:#a1ff62}
-.mk-aos aside i.is-on{background:#a1ff62}
-.mk-aos__kpis .is-hot{background:#6840ff;color:#fff}
-.mk-aos__kpis .is-hot small{color:rgba(255,255,255,.8)}
-.mk-aos__pipe span:nth-child(2) i{background:#6840ff}
-.mk-aos__pipe span:nth-child(4) i{background:#a1ff62}
-.mk-pb{background:#fbf8f1;color:#1c211e}
-.mk-pb aside{background:#1e4d3b;color:#b9d3c4}
-.mk-pb aside .mk__logo svg{color:#ffd84a}
-.mk-pb aside span.is-on{background:#ffd84a;color:#1c211e}
-.mk-pb__search,.mk-pb__files span{background:#efe9dc}
-.mk-pb__h,.mk-pb__files span{color:#1e4d3b}
-.mk-pb li i{box-shadow:inset 0 0 0 1.5px #1c211e;animation-name:mk-tick-pb}
-@keyframes mk-tick-pb{0%,8%{background-color:transparent}14%,86%{background:#ffd84a var(--check) center/72% no-repeat;box-shadow:inset 0 0 0 1.5px #ffd84a}100%{background-color:transparent}}
-
 /* Hero reel: fixed card width, two-line captions, phones in a frame */
 .reel-card{grid-template-columns:minmax(0,1fr)}
 .reel-card__cap{display:grid;gap:.15rem;min-width:0}
@@ -1174,30 +1009,267 @@ a.contact-list__value{user-select:auto;-webkit-user-select:auto}
 .thumb-phone img{width:36%;height:auto;min-height:0;border-radius:.9rem .9rem 0 0;box-shadow:0 0 0 .3rem #050505;object-fit:initial}
 .ap__img .thumb-phone{background:radial-gradient(80% 70% at 50% 110%,rgba(255,90,31,.3),transparent 70%),#e9e1d3}
 
-/* Products: built mockups, tilt toward the pointer */
+/* Products: diagrams, tilt toward the pointer */
 .prod{transform:perspective(1200px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--ty,0));transition:transform .5s var(--ease-out),box-shadow .4s}
 .prod:hover{transform:perspective(1200px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(-.35rem);box-shadow:0 0 0 1px rgba(255,90,31,.6),0 2rem 3rem -1.5rem rgba(255,90,31,.3)}
 .prod__view{position:relative;display:block;aspect-ratio:16/10;margin:.5rem;border-radius:var(--r-m);overflow:hidden;container-type:inline-size}
 .prod__view > .tag{position:absolute;right:.6rem;top:.6rem;z-index:2}
 .prod__acts .btn[data-theme="volt"]{flex:1;justify-content:space-between}
-.mk-sc{display:grid;grid-template-columns:28% 1fr;background:#121212;color:#f2f2f2}
-.mk-sc aside{display:grid;align-content:start;gap:.5em;padding:1em .85em;background:#1a1a1a;font-size:.72em;color:#9a9a9a}
-.mk-sc__logo{display:flex;align-items:center;gap:.45em;margin-bottom:.5em;color:#fff;font-weight:500;font-size:1.1em}
-.mk-sc__logo i{display:grid;place-items:center;width:1.5em;height:1.5em;border-radius:.35em;background:#f54c02;color:#fff;font-style:normal;font-size:.9em}
-.mk-sc aside span.is-on{color:#fff;background:#f54c02;border-radius:.4em;padding:.15em .45em;margin-inline:-.45em}
-.mk-sc__main{display:grid;grid-template-rows:auto auto 1fr;gap:.7em;padding:1em}
-.mk-sc__kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:.45em}
-.mk-sc__kpis span{display:grid;gap:.15em;padding:.55em .65em;border-radius:.5em;background:#1e1e1e;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
-.mk-sc__kpis small{font-size:.62em;color:#9a9a9a}
-.mk-sc__kpis b{font-size:1.4em;font-weight:500;letter-spacing:-.04em}
-.mk-sc__kpis .is-hot{background:#f54c02;box-shadow:none}
-.mk-sc__kpis .is-hot small{color:rgba(255,255,255,.85)}
-.mk-sc__rows{display:grid;gap:.4em;align-content:start;font-size:.72em}
-.mk-sc__rows span{display:flex;align-items:center;gap:.6em;padding:.55em .7em;border-radius:.5em;background:#1e1e1e}
-.mk-sc__rows i{width:.6em;height:.6em;border-radius:50%;background:#f54c02;animation:mk-blink 1.6s calc(var(--i) * .3s) infinite}
-.mk-sc__rows em{margin-left:auto;padding:.15em .55em;border-radius:99em;background:rgba(255,255,255,.08);font-style:normal;font-size:.85em}
-.mk-sc__rows em.is-live{background:#f54c02;color:#fff}
-@keyframes mk-blink{50%{opacity:.25}}
+
+/* ===== Diagrams: our products, process, playbook and pitch ===== */
+.dg{position:relative;display:block;width:100%;height:100%;font-size:2.7cqi;line-height:1.2;overflow:hidden;isolation:isolate}
+.dg *,.dg *::before,.dg *::after{animation-play-state:paused}
+.dg.is--live *,.dg.is--live *::before,.dg.is--live *::after{animation-play-state:running}
+@keyframes dg-rise{from{opacity:0;transform:translateY(.9em)}}
+@keyframes dg-pop{from{opacity:0;transform:scale(.4)}}
+
+/* Silk ERP: one gold thread from yarn to sale */
+.dg-silk{display:grid;grid-template-rows:auto auto 1fr;gap:.8em;padding:1.3em 1.5em 1.2em;color:#f7f1e7;background:radial-gradient(60% 80% at 100% 0%,rgba(226,190,116,.22),transparent 70%),repeating-linear-gradient(90deg,rgba(226,190,116,.05) 0 1px,transparent 1px 7px),repeating-linear-gradient(0deg,rgba(226,190,116,.04) 0 1px,transparent 1px 7px),#2a0b15}
+.dg-silk__top{display:flex;align-items:center;gap:.6em;font-size:.8em;letter-spacing:.14em;text-transform:uppercase;color:#e2be74}
+.dg-silk__top .crest{width:2.9em;height:2.9em;object-fit:contain}
+.dg-silk__h{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:3.2em;line-height:1;letter-spacing:-.01em}
+.dg-silk__h i{color:#e2be74}
+.dg-silk__thread{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-self:end}
+.dg-silk__line{position:absolute;left:12.5%;right:12.5%;top:1.75em;height:2px;margin-top:-1px;background:linear-gradient(90deg,#c89b47,#f3dca0 50%,#c89b47);transform-origin:left}
+.dg-silk__line::after{content:"";position:absolute;top:50%;left:0;width:2.6em;height:.7em;margin:-.35em 0 0 -1.3em;border-radius:1em;background:radial-gradient(closest-side,#fff7df,rgba(255,247,223,0));opacity:0}
+.dg-silk__node{position:relative;display:grid;justify-items:center;gap:.55em;text-align:center}
+.dg-silk__node i{display:grid;place-items:center;width:3.5em;height:3.5em;border-radius:50%;background:#2a0b15;box-shadow:inset 0 0 0 1.5px #c89b47;color:#e2be74}
+.dg-silk__node svg{width:1.7em;height:1.7em;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.dg-silk__node em{font-style:normal;font-size:.95em;font-weight:500}
+.dg-silk:not(.is--in) .dg-silk__node{opacity:0}
+.dg-silk:not(.is--in) .dg-silk__line{transform:scaleX(0)}
+.dg-silk.is--in .dg-silk__line{animation:silk-draw 1.1s var(--ease-out) .15s backwards}
+.dg-silk.is--in .dg-silk__line::after{animation:silk-shuttle 4s linear 1.3s infinite}
+.dg-silk.is--in .dg-silk__node{animation:dg-rise .7s var(--ease-out) calc(.2s + var(--i) * .12s) backwards}
+.dg-silk.is--in .dg-silk__node i{animation:silk-node 4s calc(1.3s + var(--i) * 1s) infinite}
+@keyframes silk-draw{from{transform:scaleX(0)}}
+@keyframes silk-shuttle{0%{left:0;opacity:1}75%{left:100%;opacity:1}76%,100%{left:100%;opacity:0}}
+@keyframes silk-node{0%{background:#2a0b15;color:#e2be74;transform:none}6%,18%{background:#c89b47;color:#2a0b15;transform:scale(1.1)}30%,100%{background:#2a0b15;color:#e2be74;transform:none}}
+
+/* Agency OS: three layers on one playbook, a lead dropping through them */
+.dg-aos{display:grid;grid-template-rows:auto 1fr;gap:.6em;padding:1.2em 1.4em 1.3em;color:#151313;background:radial-gradient(70% 60% at 100% 100%,rgba(104,64,255,.16),transparent 70%),radial-gradient(rgba(21,19,19,.09) 1px,transparent 1.3px) 0 0/1.4em 1.4em,#f4f4f4}
+.dg-aos__brand{display:flex;align-items:center;gap:.5em;white-space:nowrap}
+.dg-aos__brand svg{width:1.8em;height:1.8em;color:#6840ff}
+.dg-aos__brand b{font-size:1.55em;font-weight:500;letter-spacing:-.04em}
+.dg-aos__brand em{margin-left:.35em;font-style:normal;font-size:.82em;color:#6e6e6e}
+.dg-aos__stack{position:relative;display:grid;gap:.5em;align-self:center;padding-left:2.2em}
+.dg-aos__stack::before{content:"";position:absolute;left:.75em;top:1.6em;height:7.4em;width:2px;margin-left:-1px;background:repeating-linear-gradient(#151313 0 .3em,transparent .3em .6em)}
+.dg-aos__slab{position:relative;display:flex;align-items:center;justify-content:space-between;gap:1em;height:3.2em;padding:0 1em;border-radius:.7em;white-space:nowrap;box-shadow:0 .3em 0 rgba(21,19,19,.16)}
+.dg-aos__slab b{font-size:1.12em;font-weight:500;letter-spacing:-.02em}
+.dg-aos__slab span{font-size:.8em;opacity:.78}
+.dg-aos__slab:not(.is--pb)::before{content:"";position:absolute;left:-1.75em;top:50%;width:.8em;height:.8em;margin-top:-.4em;border-radius:50%;background:#f4f4f4;box-shadow:inset 0 0 0 2px #151313}
+.dg-aos__slab:not(.is--pb)::after{content:"";position:absolute;left:-.95em;top:50%;width:.95em;height:2px;margin-top:-1px;background:#151313}
+.dg-aos__slab.is--found{background:#a1ff62}
+.dg-aos__slab.is--grow{background:#6840ff;color:#fff}
+.dg-aos__slab.is--run{background:#151313;color:#f4f4f4}
+.dg-aos__slab.is--pb{margin:.4em 0 0 -2.2em;border:1.5px dashed #151313;background:rgba(255,255,255,.6);box-shadow:none}
+.dg-aos__drop{position:absolute;left:.75em;top:1.6em;width:1em;height:1em;margin:-.5em 0 0 -.5em;border-radius:50%;background:#6840ff;box-shadow:0 0 0 .3em rgba(104,64,255,.25);opacity:0}
+.dg-aos:not(.is--in) .dg-aos__slab{opacity:0}
+.dg-aos.is--in .dg-aos__slab{animation:aos-in .7s var(--ease-out) calc(.15s + var(--i) * .12s) backwards}
+.dg-aos.is--in .dg-aos__drop{animation:aos-drop 4.5s ease-in-out 1s infinite}
+.dg-aos.is--in .dg-aos__slab:not(.is--pb) b{display:inline-block;animation:aos-hit 4.5s calc(1s + var(--i) * 1.5s) infinite}
+@keyframes aos-in{from{opacity:0;transform:translateY(-1.2em) scale(.96)}}
+@keyframes aos-drop{0%{top:1.6em;opacity:0}8%,22%{top:1.6em;opacity:1}38%,52%{top:5.3em}68%,86%{top:9em;opacity:1}100%{top:9em;opacity:0}}
+@keyframes aos-hit{0%,20%,40%,100%{transform:none}28%{transform:translateX(.4em)}}
+
+/* S-Campus: one platform, nine portals */
+.dg-sc{color:#f2f2f2;background:radial-gradient(45% 55% at 50% 50%,rgba(245,76,2,.3),transparent 70%),#121212;box-shadow:inset 0 0 0 1px rgba(242,242,242,.06)}
+.dg-sc__lines{position:absolute;inset:0;width:100%;height:100%}
+.dg-sc__lines ellipse{fill:none;stroke:rgba(242,242,242,.16);stroke-dasharray:2 5;vector-effect:non-scaling-stroke}
+.dg-sc__lines line{stroke:rgba(245,76,2,.6);stroke-width:1.3;stroke-dasharray:3 4;vector-effect:non-scaling-stroke}
+.dg-sc__core{position:absolute;left:50%;top:50%;translate:-50% -50%;display:grid;justify-items:center;gap:.5em}
+.dg-sc__core i{display:grid;place-items:center;width:2.4em;height:2.4em;border-radius:.6em;background:#f54c02;color:#fff;font-style:normal;font-weight:600;font-size:1.6em;box-shadow:0 0 0 .35em rgba(245,76,2,.18),0 0 0 .8em rgba(245,76,2,.07)}
+.dg-sc__core b{font-size:1.05em;font-weight:500;letter-spacing:-.02em}
+.dg-sc__node{position:absolute;translate:-50% -50%;padding:.38em .8em;border-radius:99em;background:#1f1f1f;box-shadow:inset 0 0 0 1px rgba(242,242,242,.14);font-size:.88em;font-weight:500;white-space:nowrap}
+.dg-sc:not(.is--in) .dg-sc__node{opacity:0}
+.dg-sc.is--in .dg-sc__node{animation:dg-pop .6s var(--ease-back) calc(.2s + var(--i) * .06s) backwards,sc-node 9s calc(1.2s + var(--i) * 1s) infinite}
+.dg-sc.is--in .dg-sc__lines line{animation:sc-flow 1.4s linear infinite}
+@keyframes sc-flow{to{stroke-dashoffset:-14}}
+@keyframes sc-node{0%{background:#1f1f1f;color:#f2f2f2}4%,11%{background:#f54c02;color:#fff}18%,100%{background:#1f1f1f;color:#f2f2f2}}
+
+/* Our process: seven phases on one line, flags at the sign-offs */
+.dg-proc{color:#f2f2f2;background:radial-gradient(rgba(242,242,242,.08) 1px,transparent 1.3px) 0 0/1.6em 1.6em,#191919}
+.dg-proc svg{display:block;width:100%;height:100%;overflow:visible}
+.dg-proc__dd{fill:rgba(255,90,31,.07);stroke:rgba(242,242,242,.2);stroke-dasharray:4 4}
+.dg-proc__dd.is--2{fill:rgba(255,90,31,.13)}
+.dg-proc__track{fill:none;stroke:rgba(242,242,242,.22);stroke-width:2}
+.dg-proc__run{fill:none;stroke:var(--c-volt);stroke-width:3;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
+.dg-proc__st circle{fill:#191919;stroke:#f2f2f2;stroke-width:1.5}
+.dg-proc__n{font:500 8px var(--font-mono);fill:#f2f2f2;text-anchor:middle}
+.dg-proc__t{font:500 11px var(--font-sans);fill:#f2f2f2;text-anchor:middle}
+.dg-proc__flag{fill:var(--c-volt);stroke:var(--c-volt);stroke-width:1.5;stroke-linejoin:round}
+.dg-proc__dot{fill:var(--c-volt);stroke:#191919;stroke-width:2}
+.dg-proc__cap{font:500 19px var(--font-sans);letter-spacing:-.03em;fill:#f2f2f2}
+.dg-proc__sub{font:400 10.5px var(--font-sans);fill:#a8a8a8}
+.dg-proc:not(.is--in) .dg-proc__flag{opacity:0}
+.dg-proc.is--in .dg-proc__run{animation:proc-run 2.4s var(--ease-out) .2s forwards}
+.dg-proc.is--in .dg-proc__st circle{animation:proc-st .4s calc(.3s + var(--i) * .3s) forwards}
+.dg-proc.is--in .dg-proc__st .dg-proc__n{animation:proc-n .4s calc(.3s + var(--i) * .3s) forwards}
+.dg-proc.is--in .dg-proc__flag{transform-box:fill-box;transform-origin:0 100%;animation:dg-pop .5s var(--ease-back) calc(.45s + var(--i) * .3s) backwards}
+@keyframes proc-run{to{stroke-dashoffset:0}}
+@keyframes proc-st{to{fill:var(--c-volt);stroke:var(--c-volt)}}
+@keyframes proc-n{to{fill:#111}}
+
+/* The playbook: the library, fanned out like a hand of cards */
+.dg-pb{background:radial-gradient(70% 70% at 50% 115%,rgba(255,216,74,.32),transparent 70%),#161a17}
+.dg-pb__card{position:absolute;left:50%;bottom:16%;display:flex;flex-direction:column;align-items:flex-start;gap:.35em;width:23%;aspect-ratio:3/4;margin-left:-11.5%;padding:.8em .85em;border-radius:.8em;background:#f5f1e8;color:#1c211e;box-shadow:0 .6em 1.4em -.4em rgba(0,0,0,.55);transform-origin:50% 190%;transform:rotate(calc((var(--i) - 2.5) * 15deg));transition:transform .7s var(--ease-out)}
+.dg-pb__card em{font-style:normal;font-family:var(--font-mono);font-size:.72em;text-transform:uppercase;letter-spacing:.05em;color:#1e4d3b}
+.dg-pb__card b{margin-top:.15em;font-size:2.7em;font-weight:500;letter-spacing:-.06em;line-height:.9}
+.dg-pb__card small{font-size:.8em;line-height:1.15;color:#4a524d}
+.dg-pb__card.is--1{background:#1e4d3b;color:#f5f1e8}
+.dg-pb__card.is--1 em{color:#ffd84a}
+.dg-pb__card.is--1 small{color:#b9d3c4}
+.dg-pb__card.is--3{background:#ffd84a}
+.res:hover .dg-pb__card{transform:rotate(calc((var(--i) - 2.5) * 17deg)) translateY(-.4em)}
+.dg-pb:not(.is--in) .dg-pb__card{opacity:0}
+.dg-pb.is--in .dg-pb__card{animation:pb-deal .8s var(--ease-out) calc(.15s + var(--i) * .08s) backwards,pb-pick 7.2s calc(1.4s + var(--i) * 1.2s) infinite}
+@keyframes pb-deal{from{opacity:0;transform:rotate(0deg) translateY(40%)}}
+@keyframes pb-pick{0%{translate:0 0}6%,16%{translate:0 -1.3em}26%,100%{translate:0 0}}
+
+/* Client pitch: five practices, sixteen services */
+.dg-pt{background:radial-gradient(45% 60% at 50% 50%,rgba(255,90,31,.22),transparent 70%),#191919}
+.dg-pt svg{display:block;width:100%;height:100%}
+.dg-pt__arc{fill:none;stroke-width:16;transition:stroke-width .5s var(--ease-out)}
+.dg-pt__arc.is--0{stroke:#ff5a1f}
+.dg-pt__arc.is--1{stroke:#ff9466}
+.dg-pt__arc.is--2{stroke:#f2f2f2}
+.dg-pt__arc.is--3{stroke:#c2410c}
+.dg-pt__arc.is--4{stroke:#ffc4ad}
+.res:hover .dg-pt__arc{stroke-width:21}
+.dg-pt__dot{fill:#f2f2f2;opacity:.35}
+.dg-pt__t{font:500 10.5px var(--font-sans);fill:#f2f2f2}
+.dg-pt__glyph{color:var(--c-volt)}
+.dg-pt__c{font:500 12px var(--font-sans);fill:#f2f2f2;text-anchor:middle}
+.dg-pt:not(.is--in) .dg-pt__arc{stroke-dasharray:0 352}
+.dg-pt:not(.is--in) .dg-pt__t{opacity:0}
+.dg-pt.is--in .dg-pt__arc{animation:pt-draw .9s var(--ease-out) calc(.15s + var(--i) * .15s) backwards}
+.dg-pt.is--in .dg-pt__t{animation:dg-fade .6s ease calc(.5s + var(--i, 0) * .1s) backwards}
+.dg-pt.is--in .dg-pt__dot{animation:pt-dot 6.4s calc(1.2s + var(--i) * .4s) infinite}
+@keyframes dg-fade{from{opacity:0}}
+@keyframes pt-draw{from{stroke-dasharray:0 352}}
+@keyframes pt-dot{0%{opacity:.35;fill:#f2f2f2}3%,9%{opacity:1;fill:#ff5a1f}16%,100%{opacity:.35;fill:#f2f2f2}}
+@media (prefers-reduced-motion:reduce){.dg *{animation:none!important;transition:none!important}.dg .dg-proc__run{stroke-dashoffset:0}}
+/* Narrow cards: bigger type, layer names only */
+@container (max-width:380px){.dg{font-size:3cqi}.dg-aos__slab span{display:none}}
+
+/* ===== Contact: a short chat that draws your project map ===== */
+.contact__head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:1rem 3rem;align-items:end;margin-bottom:2.5rem}
+.contact__head .tag-pair{margin-bottom:1.25rem}
+.contact__head .p-l{color:var(--c-smoke);max-width:30rem}
+.contact__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:.75rem;align-items:stretch}
+.contact__list{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:2.5rem;margin-top:2.5rem}
+
+/* The project map */
+.pmap{position:relative;display:flex;flex-direction:column;gap:1rem;padding:1.4rem;border-radius:var(--r-xl);background:radial-gradient(rgba(242,242,242,.07) 1px,transparent 1.3px) 0 0/1.25rem 1.25rem,#161616;box-shadow:inset 0 0 0 1px rgba(242,242,242,.08);overflow:hidden}
+.pmap__head{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.pmap__head .eyebrow{color:var(--c-volt)}
+.pmap__head em{font-style:normal;font-family:var(--font-mono);font-size:.75rem;color:var(--c-steel)}
+.pmap__orbit{position:relative;flex:1;min-height:18rem}
+.pmap__lines{position:absolute;inset:0;width:100%;height:100%}
+.pmap__lines ellipse{fill:none;stroke:rgba(242,242,242,.14);stroke-dasharray:3 6;vector-effect:non-scaling-stroke}
+.pmap__lines line{stroke:var(--c-volt);stroke-width:1.5;vector-effect:non-scaling-stroke}
+.pmap__lines line.is--new{animation:dg-fade .6s ease backwards}
+.pmap__core{position:absolute;z-index:1;left:50%;top:50%;translate:-50% -50%;display:grid;justify-items:center;align-content:center;gap:.35rem;width:8.5rem;height:8.5rem;padding:1rem;border-radius:50%;background:var(--c-volt);color:var(--c-ink);text-align:center;box-shadow:0 0 0 .6rem rgba(255,90,31,.14),0 0 0 1.3rem rgba(255,90,31,.06);transition:background-color .4s}
+.pmap__core svg{width:1.5rem;height:1.5rem}
+.pmap__core b{font-size:.9375rem;font-weight:500;line-height:1.15;letter-spacing:-.02em;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pmap__node{position:absolute;z-index:2;translate:-50% -50%;display:inline-flex;align-items:center;gap:.4rem;height:2.2rem;padding:0 .85rem 0 .65rem;border-radius:var(--r-pill);background:var(--c-concrete);color:var(--c-ink);font-size:.8125rem;font-weight:500;white-space:nowrap;box-shadow:0 .5rem 1rem -.4rem rgba(0,0,0,.6);transition:left .6s var(--ease-out),top .6s var(--ease-out)}
+.pmap__node svg{width:1.05rem;height:1.05rem;flex:none;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.pmap__node.is--new{animation:pm-pop .55s var(--ease-back)}
+.pmap__node.is--ghost{justify-content:center;width:2.4rem;height:2.4rem;padding:0;border-radius:50%;background:transparent;border:1.5px dashed rgba(242,242,242,.3);color:var(--c-steel);box-shadow:none;font-family:var(--font-mono)}
+@keyframes pm-pop{from{opacity:0;transform:scale(.5)}}
+.pmap__about{min-height:1.6rem;font-family:var(--font-hand);font-size:1.6rem;line-height:1.05;color:var(--c-violet-lite);overflow-wrap:anywhere}
+.pmap__about:empty::before{content:"Your idea, in your words, lands here.";color:var(--c-graphite)}
+.pmap__path{position:relative;padding-top:2.4rem}
+.pmap__path ol{position:relative;display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
+.pmap__path ol::before{content:"";position:absolute;left:calc(100% / 14);right:calc(100% / 14);top:.45rem;height:2px;margin-top:-1px;background:rgba(242,242,242,.14)}
+.pmap__path li{position:relative;display:grid;justify-items:center;gap:.45rem;font-size:clamp(.5625rem,1.6vw,.6875rem);color:var(--c-graphite);text-align:center;transition:color .4s}
+.pmap__path li::after{content:"";position:absolute;left:50%;top:.45rem;width:100%;height:2px;margin-top:-1px;background:var(--c-volt);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease-out)}
+.pmap__path li.is--on:has(~ li.is--on)::after,.pmap__path li.is--on ~ li:has(~ li.is--on)::after{transform:scaleX(1)}
+.pmap__path li i{position:relative;z-index:1;width:.9rem;height:.9rem;border-radius:50%;background:#161616;box-shadow:inset 0 0 0 1.5px rgba(242,242,242,.28);transition:background-color .4s,box-shadow .4s,transform .4s var(--ease-back)}
+.pmap__path li.is--on{color:var(--c-concrete)}
+.pmap__path li.is--on i{background:var(--c-volt);box-shadow:none}
+.pmap__path li.is--first i{transform:scale(1.3);box-shadow:0 0 0 .3rem rgba(255,90,31,.25)}
+.pmap__flag{position:absolute;top:0;right:calc(100% * 1.5 / 7 - 1px);display:inline-flex;align-items:center;height:1.6rem;padding:0 .7rem;border-radius:.4rem .4rem 0 .4rem;background:#262626;color:var(--c-smoke);font-size:.75rem;font-weight:500;white-space:nowrap;transition:background-color .4s,color .4s}
+.pmap__flag::after{content:"";position:absolute;right:0;top:100%;width:2px;height:.8rem;background:inherit}
+.pmap__flag.is--set{background:var(--c-concrete);color:var(--c-ink)}
+.pmap__foot{display:flex;justify-content:space-between;align-items:center;gap:1rem;min-height:2.4rem;padding-top:.9rem;border-top:1px dashed rgba(242,242,242,.14)}
+.pmap__est{font-size:.875rem;color:var(--c-smoke)}
+.pmap__stamp{flex:none;padding:.25rem .75rem;border:2px solid var(--c-live);border-radius:.5rem;color:var(--c-live);font-size:.8125rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;opacity:0;transform:rotate(-8deg) scale(1.6);transition:opacity .3s,transform .5s var(--ease-back)}
+.pmap.is--sent .pmap__stamp{opacity:1;transform:rotate(-8deg) scale(1)}
+
+/* The chat */
+.chat{display:flex;flex-direction:column;height:44rem;border-radius:var(--r-xl);background:var(--c-concrete);color:var(--c-ink);overflow:hidden}
+.chat__top{display:flex;align-items:center;gap:.75rem;padding:1rem 1.25rem .6rem;background:var(--c-white)}
+.chat__av{display:grid;place-items:center;flex:none;width:2.6rem;height:2.6rem;border-radius:50%;background:var(--c-ink);color:var(--c-volt)}
+.chat__av svg{width:1.25rem;height:1.25rem}
+.chat__who{display:grid;gap:.1rem;line-height:1.2}
+.chat__who b{font-weight:500}
+.chat__who small{display:flex;align-items:center;gap:.4rem;font-size:.8125rem;color:var(--c-steel)}
+.chat__who small i{width:.45rem;height:.45rem;border-radius:50%;background:#16c45a;animation:ping 2s infinite}
+.chat__reset{margin-left:auto;height:2rem;padding:0 .85rem;border-radius:var(--r-pill);background:var(--c-ash);font-size:.8125rem;font-weight:500;color:var(--c-graphite);transition:background-color .3s,color .3s}
+.chat__reset:hover{background:var(--c-ink);color:var(--c-concrete)}
+.chat__reset[hidden]{display:none}
+.chat__steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.35rem;padding:.4rem 1.25rem .85rem;background:var(--c-white);border-bottom:1px solid var(--c-line)}
+.chat__steps li{display:grid;gap:.4rem;font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.04em;text-transform:uppercase;color:var(--c-smoke);transition:color .3s}
+.chat__steps i{position:relative;display:block;height:.25rem;border-radius:1rem;background:var(--c-ash);overflow:hidden}
+.chat__steps i::after{content:"";position:absolute;inset:0;background:var(--c-ink);transform:scaleX(0);transform-origin:left;transition:transform .6s var(--ease-out),background-color .3s}
+.chat__steps li.is--on{color:var(--c-ink)}
+.chat__steps li.is--on i::after{background:var(--c-volt);transform:scaleX(.5)}
+.chat__steps li.is--done{color:var(--c-graphite)}
+.chat__steps li.is--done i::after{transform:scaleX(1)}
+.chat__log{flex:1;min-height:0;display:flex;flex-direction:column;gap:.55rem;padding:1.25rem;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.chat__day{align-self:center;padding:.2rem .75rem;border-radius:var(--r-pill);background:rgba(17,17,17,.06);font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.04em;text-transform:uppercase;color:var(--c-steel)}
+.msg{max-width:min(85%,30rem);padding:.75rem 1rem;border-radius:1.15rem;font-size:1rem;line-height:1.4;overflow-wrap:anywhere;animation:msg-in .45s var(--ease-out) backwards}
+.msg.is--bot,.msg.is--typing{align-self:flex-start;background:var(--c-white);border-bottom-left-radius:.35rem;box-shadow:0 1px 0 var(--c-line);transform-origin:left bottom}
+.msg.is--me{align-self:flex-end;background:var(--c-ink);color:var(--c-concrete);border-bottom-right-radius:.35rem;white-space:pre-line;transform-origin:right bottom}
+.msg small{display:block;margin-top:.15rem;font-size:.8125rem;color:var(--c-steel)}
+.msg.is--typing{display:flex;gap:.3rem;padding:1rem 1.1rem}
+.msg.is--typing i{width:.45rem;height:.45rem;border-radius:50%;background:var(--c-cloud);animation:typing 1s infinite}
+.msg.is--typing i:nth-child(2){animation-delay:.15s}
+.msg.is--typing i:nth-child(3){animation-delay:.3s}
+.msg__then{display:grid;gap:.35rem;margin-top:.75rem}
+.msg__then li{display:flex;align-items:center;gap:.6rem;padding:.55rem .75rem;border-radius:.7rem;background:var(--c-concrete);font-size:.9375rem}
+.msg__then b{flex:none;font-family:var(--font-mono);font-size:.6875rem;font-weight:500;color:var(--c-violet)}
+@keyframes msg-in{from{opacity:0;transform:translateY(.6rem) scale(.96)}}
+@keyframes typing{0%,60%,100%{transform:none;background:var(--c-cloud)}30%{transform:translateY(-.25rem);background:var(--c-steel)}}
+.chat__dock{position:relative;display:grid;gap:.75rem;padding:1rem 1.25rem 1.25rem;background:var(--c-white);border-top:1px solid var(--c-line)}
+.chat__dock:empty{padding-block:0;border-top-color:transparent}
+.chat__dock > *{animation:msg-in .45s var(--ease-out) backwards}
+.chat__opts{display:flex;flex-wrap:wrap;gap:.4rem}
+.chat__opt{display:inline-flex;align-items:center;gap:.5rem;min-height:2.6rem;padding:.35rem 1rem .35rem .75rem;border-radius:var(--r-pill);background:var(--c-concrete);box-shadow:inset 0 0 0 1px var(--c-line-strong);font-size:.9375rem;font-weight:500;text-align:left;transition:background-color .25s,color .25s,box-shadow .25s,transform .35s var(--ease-out)}
+.chat__opt svg{width:1.15rem;height:1.15rem;flex:none;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.chat__opt:hover{box-shadow:inset 0 0 0 1.5px var(--c-ink);transform:translateY(-1px)}
+.chat__opt[aria-pressed="true"]{background:var(--c-ink);color:var(--c-concrete);box-shadow:none}
+.chat__opt[aria-pressed="true"] svg{color:var(--c-volt)}
+.chat__opts.is--one .chat__opt{padding-inline:1rem}
+.chat__opt:disabled{pointer-events:none}
+.chat__opt:disabled:not([aria-pressed="true"]){opacity:.4}
+.chat__send{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.6rem}
+.chat__send .btn{margin-left:auto}
+.chat__send.is--end{justify-content:flex-start}
+.chat__send.is--end .btn{margin-left:0}
+.chat__hint{font-size:.8125rem;font-weight:500;color:var(--c-violet)}
+.chat__hint:empty{display:none}
+.chat__ta{width:100%;min-height:5.5rem;padding:.85rem 1rem;border-radius:var(--r-l);border:1px solid var(--c-line-strong);background:var(--c-white);font:inherit;font-size:1rem;line-height:1.45;color:var(--c-ink);resize:none}
+.chat__ta:focus,.chat__f input:focus{outline:none;border-color:var(--c-ink);box-shadow:0 0 0 3px rgba(255,90,31,.25)}
+.chat__prompts{display:flex;flex-wrap:wrap;gap:.35rem}
+.chat__chip{height:2rem;padding:0 .8rem;border-radius:var(--r-pill);background:var(--c-concrete);font-size:.8125rem;font-weight:500;color:var(--c-graphite);transition:background-color .25s,color .25s}
+.chat__chip:hover{background:var(--c-ink);color:var(--c-concrete)}
+.chat__skip{height:2.4rem;padding:0 .4rem;font-size:.875rem;font-weight:500;color:var(--c-steel);text-decoration:underline;text-underline-offset:.2em}
+.chat__skip:hover{color:var(--c-ink)}
+.chat__fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem}
+.chat__f{display:grid;gap:.3rem;font-size:.75rem;font-weight:500;color:var(--c-graphite)}
+.chat__f input{width:100%;height:2.75rem;padding:0 .9rem;border-radius:var(--r-m);border:1px solid var(--c-line-strong);background:var(--c-white);font:inherit;font-size:1rem;color:var(--c-ink)}
+.chat__hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.chat__err{font-size:.875rem;font-weight:500;color:#b42318}
+.chat__err:empty{display:none}
+.chat__err a{text-decoration:underline}
+.chat__dock.is--sending .btn{opacity:.6;pointer-events:none}
+.chat__dock .btn[disabled]{opacity:.4;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.msg,.chat__dock > *,.pmap__node.is--new,.pmap__lines line.is--new{animation:none}}
+@media (max-width:991px){.contact__head,.contact__grid{grid-template-columns:minmax(0,1fr)}.chat{order:-1}}
+@media (max-width:767px){.pmap__orbit{min-height:20rem}.pmap__node{flex-direction:column;gap:.3rem;max-width:5.75rem;height:auto;padding:0;background:none;box-shadow:none;color:var(--c-concrete);font-size:.6875rem;line-height:1.15;white-space:normal;text-align:center}.pmap__node svg{box-sizing:content-box;width:1.05rem;height:1.05rem;padding:.55rem;border-radius:50%;background:var(--c-concrete);color:var(--c-ink);box-shadow:0 .4rem .8rem -.3rem rgba(0,0,0,.6)}.pmap__node.is--ghost{color:var(--c-steel)}}
+@media (max-width:767px){.contact{border-radius:var(--r-l) var(--r-l) 0 0}.contact__head{margin-bottom:1.75rem}.chat{height:auto;border-radius:var(--r-l)}.chat__log{flex:none;height:22rem}.chat__top,.chat__steps,.chat__log,.chat__dock{padding-inline:1rem}.chat__fields{grid-template-columns:minmax(0,1fr)}.chat__f input,.chat__ta{font-size:16px}.pmap{padding:1.1rem;border-radius:var(--r-l)}.pmap__core{width:7rem;height:7rem}.contact__list{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
 <body>
@@ -1484,33 +1556,41 @@ a.contact-list__value{user-select:auto;-webkit-user-select:auto}
 
 <!-- ============ CONTACT ============ -->
 <section class="section is--dark contact" id="contact">
-  <div class="container contact__grid">
-    <div class="contact__side">
-      <div class="tag-pair"><span class="tag" data-theme="glass">Let’s connect</span><span class="avail"><i></i>Available for work</span></div>
-      <h2 class="h-l">Have a project in mind?</h2>
-      <p class="p-l">Answer five quick questions. Your brief builds itself as you go.</p>
-      <div class="bdoc" id="bdoc" aria-live="polite">
-        <div class="bdoc__head"><span class="bdoc__logo"><svg viewBox="0 0 80 80" aria-hidden="true"><use href="#i-glyph"/></svg></span><b>Project brief</b><em id="bdoc-date"></em></div>
-        <dl>
-          <div><dt>Building</dt><dd data-b="needs">—</dd></div>
-          <div><dt>Stage</dt><dd data-b="stage">—</dd></div>
-          <div><dt>Launch</dt><dd data-b="when">—</dd></div>
-          <div><dt>About</dt><dd data-b="message">—</dd></div>
-          <div><dt>From</dt><dd data-b="name">—</dd></div>
-        </dl>
-        <p class="bdoc__time" id="bdoc-time"></p>
-        <span class="bdoc__stamp" aria-hidden="true">Sent</span>
+  <div class="container">
+    <div class="contact__head">
+      <div>
+        <div class="tag-pair"><span class="tag" data-theme="glass">Let’s connect</span><span class="avail"><i></i>Available for work</span></div>
+        <h2 class="h-l">Have a project in mind?</h2>
       </div>
-      <ul class="contact-list" aria-label="Contact details">
-        <li><span class="eyebrow">Phone · WhatsApp</span><span class="contact-list__value">+91 90149 52056</span><button class="copy" type="button" data-copy="+91 9014952056" aria-label="Copy phone number"><svg viewBox="0 0 16 16"><use href="#i-copy"/></svg><span>Copy</span></button></li>
-        <li><span class="eyebrow">Email</span><span class="contact-list__value">workwithonestop@gmail.com</span><button class="copy" type="button" data-copy="workwithonestop@gmail.com" aria-label="Copy email"><svg viewBox="0 0 16 16"><use href="#i-copy"/></svg><span>Copy</span></button></li>
-      </ul>
+      <p class="p-l">Chat with us for a minute. Your project map draws itself as you answer.</p>
     </div>
-    <div class="qz" id="qz">
-      <div class="qz__top"><button class="qz__back" type="button" data-qz-back hidden>← Back</button><span class="eyebrow tnum" id="qz-count">01 / 05</span></div>
-      <div class="qz__bar"><i id="qz-bar"></i></div>
-      <form class="qz__body" id="qz-body" novalidate></form>
+    <div class="contact__grid">
+      <div class="pmap" id="pmap" aria-hidden="true">
+        <div class="pmap__head"><span class="eyebrow">Your project map</span><em id="pmap-date"></em></div>
+        <div class="pmap__orbit">
+          <svg class="pmap__lines" viewBox="0 0 100 100" preserveAspectRatio="none"><ellipse cx="50" cy="50" rx="36" ry="33"/><g id="pmap-lines"></g></svg>
+          <span class="pmap__core"><svg viewBox="0 0 80 80"><use href="#i-glyph"/></svg><b id="pmap-name">Your project</b></span>
+          <div id="pmap-nodes"></div>
+        </div>
+        <p class="pmap__about" id="pmap-about"></p>
+        <div class="pmap__path"><ol id="pmap-path"><li><i></i><span>Connect</span></li><li><i></i><span>Discover</span></li><li><i></i><span>Define</span></li><li><i></i><span>Design</span></li><li><i></i><span>Build</span></li><li><i></i><span>Launch</span></li><li><i></i><span>Grow</span></li></ol><span class="pmap__flag" id="pmap-flag">Launch</span></div>
+        <div class="pmap__foot"><span class="pmap__est" id="pmap-est"></span><span class="pmap__stamp">Sent ✓</span></div>
+      </div>
+      <div class="chat" id="chat">
+        <div class="chat__top">
+          <span class="chat__av"><svg viewBox="0 0 80 80" aria-hidden="true"><use href="#i-glyph"/></svg></span>
+          <div class="chat__who"><b>One Stop</b><small><i></i>Takes about a minute</small></div>
+          <button class="chat__reset" type="button" data-chat-reset hidden>Start over</button>
+        </div>
+        <ol class="chat__steps" id="chat-steps" aria-label="Steps"><li><i></i>What</li><li><i></i>Stage</li><li><i></i>Launch</li><li><i></i>About</li><li><i></i>You</li></ol>
+        <div class="chat__log" id="chat-log" role="log" aria-live="polite" data-lenis-prevent></div>
+        <form class="chat__dock" id="chat-dock" novalidate></form>
+      </div>
     </div>
+    <ul class="contact-list contact__list" aria-label="Contact details">
+      <li><span class="eyebrow">Phone · WhatsApp</span><span class="contact-list__value">+91 90149 52056</span><button class="copy" type="button" data-copy="+91 9014952056" aria-label="Copy phone number"><svg viewBox="0 0 16 16"><use href="#i-copy"/></svg><span>Copy</span></button></li>
+      <li><span class="eyebrow">Email</span><span class="contact-list__value">workwithonestop@gmail.com</span><button class="copy" type="button" data-copy="workwithonestop@gmail.com" aria-label="Copy email"><svg viewBox="0 0 16 16"><use href="#i-copy"/></svg><span>Copy</span></button></li>
+    </ul>
   </div>
 </section>
 
@@ -2010,40 +2090,70 @@ const CORE = [
 ];
 const ALSO = [['Research & strategy', 'Know the market before you build.'], ['Brand & pitch decks', 'Identity, decks and booklets.'], ['Automation & AI agents', 'n8n flows, WhatsApp and voice agents.'], ['SEO & Meta ads', 'Get found. Get customers.'], ['Hosting & care', 'Domains, uptime, backups, fixes.'], ['Scale & new features', 'Grow the product you already have.']];
 
-/* ---------- Built mockups for our decks, process and playbook ---------- */
+/* ---------- Diagrams for our products, process, playbook and pitch ---------- */
 const PHASES7 = ['Connect', 'Discover', 'Define', 'Design', 'Build', 'Launch', 'Grow'];
-const MK = {
-  process: () => `<div class="mk mk-proc"><div class="mk__top"><span class="mk__logo">${GLYPH}One Stop</span><em>7 phases</em></div>
-    <div class="mk-proc__dd"><svg viewBox="0 0 220 72" preserveAspectRatio="none" aria-hidden="true"><polygon points="4,36 57,4 110,36 57,68"/><polygon points="110,36 163,4 216,36 163,68"/></svg><span>Find the right problem</span><span>Build the right solution</span></div>
-    <ol class="mk-proc__rail">${PHASES7.map((t, i) => `<li style="--i:${i}"><i></i>${t}</li>`).join('')}</ol></div>`,
-  playbook: () => `<div class="mk mk-pb"><aside><span class="mk__logo">${GLYPH}Playbook</span>${PHASES7.map((t, i) => `<span class="${i === 1 ? 'is-on' : ''}">${t}</span>`).join('')}</aside>
-    <div class="mk-pb__main"><div class="mk-pb__search">Search everything <kbd>⌘K</kbd></div><b class="mk-pb__h">Discover · checklist</b>
-    <ul>${['Kickoff: goals and metrics', 'Competitor analysis', 'Interview 5 users', 'UX audit', 'Synthesise insights'].map((t, i) => `<li style="--i:${i}"><i></i>${t}</li>`).join('')}</ul>
-    <div class="mk-pb__files"><span>competitors.md</span><span>interviews.md</span><span>ux-audit.pdf</span></div></div></div>`,
-  pitch: () => `<div class="mk mk-pt"><div class="mk__top"><span class="mk__logo">${GLYPH}One Stop</span><em class="mk-pt__cta">Book a call</em></div>
-    <b class="mk-pt__h">Build once.<br>Earn for years.</b><div class="mk-pt__pills">${['Research', 'Brand', 'Design', 'Build', 'Grow'].map((t, i) => `<span style="--i:${i}">${t}</span>`).join('')}</div>
-    <div class="mk-pt__cards"><i></i><i></i><i></i><i></i></div></div>`,
-  agencyos: () => `<div class="mk mk-aos"><aside><span class="mk-aos__g">${GLYPH}</span><i class="is-on"></i><i></i><i></i><i></i><i></i></aside>
-    <div class="mk-aos__main"><div class="mk__top"><b>Agency OS</b><em>Owner</em></div>
-    <div class="mk-aos__kpis"><span><small>Leads</small><b>24</b></span><span><small>Projects</small><b>8</b></span><span class="is-hot"><small>Invoices due</small><b>3</b></span></div>
-    <div class="mk-aos__pipe">${['Lead', 'Proposal', 'Design', 'Build', 'Launch'].map((t, i) => `<span style="--h:${[78, 56, 64, 46, 34][i]}%;--i:${i}"><i></i>${t}</span>`).join('')}</div></div></div>`,
-  scampus: () => `<div class="mk mk-sc"><aside><span class="mk-sc__logo"><i>S</i>S-Campus</span>${['Dashboard', 'Admissions', 'Exams', 'Hostel', 'Transport', 'Finance'].map((t, i) => `<span class="${i === 4 ? 'is-on' : ''}">${t}</span>`).join('')}</aside>
-    <div class="mk-sc__main"><div class="mk__top"><b>Transport</b><em>Admin portal</em></div>
-    <div class="mk-sc__kpis"><span class="is-hot"><small>Students</small><b>1,240</b></span><span><small>Routes</small><b>18</b></span><span><small>Portals</small><b>9</b></span></div>
-    <div class="mk-sc__rows">${[['Route 03 · North loop', 'Live'], ['Route 07 · City', 'Done'], ['Route 11 · East', 'Next']].map(([t, st], i) => `<span><i style="--i:${i}"></i>${t}<em class="is-${st.toLowerCase()}">${st}</em></span>`).join('')}</div></div></div>`,
-  silkerp: () => `<div class="mk mk-erp"><div class="mk-erp__nav">${CREST}<b>BEERE KESAVA</b><em class="is-on">Overview</em><em>Production</em><em>Finance</em></div>
-    <div class="mk-erp__hero"><small>SINCE 1999 · SUPERADMIN</small><b>From yarn <i>to sale.</i><br>One portal.</b></div>
-    <div class="mk-erp__stats"><span><small>Active weavers</small><b>41</b></span><span><small>In production</small><b>12</b></span><span class="is-gold"><small>Dispatched</small><b>118</b></span></div></div>`
+/* A smooth line through points (Catmull-Rom as cubic Béziers) */
+const smooth = pts => pts.map(([x, y], i) => {
+  if (!i) return `M${x} ${y}`;
+  const [x0, y0] = pts[Math.max(0, i - 2)], [x1, y1] = pts[i - 1], [x3, y3] = pts[Math.min(pts.length - 1, i + 1)];
+  return `C${(x1 + (x - x0) / 6).toFixed(1)} ${(y1 + (y - y0) / 6).toFixed(1)} ${(x - (x3 - x1) / 6).toFixed(1)} ${(y - (y3 - y1) / 6).toFixed(1)} ${x} ${y}`;
+}).join(' ');
+const LINE_ICON = {
+  yarn: '<circle cx="12" cy="12" r="8"/><path d="M6.5 8c4 1 7.5 5 8.5 11M9.5 4.7c3 2 6 6.5 7 12M5 13.5c3 0 6 2 8 6"/>',
+  loom: '<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 4v16M12 4v16M16 4v16M4 12h16"/>',
+  check: '<circle cx="12" cy="12" r="8"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/>',
+  tag: '<path d="M4 12V5a1 1 0 0 1 1-1h7l8 8-8 8z"/><circle cx="8.5" cy="8.5" r="1.4"/>'
+};
+const lineIcon = k => `<svg viewBox="0 0 24 24" aria-hidden="true">${LINE_ICON[k]}</svg>`;
+const DG = {
+  /* Silk ERP: one gold thread from yarn to sale */
+  silk: () => `<div class="dg dg-silk"><div class="dg-silk__top">${CREST}<span>Beere Kesava · Dharmavaram</span></div>
+    <b class="dg-silk__h">From yarn <i>to sale.</i></b>
+    <div class="dg-silk__thread"><span class="dg-silk__line"></span>${[['yarn', 'Buy yarn'], ['loom', 'Weave'], ['check', 'Check'], ['tag', 'Sell']].map(([k, t], i) => `<span class="dg-silk__node" style="--i:${i}"><i>${lineIcon(k)}</i><em>${t}</em></span>`).join('')}</div></div>`,
+  /* Agency OS: three layers on one playbook */
+  aos: () => `<div class="dg dg-aos"><div class="dg-aos__brand">${GLYPH}<b>Agency OS</b><em>Three layers, one playbook</em></div>
+    <div class="dg-aos__stack">${[['Get found', 'Profiles · Marketplace · Free tools', 'found'], ['Grow', 'Leads · Proposals · Lead → client', 'grow'], ['Deliver & run', 'Projects · Client portal · Finance', 'run'], ['Playbook', 'Sits under all three', 'pb']].map(([t, l, k], i) => `<div class="dg-aos__slab is--${k}" style="--i:${i}"><b>${esc(t)}</b><span>${esc(l)}</span></div>`).join('')}<span class="dg-aos__drop" aria-hidden="true"></span></div></div>`,
+  /* S-Campus: one platform, nine portals */
+  scampus: () => {
+    const roles = ['Admin', 'HOD', 'Faculty', 'Student', 'Parent', 'Exam Cell', 'Finance', 'Warden', 'Driver'];
+    const pos = roles.map((_, i) => { const a = (-90 + i * 40) * Math.PI / 180; return [50 + Math.cos(a) * 38, 50 + Math.sin(a) * 36]; });
+    return `<div class="dg dg-sc"><svg class="dg-sc__lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><ellipse cx="50" cy="50" rx="38" ry="36"/>${pos.map(([x, y]) => `<line x1="50" y1="50" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}"/>`).join('')}</svg>
+      <span class="dg-sc__core"><i>S</i><b>S-Campus</b></span>${roles.map((r, i) => `<span class="dg-sc__node" style="left:${pos[i][0].toFixed(1)}%;top:${pos[i][1].toFixed(1)}%;--i:${i}">${r}</span>`).join('')}</div>`;
+  },
+  /* Our process: seven phases on one line, with your sign-off at the gates */
+  process: () => {
+    const pts = [[34, 196], [88, 128], [146, 84], [204, 124], [262, 176], [318, 128], [370, 74]];
+    const d = smooth(pts);
+    return `<div class="dg dg-proc"><svg viewBox="0 0 400 250" aria-hidden="true">
+      <polygon class="dg-proc__dd" points="58,150 146,62 234,150 146,238"/><polygon class="dg-proc__dd is--2" points="178,150 262,66 346,150 262,234"/>
+      <path class="dg-proc__track" d="${d}"/><path class="dg-proc__run" d="${d}" pathLength="1"/>
+      ${pts.map(([x, y], i) => `<g class="dg-proc__st" style="--i:${i}">${PH[i] && PH[i].gate ? `<path class="dg-proc__flag" d="M${x} ${y - 12}v-17l11 4.5-11 4.5"/>` : ''}<circle cx="${x}" cy="${y}" r="10"/><text x="${x}" y="${y + 3.4}" class="dg-proc__n">${pad(i)}</text><text x="${x}" y="${y + 27}" class="dg-proc__t">${PHASES7[i]}</text></g>`).join('')}
+      <circle class="dg-proc__dot" r="5.5"><animateMotion dur="8s" repeatCount="indefinite" path="${d}"/></circle>
+      <text x="22" y="32" class="dg-proc__cap">7 phases</text><text x="22" y="48" class="dg-proc__sub">Flags mark your sign-off</text></svg></div>`;
+  },
+  /* The playbook: the library, fanned out */
+  playbook: () => `<div class="dg dg-pb">${[['Process', 7, 'phases'], ['Services', 16, 'routes'], ['Research', 10, 'documents'], ['Prompts', 25, 'ready to copy'], ['Tools', 37, 'in the stack'], ['Knowledge', 17, 'notes']].map(([t, n, l], i) => `<span class="dg-pb__card is--${i}" style="--i:${i}"><em>${t}</em><b class="tnum">${n}</b><small>${l}</small></span>`).join('')}</div>`,
+  /* Client pitch: five practices, sixteen services, one team */
+  pitch: () => {
+    const P5 = [['Brand & strategy', 2], ['Product design', 3], ['Build', 6], ['Automate & AI', 3], ['Grow', 2]];
+    const cx = 180, cy = 110, r = 56, C = 2 * Math.PI * r;
+    let at = 0, k = 0;
+    const arcs = P5.map(([, n], i) => { const len = n / 16 * C, s = at; at += len; return `<circle class="dg-pt__arc is--${i}" cx="${cx}" cy="${cy}" r="${r}" stroke-dasharray="${(len - 3).toFixed(1)} ${C.toFixed(1)}" stroke-dashoffset="${(-s).toFixed(1)}" style="--i:${i}"/>`; }).join('');
+    const labels = P5.map(([t, n]) => { const mid = (k + n / 2) / 16 * 2 * Math.PI - Math.PI / 2; k += n; const c = Math.cos(mid); return `<text x="${(cx + c * 94).toFixed(1)}" y="${(cy + Math.sin(mid) * 88 + 3).toFixed(1)}" text-anchor="${c > .2 ? 'start' : c < -.2 ? 'end' : 'middle'}" class="dg-pt__t">${esc(t)}</text>`; }).join('');
+    const dots = Array.from({ length: 16 }, (_, i) => { const a = (i + .5) / 16 * 2 * Math.PI - Math.PI / 2; return `<circle class="dg-pt__dot" cx="${(cx + Math.cos(a) * 75).toFixed(1)}" cy="${(cy + Math.sin(a) * 75).toFixed(1)}" r="2.6" style="--i:${i}"/>`; }).join('');
+    return `<div class="dg dg-pt"><svg viewBox="0 0 360 220" aria-hidden="true"><g transform="rotate(-90 ${cx} ${cy})">${arcs}</g>${dots}${labels}
+      <use href="#i-glyph" x="${cx - 13}" y="${cy - 24}" width="26" height="26" class="dg-pt__glyph"/><text x="${cx}" y="${cy + 19}" class="dg-pt__c">16 services</text></svg></div>`;
+  }
 };
 const RES = [
-  { mk: 'process', tag: 'How we work', name: 'Our process', line: 'Seven phases. Your sign-off at every gate.', href: 'pitch/#process', cta: 'See the process' },
-  { mk: 'playbook', tag: 'Inside the team', name: 'The playbook', line: 'Every phase has a checklist, files and an exit gate.', href: 'playbook/', cta: 'Open the playbook' },
-  { mk: 'pitch', tag: 'For clients', name: 'Client pitch', line: 'What we do, how we work and what you keep.', href: 'pitch/', cta: 'Open the pitch' }
+  { dg: 'process', tag: 'How we work', name: 'Our process', line: 'Seven phases. Your sign-off at every gate.', href: 'pitch/#process', cta: 'See the process' },
+  { dg: 'playbook', tag: 'Inside the team', name: 'The playbook', line: 'Every phase has a checklist, files and an exit gate.', href: 'playbook/', cta: 'Open the playbook' },
+  { dg: 'pitch', tag: 'For clients', name: 'Client pitch', line: 'What we do, how we work and what you keep.', href: 'pitch/', cta: 'Open the pitch' }
 ];
 const PRODS = [
-  { name: 'Silk ERP', from: 'Built for Beere Kesava & Brothers Silks', line: 'Run a textile business from yarn to sale. Six role portals, GST billing, WhatsApp reports.', mk: 'silkerp', status: 'Live', deck: 'beere-kesava/', p: 'bk' },
-  { name: 'Agency OS', from: 'Our own product', line: 'Run a whole agency in one place. Leads, projects, client portals and the playbook.', mk: 'agencyos', status: 'Live', deck: 'agency-os/', p: 'agencyos' },
-  { name: 'S-Campus', from: 'College management SaaS', line: 'Admissions to transport. Nine portals, one platform for the whole college.', mk: 'scampus', status: 'Design ready', p: 'scampus' }
+  { name: 'Silk ERP', from: 'Built for Beere Kesava & Brothers Silks', line: 'Run a textile business from yarn to sale. Six role portals, GST billing, WhatsApp reports.', dg: 'silk', status: 'Live', deck: 'beere-kesava/', p: 'bk' },
+  { name: 'Agency OS', from: 'Our own product', line: 'Run a whole agency in one place. Leads, projects, client portals and the playbook.', dg: 'aos', status: 'Live', deck: 'agency-os/', p: 'agencyos' },
+  { name: 'S-Campus', from: 'College management SaaS', line: 'Admissions to transport. Nine portals, one platform for the whole college.', dg: 'scampus', status: 'Design ready', p: 'scampus' }
 ];
 
 const STAGES = [
@@ -2229,14 +2339,27 @@ function renderServices() {
     <ul class="ticks">${c.inc.map(t => `<li>${esc(t)}</li>`).join('')}</ul>
     <div class="svc__foot"><span class="svc__work">Seen in ${esc(c.work)}</span><a class="link-arrow" href="#contact" data-need="${esc(c.need)}">Start this project <svg viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-r"/></svg></a></div></div></article>`).join('');
   $('#also').innerHTML = ALSO.map(([t, l], i) => `<div class="also__item"><span class="eyebrow tnum">${pad(i + 1)}</span><b>${esc(t)}</b><span>${esc(l)}</span></div>`).join('');
-  $('#res').innerHTML = RES.map((r, i) => `<a class="res${i === 1 ? ' is--hot' : ''}" href="${r.href}"><span class="res__view">${MK[r.mk]()}</span><span class="res__body"><span class="eyebrow">${esc(r.tag)}</span><b class="h-s">${esc(r.name)}</b><span class="res__line">${esc(r.line)}</span><span class="res__cta">${esc(r.cta)} <svg viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-ur"/></svg></span></span></a>`).join('');
+  $('#res').innerHTML = RES.map((r, i) => `<a class="res${i === 1 ? ' is--hot' : ''}" href="${r.href}"><span class="res__view">${DG[r.dg]()}</span><span class="res__body"><span class="eyebrow">${esc(r.tag)}</span><b class="h-s">${esc(r.name)}</b><span class="res__line">${esc(r.line)}</span><span class="res__cta">${esc(r.cta)} <svg viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-ur"/></svg></span></span></a>`).join('');
   $('#prods').innerHTML = PRODS.map(x => {
     const live = byId(x.p).live;
-    return `<article class="prod"><div class="prod__view">${MK[x.mk]()}<span class="tag" data-theme="${x.status === 'Live' ? 'volt' : 'white'}" data-shape="round">${x.status}</span></div>
+    return `<article class="prod"><div class="prod__view">${DG[x.dg]()}<span class="tag" data-theme="${x.status === 'Live' ? 'volt' : 'white'}" data-shape="round">${x.status}</span></div>
     <div class="prod__body"><p class="eyebrow">${esc(x.from)}</p><h3 class="h-s">${esc(x.name)}</h3><p class="p-s">${esc(x.line)}</p>
     <div class="prod__acts">${x.deck ? `<a class="btn" data-theme="volt" href="${x.deck}"><span class="btn__label">Open pitch deck</span>${arrow}</a>` : ''}${live ? `<button class="btn" type="button" data-theme="${x.deck ? 'glass' : 'volt'}" data-shape="round" data-live="${x.p}"><span class="btn__label">${x.deck ? 'Preview' : 'Preview the design'}</span></button>` : ''}</div>
     <a class="link-arrow is--light" href="#contact" data-need="Something like your products" data-product="${esc(x.name)}">Build something like this <svg viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-r"/></svg></a></div></article>`;
   }).join('');
+}
+
+/* Diagrams come alive in view and rest when they leave it */
+function initDiagrams() {
+  $$('.dg').forEach(el => {
+    const svgs = $$('svg', el).filter(x => x.pauseAnimations);
+    if (reduce) { el.classList.add('is--in'); svgs.forEach(x => x.pauseAnimations()); return; }
+    onVisible(el, v => {
+      if (v) el.classList.add('is--in');
+      el.classList.toggle('is--live', v);
+      svgs.forEach(x => (v ? x.unpauseAnimations() : x.pauseAnimations()));
+    }, { threshold: 0.3 });
+  });
 }
 
 /* ---------- Process: stages + draggable phase cards ---------- */
@@ -2314,7 +2437,7 @@ function initImages() {
   });
 }
 
-/* ---------- The brief: five questions, saved to our leads ---------- */
+/* ---------- The brief: a short chat that draws your project map, saved to our leads ---------- */
 const ICON = {
   web: '<rect x="3" y="5" width="26" height="22" rx="3"/><path d="M3 11h26M8 8h.01M12 8h.01"/>',
   erp: '<rect x="4" y="4" width="10" height="10" rx="2"/><rect x="18" y="4" width="10" height="10" rx="2"/><rect x="4" y="18" width="10" height="10" rx="2"/><path d="M18 23h10M23 18v10"/>',
@@ -2326,142 +2449,213 @@ const ICON = {
   unsure: '<circle cx="16" cy="16" r="12"/><path d="M12.5 12.5a3.6 3.6 0 1 1 5 3.3c-1 .5-1.5 1.2-1.5 2.2v1M16 23h.01"/>'
 };
 const STEPS = [
-  { id: 'needs', q: 'What are we building together?', hint: 'Pick all that apply.', multi: true, opts: [['Website', 'web'], ['ERP or dashboard', 'erp'], ['SaaS or web app', 'saas'], ['Mobile app', 'app'], ['UI/UX design', 'ux'], ['Something like your products', 'prod'], ['Brand or pitch deck', 'brand'], ['Not sure yet', 'unsure']] },
-  { id: 'stage', q: 'Where are you today?', hint: 'Pick one.', opts: [['Just an idea'], ['I have designs'], ['I have a product to improve'], ['I need it live fast']] },
-  { id: 'when', q: 'When do you want to launch?', hint: 'Pick one.', opts: [['As soon as possible'], ['In 1–2 months'], ['In 3+ months'], ['Just exploring']] },
-  { id: 'message', q: 'Tell us a little about it', hint: 'Optional. A few lines is plenty.', type: 'text', prompts: ['Who is it for?', 'What problem does it solve?', 'A site or app you like?'] },
-  { id: 'contact', q: 'Where can we reach you?', hint: 'Your name, plus a phone number or email.', type: 'contact' }
+  { id: 'needs', label: 'What', q: 'Hi! What are we building together?', hint: 'Pick all that apply.', multi: true, opts: [['Website', 'web'], ['ERP or dashboard', 'erp'], ['SaaS or web app', 'saas'], ['Mobile app', 'app'], ['UI/UX design', 'ux'], ['Something like your products', 'prod'], ['Brand or pitch deck', 'brand'], ['Not sure yet', 'unsure']] },
+  { id: 'stage', label: 'Stage', q: 'Nice. Where are you today?', opts: [['Just an idea'], ['I have designs'], ['I have a product to improve'], ['I need it live fast']] },
+  { id: 'when', label: 'Launch', q: 'When do you want to launch?', opts: [['As soon as possible'], ['In 1–2 months'], ['In 3+ months'], ['Just exploring']] },
+  { id: 'message', label: 'About', q: 'Tell us a little about it. Who is it for, and what should it do?', type: 'text', prompts: ['It’s for…', 'It should help people…', 'A site or app we like:'] },
+  { id: 'contact', label: 'You', q: 'Last one. Where can we reach you?', type: 'contact' }
 ];
-const brief = { needs: [], stage: '', when: '', message: '', name: '', phone: '', email: '', company: '' };
-let qStep = 0, sending = false;
-const qBody = () => $('#qz-body');
+/* Which of the seven phases a project goes through, by where it starts */
+const STAGE_PATH = { 'Just an idea': [0, 1, 2, 3, 4, 5, 6], 'I have designs': [0, 4, 5, 6], 'I have a product to improve': [0, 1, 3, 4, 5, 6], 'I need it live fast': [0, 3, 4, 5] };
+const EMPTY = { needs: [], stage: '', when: '', message: '', name: '', phone: '', email: '', company: '' };
+const brief = { ...EMPTY, needs: [] };
+let qStep = 0, sending = false, done = false, asking = 0;
+const chatLog = () => $('#chat-log'), dock = () => $('#chat-dock');
+const DAY = '<p class="chat__day">Today</p>';
 function timeHint() {
   const big = ['ERP or dashboard', 'SaaS or web app', 'Mobile app', 'Something like your products'];
   if (brief.needs.some(n => big.includes(n))) return 'Typical time: 2–8 weeks for a full product.';
   if (brief.needs.includes('Website')) return 'Typical time: 4–7 days for a simple website.';
   return '';
 }
-function paintDoc() {
-  const set = (k, v) => { const el = $(`#bdoc [data-b="${k}"]`); if (!el) return; el.textContent = v || '—'; el.classList.toggle('is--set', !!v); };
-  set('needs', brief.needs.join(', '));
-  set('stage', brief.stage);
-  set('when', brief.when);
-  set('message', brief.message);
-  set('name', [brief.name, brief.company].filter(Boolean).join(' · '));
-  $('#bdoc-time').textContent = timeHint();
+const SHORT = { 'ERP or dashboard': 'ERP / dashboard', 'SaaS or web app': 'SaaS / web app', 'Something like your products': 'Like your products', 'Brand or pitch deck': 'Brand / deck' };
+/* Keep every node inside the map, and draw its line from the centre */
+function placeNodes(fresh = []) {
+  const wrap = $('#pmap-nodes'), W = wrap.parentNode.clientWidth;
+  const nodes = $$('.pmap__node[data-v]', wrap);
+  if (!W) return;
+  $('#pmap-lines').innerHTML = nodes.map(el => {
+    const half = el.offsetWidth / 2, x = clamp(+el.dataset.x / 100 * W, half + 6, W - half - 6);
+    el.style.left = x + 'px';
+    el.style.top = el.dataset.y + '%';
+    return `<line x1="50" y1="50" x2="${(x / W * 100).toFixed(1)}" y2="${el.dataset.y}"${fresh.includes(el.dataset.v) ? ' class="is--new"' : ''}/>`;
+  }).join('');
 }
-function renderStep() {
-  const s = STEPS[qStep];
-  $('#qz-count').textContent = `${pad(qStep + 1)} / ${pad(STEPS.length)}`;
-  $('#qz-bar').style.transform = `scaleX(${(qStep + 1) / STEPS.length})`;
-  $('[data-qz-back]').hidden = qStep === 0;
-  let inner = `<h3 class="qz__q">${esc(s.q)}</h3><p class="qz__hint">${esc(s.hint)}</p>`;
+function paintMap() {
+  const needs = brief.needs, n = needs.length;
+  const narrow = $('.pmap__orbit').clientWidth < 480, rx = narrow ? 34 : 36, ry = narrow ? 37 : 33;
+  const pos = needs.map((_, i) => { const a = ((n < 3 ? 0 : -90) + i * 360 / n) * Math.PI / 180; return [50 + Math.cos(a) * rx, 50 + Math.sin(a) * ry]; });
+  const iconOf = v => (STEPS[0].opts.find(o => o[0] === v) || [])[1] || 'unsure';
+  const wrap = $('#pmap-nodes'), fresh = [];
+  if (!n) {
+    wrap.innerHTML = [[14, 50], [86, 50], [50, 12]].map(([x, y]) => `<span class="pmap__node is--ghost" style="left:${x}%;top:${y}%">?</span>`).join('');
+  } else {
+    $$('.is--ghost', wrap).forEach(g => g.remove());
+    const have = new Map($$('.pmap__node', wrap).map(el => [el.dataset.v, el]));
+    have.forEach((el, v) => { if (!needs.includes(v)) el.remove(); });
+    needs.forEach((v, i) => {
+      let el = have.get(v);
+      if (el) el.classList.remove('is--new');
+      else {
+        el = document.createElement('span');
+        el.className = 'pmap__node is--new';
+        el.dataset.v = v;
+        el.innerHTML = `<svg viewBox="0 0 32 32" aria-hidden="true">${ICON[iconOf(v)]}</svg>${esc(SHORT[v] || v)}`;
+        wrap.appendChild(el);
+        fresh.push(v);
+      }
+      el.dataset.x = pos[i][0].toFixed(1);
+      el.dataset.y = pos[i][1].toFixed(1);
+    });
+  }
+  placeNodes(fresh);
+  $('#pmap-name').textContent = brief.company || (brief.name ? brief.name.split(' ')[0] + '’s project' : 'Your project');
+  const on = STAGE_PATH[brief.stage] || [];
+  $$('#pmap-path li').forEach((li, i) => { li.classList.toggle('is--on', on.includes(i)); li.classList.toggle('is--first', on[0] === i); });
+  const flag = $('#pmap-flag');
+  flag.textContent = brief.when ? 'Launch · ' + brief.when : 'Launch';
+  flag.classList.toggle('is--set', !!brief.when);
+  $('#pmap-est').textContent = timeHint() || (n ? 'We plan the timeline with you.' : 'Your timeline appears as you answer.');
+  $('#pmap-about').textContent = brief.message ? '“' + brief.message.trim().slice(0, 90) + (brief.message.trim().length > 90 ? '…”' : '”') : '';
+}
+function scrollLog() { const l = chatLog(); l.scrollTo({ top: l.scrollHeight, behavior: reduce ? 'auto' : 'smooth' }); }
+function say(html, who = 'bot') { const m = document.createElement('div'); m.className = 'msg is--' + who; m.innerHTML = html; chatLog().appendChild(m); scrollLog(); return m; }
+function botSay(html) {
+  return new Promise(res => {
+    if (reduce) { say(html); res(); return; }
+    const t = say('<i></i><i></i><i></i>', 'typing');
+    setTimeout(() => { t.remove(); say(html); res(); }, 700);
+  });
+}
+function paintSteps() {
+  $$('#chat-steps li').forEach((li, i) => { li.classList.toggle('is--on', i === qStep && !done); li.classList.toggle('is--done', done || i < qStep); });
+  $('[data-chat-reset]').hidden = qStep === 0 && !done;
+}
+function dockHTML(s) {
   if (s.opts) {
     const val = brief[s.id];
-    inner += `<div class="qz__opts${s.multi ? '' : ' is--list'}">${s.opts.map(([label, ic]) => {
+    return `<div class="chat__opts${s.multi ? '' : ' is--one'}">${s.opts.map(([label, ic]) => {
       const on = s.multi ? val.includes(label) : val === label;
-      return `<button type="button" class="qz__opt" data-v="${esc(label)}" aria-pressed="${on}">${ic ? `<svg viewBox="0 0 32 32" aria-hidden="true">${ICON[ic]}</svg>` : ''}<b>${esc(label)}</b><i class="qz__tick" aria-hidden="true"></i></button>`;
-    }).join('')}</div>`;
-    if (s.multi) inner += `<div class="qz__next"><p class="qz__time">${esc(timeHint())}</p><button class="btn" type="submit" data-theme="volt" data-size="l"${val.length ? '' : ' disabled'}><span class="btn__label">Continue</span></button></div>`;
-  } else if (s.type === 'text') {
-    inner += `<textarea class="qz__ta" name="message" rows="5" maxlength="2000" placeholder="We run a … and want to …">${esc(brief.message)}</textarea><div class="qz__prompts">${s.prompts.map(t => `<button type="button" class="chip" data-prompt="${esc(t)}">+ ${esc(t)}</button>`).join('')}</div>
-      <div class="qz__next"><span></span><button class="btn" type="submit" data-theme="volt" data-size="l"><span class="btn__label">${brief.message ? 'Continue' : 'Skip for now'}</span></button></div>`;
-  } else {
-    const f = (name, label, type, ac, ph) => `<label class="qz__f"><span>${label}</span><input name="${name}" type="${type}" autocomplete="${ac}" placeholder="${ph}" value="${esc(brief[name])}" maxlength="${name === 'phone' ? 30 : 120}"></label>`;
-    inner += `<div class="qz__fields">${f('name', 'Your name', 'text', 'name', 'Full name')}${f('company', 'Company', 'text', 'organization', 'Optional')}${f('phone', 'Phone / WhatsApp', 'tel', 'tel', '+91')}${f('email', 'Email', 'email', 'email', 'you@company.com')}</div>
-      <label class="qz__hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
-      <p class="qz__err" role="alert" id="qz-err"></p>
-      <div class="qz__next"><span class="qz__time">We reply on the number or email you give.</span><button class="btn" type="submit" data-theme="volt" data-size="l"><span class="btn__label">Send my brief</span>${arrow}</button></div>`;
+      return `<button type="button" class="chat__opt" data-v="${esc(label)}" aria-pressed="${on}">${ic ? `<svg viewBox="0 0 32 32" aria-hidden="true">${ICON[ic]}</svg>` : ''}<span>${esc(label)}</span></button>`;
+    }).join('')}</div>${s.multi ? `<div class="chat__send"><span class="chat__hint">${esc(timeHint())}</span><button class="btn" type="submit" data-theme="volt"${val.length ? '' : ' disabled'}><span class="btn__label">Continue</span>${arrow}</button></div>` : ''}`;
   }
-  const body = qBody();
-  body.innerHTML = `<div class="qz__step">${inner}</div>`;
-  initButtons(body);
-  paintDoc();
+  if (s.type === 'text') {
+    return `<textarea class="chat__ta" name="message" rows="3" maxlength="2000" aria-label="About your project" placeholder="We run a … and want to …">${esc(brief.message)}</textarea>
+      <div class="chat__prompts">${s.prompts.map(t => `<button type="button" class="chat__chip" data-prompt="${esc(t)}">+ ${esc(t)}</button>`).join('')}</div>
+      <div class="chat__send"><button type="button" class="chat__skip" data-skip>Skip</button><button class="btn" type="submit" data-theme="volt"><span class="btn__label">Send</span>${arrow}</button></div>`;
+  }
+  const f = (name, label, type, ac, ph) => `<label class="chat__f"><span>${label}</span><input name="${name}" type="${type}" autocomplete="${ac}" placeholder="${ph}" value="${esc(brief[name])}" maxlength="${name === 'phone' ? 30 : 120}"></label>`;
+  return `<div class="chat__fields">${f('name', 'Your name', 'text', 'name', 'Full name')}${f('company', 'Company', 'text', 'organization', 'Optional')}${f('phone', 'Phone / WhatsApp', 'tel', 'tel', '+91')}${f('email', 'Email', 'email', 'email', 'you@company.com')}</div>
+    <label class="chat__hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
+    <p class="chat__err" role="alert" id="chat-err"></p>
+    <div class="chat__send"><span class="chat__hint">A name, plus a phone number or email.</span><button class="btn" type="submit" data-theme="volt"><span class="btn__label">Send my brief</span>${arrow}</button></div>`;
 }
-function goStep(n) { qStep = clamp(n, 0, STEPS.length - 1); renderStep(); const f = $('.qz__opt, textarea, input', qBody()); if (f && !isMobile()) f.focus({ preventScroll: true }); }
+async function ask(i) {
+  const me = ++asking;
+  qStep = i; paintSteps();
+  dock().innerHTML = '';
+  const s = STEPS[i];
+  await botSay(`${esc(s.q)}${s.hint ? `<small>${esc(s.hint)}</small>` : ''}`);
+  if (me !== asking) return;
+  dock().innerHTML = dockHTML(s);
+  initButtons(dock());
+  scrollLog();
+  const f = $('.chat__opt, textarea, input', dock());
+  if (f && i > 0 && !isMobile() && chatLog().getBoundingClientRect().top < innerHeight) f.focus({ preventScroll: true });
+}
+const answer = text => say(esc(text), 'me');
 function waText() {
   return ['Hi One Stop Solutions,', brief.message || 'I have a project in mind.', brief.needs.length ? 'Building: ' + brief.needs.join(', ') : '', brief.stage ? 'Stage: ' + brief.stage : '', brief.when ? 'Launch: ' + brief.when : '', brief.name ? 'Name: ' + brief.name : ''].filter(Boolean).join('\n');
 }
 async function sendBrief(form) {
   const v = k => String(new FormData(form).get(k) || '').trim();
   ['name', 'company', 'phone', 'email'].forEach(k => { brief[k] = v(k); });
-  paintDoc();
-  const err = $('#qz-err');
+  paintMap();
+  const err = $('#chat-err');
   if (!brief.name) { err.textContent = 'Please add your name.'; return; }
   if (!brief.phone && !brief.email) { err.textContent = 'Please add a phone number or email, so we can reply.'; return; }
   if (brief.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(brief.email)) { err.textContent = 'That email doesn’t look right.'; return; }
   if (sending) return;
-  sending = true;
-  err.textContent = '';
-  form.classList.add('is--sending');
+  sending = true; err.textContent = ''; form.classList.add('is--sending');
   let ok = false, msg = '';
   try {
     const r = await fetch('/api/leads', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...brief, website: v('website') }) });
     ok = r.ok;
     if (!ok) msg = (await r.json().catch(() => ({}))).error || '';
   } catch (e) { msg = ''; }
-  sending = false;
-  form.classList.remove('is--sending');
+  sending = false; form.classList.remove('is--sending');
   if (!ok) {
     err.innerHTML = `${esc(msg || 'We couldn’t send your brief just now.')} <a href="https://wa.me/${WA}?text=${encodeURIComponent(waText())}" target="_blank" rel="noopener">Send it on WhatsApp instead →</a>`;
     return;
   }
-  $('#bdoc').classList.add('is--sent');
-  $('#qz-count').textContent = 'Sent';
-  $('#qz-bar').style.transform = 'scaleX(1)';
-  $('[data-qz-back]').hidden = true;
-  qBody().innerHTML = `<div class="qz__step qz__done"><span class="qz__check"><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#i-check"/></svg></span><h3 class="qz__q">Thanks, ${esc(brief.name.split(' ')[0])}. Your brief is with us.</h3>
-    <ol class="qz__then"><li><b>01</b>We read your brief.</li><li><b>02</b>We call you to talk it through.</li><li><b>03</b>You get a clear plan and timeline.</li></ol>
-    <div class="btn-row"><button class="btn" type="button" data-theme="white" data-shape="round" data-qz-again><span class="btn__label">Send another brief</span></button><a class="btn" data-theme="glass" data-shape="round" href="#work"><span class="btn__label">Look at our work</span></a></div></div>`;
-  initButtons(qBody());
+  done = true; paintSteps();
+  answer([brief.name, brief.phone || brief.email].join(' · '));
+  dock().innerHTML = '';
+  $('#pmap').classList.add('is--sent');
+  await botSay(`Thanks, ${esc(brief.name.split(' ')[0])}. Your brief is with us.<ol class="msg__then"><li><b>01</b>We read your brief.</li><li><b>02</b>We call you to talk it through.</li><li><b>03</b>You get a clear plan and timeline.</li></ol>`);
+  dock().innerHTML = `<div class="chat__send is--end"><button class="btn" type="button" data-theme="ink" data-shape="round" data-chat-reset-btn><span class="btn__label">Send another brief</span></button><a class="btn" data-theme="bone" data-shape="round" href="#work"><span class="btn__label">Look at our work</span></a></div>`;
+  initButtons(dock());
+  scrollLog();
+}
+function resetChat() {
+  Object.assign(brief, EMPTY, { needs: [] });
+  done = false; chatLog().innerHTML = DAY;
+  $('#pmap').classList.remove('is--sent');
+  paintMap(); ask(0);
 }
 function initBrief() {
-  const body = qBody();
-  renderStep();
-  body.addEventListener('click', e => {
-    const o = e.target.closest('.qz__opt');
+  const d = dock();
+  d.addEventListener('click', e => {
+    const o = e.target.closest('.chat__opt');
     if (o) {
       const s = STEPS[qStep], v = o.dataset.v;
       if (s.multi) {
         brief.needs = brief.needs.includes(v) ? brief.needs.filter(x => x !== v) : brief.needs.concat(v);
         o.setAttribute('aria-pressed', String(brief.needs.includes(v)));
-        $('.qz__next .btn', body).disabled = !brief.needs.length;
-        $('.qz__time', body).textContent = timeHint();
-        paintDoc();
+        $('.chat__send .btn', d).disabled = !brief.needs.length;
+        $('.chat__hint', d).textContent = timeHint();
+        paintMap();
       } else {
         brief[s.id] = v;
-        $$('.qz__opt', body).forEach(x => x.setAttribute('aria-pressed', String(x === o)));
-        paintDoc();
-        setTimeout(() => goStep(qStep + 1), reduce ? 0 : 260);
+        $$('.chat__opt', d).forEach(x => { x.setAttribute('aria-pressed', String(x === o)); x.disabled = true; });
+        paintMap(); answer(v);
+        ask(qStep + 1);
       }
       return;
     }
     const pr = e.target.closest('[data-prompt]');
-    if (pr) { const ta = $('textarea', body); ta.value = (ta.value ? ta.value.trim() + '\n' : '') + pr.dataset.prompt + ' '; ta.focus(); ta.dispatchEvent(new Event('input', { bubbles: true })); return; }
-    if (e.target.closest('[data-qz-again]')) { Object.assign(brief, { needs: [], stage: '', when: '', message: '', name: '', phone: '', email: '', company: '' }); $('#bdoc').classList.remove('is--sent'); goStep(0); }
+    if (pr) { const ta = $('textarea', d); ta.value = (ta.value.trim() ? ta.value.trim() + '\n' : '') + pr.dataset.prompt + ' '; ta.focus(); ta.dispatchEvent(new Event('input', { bubbles: true })); return; }
+    if (e.target.closest('[data-skip]')) { brief.message = ''; paintMap(); answer('Skip for now'); ask(4); return; }
+    if (e.target.closest('[data-chat-reset-btn]')) resetChat();
   });
-  body.addEventListener('input', e => {
-    const er = $('#qz-err', body); if (er && er.textContent) er.textContent = '';
-    if (e.target.name === 'message') { brief.message = e.target.value; const b = $('.qz__next .btn__label', body); if (b) b.textContent = brief.message.trim() ? 'Continue' : 'Skip for now'; paintDoc(); }
-    else if (['name', 'company'].includes(e.target.name)) { brief[e.target.name] = e.target.value; paintDoc(); }
+  d.addEventListener('input', e => {
+    const er = $('#chat-err', d); if (er && er.textContent) er.textContent = '';
+    if (e.target.name === 'message') { brief.message = e.target.value; paintMap(); }
+    else if (['name', 'company'].includes(e.target.name)) { brief[e.target.name] = e.target.value; paintMap(); }
   });
-  body.addEventListener('submit', e => {
+  d.addEventListener('submit', e => {
     e.preventDefault();
     const s = STEPS[qStep];
-    if (s.type === 'contact') sendBrief(body);
-    else if (!s.multi || brief.needs.length) goStep(qStep + 1);
+    if (s.multi) { if (!brief.needs.length) return; answer(brief.needs.join(', ')); ask(1); }
+    else if (s.type === 'text') { answer(brief.message.trim() || 'Skip for now'); ask(4); }
+    else if (s.type === 'contact') sendBrief(d);
   });
-  $('[data-qz-back]').addEventListener('click', () => goStep(qStep - 1));
-  /* Buttons elsewhere on the page that start a brief */
+  $('[data-chat-reset]').addEventListener('click', resetChat);
+  /* "Start this project" and "Build something like this" pre-fill the first answer */
   document.addEventListener('click', e => {
     const a = e.target.closest('[data-need]');
-    if (!a) return;
+    if (!a || done) return;
     if (!brief.needs.includes(a.dataset.need)) brief.needs = brief.needs.concat(a.dataset.need);
-    if (a.dataset.product) brief.message = brief.message || `I’d like something like your ${a.dataset.product}.`;
-    if (qStep === 0) renderStep(); else paintDoc();
+    if (a.dataset.product && !brief.message) brief.message = `I’d like something like your ${a.dataset.product}.`;
+    if (qStep === 0 && $('.chat__opts', d)) { d.innerHTML = dockHTML(STEPS[0]); initButtons(d); }
+    paintMap();
   });
-  const d = new Date();
-  $('#bdoc-date').textContent = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  $('#pmap-date').textContent = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  window.addEventListener('resize', () => requestAnimationFrame(paintMap));
+  paintMap(); paintSteps();
+  chatLog().innerHTML = DAY;
+  /* Start the chat when the section comes into view */
+  onVisible($('#contact'), (v, io) => { if (v) { io.disconnect(); ask(0); } }, { threshold: 0.15 });
 }
 
 /* ---------- Leads: footer button, code, list ---------- */
@@ -2584,6 +2778,7 @@ function initDepth() {
 
 /* ---------- Boot ---------- */
 safe('render', () => { renderReel(); renderCases(); renderServices(); renderProcess(); renderPeople(); renderAll(); });
+safe('diagrams', initDiagrams);
 safe('images', initImages);
 safe('buttons', () => initButtons());
 safe('lenis', initLenis);

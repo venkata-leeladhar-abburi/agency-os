@@ -744,4 +744,14 @@ safe('lenis', initLenis);
 safe('nav', initNav);
 safe('events', initGlobalEvents);
 safe('playbook', initPlaybook);
+/* The tab bar gets a solid backing while it is stuck, so cards never show between it and the menu */
+safe('sticky-tabs', () => {
+  const wrap = $('.pb-tabs-wrap');
+  if (!wrap) return;
+  let ticking = false;
+  const check = () => { ticking = false; const top = parseFloat(getComputedStyle(wrap).top) || 0; wrap.classList.toggle('is--stuck', wrap.getBoundingClientRect().top <= top + 1); };
+  window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(check); } }, { passive: true });
+  window.addEventListener('resize', check);
+  check();
+});
 connect().catch(err => { console.error('[connect]', err); setMode('offline'); });
