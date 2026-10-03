@@ -229,6 +229,25 @@ def build():
     write(os.path.join(ART_DIR, 'one-stop-pitch.html'), recolor(fragment(title, css, body, tags, js), 'pitch'))
     print(f'pitch: {len(full.encode()):,} bytes')
 
+    # ---------- Our process: the same page, starting at the seven phases ----------
+    proc_css = css + ('\n/* Our process page: start at the seven phases */\n'
+                      '#top,#reel,#intro,#problem,#services{display:none!important}')
+    proc_body = body
+    for a, b, n in (('<h2 class="h-l" data-reveal>Seven phases. No surprises.</h2>', '<h1 class="h-l" data-reveal>Seven phases. No surprises.</h1>', 1),
+                    ('href="#top"', 'href="#process"', None), ('href="#services"', 'href="../pitch/#services"', None),
+                    ('href="#problem"', 'href="../pitch/#problem"', None), ('href="#intro"', 'href="../pitch/#intro"', None)):
+        assert n is None or proc_body.count(a) == n, a
+        proc_body = proc_body.replace(a, b)
+    check({'css': proc_css, 'body': proc_body, 'js': js})
+    ptitle, pdesc = 'Our process · One Stop Solutions', ('How One Stop Solutions works: seven phases from the first call '
+                                                          'to growth, with your sign-off at every gate.')
+    proc, _ = page(ptitle, pdesc, proc_css, proc_body, js, GSAP + [LENIS],
+                   f'<meta property="og:title" content="{ptitle}">\n<meta property="og:description" content="{pdesc}">\n'
+                   '<meta property="og:type" content="website">\n')
+    proc = recolor(proc, 'pitch')
+    write(os.path.join(REPO, 'process', 'index.html'), proc)
+    print(f'process: {len(proc.encode()):,} bytes')
+
     # ---------- Team playbook ----------
     if not os.path.exists(os.path.join(SRC2, 'playbook.js')):
         return

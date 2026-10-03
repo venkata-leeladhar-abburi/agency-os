@@ -1392,7 +1392,7 @@ a.contact-list__value{user-select:auto;-webkit-user-select:auto}
             <div>
               <span class="nav__col-title eyebrow">Open</span>
               <nav class="nav__links" aria-label="Our process, playbook and decks">
-                <a href="pitch/#process">Our process <span class="eyebrow">↗</span></a>
+                <a href="process/">Our process <span class="eyebrow">↗</span></a>
                 <a href="playbook/">The playbook <span class="eyebrow">↗</span></a>
                 <a href="pitch/">Client pitch <span class="eyebrow">↗</span></a>
                 <a href="agency-os/">Agency OS deck <span class="eyebrow">↗</span></a>
@@ -1449,7 +1449,7 @@ a.contact-list__value{user-select:auto;-webkit-user-select:auto}
     </div>
     <nav class="oh__links" aria-label="Open our process, playbook and decks" data-hero-fade>
       <span class="eyebrow">Open</span>
-      <a href="pitch/#process"><i></i>Our process</a>
+      <a href="process/"><i></i>Our process</a>
       <a href="playbook/"><i></i>The playbook</a>
       <a href="pitch/"><i></i>Client pitch</a>
       <a href="agency-os/"><i></i>Agency OS deck</a>
@@ -1694,7 +1694,7 @@ a.contact-list__value{user-select:auto;-webkit-user-select:auto}
         </div>
         <div class="footer__cols">
           <div><h3 class="h-xs">Studio</h3><ul><li><a href="#work">Work</a></li><li><a href="#services">Services</a></li><li><a href="#products">Products</a></li><li><a href="#team">Team</a></li></ul></div>
-          <div><h3 class="h-xs">How we work</h3><ul><li><a href="pitch/#process">Our process</a></li><li><a href="playbook/">The playbook</a></li><li><a href="pitch/">Client pitch</a></li><li><a href="#faq">Questions</a></li></ul></div>
+          <div><h3 class="h-xs">How we work</h3><ul><li><a href="process/">Our process</a></li><li><a href="playbook/">The playbook</a></li><li><a href="pitch/">Client pitch</a></li><li><a href="#faq">Questions</a></li></ul></div>
           <div><h3 class="h-xs">Decks</h3><ul><li><a href="agency-os/">Agency OS deck</a></li><li><a href="beere-kesava/">Silk ERP deck</a></li><li><button type="button" data-all-open>All projects</button></li><li><a href="#contact">Start a project</a></li></ul></div>
         </div>
       </div>
@@ -2025,16 +2025,37 @@ function initCursor(openSel) {
 
 /* Smooth scrolling */
 function initLenis() {
-  if (!window.Lenis || reduce) return;
-  lenis = new window.Lenis({ lerp: 0.1, smoothWheel: true });
-  if (hasG && window.ScrollTrigger) {
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add(t => lenis.raf(t * 1000));
-    gsap.ticker.lagSmoothing(0);
-  } else {
-    const raf = t => { lenis.raf(t); requestAnimationFrame(raf); };
-    requestAnimationFrame(raf);
+  if (window.Lenis && !reduce) {
+    lenis = new window.Lenis({ lerp: 0.1, smoothWheel: true });
+    if (hasG && window.ScrollTrigger) {
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add(t => lenis.raf(t * 1000));
+      gsap.ticker.lagSmoothing(0);
+    } else {
+      const raf = t => { lenis.raf(t); requestAnimationFrame(raf); };
+      requestAnimationFrame(raf);
+    }
   }
+  landOnHash();
+}
+
+/* Opened with a #section in the link: stay on it while fonts and images settle, until the visitor scrolls */
+function landOnHash() {
+  let id = '';
+  try { id = decodeURIComponent(location.hash.slice(1)); } catch (e) { return; }
+  const t = id && document.getElementById(id);
+  if (!t) return;
+  let moved = false;
+  ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(ev => window.addEventListener(ev, () => { moved = true; }, { once: true, passive: true }));
+  const go = () => {
+    const top = t.getBoundingClientRect().top;
+    if (moved || Math.abs(top) < 2) return;
+    if (lenis) lenis.scrollTo(top + window.scrollY, { immediate: true, force: true });
+    else window.scrollTo(0, top + window.scrollY);
+  };
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(go);
+  if (document.readyState === 'complete') go();
+  else window.addEventListener('load', () => { go(); setTimeout(go, 500); }, { once: true });
 }
 
 /* Scroll reveals, counters, rotating dotted circles, footer logo parallax */
@@ -2099,8 +2120,8 @@ const P = [
       result: ['It looked and felt like a product launch.', 'Strong buzz across the student community.'] } },
   { id: 'aaravi', name: 'Aaravi Collectives', what: 'A brand website for a luxury silk saree label.',
     desc: 'Aaravi Collectives is a new silk saree brand. The site tells its heritage story in cinematic scenes and builds a waitlist before launch.',
-    cat: 'web', key: 'aaravi', cover: 4, imgs: [[4, 'desk'], [1, 'desk'], [2, 'desk'], [3, 'desk'], [5, 'desk'], [6, 'desk']], url: 'aaravi collectives',
-    live: '', links: [], tags: ['Brand website', 'Storytelling', 'Waitlist'], client: 'Aaravi Collectives', platform: 'Brand website', scope: 'Brand story, UX/UI, web build',
+    cat: 'web', key: 'aaravi', cover: 4, imgs: [[4, 'desk'], [1, 'desk'], [2, 'desk'], [3, 'desk'], [5, 'desk'], [6, 'desk']], url: 'aaravi-collectives.vercel.app',
+    live: 'https://aaravi-collectives.vercel.app/', liveName: 'Aaravi Collectives', links: [['View live', 'https://aaravi-collectives.vercel.app/']], tags: ['Brand website', 'Storytelling', 'Waitlist'], client: 'Aaravi Collectives', platform: 'Brand website', scope: 'Brand story, UX/UI, web build',
     cs: { challenge: 'A new label has to earn trust before its first sale.',
       competitor: ['Saree sites: product grids with little story.', 'A luxury feel is rare online.', 'The gap: heritage, told like cinema.'],
       research: ['Studied how buyers choose silk: trust, story, craft.', 'Looked at luxury fashion sites for pace and tone.'],
@@ -2230,7 +2251,7 @@ const DG = {
   }
 };
 const RES = [
-  { dg: 'process', tag: 'How we work', name: 'Our process', line: 'Seven phases. Your sign-off at every gate.', href: 'pitch/#process', cta: 'See the process' },
+  { dg: 'process', tag: 'How we work', name: 'Our process', line: 'Seven phases. Your sign-off at every gate.', href: 'process/', cta: 'See the process' },
   { dg: 'playbook', tag: 'Inside the team', name: 'The playbook', line: 'Every phase has a checklist, files and an exit gate.', href: 'playbook/', cta: 'Open the playbook' },
   { dg: 'pitch', tag: 'For clients', name: 'Client pitch', line: 'What we do, how we work and what you keep.', href: 'pitch/', cta: 'Open the pitch' }
 ];
@@ -2355,7 +2376,7 @@ function caseHTML(p) {
     ${step('05', 'Build', 'Build', `<ul class="pills is--dark">${c.stack.map(s => `<li>${esc(s)}</li>`).join('')}</ul>${ul(c.build)}`)}
     ${step('06', 'Test and launch', 'Launch', ul(c.launch))}
     </div>
-    <section class="cm__result"><p class="eyebrow">The result</p>${c.result.map(r => `<p class="h-s">${esc(r)}</p>`).join('')}<a class="btn" data-theme="ink" data-shape="round" href="pitch/#process"><span class="btn__label">See our full process</span>${arrow}</a></section>
+    <section class="cm__result"><p class="eyebrow">The result</p>${c.result.map(r => `<p class="h-s">${esc(r)}</p>`).join('')}<a class="btn" data-theme="ink" data-shape="round" href="process/"><span class="btn__label">See our full process</span>${arrow}</a></section>
     ${galBlock}
     <div class="pm__nav"><button class="btn" type="button" data-theme="bone" data-case="${prev.id}"><span class="btn__label">← ${esc(prev.name)}</span></button><button class="btn" type="button" data-theme="volt" data-case="${next.id}"><span class="btn__label">${esc(next.name)} →</span></button></div></div>`;
 }

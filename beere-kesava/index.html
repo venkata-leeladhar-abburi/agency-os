@@ -2203,7 +2203,7 @@ h1 em,h2 em,h3 em,.h-xxl em,.h-xl em,.h-l em,.h-ml em,.h-m em,.h-s em{font-style
           <li><span class="eyebrow">Email</span><span class="contact-list__value">workwithonestop@gmail.com</span><button class="copy" type="button" data-copy="workwithonestop@gmail.com" aria-label="Copy email address"><svg viewBox="0 0 16 16"><use href="#i-copy"/></svg><span>Copy</span></button></li>
           <li><span class="eyebrow">Email</span><span class="contact-list__value">leeladharabburi2032@gmail.com</span><button class="copy" type="button" data-copy="leeladharabburi2032@gmail.com" aria-label="Copy second email address"><svg viewBox="0 0 16 16"><use href="#i-copy"/></svg><span>Copy</span></button></li>
           <li><span class="eyebrow">Phone · WhatsApp</span><span class="contact-list__value">+91 90149 52056</span><button class="copy" type="button" data-copy="+91 9014952056" aria-label="Copy phone number"><svg viewBox="0 0 16 16"><use href="#i-copy"/></svg><span>Copy</span></button></li>
-          <li><span class="eyebrow">Website</span><a class="contact-list__value" href="https://onestopsolutions.framer.website/" target="_blank" rel="noopener">onestopsolutions.framer.website</a><span class="copy is--static" aria-hidden="true"><svg viewBox="0 0 12 12"><use href="#i-arrow-ur"/></svg></span></li>
+          <li><span class="eyebrow">Website</span><a class="contact-list__value" href="https://onestop-solutions.vercel.app/" target="_blank" rel="noopener">onestop-solutions.vercel.app</a><span class="copy is--static" aria-hidden="true"><svg viewBox="0 0 12 12"><use href="#i-arrow-ur"/></svg></span></li>
         </ul>
       </div>
       <div class="invest__end">
@@ -2227,7 +2227,7 @@ h1 em,h2 em,h3 em,.h-xxl em,.h-xl em,.h-l em,.h-ml em,.h-m em,.h-s em{font-style
         <ul class="footer__rows">
           <li><span class="eyebrow">Email</span><a href="mailto:workwithonestop@gmail.com">workwithonestop@gmail.com</a></li>
           <li><span class="eyebrow">Call</span><a href="tel:+919014952056">+91 90149 52056</a></li>
-          <li><span class="eyebrow">Web</span><a href="https://onestopsolutions.framer.website/" target="_blank" rel="noopener">onestopsolutions.framer.website ↗</a></li>
+          <li><span class="eyebrow">Web</span><a href="https://onestop-solutions.vercel.app/" target="_blank" rel="noopener">onestop-solutions.vercel.app ↗</a></li>
         </ul>
       </div>
       <div class="footer__cols">
@@ -2241,7 +2241,7 @@ h1 em,h2 em,h3 em,.h-xxl em,.h-xl em,.h-l em,.h-ml em,.h-m em,.h-s em{font-style
         </div>
         <div>
           <h3 class="h-xs">Company</h3>
-          <ul><li><button type="button" data-modal-open="about">About One Stop</button></li><li><a href="https://onestopsolutions.framer.website/" target="_blank" rel="noopener">Website ↗</a></li><li><a href="#start">See it live</a></li></ul>
+          <ul><li><button type="button" data-modal-open="about">About One Stop</button></li><li><a href="https://onestop-solutions.vercel.app/" target="_blank" rel="noopener">Website ↗</a></li><li><a href="#start">See it live</a></li></ul>
         </div>
       </div>
       <div class="footer__buttons">
@@ -2293,7 +2293,7 @@ h1 em,h2 em,h3 em,.h-xxl em,.h-xl em,.h-l em,.h-ml em,.h-m em,.h-s em{font-style
               <li><span class="eyebrow">Phone · WhatsApp</span><span class="contact-list__value">+91 90149 52056</span><button class="copy" type="button" data-copy="+91 9014952056" aria-label="Copy phone number"><svg viewBox="0 0 16 16"><use href="#i-copy"/></svg><span>Copy</span></button></li>
             </ul>
             <div class="btn-row" style="margin-top:1.25rem">
-              <a class="btn" data-theme="ink" data-shape="round" href="https://onestopsolutions.framer.website/" target="_blank" rel="noopener"><span class="btn__label">Visit our website</span><svg class="btn__icon" viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+              <a class="btn" data-theme="ink" data-shape="round" href="https://onestop-solutions.vercel.app/" target="_blank" rel="noopener"><span class="btn__label">Visit our website</span><svg class="btn__icon" viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
               <a class="btn" data-theme="volt" href="#start"><span class="btn__label">See it live</span></a>
             </div>
           </div>
@@ -2766,16 +2766,37 @@ function initCursor(openSel) {
 
 /* Smooth scrolling */
 function initLenis() {
-  if (!window.Lenis || reduce) return;
-  lenis = new window.Lenis({ lerp: 0.1, smoothWheel: true });
-  if (hasG && window.ScrollTrigger) {
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add(t => lenis.raf(t * 1000));
-    gsap.ticker.lagSmoothing(0);
-  } else {
-    const raf = t => { lenis.raf(t); requestAnimationFrame(raf); };
-    requestAnimationFrame(raf);
+  if (window.Lenis && !reduce) {
+    lenis = new window.Lenis({ lerp: 0.1, smoothWheel: true });
+    if (hasG && window.ScrollTrigger) {
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add(t => lenis.raf(t * 1000));
+      gsap.ticker.lagSmoothing(0);
+    } else {
+      const raf = t => { lenis.raf(t); requestAnimationFrame(raf); };
+      requestAnimationFrame(raf);
+    }
   }
+  landOnHash();
+}
+
+/* Opened with a #section in the link: stay on it while fonts and images settle, until the visitor scrolls */
+function landOnHash() {
+  let id = '';
+  try { id = decodeURIComponent(location.hash.slice(1)); } catch (e) { return; }
+  const t = id && document.getElementById(id);
+  if (!t) return;
+  let moved = false;
+  ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(ev => window.addEventListener(ev, () => { moved = true; }, { once: true, passive: true }));
+  const go = () => {
+    const top = t.getBoundingClientRect().top;
+    if (moved || Math.abs(top) < 2) return;
+    if (lenis) lenis.scrollTo(top + window.scrollY, { immediate: true, force: true });
+    else window.scrollTo(0, top + window.scrollY);
+  };
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(go);
+  if (document.readyState === 'complete') go();
+  else window.addEventListener('load', () => { go(); setTimeout(go, 500); }, { once: true });
 }
 
 /* Scroll reveals, counters, rotating dotted circles, footer logo parallax */

@@ -1,12 +1,13 @@
 # One Stop Solutions: pitch websites
 
-Five websites for **One Stop Solutions**. Each page has its CSS and JavaScript inline:
+Six pages for **One Stop Solutions**. Each page has its CSS and JavaScript inline:
 
 | Page | File | Who it is for |
 | --- | --- | --- |
 | Agency website (home page) | `index.html` (images in `img/`) | Clients, partners and hires |
 | Agency OS pitch deck | `agency-os/index.html` | Investors |
 | Client pitch | `pitch/index.html` | Clients and leads |
+| Our process | `process/index.html` | Clients and leads: the client pitch, starting at the seven phases |
 | Beere Kesava ERP deck | `beere-kesava/index.html` | Beere Kesava, investors and silk businesses |
 | Team playbook | `playbook/index.html` | The One Stop team only |
 
@@ -40,10 +41,11 @@ Once deployed, the pages live at:
 | `/` | Agency website |
 | `/agency-os/` | Agency OS pitch deck |
 | `/pitch/` | Client pitch |
+| `/process/` | Our process |
 | `/beere-kesava/` | Beere Kesava ERP deck |
 | `/playbook/` | Team playbook |
 
-`vercel.json` adds clean URLs with trailing slashes, a week of browser caching for images, and basic security headers. `.vercelignore` keeps the `source/` folder off the live site.
+`vercel.json` adds clean URLs, a week of browser caching for images, and basic security headers. `.vercelignore` keeps the `source/` folder off the live site.
 
 **The playbook is internal.** It is deployed with a `noindex` header, so search engines skip it, but anyone with the link can open it. To keep it off the live site entirely, add `playbook` to `.vercelignore` and remove the playbook links from the agency website.
 
@@ -55,7 +57,7 @@ Every page is generated from the files in `source/`. Edit a source file, then ru
 | --- | --- | --- |
 | Agency website | `python3 source/build4.py` | `source/src4/` |
 | Agency OS deck | `python3 source/build.py` | `source/src/` |
-| Client pitch and playbook | `python3 source/build2.py` | `source/src2/` |
+| Client pitch, our process and playbook | `python3 source/build2.py` | `source/src2/` |
 | Beere Kesava deck | `python3 source/build3.py` | `source/src3/`, `source/bk/img/` |
 
 The builders need Python 3 only. `api/leads.js` needs no packages. Project screenshots and logos for the agency website are WebP files in `img/`; the project list, services, products and team are at the top of `source/src4/site.js`.
@@ -71,11 +73,10 @@ One Stop Solutions’ own website: our work, services, products, process and tea
 | Selected work | Beere Kesava ERP, Ornate ’26, Aaravi Collectives, NGB and LimitX: what each one is, its real screens, a live preview, and a case study from research to launch (competitor analysis, user research, empathy map, users and flows, a wireframe-to-UI slider, build, test and launch, result) |
 | All projects | Every project, filtered by type, with live previews and links |
 | Services | Four core services with what each includes, plus what we help with around a product |
-| Products | Silk ERP, Agency OS and S-Campus, with pitch decks, previews and “Build something like this” |
-| Product decks | Built previews of the Agency OS deck, the Silk ERP deck and the client pitch |
-| How we work | Three stages, seven draggable phase cards, and built previews of our process, playbook and client pitch |
+| Products | Silk ERP, Agency OS and S-Campus, each drawn as a simple diagram, with pitch decks, live previews and “Build something like this” |
+| How we work | Three stages, seven draggable phase cards, and diagrams of our process, playbook and client pitch |
 | Proof, team, questions | A client quote, facts, the team and answers |
-| Have a project in mind? | Five quick questions; the brief fills in beside them and is saved to our leads |
+| Have a project in mind? | A short chat; a project map draws itself from the answers, and the brief is saved to our leads |
 | Footer | Links, and **Leads**: enter the code to see, search, export or delete every brief |
 
 Live previews load a project’s real website inside the page when someone clicks. A site that blocks this shows a blank box, so the preview always has an **Open site** button. Team photos load from the current Framer site and fall back to initials.
@@ -95,6 +96,8 @@ To try the whole site locally, with working leads in memory, run `node source/to
 ## Client pitch (`pitch/`)
 
 A short, visual pitch for clients. Every line is a few words.
+
+`process/` is the same page with the sections before the process hidden, so “Our process” opens at the seven phases. On the client pitch, the process page and the Agency OS deck, every “Book a call” button goes to the Let’s talk section of the agency website: https://onestop-solutions.vercel.app/#contact.
 
 | Section | What it shows |
 | --- | --- |
@@ -180,4 +183,4 @@ The shared version of the playbook is a Claude artifact with a shared database, 
 - Phone / WhatsApp: +91 90149 52056
 - Agency: workwithonestop@gmail.com
 - Email: leeladharabburi2032@gmail.com
-- Website: https://onestopsolutions.framer.website/
+- Website: https://onestop-solutions.vercel.app/

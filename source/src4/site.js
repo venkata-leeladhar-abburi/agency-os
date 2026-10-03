@@ -45,8 +45,8 @@ const P = [
       result: ['It looked and felt like a product launch.', 'Strong buzz across the student community.'] } },
   { id: 'aaravi', name: 'Aaravi Collectives', what: 'A brand website for a luxury silk saree label.',
     desc: 'Aaravi Collectives is a new silk saree brand. The site tells its heritage story in cinematic scenes and builds a waitlist before launch.',
-    cat: 'web', key: 'aaravi', cover: 4, imgs: [[4, 'desk'], [1, 'desk'], [2, 'desk'], [3, 'desk'], [5, 'desk'], [6, 'desk']], url: 'aaravi collectives',
-    live: '', links: [], tags: ['Brand website', 'Storytelling', 'Waitlist'], client: 'Aaravi Collectives', platform: 'Brand website', scope: 'Brand story, UX/UI, web build',
+    cat: 'web', key: 'aaravi', cover: 4, imgs: [[4, 'desk'], [1, 'desk'], [2, 'desk'], [3, 'desk'], [5, 'desk'], [6, 'desk']], url: 'aaravi-collectives.vercel.app',
+    live: 'https://aaravi-collectives.vercel.app/', liveName: 'Aaravi Collectives', links: [['View live', 'https://aaravi-collectives.vercel.app/']], tags: ['Brand website', 'Storytelling', 'Waitlist'], client: 'Aaravi Collectives', platform: 'Brand website', scope: 'Brand story, UX/UI, web build',
     cs: { challenge: 'A new label has to earn trust before its first sale.',
       competitor: ['Saree sites: product grids with little story.', 'A luxury feel is rare online.', 'The gap: heritage, told like cinema.'],
       research: ['Studied how buyers choose silk: trust, story, craft.', 'Looked at luxury fashion sites for pace and tone.'],
@@ -176,7 +176,7 @@ const DG = {
   }
 };
 const RES = [
-  { dg: 'process', tag: 'How we work', name: 'Our process', line: 'Seven phases. Your sign-off at every gate.', href: 'pitch/#process', cta: 'See the process' },
+  { dg: 'process', tag: 'How we work', name: 'Our process', line: 'Seven phases. Your sign-off at every gate.', href: 'process/', cta: 'See the process' },
   { dg: 'playbook', tag: 'Inside the team', name: 'The playbook', line: 'Every phase has a checklist, files and an exit gate.', href: 'playbook/', cta: 'Open the playbook' },
   { dg: 'pitch', tag: 'For clients', name: 'Client pitch', line: 'What we do, how we work and what you keep.', href: 'pitch/', cta: 'Open the pitch' }
 ];
@@ -301,7 +301,7 @@ function caseHTML(p) {
     ${step('05', 'Build', 'Build', `<ul class="pills is--dark">${c.stack.map(s => `<li>${esc(s)}</li>`).join('')}</ul>${ul(c.build)}`)}
     ${step('06', 'Test and launch', 'Launch', ul(c.launch))}
     </div>
-    <section class="cm__result"><p class="eyebrow">The result</p>${c.result.map(r => `<p class="h-s">${esc(r)}</p>`).join('')}<a class="btn" data-theme="ink" data-shape="round" href="pitch/#process"><span class="btn__label">See our full process</span>${arrow}</a></section>
+    <section class="cm__result"><p class="eyebrow">The result</p>${c.result.map(r => `<p class="h-s">${esc(r)}</p>`).join('')}<a class="btn" data-theme="ink" data-shape="round" href="process/"><span class="btn__label">See our full process</span>${arrow}</a></section>
     ${galBlock}
     <div class="pm__nav"><button class="btn" type="button" data-theme="bone" data-case="${prev.id}"><span class="btn__label">← ${esc(prev.name)}</span></button><button class="btn" type="button" data-theme="volt" data-case="${next.id}"><span class="btn__label">${esc(next.name)} →</span></button></div></div>`;
 }

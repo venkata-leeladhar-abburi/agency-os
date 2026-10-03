@@ -1290,16 +1290,37 @@ function initCursor(openSel) {
 
 /* Smooth scrolling */
 function initLenis() {
-  if (!window.Lenis || reduce) return;
-  lenis = new window.Lenis({ lerp: 0.1, smoothWheel: true });
-  if (hasG && window.ScrollTrigger) {
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add(t => lenis.raf(t * 1000));
-    gsap.ticker.lagSmoothing(0);
-  } else {
-    const raf = t => { lenis.raf(t); requestAnimationFrame(raf); };
-    requestAnimationFrame(raf);
+  if (window.Lenis && !reduce) {
+    lenis = new window.Lenis({ lerp: 0.1, smoothWheel: true });
+    if (hasG && window.ScrollTrigger) {
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add(t => lenis.raf(t * 1000));
+      gsap.ticker.lagSmoothing(0);
+    } else {
+      const raf = t => { lenis.raf(t); requestAnimationFrame(raf); };
+      requestAnimationFrame(raf);
+    }
   }
+  landOnHash();
+}
+
+/* Opened with a #section in the link: stay on it while fonts and images settle, until the visitor scrolls */
+function landOnHash() {
+  let id = '';
+  try { id = decodeURIComponent(location.hash.slice(1)); } catch (e) { return; }
+  const t = id && document.getElementById(id);
+  if (!t) return;
+  let moved = false;
+  ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(ev => window.addEventListener(ev, () => { moved = true; }, { once: true, passive: true }));
+  const go = () => {
+    const top = t.getBoundingClientRect().top;
+    if (moved || Math.abs(top) < 2) return;
+    if (lenis) lenis.scrollTo(top + window.scrollY, { immediate: true, force: true });
+    else window.scrollTo(0, top + window.scrollY);
+  };
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(go);
+  if (document.readyState === 'complete') go();
+  else window.addEventListener('load', () => { go(); setTimeout(go, 500); }, { once: true });
 }
 
 /* Scroll reveals, counters, rotating dotted circles, footer logo parallax */
