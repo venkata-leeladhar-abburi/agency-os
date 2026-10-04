@@ -4,3 +4,4 @@ node_modules/
 source/artifact*/
 source/preview/
 .vercel
+source/shots*/
