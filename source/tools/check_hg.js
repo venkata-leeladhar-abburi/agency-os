@@ -25,10 +25,11 @@ async function route(r, blocked) {
   blocked.push(u.slice(0, 90));
   return r.abort();
 }
-const CONTAINERS = ['radial-list', 'reel-ticker', 'found-slides', 'today-chain', 'mess-chips', 'mess-lines', 'mess-cols', 'pains', 'pipe-svg', 'pipe-holes',
-  'loop-svg', 'loop-stations', 'stage-cards', 'stage-detail', 'chain', 'hub-svg', 'hub-nodes', 'tool-screen', 'tool-pins', 'tool-info', 'dial-svg', 'day-list',
-  'call-wave', 'call-lines', 'ystats', 'yloop-ring', 'people-cards', 'tactics', 'plugs', 'road', 'need', 'map-svg', 'map-towns', 'proof-list', 'player-frames', 'player-progress'];
-const SECTIONS = ['top', 'reel', 'store', 'problem', 'leaks', 'flow', 'bill', 'platform', 'always', 'youth', 'money', 'process', 'scale', 'proof', 'start', 'contact'];
+const CONTAINERS = ['radial-list', 'reel-ticker', 'audit-list', 'mess-chips', 'mess-lines', 'pains', 'funnel-rows', 'loop-nodes', 'loop-arrows',
+  'stage-nav', 'stage-cards', 'rail-stations', 'stage-detail', 'docs-rows', 'engine', 'dash', 'portal-cards', 'cal-grid', 'cal-features',
+  'stats', 'people-tabs', 'person', 'tools-marquee', 'plugs', 'road', 'need', 'works', 'mini-dash'];
+const SECTIONS = ['top', 'reel', 'intro', 'problem', 'leaks', 'flow', 'steps', 'bill', 'platform', 'tools', 'tool-cards', 'always', 'screens',
+  'youth', 'money', 'process', 'work', 'start', 'contact'];
 async function run(name, opts) {
   const browser = await chromium.launch({ executablePath: CHROME });
   const ctx = await browser.newContext(opts);
@@ -59,7 +60,7 @@ async function run(name, opts) {
   });
   rep.textClip = await page.evaluate(() => {
     const out = [];
-    const skip = '.radial, .marquee, .undernav, .flick, .gslider, .k, .reel__ticker, .mess, .modal, .nav, .footer__logo, .vslider__list, .media, .pipe, .loop, .hub, .map, .yloop';
+    const skip = '.radial, .marquee, .undernav, .flick, .gslider, .reel__ticker, .mess, .modal, .nav, .footer__logo, .media, .mui, .loop, .dash, .mini-dash, .phone, .rail-scroll';
     for (const el of document.querySelectorAll('body *')) {
       if (el.closest(skip)) continue;
       const s = getComputedStyle(el);
@@ -82,60 +83,47 @@ async function run(name, opts) {
     await page.waitForTimeout(900);
     await page.screenshot({ path: `${OUT}/${name}-${file}.png` });
   };
-  // Leaks: back to today
-  await page.evaluate(() => document.querySelector('[data-pipe-set="today"]').click());
-  await page.waitForTimeout(1400);
-  act.pipe = await page.evaluate(() => ({ state: document.getElementById('pipe').dataset.state, out: document.getElementById('pipe-out').textContent, w0: document.querySelector('.pipe__water[data-i="5"]').style.strokeWidth }));
-  await shotOf('.pipe__stage', 'i-pipe-today');
-  // Lost calculator
-  await page.evaluate(() => { const r = document.getElementById('r-lost'); r.value = 4; r.dispatchEvent(new Event('input', { bubbles: true })); });
-  await page.waitForTimeout(700);
-  act.lost = await page.evaluate(() => document.getElementById('o-lost').textContent);
-  // Flow: store lane + step 4
-  await page.evaluate(() => document.querySelector('[data-lane-set="st"]').click());
-  await page.evaluate(() => document.querySelector('#loop-stations [data-st="3"]').click());
+  // Funnel: back to today
+  await page.evaluate(() => document.querySelector('[data-funnel-set="today"]').click());
   await page.waitForTimeout(1300);
-  act.flow = await page.evaluate(() => ({ lane: document.getElementById('loop').dataset.lane, step: document.querySelector('#stage-detail h3')?.textContent, line: document.querySelector('#loop-stations [data-st="3"] .lst__line')?.textContent }));
-  await shotOf('#loop', 'i-loop');
-  // Bill
-  await page.evaluate(() => document.getElementById('bill-btn').click());
-  await page.waitForTimeout(4200);
-  act.bill = await page.evaluate(() => document.querySelectorAll('#chain li.is--on').length);
-  await shotOf('.bill__grid', 'i-bill');
-  // Platform: pick the billing counter
-  await page.evaluate(() => document.querySelector('#hub-nodes [data-tool="3"]').click());
+  act.funnel = await page.evaluate(() => document.querySelector('[data-funnel]').dataset.state);
+  await shotOf('#funnel-rows', 'i-funnel-today');
+  // Calculator
+  await page.evaluate(() => { const r = document.getElementById('i-enq'); r.value = 60; r.dispatchEvent(new Event('input', { bubbles: true })); });
+  await page.waitForTimeout(400);
+  act.calc = await page.evaluate(() => ['c-lost', 'c-win', 'c-year'].map(i => document.getElementById(i).textContent));
+  // Steps: jump to Bill
+  await page.evaluate(() => document.querySelector('#rail-stations [data-stage="4"]').click());
+  await page.waitForTimeout(1300);
+  act.step = await page.evaluate(() => document.querySelector('#stage-detail h3')?.textContent);
+  await shotOf('#steps .gslider', 'i-steps');
+  // Bill: back to the template
+  await page.evaluate(() => document.querySelector('[data-paper-mode="fields"]').click());
+  await page.waitForTimeout(1200);
+  act.bill = await page.evaluate(() => ({ mode: document.getElementById('sow').dataset.mode, done: document.querySelectorAll('#docs-rows .is--done').length }));
+  // Tools: next card, open it
+  await page.evaluate(() => document.querySelector('[data-flick-next]').click());
   await page.waitForTimeout(900);
-  act.tool = await page.evaluate(() => document.querySelector('#tool-info h3')?.textContent);
-  await shotOf('#show', 'i-show');
-  // Always on: pick the voice calls
-  await page.evaluate(() => document.querySelector('#day-list [data-day="4"]').click());
-  await page.waitForTimeout(600);
-  act.day = await page.evaluate(() => ({ time: document.getElementById('dial-time').textContent, item: document.querySelector('#day-list li.is--on b')?.textContent }));
-  await shotOf('#call', 'i-call');
-  await page.waitForTimeout(6000);
-  act.call = await page.evaluate(() => document.querySelectorAll('#call-lines li.is--on').length);
-  await page.screenshot({ path: `${OUT}/${name}-i-call-later.png` });
-  // Youth loop + persona modal
-  await page.evaluate(() => document.querySelector('#yloop-ring [data-yl="3"]').click());
-  await page.waitForTimeout(700);
-  act.yloop = await page.evaluate(() => document.getElementById('yloop-name').textContent);
   await page.evaluate(() => document.querySelector('[data-flick-open]').click());
   await page.waitForTimeout(1000);
-  act.person = await page.evaluate(() => document.getElementById('person-title')?.textContent);
-  await page.screenshot({ path: `${OUT}/${name}-i-person.png` });
+  act.tool = await page.evaluate(() => document.getElementById('portal-title')?.textContent);
+  await page.screenshot({ path: `${OUT}/${name}-i-tool.png` });
   await page.keyboard.press('Escape');
   await page.waitForTimeout(500);
-  // Calculator
-  await page.evaluate(() => { const r = document.getElementById('r-online'); r.value = 10; r.dispatchEvent(new Event('input', { bubbles: true })); });
-  await page.waitForTimeout(900);
-  act.calc = await page.evaluate(() => ['o-month', 'o-year', 'o-records', 'o-pct'].map(i => document.getElementById(i).textContent));
-  await shotOf('#calc', 'i-calc');
-  // Player
-  await page.evaluate(() => document.querySelector('[data-reel-open]').click());
-  await page.waitForTimeout(1500);
-  await page.screenshot({ path: `${OUT}/${name}-i-player.png` });
-  await page.keyboard.press('Escape');
-  await page.waitForTimeout(400);
+  // Day view: customer
+  await page.evaluate(() => document.querySelector('[data-cal-view="customer"]').click());
+  await page.waitForTimeout(500);
+  act.day = await page.evaluate(() => document.querySelector('#cal-grid .cal__ev b')?.textContent);
+  // Buyers: the district shopper
+  await page.evaluate(() => document.querySelector('#people-tabs [data-person="3"]').click());
+  await page.waitForTimeout(800);
+  act.person = await page.evaluate(() => document.querySelector('#person h4')?.textContent);
+  await shotOf('#person', 'i-person');
+  // Start: light preview
+  await page.evaluate(() => document.querySelector('[data-preview="light"]').click());
+  await page.waitForTimeout(500);
+  act.preview = await page.evaluate(() => !!document.querySelector('#mini-dash .dsh.is--light'));
+  await shotOf('.invest__card', 'i-start');
   // Menu
   await page.evaluate(() => window.scrollTo(0, 0));
   await page.waitForTimeout(400);

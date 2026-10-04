@@ -20,7 +20,7 @@ Each page has its own colours:
 | Agency OS deck | Concrete, volt green and violet |
 | Team playbook | Warm paper, forest green and highlighter yellow |
 | Beere Kesava ERP deck | Wine, gold and cream |
-| Heaven Gadgets growth plan | Store black, electric blue and white, with a red accent (from the store's logo) |
+| Heaven Gadgets growth plan | Agency OS colours: concrete, ink, volt and violet |
 
 The pitch and the playbook share their sources with the Agency OS deck; `source/build2.py` recolours them (`PALETTES`), so the deck keeps its own look.
 
@@ -141,29 +141,30 @@ The savings estimator only uses the numbers the visitor sets. No prices are quot
 
 ## Heaven Gadgets growth plan (`heaven-gadgets/`)
 
-A pitch for Heaven Gadgets, a watches, footwear and gadgets store in Ongole. It shows what the store faces today, the system One Stop would build, the new flow from a reel to a repeat order, and what it earns back. It uses the store's own black and electric-blue colours, its logo and photos from its Instagram profile, on the same layout as the other pages. Every line is a few words. The images are embedded, so the file works on its own. The page asks search engines not to index it.
+A pitch for Heaven Gadgets, a watches, footwear and gadgets store in Ongole. It is built on the Agency OS design system: the same fonts, colours, components, dashboard and mini screens, filled with the store's own story. It shows what the store faces today, the system One Stop would build, the new flow from a reel to a repeat buyer, and what it earns back. The store's logo and two product photos from its Instagram profile are embedded, so the file works on its own. The page asks search engines not to index it.
 
 | Section | What it shows |
 | --- | --- |
-| Hero | "Only in Ongole. Soon, all of India." with a rotating ring of the eight steps and a stat bar |
-| Walkthrough | An eight-step player, one screen per step |
-| Your store | Who they are, five gaps we found on Instagram and in store, and how an order works today, with its weak links |
-| Chats to system | Scattered chats flip into one system, and eight questions answered |
-| Where sales leak | A pipe with five leaks that the system plugs, and a lost-sales estimator |
-| The new flow | One loop for online and store buyers (switch between the two), draggable step cards, and who, what, today and what it gives back for each step |
-| One bill | Bill once at the counter and watch seven things happen |
-| One platform | Eight tools around one database, each shown on a screen with numbered call-outs, plus the extras around it |
-| Always on | A 24-hour clock of bills, alerts, offers and calls, and the AI voice agent on a live call |
-| Your buyers | Research on how young buyers shop, the youth loop, five buyer types and eight ways to win them |
-| Your numbers | A growth estimator with drag sliders and a before-and-after bar, the leaks it plugs, and why keeping buyers pays |
-| How we build | Our seven phases with weeks, and what we need from the store |
-| Branch two | Towns around Ongole on a map, and how the system runs new branches |
-| Why One Stop | Projects we have built, linked to the agency website |
-| Next step | Store visit, plan and quote, go live, with contact details |
+| Hero | "Heaven Gadgets, Open 24/7" over a turning ring of twelve system screens |
+| What we found | The store card, and its Instagram today with four numbered findings |
+| Where sales leak | Chats and notebooks flip into one system (Sell, Run, Grow), and eight before-and-after pairs |
+| Small leaks, big money | 100 people who see one reel, step by step, today and with the system, plus a lost-sales calculator |
+| The customer loop | Eight steps on one ring, online and store buyers side by side |
+| Eight steps | Draggable step cards with what the online buyer, the store buyer and the system do at each step |
+| One bill | A counter bill that fills in, and the seven things it updates |
+| The platform | The owner dashboard with sample data |
+| Eight tools | Sell, Run and Grow on one customer record, and a card for each tool that opens its details |
+| Always on | One day for the owner, a customer and the staff, and the AI voice agent on a call |
+| The screens | Customer, owner and counter phone screens, and what each role sees |
+| Ongole's youth | Five research figures, five buyer types with the step where each one drops off today, and eight ideas |
+| What it earns back | Leaks plugged, repeat buyers, time saved, and the figures behind them |
+| Our process | Seven steps from the store visit to growth, branches later, and what we need from the store |
+| Selected work | Beere Kesava ERP, Ornate ’26, Aaravi Collectives, NGB and LimitX, in the agency site's order |
+| Start | Contact details and a dark or light preview of the owner dashboard |
 
 Products, prices, names and numbers inside the screens are samples. The estimators only use the numbers the visitor sets. The research figures name their sources on the page (Meta × GWI 2025, Snap × BCG 2024, Bain & Co. 2025).
 
-To check the page in a browser, run `node source/tools/check_hg.js heaven-gadgets/index.html` after `npm install` in `source/tools/`. It reports console errors, overflow and empty containers, runs the main interactions and saves screenshots at desktop and phone widths.
+To check the page in a browser, run `node source/tools/check_hg.js heaven-gadgets/index.html` after `npm install` in `source/tools/`. It reports console errors, overflow and empty containers, runs the main interactions (funnel, calculator, steps, bill, tools, day view, buyers, preview) and saves screenshots at desktop and phone widths.
 
 ## Team playbook (`playbook/`)
 
@@ -179,7 +180,7 @@ The shared version of the playbook is a Claude artifact with a shared database, 
 
 - HTML, CSS and vanilla JavaScript, one file per page
 - [GSAP 3.13](https://gsap.com/) (Draggable, InertiaPlugin, ScrollTrigger, CustomEase) and [Lenis 1.3.4](https://lenis.darkroom.engineering/) from jsDelivr
-- Geist, Geist Mono and Caveat from Google Fonts, plus Fraunces for the Beere Kesava deck and Unbounded for the Heaven Gadgets plan
+- Geist, Geist Mono and Caveat from Google Fonts, plus Fraunces for the Beere Kesava deck
 - Keyboard support for sliders and dialogs, and reduced motion for visitors who ask for it
 
 `assets/onestop-logo.svg` is the Onestop wordmark used on every page.
