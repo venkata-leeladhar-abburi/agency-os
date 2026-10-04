@@ -80,7 +80,7 @@ function renderPipe() {
   const m = isMobile(), g = pipeGeom(m), svg = $('#pipe-svg');
   svg.setAttribute('viewBox', `0 0 ${g.w} ${g.h}`);
   const wg = m ? 'x1="0" y1="70" x2="0" y2="760"' : 'x1="118" y1="0" x2="980" y2="0"';
-  let s = `<defs><linearGradient id="pipe-water" gradientUnits="userSpaceOnUse" ${wg}><stop offset="0" stop-color="#9EC1FF"/><stop offset="1" stop-color="#2E6BFF"/></linearGradient><linearGradient id="pipe-body" x1="0" y1="0" x2="${m ? 1 : 0}" y2="${m ? 0 : 1}"><stop offset="0" stop-color="#2A3242"/><stop offset=".5" stop-color="#151B26"/><stop offset="1" stop-color="#0B0F16"/></linearGradient></defs>`;
+  let s = `<defs><linearGradient id="pipe-water" gradientUnits="userSpaceOnUse" ${wg}><stop offset="0" stop-color="#FFD43A"/><stop offset="1" stop-color="#2B4DFF"/></linearGradient><linearGradient id="pipe-body" x1="0" y1="0" x2="${m ? 1 : 0}" y2="${m ? 0 : 1}"><stop offset="0" stop-color="#2D3978"/><stop offset=".5" stop-color="#18225E"/><stop offset="1" stop-color="#0D154A"/></linearGradient></defs>`;
   const people = Array.from({ length: 9 }, (_, i) => i);
   if (!m) {
     s += `<path class="pipe__funnel" d="M14 54 Q70 92 118 112 L118 188 Q70 208 14 246 Z"/><text class="pipe__lbl" x="16" y="34">People who see your reels</text>`;
@@ -318,6 +318,7 @@ function placePins() {
     let x = 0, y = 0, n = el;
     while (n && n !== root) { x += n.offsetLeft; y += n.offsetTop; n = n.offsetParent; }
     if (n !== root) return;
+    if (el.dataset.pinAt === 'r') { x += el.offsetWidth + W * 0.022; y += el.offsetHeight / 2; }
     li.style.left = clamp(x / W * 100, 3, 97).toFixed(1) + '%';
     li.style.top = clamp(y / H * 100, 4, 96).toFixed(1) + '%';
   });

@@ -20,7 +20,7 @@ Each page has its own colours:
 | Agency OS deck | Concrete, volt green and violet |
 | Team playbook | Warm paper, forest green and highlighter yellow |
 | Beere Kesava ERP deck | Wine, gold and cream |
-| Heaven Gadgets growth plan | Store black, electric blue and white, with a red accent (from the store's logo) |
+| Heaven Gadgets growth plan | Midnight navy, cobalt and price-tag yellow, with a red accent |
 
 The pitch and the playbook share their sources with the Agency OS deck; `source/build2.py` recolours them (`PALETTES`), so the deck keeps its own look.
 
@@ -141,7 +141,7 @@ The savings estimator only uses the numbers the visitor sets. No prices are quot
 
 ## Heaven Gadgets growth plan (`heaven-gadgets/`)
 
-A pitch for Heaven Gadgets, a watches, footwear and gadgets store in Ongole. It shows what the store faces today, the system One Stop would build, the new flow from a reel to a repeat order, and what it earns back. It uses the store's own black and electric-blue colours, its logo and photos from its Instagram profile, on the same layout as the other pages. Every line is a few words. The images are embedded, so the file works on its own. The page asks search engines not to index it.
+A pitch for Heaven Gadgets, a watches, footwear and gadgets store in Ongole. It shows what the store faces today, the system One Stop would build, the new flow from a reel to a repeat order, and what it earns back. It uses midnight navy, cobalt and price-tag yellow, with the store's logo and photos from its Instagram profile, on the same layout as the other pages. Every line is a few words. The store's own images are embedded. The mock screens (store, product page, checkout, tracking, phone app, admin and counter) use their own neutral look, grey canvas, black pills and big condensed type, with free-licence studio product photos that load from Unsplash, so those need a connection. The page asks search engines not to index it.
 
 | Section | What it shows |
 | --- | --- |
@@ -179,7 +179,7 @@ The shared version of the playbook is a Claude artifact with a shared database, 
 
 - HTML, CSS and vanilla JavaScript, one file per page
 - [GSAP 3.13](https://gsap.com/) (Draggable, InertiaPlugin, ScrollTrigger, CustomEase) and [Lenis 1.3.4](https://lenis.darkroom.engineering/) from jsDelivr
-- Geist, Geist Mono and Caveat from Google Fonts, plus Fraunces for the Beere Kesava deck and Unbounded for the Heaven Gadgets plan
+- Geist, Geist Mono and Caveat from Google Fonts, plus Fraunces for the Beere Kesava deck. The Heaven Gadgets plan uses Clash Display and Satoshi from Fontshare
 - Keyboard support for sliders and dialogs, and reduced motion for visitors who ask for it
 
 `assets/onestop-logo.svg` is the Onestop wordmark used on every page.

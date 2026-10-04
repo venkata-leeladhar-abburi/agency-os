@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Assemble the Heaven Gadgets growth plan from src5/ (plus the shared Osmo base in src/ and src2/).
+Colours: midnight navy, cobalt and price-tag yellow. Fonts: Clash Display and Satoshi (Fontshare), Geist Mono and Caveat (Google).
 
 Writes:
   - <repo>/heaven-gadgets/index.html : the full single-file page (store images embedded as data URIs)
@@ -16,11 +17,11 @@ SRC, SRC2, SRC5 = (os.path.join(HERE, d) for d in ('src', 'src2', 'src5'))
 IMG = os.path.join(HERE, 'hg', 'img')
 REPO = sys.argv[1] if len(sys.argv) > 1 else os.path.dirname(HERE)
 
-FONTS = ('https://fonts.googleapis.com/css2?family=Unbounded:wght@400..700'
-         '&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Caveat:wght@500;600&display=swap')
-FAV_SVG = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#05070A" '
-           'stroke="#2E6BFF" stroke-width="3"/><text x="32" y="41" text-anchor="middle" font-family="Arial,sans-serif" '
-           'font-size="24" font-weight="700" fill="#fff">H<tspan fill="#5B8CFF">G</tspan></text></svg>')
+FONTS = ('https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,700&display=swap',
+         'https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@1,62..125,100..900&family=Geist+Mono:wght@400;500&family=Caveat:wght@500;600&display=swap')
+FAV_SVG = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#0B1340" '
+           'stroke="#2B4DFF" stroke-width="3"/><text x="32" y="41" text-anchor="middle" font-family="Arial,sans-serif" '
+           'font-size="24" font-weight="700" fill="#fff">H<tspan fill="#FFD43A">G</tspan></text></svg>')
 FAVICON = 'data:image/svg+xml,' + FAV_SVG.replace('"', "'").replace('#', '%23').replace('<', '%3C').replace('>', '%3E')
 BLOCKS = ['HERO', 'REEL', 'INTRO', 'Vertical slider (shared)', 'PROBLEM', 'JOURNEY', 'PORTALS (dark)',
           'INVEST', 'FOOTER', 'MODAL CONTENT']
@@ -68,7 +69,7 @@ def build():
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{TITLE}</title>
 <meta name="description" content="{DESC}">
-<meta name="theme-color" content="#05070A">
+<meta name="theme-color" content="#080D2E">
 <meta name="robots" content="noindex">
 <meta property="og:title" content="{TITLE}">
 <meta property="og:description" content="{DESC}">
@@ -76,7 +77,11 @@ def build():
 <link rel="icon" type="image/svg+xml" href="{FAVICON}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="{FONTS}">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="stylesheet" href="{FONTS[0]}">
+<link rel="stylesheet" href="{FONTS[1]}">
 <style>
 {css}
 </style>
