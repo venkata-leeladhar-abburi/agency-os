@@ -35,35 +35,6 @@ const C = {
       who: 'WhatsApp · Voice agent', what: ['New drops on WhatsApp', 'Festival offers by call', 'Points and referrals'], today: 'Offers vanish with the story', gives: 'One-time buyers become regulars' }
   ],
 
-  /* Before -> after chips: [today, with the system, column, scattered xy+rot, ordered xy, scattered mobile, ordered mobile] */
-  mess: [
-    ['“DM for price”', 'Price on every product', 'a', [15, 18, -6], [18, 25], [27, 9, -6], [27, 14]],
-    ['“Is size 9 there?” calls', 'Live stock online', 'a', [76, 14, 5], [18, 39], [70, 14, 5], [27, 25]],
-    ['Screenshots of products', 'Full online catalogue', 'a', [38, 32, 4], [18, 53], [32, 24, 4], [27, 36]],
-    ['UPI screenshots', 'Secure checkout', 'a', [62, 26, -5], [18, 67], [70, 31, -5], [27, 47]],
-    ['Orders in a notebook', 'Orders dashboard', 'b', [86, 43, 7], [50, 25], [28, 42, 7], [27, 58]],
-    ['Stock in someone’s head', 'Live inventory', 'b', [18, 53, 3], [50, 39], [70, 48, 3], [27, 69]],
-    ['Paper bills, or none', 'Billing counter', 'b', [52, 55, -4], [50, 53], [30, 57, -4], [73, 14]],
-    ['“Where is my parcel?”', 'Tracking on WhatsApp', 'b', [80, 65, 6], [50, 67], [70, 64, 6], [73, 25]],
-    ['Offers in 24-hour stories', 'Offers to every buyer', 'c', [18, 80, -7], [82, 25], [32, 74, -7], [73, 36]],
-    ['Forgotten buyers', 'Customer list', 'c', [46, 77, 5], [82, 39], [68, 81, 5], [73, 47]],
-    ['Boosted posts, no tracking', 'Meta ads that sell', 'c', [72, 89, -3], [82, 53], [30, 90, -3], [73, 58]],
-    ['Guesswork', 'Sales reports', 'c', [89, 82, 6], [82, 67], [72, 94, 6], [73, 69]]
-  ],
-  messLinks: [[0, 2, 1], [2, 3, 0], [3, 7, 1], [6, 9, 0], [5, 6, 1], [4, 5, 0], [10, 1, 0], [11, 8, 1], [7, 10, 0], [9, 0, 0], [1, 4, 1], [8, 3, 0]],
-  messCols: ['Sell', 'Run', 'Grow'],
-
-  pains: [
-    ['Size 9 in black?', 'Call, wait, check the shelf', 'Live stock on every product.'],
-    ['How much is it?', '“DM for price”, and they leave', 'Prices online, day and night.'],
-    ['Did we reply to her?', 'Chats buried under chats', 'Every order in one dashboard.'],
-    ['Any offers this week?', 'Seen only if they catch the story', 'Offers on WhatsApp to every buyer.'],
-    ['Where’s my parcel?', 'Customers keep asking', 'Tracking link sent for you.'],
-    ['Who are our regulars?', 'Nobody wrote it down', 'Every buyer saved, with history.'],
-    ['What sold today?', 'Count cash and UPI at night', 'Live sales on your phone.'],
-    ['Can we run ads?', 'Ads with nowhere to land', 'A store built for Meta ads.']
-  ],
-
   /* The leaky pipe: holes today, patches with the system */
   leaks: [
     ['No prices online', 'Prices on every product'],
@@ -75,21 +46,21 @@ const C = {
 
   /* How an order works today: [icon, step, weak link or ''] */
   today: [
-    ['eye', 'Sees your reel', ''],
-    ['chat', 'Sends a DM: “price?”', ''],
-    ['clock', 'Waits for a reply', 'Slow'],
-    ['qr', 'Pays by UPI screenshot', 'No record'],
-    ['truck', 'You pack and courier', ''],
-    ['user', 'Never hears from you again', 'Lost']
+    ['reel', 'Ravi sees your reel', ''],
+    ['send', 'Sends a DM: “price?”', ''],
+    ['hourglass', 'Waits for a reply', 'Slow'],
+    ['shot', 'Pays by UPI screenshot', 'No record'],
+    ['parcel', 'You pack and courier', ''],
+    ['userx', 'Never hears from you again', 'Lost']
   ],
 
-  /* What we observed: [visual, title, finding] */
+  /* What we observed: [visual, title, finding, where we saw it, what fixes it] */
   found: [
-    ['ig', 'Your reels sell', 'People see the product. Then they have to DM.'],
-    ['wachat', 'Every order starts with a question', 'Price? Size? In stock? One chat at a time.'],
-    ['shelf', 'Great stock, hidden online', 'The wall is full. The internet can’t see it.'],
-    ['nodata', 'No list of buyers', 'After the sale, the customer is gone.'],
-    ['noads', 'Ads have nowhere to land', 'A boosted post can’t take a payment.']
+    ['ig', 'Your reels sell', 'People see the product. Then they have to DM.', 'Instagram', 'A Buy button on every reel'],
+    ['wachat', 'Every order starts with a question', 'Price? Size? In stock? One chat at a time.', 'WhatsApp', 'Prices and live stock online'],
+    ['shelf', 'Great stock, hidden online', 'The wall is full. The internet can’t see it.', 'Google', 'Your own online store'],
+    ['nodata', 'No list of buyers', 'After the sale, the customer is gone.', 'The counter', 'Every bill saves the buyer'],
+    ['noads', 'Ads have nowhere to land', 'A boosted post can’t take a payment.', 'Meta ads', 'Ads that open a product page']
   ],
 
   /* One bill, everything that follows: [icon, title, detail, where] */
@@ -176,20 +147,21 @@ const C = {
     ['Flex', 'Story, tag, unboxing', 'Tag-us rewards', 'camera'],
     ['Repeat', 'Next drop, next offer', 'Drop alerts and points', 'repeat']
   ],
+  /* Five buyers. img = Pexels photo id (free licence), py = how far down the portrait is framed (%), face = centre of the face in the photo (%), whereAs = the label for `where` when it is not a place */
   people: [
-    { id: 'sneaker', name: 'The college sneakerhead', age: '18–22', where: 'Colleges in and around Ongole', icon: 'sneaker', quote: 'Is the new pair there in my size?',
+    { id: 'sneaker', first: 'Karthik', at: 20, name: 'The college sneakerhead', age: '18–22', where: 'Colleges in and around Ongole', img: 8494698, py: 0, face: [50, 23], quote: 'Is the new pair there in my size?',
       budget: '₹800–2,500', finds: 'Instagram Reels', pays: 'UPI', wants: ['Price and size online', 'First look at new drops', 'Student offers'],
       pains: ['Can’t see sizes without asking', 'Hates waiting for a DM reply'], win: 'Drop alerts on WhatsApp and Student Fridays' },
-    { id: 'flex', name: 'The first-job flexer', age: '22–28', where: 'Back home, or working in a city', icon: 'watch', quote: 'Payday watch. Can it come by Friday?',
+    { id: 'flex', first: 'Vamsi', at: 25, name: 'The first-job flexer', age: '22–28', where: 'Back home, or working in a city', img: 11316539, py: 0, face: [59, 30], quote: 'Payday watch. Can it come by Friday?',
       budget: '₹1,500–5,000', finds: 'Reels and YouTube reviews', pays: 'UPI or card', wants: ['Real photos and reviews', 'Fast prepaid delivery', 'Combo deals'],
       pains: ['Unsure what is in stock', 'No tracking after paying'], win: 'Quick dispatch, tracking and combo offers' },
-    { id: 'gift', name: 'The gift hunter', age: '17–30', where: 'Birthdays, Rakhi, Valentine’s', icon: 'gift', quote: 'Birthday is tomorrow. Help!',
+    { id: 'gift', first: 'Sravya', at: 22, name: 'The gift hunter', age: '17–30', where: 'Birthdays, Rakhi, Valentine’s', whereAs: 'Shops for', img: 20132403, py: 14, face: [42, 40], quote: 'Birthday is tomorrow. Help!',
       budget: '₹500–3,000', finds: 'WhatsApp and friends', pays: 'UPI', wants: ['Gift ideas by budget', 'Gift wrap', 'Pick up today'],
       pains: ['Too many choices, no guidance', 'Needs it today'], win: 'A gift finder plus reserve-and-pick-up' },
-    { id: 'district', name: 'The district shopper', age: '18–35', where: 'Kandukur, Addanki, Markapur…', icon: 'pin', quote: 'Is it in stock before I travel?',
+    { id: 'district', first: 'Naveen', at: 29, name: 'The district shopper', age: '18–35', where: 'Kandukur, Addanki, Markapur…', img: 6102858, py: 0, face: [51, 29], quote: 'Is it in stock before I travel?',
       budget: '₹1,000–4,000', finds: 'Instagram and word of mouth', pays: 'UPI or cash', wants: ['Live stock', 'Reserve online', 'Ship home instead'],
       pains: ['Travels, then finds it sold out', 'Can’t call during work'], win: 'Live stock and reserve online' },
-    { id: 'away', name: 'The out-of-town fan', age: '18–30', where: 'Hyderabad, Chennai, Bengaluru', icon: 'globe', quote: 'Saw your reel. Can you ship to Hyderabad?',
+    { id: 'away', first: 'Anusha', at: 24, name: 'The out-of-town fan', age: '18–30', where: 'Hyderabad, Chennai, Bengaluru', img: 10199917, py: 46, face: [46, 40], quote: 'Saw your reel. Can you ship to Hyderabad?',
       budget: '₹1,000–3,000', finds: 'Reels', pays: 'UPI, prepaid', wants: ['Secure checkout', 'Tracking', 'Easy size exchange'],
       pains: ['Paying a stranger on chat feels risky', 'No idea when it will arrive'], win: 'A real store website with tracking' }
   ],
@@ -204,32 +176,34 @@ const C = {
     ['crown', 'Regulars club', 'First look for VIP buyers.']
   ],
 
-  /* Money */
-  plugs: [
-    ['chat', 'Missed and late chats', 'Orders without a chat'],
-    ['box', '“Sold out” surprises', 'Live stock, reserve online'],
-    ['tag', 'Offers nobody sees', 'Offers reach every buyer'],
-    ['repeat', 'Buyers who never return', 'Reminders bring them back']
-  ],
-
-  /* Process: [n, phase, title, line, when] */
+  /* Process: [n, phase, title, line, when, first week (0 = week 1), weeks (0 = one day)]. Column 7 is after launch. */
   road: [
-    ['00', 'Connect', 'Store visit', 'Your goals, counter and stock.', 'Day 1'],
-    ['01', 'Discover', 'Know your buyers', 'Chats, reels, nearby stores.', 'Week 1'],
-    ['02', 'Define', 'Plan the system', 'Flows, catalogue, offers. You approve.', 'Week 2'],
-    ['03', 'Design', 'Design every screen', 'Website, billing, dashboards.', 'Week 3'],
-    ['04', 'Build', 'Build and connect', 'Store, stock, WhatsApp, voice.', 'Weeks 4–6'],
-    ['05', 'Launch', 'Go live', 'Products loaded. Staff trained.', 'Week 7'],
-    ['06', 'Grow', 'Make it earn', 'Ads, offers, monthly reviews.', 'Every month']
+    ['00', 'Connect', 'Store visit', 'Your goals, counter and stock.', 'Day 1', 0, 0],
+    ['01', 'Discover', 'Know your buyers', 'Chats, reels, nearby stores.', 'Week 1', 0, 1],
+    ['02', 'Define', 'Plan the system', 'Flows, catalogue, offers. You approve.', 'Week 2', 1, 1],
+    ['03', 'Design', 'Design every screen', 'Website, billing, dashboards.', 'Week 3', 2, 1],
+    ['04', 'Build', 'Build and connect', 'Store, stock, WhatsApp, voice.', 'Weeks 4–6', 3, 3],
+    ['05', 'Launch', 'Go live', 'Products loaded. Staff trained.', 'Week 7', 6, 1],
+    ['06', 'Grow', 'Make it earn', 'Ads, offers, monthly reviews.', 'Every month', 7, 1]
   ],
-  need: ['Product list', 'Photos, or we shoot them', 'Logo and colours', 'WhatsApp Business number', 'GST details, if any', 'One hour a week'],
 
   /* Towns around Ongole, placed roughly by direction and distance: [name, x%, y%] */
   towns: [['Ongole', 62, 53.3], ['Chirala', 79.8, 27.5], ['Addanki', 57, 28.1], ['Darsi', 39.8, 31.1], ['Chimakurthi', 51.4, 46.7], ['Markapur', 15.3, 34.1], ['Kanigiri', 29.8, 61.5], ['Kandukur', 53.1, 76.3]],
 
   proof: [
     { name: 'Beere Kesava ERP', tag: 'Live', line: 'Billing, stock and WhatsApp bills for a silk business.', img: '../img/bk-dash.webp', href: '../beere-kesava/', cta: 'Open the deck' },
-    { name: 'Billing app', tag: 'Local stores', line: 'Bills, customers and WhatsApp offers for shops.', img: '../img/billing-1.webp', href: 'https://onestop-solutions.vercel.app/#work', cta: 'See our work', phone: true },
-    { name: 'Ornate ’26', tag: 'RGUKT Ongole', line: 'A fest website for Ongole’s students. Your buyers.', img: '../img/ornate-4.webp', href: 'https://ornate-one.vercel.app/', cta: 'Visit the site' }
+    { name: 'Aaravi Collectives', tag: 'Silk sarees', line: 'A brand website for a luxury silk saree label.', img: '../img/aaravi-4.webp', href: 'https://aaravi-collectives.vercel.app/', cta: 'Visit the site' },
+    { name: 'Nawin Golden Boy', tag: 'Fitness', line: 'Programs and sign-ups for a fitness coaching brand.', img: '../img/ngb-1.webp', href: 'https://fitness-platform-ngb.vercel.app/', cta: 'Visit the site' }
+  ],
+
+  /* More we’ve built: [name, what it is, link] */
+  more: [
+    ['Ornate ’26', 'Fest website, Ongole', 'https://ornate-one.vercel.app/'],
+    ['Billing app', 'Local stores', 'https://www.onestop-solutions.in/#work'],
+    ['Bookaholic', 'Online store', 'https://bookaholic-main.vercel.app/'],
+    ['LimitX', 'Fee payments app', 'https://timelly.in/limitx'],
+    ['Lumora Health', 'Clinic website', 'https://lumora-health-services.vercel.app/'],
+    ['S-Campus', 'College software', 'https://s-campus.figma.site/'],
+    ['Timelly', 'School software', 'https://timelly.in/']
   ]
 };

@@ -117,7 +117,7 @@ function serviceHTML(i) {
         <div class="media svm__media"><div class="mui">${V[s.vis]()}</div></div>
         <div class="svm__get"><span class="eyebrow">You get</span><p class="h-xs">${esc(s.get)}</p></div>
         <div class="svm__phases"><span class="eyebrow">Phases used</span><ol class="svr">${rail}</ol></div>
-        <a class="btn" data-theme="ink" data-size="full" href="https://onestop-solutions.vercel.app/#contact"><span class="btn__label">Talk about this service</span><svg class="btn__icon" viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+        <a class="btn" data-theme="ink" data-size="full" href="https://www.onestop-solutions.in/#contact"><span class="btn__label">Talk about this service</span><svg class="btn__icon" viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
       </div>
     </div>
     <div class="pm__nav"><button class="btn" type="button" data-theme="bone" data-svc-step="-1"><span class="btn__label">← ${esc(prev.name)}</span></button><button class="btn" type="button" data-theme="volt" data-svc-step="1"><span class="btn__label">${esc(next.name)} →</span></button></div>

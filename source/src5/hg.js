@@ -1,6 +1,10 @@
 /* ===== Heaven Gadgets growth plan ===== */
 const ST = C.steps, ACT = id => C.acts.find(a => a.id === id);
 const kicon = (id, cls = 'ki') => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true"><use href="#k-${id}"/></svg>`;
+const portrait = p => `https://images.pexels.com/photos/${p.img}/pexels-photo-${p.img}.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=640&h=960`;
+const facePos = (p, z = 2.6) => `background-image:url(${portrait(p)});background-size:${z * 100}%;background-position:${clamp((p.face[0] * z - 50) / (z - 1), 0, 100).toFixed(1)}% ${clamp((p.face[1] * z * 1.5 - 50) / (z * 1.5 - 1), 0, 100).toFixed(1)}%`;
+const photo = p => `<span class="person-card__init" aria-hidden="true">${esc(p.first[0])}</span><img src="${esc(portrait(p))}" alt="" decoding="async" draggable="false" onerror="this.remove()">`;
+const facts = rows => `<dl class="person-card__facts">${rows.map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>`;
 const PHONE = ['mhome', 'mwa', 'mproduct'];
 const screen = v => `<span class="k${PHONE.includes(v) ? ' is--m' : ''}">${V[v] ? V[v]() : ''}</span>`;
 const ACT_THEME = { attract: 'light', convert: 'violet', deliver: 'black', retain: 'volt' };
@@ -36,104 +40,146 @@ function renderTicker() {
 }
 
 /* ---------- Your store: what we found + today's chain ---------- */
-function renderFound() {
-  $('#found-slides').innerHTML = C.found.map(([v, t, l], i) => `<article class="live-card"><div class="live-card__start"><div class="tag-pair"><span class="tag">Today</span><span class="tag" data-shape="round">Gap ${pad(i + 1)}</span></div><div class="live-card__title"><h3 class="h-s">${esc(t)}</h3><p class="p-s">${esc(l)}</p></div><span class="eyebrow">${pad(i + 1)} / ${pad(C.found.length)}</span></div><div class="media">${screen(v)}</div></article>`).join('');
-  $('#today-chain').innerHTML = C.today.map(([ic, t, weak], i) => `<li class="tc${weak ? ' is--weak' : ''}" style="--k:${i}"><span class="tc__dot">${kicon(ic)}</span><span class="tc__n">${pad(i + 1)}</span><b class="tc__t">${esc(t)}</b>${weak ? `<span class="tc__flag">${esc(weak)}</span>` : ''}</li>`).join('');
-}
-
-/* ---------- Chats to system ---------- */
-function renderMess() {
-  const m = isMobile();
-  $('#mess-chips').innerHTML = C.mess.map(([from, to, g, a, b, am, bm], k) => {
-    const A = m ? am : a, B = m ? bm : b;
-    return `<li class="mess__chip" data-g="${g}" style="--k:${k};--ax:${A[0]}%;--ay:${A[1]}%;--ar:${A[2]}deg;--bx:${B[0]}%;--by:${B[1]}%"><span class="mess__chip-inner"><span class="from">${esc(from)}</span><span class="to">${esc(to)}</span></span></li>`;
-  }).join('');
-  const P0 = i => (m ? C.mess[i][5] : C.mess[i][3]);
-  $('#mess-lines').innerHTML = C.messLinks.map(([i, j, red]) => {
-    const [x1, y1] = P0(i), [x2, y2] = P0(j);
-    const cx = (x1 + x2) / 2 + (y2 - y1) * 0.35, cy = (y1 + y2) / 2 - (x2 - x1) * 0.35;
-    return `<path class="${red ? 'is--red' : ''}" d="M${x1} ${y1} Q${cx.toFixed(1)} ${cy.toFixed(1)} ${x2} ${y2}"/>`;
-  }).join('');
-  $('#mess-cols').innerHTML = C.messCols.map(c => `<span class="eyebrow">${esc(c)}</span>`).join('');
-  $('#mess-cols').hidden = m;
-}
-function initMess() {
-  const root = $('[data-mess]');
-  let touched = false;
-  const set = s => { root.dataset.state = s; $$('[data-mess-set]', root).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.messSet === s))); };
-  $$('[data-mess-set]', root).forEach(b => b.addEventListener('click', () => { touched = true; set(b.dataset.messSet); }));
-  if (!reduce) onVisible($('.mess__stage'), (v, io) => { if (v) { io.disconnect(); setTimeout(() => { if (!touched) set('os'); }, 1700); } }, { threshold: 0.55 });
-}
-function renderPains() {
-  $('#pains').innerHTML = C.pains.map(([q, a, b], i) => `<li class="pain3"><span class="pain3__n">${pad(i + 1)}</span><p class="pain3__q">${esc(q)}</p><p class="pain3__from">${esc(a)}</p><p class="pain3__to">${esc(b)}</p></li>`).join('');
-}
-
-/* ---------- The leaky pipe ---------- */
-function pipeGeom(m) {
-  /* Desktop: a pipe left to right. Phone: top to bottom. Coordinates in the SVG's own units. */
-  return m
-    ? { w: 360, h: 760, holes: [150, 255, 360, 465, 570].map(y => [96, y]), seg: [70, 150, 255, 360, 465, 570, 650] }
-    : { w: 1000, h: 400, holes: [230, 370, 510, 650, 790].map(x => [x, 150]), seg: [118, 230, 370, 510, 650, 790, 868] };
-}
-const WATER = { today: [30, 24, 19, 14, 10, 7], os: [30, 30, 29, 29, 28, 28] };
-function renderPipe() {
-  const m = isMobile(), g = pipeGeom(m), svg = $('#pipe-svg');
-  svg.setAttribute('viewBox', `0 0 ${g.w} ${g.h}`);
-  const wg = m ? 'x1="0" y1="70" x2="0" y2="760"' : 'x1="118" y1="0" x2="980" y2="0"';
-  let s = `<defs><linearGradient id="pipe-water" gradientUnits="userSpaceOnUse" ${wg}><stop offset="0" stop-color="#FFD43A"/><stop offset="1" stop-color="#2B4DFF"/></linearGradient><linearGradient id="pipe-body" x1="0" y1="0" x2="${m ? 1 : 0}" y2="${m ? 0 : 1}"><stop offset="0" stop-color="#2D3978"/><stop offset=".5" stop-color="#18225E"/><stop offset="1" stop-color="#0D154A"/></linearGradient></defs>`;
-  const people = Array.from({ length: 9 }, (_, i) => i);
-  if (!m) {
-    s += `<path class="pipe__funnel" d="M14 54 Q70 92 118 112 L118 188 Q70 208 14 246 Z"/><text class="pipe__lbl" x="16" y="34">People who see your reels</text>`;
-    s += people.map(i => `<circle class="pipe__in" r="${3 + (i % 3)}" cx="0" cy="${(78 + i * 18).toFixed(0)}" style="--d:${(i * 0.29).toFixed(2)}s;--ty:${(150 - (78 + i * 18)).toFixed(0)}px"/>`).join('');
-    s += `<rect class="pipe__body" x="112" y="112" width="764" height="76" rx="16"/>`;
-    for (let i = 0; i < 6; i++) s += `<line class="pipe__water" data-i="${i}" x1="${g.seg[i]}" y1="150" x2="${g.seg[i + 1]}" y2="150"/>`;
-    s += `<path class="pipe__jar" d="M884 96 h96 v190 a14 14 0 0 1 -14 14 h-68 a14 14 0 0 1 -14 -14 z"/><rect class="pipe__fill" id="pipe-fill" x="890" y="120" width="84" height="174" rx="8"/><text class="pipe__lbl" x="932" y="80" text-anchor="middle">Sales</text>`;
-    g.holes.forEach(([x, y], i) => { s += `<g class="pipe__hole" data-i="${i}"><ellipse cx="${x}" cy="${y + 38}" rx="13" ry="5"/><circle class="pipe__drip" cx="${x}" cy="${y + 44}" r="5" style="--d:${(i * 0.37).toFixed(2)}s"/><circle class="pipe__drip is--2" cx="${x}" cy="${y + 44}" r="3.6" style="--d:${(i * 0.37 + 0.6).toFixed(2)}s"/><rect class="pipe__patch" x="${x - 30}" y="${y + 26}" width="60" height="24" rx="8"/></g>`; });
-  } else {
-    s += `<path class="pipe__funnel" d="M28 6 Q62 50 76 70 L116 70 Q130 50 164 6 Z"/><text class="pipe__lbl" x="190" y="30">People who see</text><text class="pipe__lbl" x="190" y="50">your reels</text>`;
-    s += people.map(i => `<circle class="pipe__in is--v" r="${3 + (i % 3)}" cx="${(40 + i * 14).toFixed(0)}" cy="0" style="--d:${(i * 0.29).toFixed(2)}s;--tx:${(96 - (40 + i * 14)).toFixed(0)}px"/>`).join('');
-    s += `<rect class="pipe__body" x="58" y="64" width="76" height="592" rx="16"/>`;
-    for (let i = 0; i < 6; i++) s += `<line class="pipe__water" data-i="${i}" x1="96" y1="${g.seg[i]}" x2="96" y2="${g.seg[i + 1]}"/>`;
-    s += `<path class="pipe__jar" d="M40 662 h112 v80 a14 14 0 0 1 -14 14 h-84 a14 14 0 0 1 -14 -14 z"/><rect class="pipe__fill" id="pipe-fill" x="46" y="668" width="100" height="82" rx="8"/>`;
-    g.holes.forEach(([x, y], i) => { s += `<g class="pipe__hole is--side" data-i="${i}"><ellipse cx="${x + 38}" cy="${y}" rx="5" ry="13"/><circle class="pipe__drip" cx="${x + 44}" cy="${y}" r="5" style="--d:${(i * 0.37).toFixed(2)}s"/><circle class="pipe__drip is--2" cx="${x + 44}" cy="${y}" r="3.6" style="--d:${(i * 0.37 + 0.6).toFixed(2)}s"/><rect class="pipe__patch" x="${x + 26}" y="${y - 30}" width="24" height="60" rx="8"/></g>`; });
+/* The five gaps: a list on the left and one large screen on the right. It moves on by itself until someone picks a gap. */
+function initGaps() {
+  const root = $('#gaps'), list = $('#gaps-list'), scr = $('#gaps-screen');
+  if (!root || !list || !scr) return;
+  const F = C.found, DUR = 5200;
+  list.innerHTML = F.map(([, t, l, where, fix], i) => `<li role="presentation"><button type="button" class="gap" role="tab" id="gap-${i}" aria-controls="gaps-stage" aria-selected="false" tabindex="-1" data-i="${i}"><span class="gap__n">${pad(i + 1)}</span><b class="gap__t">${esc(t)}</b><span class="gap__more"><span class="gap__l">${esc(l)}</span><span class="gap__meta"><span class="gap__where">Seen on ${esc(where)}</span><span class="gap__fix">${kicon('check')}${esc(fix)}</span></span></span><i class="gap__bar" aria-hidden="true"></i></button></li>`).join('');
+  const btns = $$('.gap', list);
+  let cur = -1, auto = !reduce, inView = false, hover = false, elapsed = 0, last = 0;
+  function set(i, user, focus) {
+    cur = (i + F.length) % F.length;
+    btns.forEach((b, k) => { const on = k === cur; b.setAttribute('aria-selected', String(on)); b.tabIndex = on ? 0 : -1; b.style.setProperty('--p', 0); });
+    scr.innerHTML = screen(F[cur][0]);
+    scr.classList.remove('is--in');
+    void scr.offsetWidth;
+    scr.classList.add('is--in');
+    $('#gaps-stage').setAttribute('aria-labelledby', 'gap-' + cur);
+    elapsed = 0;
+    if (user) auto = false;
+    if (focus) btns[cur].focus();
   }
-  svg.innerHTML = s;
-  $('#pipe-holes').innerHTML = C.leaks.map(([a, b], i) => {
-    const [x, y] = g.holes[i];
-    const style = m ? `left:${((x + 70) / g.w * 100).toFixed(1)}%;top:${(y / g.h * 100).toFixed(1)}%` : `left:${(x / g.w * 100).toFixed(1)}%;top:${((y + 104 + (i % 2) * 70) / g.h * 100).toFixed(1)}%`;
-    return `<li class="pipe__tag" style="${style};--k:${i}"><span class="pipe__tag-n">${pad(i + 1)}</span><span class="pipe__tag-t"><span class="from">${esc(a)}</span><span class="to">${esc(b)}</span></span></li>`;
-  }).join('');
+  list.addEventListener('click', e => { const b = e.target.closest('.gap'); if (b) set(+b.dataset.i, true); });
+  list.addEventListener('keydown', e => {
+    const d = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
+    if (!d) return;
+    e.preventDefault();
+    set(cur + d, true, true);
+  });
+  root.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') hover = true; });
+  root.addEventListener('pointerleave', () => { hover = false; });
+  onVisible(root, v => { inView = v; }, { threshold: 0.25 });
+  set(0);
+  if (!auto) return;
+  const tick = now => {
+    const dt = last ? Math.min(100, now - last) : 0;
+    last = now;
+    if (auto && inView && !hover && !document.hidden) {
+      elapsed += dt;
+      btns[cur].style.setProperty('--p', clamp(elapsed / DUR, 0, 1).toFixed(3));
+      if (elapsed >= DUR) set(cur + 1);
+    }
+    if (auto) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+function renderFound() {
+  initGaps();
+  $('#today-chain').innerHTML = C.today.map(([ic, t, weak], i) => `<li class="lk${weak ? ' is--weak' : ''}" style="--k:${i}"><span class="lk__ring">${kicon(ic)}</span><span class="lk__n">Step ${pad(i + 1)}</span><b class="lk__t">${esc(t)}</b>${weak ? `<span class="lk__flag">${esc(weak)}</span>` : ''}</li>`).join('') + '<li class="links__order" aria-hidden="true">Order</li>';
+}
+
+/* ---------- The leaks: a flow chart ---------- */
+/* A band of buyers runs past five gates. At each gate a share turns red and falls away; with the system the band stays whole.
+   The numbers are each stretch's share of the band's full thickness. They show the shape, not measured rates. */
+const FLOW = { today: [1, 0.8, 0.63, 0.47, 0.33, 0.23], os: [1, 0.97, 0.94, 0.91, 0.88, 0.85] };
+let pipeGeo = null, pipeW = FLOW.today.slice(), pipeRaf = 0;
+function renderPipe() {
+  $('#pipe-svg').innerHTML = `<defs><linearGradient id="pipe-lost" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F0434F"/><stop offset=".3" stop-color="#F0434F" stop-opacity=".9"/><stop offset="1" stop-color="#F0434F" stop-opacity="0"/></linearGradient></defs>`
+    + C.leaks.map(() => '<path class="pipe__rib"/>').join('') + '<path class="pipe__band"/>'
+    + C.leaks.map(() => '<path class="pipe__cut"/>').join('') + '<rect class="pipe__src" rx="2"/><rect class="pipe__sink" rx="2"/>';
+  $('#pipe-holes').innerHTML = C.leaks.map(([a, b], i) => `<li class="pcol" style="--k:${i}"><span class="pcol__k tnum">${pad(i + 1)}</span><b class="pcol__t"><span class="from">${esc(a)}</span><span class="to">${esc(b)}</span></b><span class="pcol__s"><span class="from"><i></i>Leaking</span><span class="to">${icon('check')}Plugged</span></span></li>`).join('');
+  measurePipe();
   paintPipe();
 }
+/* Read the gates off the layout, so the chart always lines up with its labels. Desktop runs left to right, a phone top to bottom:
+   u is the distance along the flow, v the distance across it. */
+function measurePipe() {
+  const stage = $('.pipe__stage'), R = stage.getBoundingClientRect();
+  if (!R.width) return;
+  const m = isMobile(), cs = getComputedStyle(stage), rem = parseFloat(getComputedStyle(html).fontSize) || 16;
+  const v = n => (parseFloat(cs.getPropertyValue(n)) || 0) * rem;
+  const at = el => { const r = el.getBoundingClientRect(); return m ? r.top - R.top : r.left - R.left; };
+  const g = $$('#pipe-holes > li').map(at), V0 = v('--v0'), H = v('--bh');
+  pipeGeo = { m, g, u0: v('--u0'), end: at($('.pipe__meter')), V0, H, r: (m ? 0.75 : 1.25) * rem, node: 0.4 * rem,
+    vEnd: m ? R.width - 1.25 * rem : V0 + H + v('--fall') };
+  $('#pipe-lost').setAttribute(m ? 'x2' : 'y2', '1');
+  $('#pipe-lost').setAttribute(m ? 'y2' : 'x2', '0');
+  drawPipe();
+}
+function drawPipe() {
+  const G = pipeGeo;
+  if (!G) return;
+  const { m, g, u0, end, V0, r, vEnd } = G, w = pipeW.map(f => f * G.H);
+  const P = (u, v) => (m ? `${v.toFixed(1)} ${u.toFixed(1)}` : `${u.toFixed(1)} ${v.toFixed(1)}`);
+  const arc = (rad, cw, u, v) => `A${rad.toFixed(1)} ${rad.toFixed(1)} 0 0 ${m ? +!cw : +cw} ${P(u, v)}`;
+  const box = (el, u1, v1, u2, v2) => { [['x', m ? v1 : u1], ['y', m ? u1 : v1], ['width', m ? v2 - v1 : u2 - u1], ['height', m ? u2 - u1 : v2 - v1]].forEach(([k, n]) => el.setAttribute(k, Math.max(0, n).toFixed(1))); };
+  let band = `M${P(u0, V0)}L${P(end, V0)}L${P(end, V0 + w[5])}`;
+  for (let i = 4; i >= 0; i--) band += `L${P(g[i], V0 + w[i + 1])}L${P(g[i], V0 + w[i])}`;
+  $('.pipe__band').setAttribute('d', band + `L${P(u0, V0 + w[0])}Z`);
+  const ribs = $$('.pipe__rib'), cuts = $$('.pipe__cut');
+  g.forEach((x, i) => {
+    const d = w[i] - w[i + 1], far = V0 + w[i];
+    ribs[i].setAttribute('d', d < 0.3 ? '' : `M${P(x, far - d)}${arc(r + d, 1, x + r + d, far + r)}L${P(x + r + d, vEnd)}L${P(x + r, vEnd)}L${P(x + r, far + r)}${arc(r, 0, x, far)}Z`);
+    cuts[i].setAttribute('d', `M${P(x, V0)}L${P(x, far)}`);
+  });
+  box($('.pipe__src'), u0, V0, u0 + G.node, V0 + w[0]);
+  box($('.pipe__sink'), end, V0, end + G.node * 1.5, V0 + w[5]);
+  $('#pipe-svg').dataset.out = pipeW[5].toFixed(2);
+}
 function paintPipe() {
-  const root = $('#pipe'), st = root.dataset.state, w = WATER[st];
-  $$('.pipe__water', root).forEach((l, i) => { l.style.strokeWidth = w[i] + 'px'; });
-  const f = $('#pipe-fill');
-  if (f) {
-    const m = isMobile(), H = m ? 82 : 174, top = m ? 668 : 120, p = st === 'os' ? 0.86 : 0.24;
-    f.setAttribute('y', (top + H * (1 - p)).toFixed(1));
-    f.setAttribute('height', (H * p).toFixed(1));
-  }
-  $('#pipe-out').textContent = st === 'os' ? 'Most of it' : 'A trickle';
+  const root = $('#pipe'), os = root.dataset.state === 'os', to = FLOW[os ? 'os' : 'today'];
+  $('#pipe-out').textContent = os ? 'Most of it' : 'A trickle';
+  $$('.pcol .from', root).forEach(e => e.setAttribute('aria-hidden', String(os)));
+  $$('.pcol .to', root).forEach(e => e.setAttribute('aria-hidden', String(!os)));
+  cancelAnimationFrame(pipeRaf);
+  if (reduce) { pipeW = to.slice(); drawPipe(); return; }
+  const from = pipeW.slice(), t0 = performance.now(), DUR = 900, LAG = 90;
+  const step = now => {
+    let live = false;
+    pipeW = to.map((f, i) => { const p = clamp((now - t0 - i * LAG) / DUR, 0, 1); if (p < 1) live = true; return from[i] + (f - from[i]) * (1 - Math.pow(1 - p, 4)); });
+    drawPipe();
+    if (live) pipeRaf = requestAnimationFrame(step);
+  };
+  pipeRaf = requestAnimationFrame(step);
 }
 function initPipe() {
-  const root = $('#pipe');
+  const root = $('#pipe'), stage = $('.pipe__stage');
   let touched = false;
   const set = s => { root.dataset.state = s; $$('[data-pipe-set]', root).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.pipeSet === s))); paintPipe(); };
   $$('[data-pipe-set]', root).forEach(b => b.addEventListener('click', () => { touched = true; set(b.dataset.pipeSet); }));
-  if (!reduce) onVisible($('.pipe__stage'), (v, io) => { if (v) { io.disconnect(); setTimeout(() => { if (!touched) set('os'); }, 2600); } }, { threshold: 0.5 });
+  if ('ResizeObserver' in window) new ResizeObserver(measurePipe).observe(stage);
+  else window.addEventListener('resize', measurePipe);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measurePipe);
+  if (!reduce) onVisible(stage, (v, io) => { if (v) { io.disconnect(); setTimeout(() => { if (!touched) set('os'); }, 2600); } }, { threshold: 0.5 });
 }
 function initLost() {
-  const a = $('#r-lost'), b = $('#r-lost-avg'), out = $('#o-lost');
+  const a = $('#r-lost'), b = $('#r-lost-avg'), out = $('#o-lost'), root = $('.lost');
   let shown = 0, raf = 0;
   const fill = el => el.style.setProperty('--p', ((el.value - el.min) / (el.max - el.min) * 100).toFixed(1) + '%');
+  $$('.lost__stairs i', root).forEach((bar, i) => bar.style.setProperty('--i', i));
+  if (reduce) root.classList.add('is--in');
+  else onVisible(root, (v, io) => { if (v) { io.disconnect(); root.classList.add('is--in'); } }, { threshold: 0.35 });
   const update = () => {
     const n = +a.value, avg = +b.value, year = n * avg * 365;
     $('#v-lost').textContent = n;
     $('#v-lost-avg').textContent = '₹' + fmtIN(avg);
     $('#o-lost-sub').textContent = n ? `That’s ₹${fmtIN(year / 12)} a month.` : 'Nothing lost. Nice!';
+    $('#o-lost-today').textContent = n ? `Today, ${fmtIN(n * 365)} buyers walk away a year.` : 'Today, no buyer walks away.';
+    root.classList.toggle('is--zero', !n);
+    /* The figure sizes itself to its final length, so the largest sum still fits the card */
+    out.style.setProperty('--ch', ('₹' + fmtIN(year)).length);
     [a, b].forEach(fill);
-    $('.lost').style.setProperty('--drip', String(Math.min(n, 5)));
     cancelAnimationFrame(raf);
     if (reduce) { shown = year; out.textContent = '₹' + fmtIN(year); return; }
     const from = shown, t0 = performance.now();
@@ -161,7 +207,7 @@ function renderLoop() {
     return `<button class="lst is--${s.act}" type="button" data-st="${i}" style="left:${(x / LOOP.w * 100).toFixed(2)}%;top:${(y / LOOP.h * 100).toFixed(2)}%" aria-label="Step ${s.n}: ${esc(s.name)}"><span class="lst__top"><span class="lst__ic">${kicon(s.icon)}</span><span class="lst__n">${s.n}</span><span class="lst__act">${esc(ACT(s.act).name)}</span></span><b class="lst__name">${esc(s.name)}</b><span class="lst__line">${esc(s[lane])}</span></button>`;
   }).join('');
 }
-const LANE_CAP = { on: 'Sees a reel. Buys on the website. Comes back for more.', st: 'Walks in. Billed at the counter. Comes back for more.' };
+const LANE_CAP = { on: 'Ravi sees a reel. Buys on the website. Comes back for more.', st: 'Ravi walks in. Billed at the counter. Comes back for more.' };
 function setLane(l) {
   lane = l;
   $('#loop').dataset.lane = l;
@@ -446,7 +492,8 @@ function renderYouth() {
   $('#ystats').innerHTML = C.stats.map(([v, t, s], i) => `<li class="ys${i === 0 ? ' is--blue' : ''}"><b class="ys__v">${esc(v)}</b><span class="ys__t">${esc(t)}</span><small>${esc(s)}</small></li>`).join('');
   const n = C.loop.length;
   $('#yloop-ring').innerHTML = `<svg class="yloop__svg" viewBox="0 0 100 100" aria-hidden="true"><circle class="yloop__track" cx="50" cy="50" r="40"/><circle class="yloop__prog" id="yloop-prog" cx="50" cy="50" r="40" pathLength="100"/></svg>` + C.loop.map(([name, , , ic], i) => { const a = (-90 + i * 360 / n) * Math.PI / 180; return `<button class="yl" type="button" data-yl="${i}" style="left:${(50 + Math.cos(a) * 40).toFixed(2)}%;top:${(50 + Math.sin(a) * 40).toFixed(2)}%" aria-label="${esc(name)}"><span class="yl__ic">${kicon(ic)}</span><span class="yl__n">${esc(name)}</span></button>`; }).join('');
-  $('#people-cards').innerHTML = C.people.map((p, i) => `<div class="flick__item" data-i="${i}" role="listitem"><article class="person-card"><div class="person-card__top"><span class="person-card__av">${kicon(p.icon)}</span><span class="tag" data-theme="volt" data-shape="round">${esc(p.age)}</span></div><p class="person-card__q">“${esc(p.quote)}”</p><div class="person-card__info"><h3 class="h-s">${esc(p.name)}</h3><p class="p-s">${esc(p.where)}</p></div><div class="portal-card__counts"><span>${esc(p.budget)}</span><span>${esc(p.finds)}</span><span>${esc(p.pays)}</span></div><div class="portal-card__open"><span>Meet them</span><svg viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-ur"/></svg></div></article></div>`).join('');
+  $('#people-cards').innerHTML = C.people.map((p, i) => `<div class="flick__item" data-i="${i}" role="listitem"><article class="person-card"><div class="person-card__photo" style="--py:${p.py}%">${photo(p)}<span class="person-card__age">Ages ${esc(p.age)}</span><span class="person-card__go" aria-hidden="true"><svg viewBox="0 0 12 12"><use href="#i-arrow-ur"/></svg></span><p class="person-card__q">“${esc(p.quote)}”</p></div><div class="person-card__body"><div class="person-card__who"><h3 class="person-card__name">${esc(p.first)}, ${p.at}</h3><p class="person-card__type">${esc(p.name)}</p><p class="person-card__where">${esc(p.where)}</p></div>${facts([['Spends', p.budget], ['Finds you on', p.finds], ['Pays with', p.pays]])}</div></article></div>`).join('');
+  $('#people-faces').innerHTML = C.people.map((p, i) => `<button class="face" type="button" data-face="${i}" aria-pressed="false" aria-label="${esc(p.first)}, ${esc(p.name.replace(/^The /, 'the '))}"><span style="${esc(facePos(p))}"></span></button>`).join('');
   $('#tactics').innerHTML = C.tactics.map(([ic, t, l], i) => `<li class="tac" style="--k:${i}"><span class="tac__ic">${kicon(ic)}</span><b>${esc(t)}</b><span>${esc(l)}</span></li>`).join('');
 }
 function initYLoop() {
@@ -470,9 +517,10 @@ let personIndex = 0;
 function personHTML(i) {
   const p = C.people[i], n = C.people.length;
   const prev = C.people[(i - 1 + n) % n], next = C.people[(i + 1) % n];
-  return `<div class="pmod"><div class="pmod__head"><div class="tag-pair"><span class="tag">Buyer ${pad(i + 1)} / ${pad(n)}</span><span class="tag" data-theme="volt" data-shape="round">${esc(p.age)}</span></div><h2 class="h-l" id="person-title">${esc(p.name)}</h2><p class="p-l">“${esc(p.quote)}”</p></div>
-    <div class="pmod__grid"><div class="pmod__tabs"><span class="eyebrow">What they want</span><ol class="route">${p.wants.map((t, k) => `<li style="--k:${k}"><span class="route__n">${pad(k + 1)}</span><span class="route__t">${esc(t)}</span></li>`).join('')}</ol><span class="eyebrow" style="margin-top:1.5rem">What annoys them today</span><ul class="pmod__pains">${p.pains.map(t => `<li>${esc(t)}</li>`).join('')}</ul></div>
-    <div class="pmod__side"><div class="pmod__card is--dark"><div class="pmod__facts"><span><small>Lives</small>${esc(p.where)}</span><span><small>Spends</small>${esc(p.budget)}</span><span><small>Finds you on</small>${esc(p.finds)}</span><span><small>Pays with</small>${esc(p.pays)}</span></div></div><div class="pmod__card is--gold"><span class="eyebrow">How we win them</span><p class="h-xs">${esc(p.win)}</p></div></div></div>
+  return `<div class="pmod"><div class="pmod__top"><div class="pmod__id"><div class="pmod__photo" style="--py:${p.py}%">${photo(p)}<p class="pmod__name">${esc(p.first)}, ${p.at}</p></div>${facts([[p.whereAs || 'Lives', p.where], ['Spends', p.budget], ['Finds you on', p.finds], ['Pays with', p.pays]])}</div>
+    <div class="pmod__main"><div class="pmod__head"><div class="tag-pair"><span class="tag">Buyer ${pad(i + 1)} / ${pad(n)}</span><span class="tag" data-theme="volt" data-shape="round">Ages ${esc(p.age)}</span></div><h2 class="h-l" id="person-title">${esc(p.name)}</h2><p class="pmod__q">“${esc(p.quote)}”</p></div>
+    <div class="pmod__cols"><div class="pmod__box"><span class="eyebrow">What they want</span><ul class="pmod__list is--want">${p.wants.map(t => `<li>${esc(t)}</li>`).join('')}</ul></div><div class="pmod__box"><span class="eyebrow">What annoys them today</span><ul class="pmod__list is--pain">${p.pains.map(t => `<li>${esc(t)}</li>`).join('')}</ul></div></div>
+    <div class="pmod__win"><span class="eyebrow">How we win them</span><p class="h-xs">${esc(p.win)}</p></div></div></div>
     <div class="pm__nav"><button class="btn" type="button" data-theme="haze" data-person-step="-1"><span class="btn__label">← ${esc(prev.name)}</span></button><button class="btn" type="button" data-theme="volt" data-person-step="1"><span class="btn__label">${esc(next.name)} →</span></button></div></div>`;
 }
 function openPerson(i, trigger) {
@@ -491,6 +539,16 @@ function initFlick() {
   let pos = 0, target = 0, dragging = false, raf = 0;
   const cardW = () => items[0].offsetWidth;
   const idx = v => ((Math.round(v) % n) + n) % n;
+  const faces = $$('#people-faces .face'), openLabels = $$('[data-flick-open] .btn__label');
+  let shown = -1;
+  function show(i) {
+    if (i === shown) return;
+    shown = i;
+    const p = C.people[i];
+    faces.forEach((b, k) => { b.classList.toggle('is--on', k === i); b.setAttribute('aria-pressed', String(k === i)); });
+    openLabels.forEach(l => { l.textContent = `Meet ${p.first}`; });
+    $('#people-count').textContent = `${p.first}, ${p.name.replace(/^The /, 'the ')}. Buyer ${i + 1} of ${n}.`;
+  }
   function layout() {
     const w = cardW(), sp = w * (isMobile() ? 0.56 : 0.7);
     items.forEach((it, i) => {
@@ -505,7 +563,7 @@ function initFlick() {
       it.classList.toggle('is--active', act);
       it.setAttribute('aria-current', String(act));
     });
-    $('#people-count').textContent = `${pad(idx(pos) + 1)} / ${pad(n)}`;
+    show(idx(pos));
   }
   function animate() {
     cancelAnimationFrame(raf);
@@ -559,6 +617,7 @@ function initFlick() {
   $('[data-flick-prev]').addEventListener('click', () => goTo(Math.round(target) - 1));
   $('[data-flick-next]').addEventListener('click', () => goTo(Math.round(target) + 1));
   $('[data-flick-open]').addEventListener('click', e => openPerson(idx(target), e.currentTarget));
+  faces.forEach(b => b.addEventListener('click', () => goTo(nearestTarget(+b.dataset.face))));
   document.addEventListener('click', e => { const st = e.target.closest('[data-person-step]'); if (st) openPerson(personIndex + (+st.dataset.personStep)); });
   window.addEventListener('resize', layout);
   layout();
@@ -608,12 +667,17 @@ function initCalc() {
   update();
 }
 
-/* ---------- Lists: plugs, road, need, proof, map ---------- */
+/* ---------- Lists: road, proof, map ---------- */
 function renderLists() {
-  $('#plugs').innerHTML = C.plugs.map(([ic, a, b]) => `<li>${kicon(ic)}<b><s>${esc(a)}</s></b><span>${esc(b)}</span></li>`).join('');
-  $('#road').innerHTML = C.road.map(([n, ph, t, l, w]) => `<li><span class="trail__dot" aria-hidden="true">${n}</span><div class="trail__card"><span class="trail__ph">${esc(ph)} · ${esc(w)}</span><h3>${esc(t)}</h3><p>${esc(l)}</p></div></li>`).join('');
-  $('#need').innerHTML = C.need.map(t => `<li>${esc(t)}</li>`).join('');
+  /* Plan: one bar per phase on an eight-column track (weeks 1 to 7, then after launch) */
+  const gate = '<i class="plan__gate"><svg viewBox="0 0 16 16"><use href="#i-check"/></svg></i>';
+  $('#road').innerHTML = C.road.map(([n, ph, t, l, w, s, d], i, a) => {
+    const live = i === a.length - 2, open = i === a.length - 1;
+    const kind = open ? ' is--open' : live ? ' is--live' : d ? '' : ' is--day';
+    return `<li class="plan__row${kind}" style="--s:${s};--d:${d};--k:${i}"><div class="plan__id"><span class="plan__n">${n}</span><span class="plan__ph">${esc(ph)}</span></div><div class="plan__text"><h3>${esc(t)}</h3><p>${esc(l)}</p></div><span class="plan__when">${esc(w)}</span><div class="plan__track" aria-hidden="true"><span class="plan__bar">${live || open ? '' : gate}</span>${live ? '<b class="plan__flag">Live</b>' : ''}</div></li>`;
+  }).join('');
   $('#proof-list').innerHTML = C.proof.map(p => `<li class="pf${p.phone ? ' is--phone' : ''}"><a class="pf__link" href="${esc(p.href)}"${/^https?:/.test(p.href) ? ' target="_blank" rel="noopener"' : ''}><span class="pf__img"><img src="${esc(p.img)}" alt="${esc(p.name)} screen" loading="lazy"></span><span class="pf__body"><span class="tag" data-theme="haze" data-shape="round">${esc(p.tag)}</span><b class="pf__name">${esc(p.name)}</b><span class="pf__line">${esc(p.line)}</span><span class="pf__cta">${esc(p.cta)}<svg viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-ur"/></svg></span></span></a></li>`).join('');
+  $('#more-list').innerHTML = C.more.map(([n, k, h]) => `<li><a class="more__chip" href="${esc(h)}" target="_blank" rel="noopener"><b>${esc(n)}</b><span>${esc(k)}</span><svg viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a></li>`).join('');
   /* Map: rings, coast, arcs from Ongole */
   const [, hx, hy] = C.towns[0];
   const coast = 'M98 0 C95 6 91.5 12 88.7 16.6 C87 19 85.5 20.8 83.4 22.1 C78 30 72 38 69.1 44.3 C67.8 48 67 52 66.2 55.4 C64.8 60 62.8 64.6 61.4 68.4 C60.8 70.5 60.1 73 59.5 75';
@@ -624,7 +688,7 @@ function renderLists() {
   $('#map-towns').innerHTML = C.towns.map(([t, x, y], i) => `<span class="town${i === 0 ? ' is--home' : ''}" style="left:${x}%;top:${y}%;--k:${i}"><i></i><b>${esc(t)}</b></span>`).join('');
 }
 function initWork() {
-  const els = $$('.today, .map, .chain');
+  const els = $$('.today, .map, .chain, .plan');
   if (reduce || !('IntersectionObserver' in window)) { els.forEach(e => e.classList.add('is--in')); return; }
   els.forEach(el => onVisible(el, (v, io) => { if (v) { io.disconnect(); el.classList.add('is--in'); } }, { threshold: 0.3 }));
 }
@@ -705,14 +769,9 @@ function initRadialMotion() {
     spin.timeScale(spin.timeScale() + (target - spin.timeScale()) * 0.08);
   });
 }
-function initResize() {
-  let wasMobile = isMobile();
-  window.addEventListener('resize', () => { if (isMobile() !== wasMobile) { wasMobile = isMobile(); renderMess(); renderPipe(); } });
-}
-
 /* ---------- Boot ---------- */
 safe('render', () => {
-  renderRadial(); renderTicker(); renderFound(); renderMess(); renderPains(); renderPipe(); renderLoop(); renderStages();
+  renderRadial(); renderTicker(); renderFound(); renderPipe(); renderLoop(); renderStages();
   renderChain(); renderHub(); renderDay(); renderCall(); renderYouth(); renderLists();
   $$('[data-visual]').forEach(el => { const n = el.dataset.visual, v = V[n]; if (v) { el.innerHTML = v(); if (PHONE.includes(n)) el.classList.add('is--m'); } });
   $$('[data-year]').forEach(e => { e.textContent = String(new Date().getFullYear()); });
@@ -727,7 +786,6 @@ safe('loop', initLoop);
 safe('radial-links', initRadialLinks);
 safe('pipe', initPipe);
 safe('lost', initLost);
-safe('mess', initMess);
 safe('bill', initBill);
 safe('hub', initHub);
 safe('day', initDay);
@@ -739,7 +797,6 @@ safe('work', initWork);
 safe('player', initPlayer);
 safe('copy', initCopy);
 safe('cursor', () => initCursor('.flick__item.is--active'));
-safe('resize', initResize);
 safe('hero', initHero);
 safe('radial', initRadialMotion);
 safe('reveals', initReveals);

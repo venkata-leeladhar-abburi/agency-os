@@ -101,7 +101,7 @@ To try the whole site locally, with working leads in memory, run `node source/to
 
 A short, visual pitch for clients. Every line is a few words.
 
-`process/` is the same page with the sections before the process hidden, so “Our process” opens at the seven phases. On the client pitch, the process page and the Agency OS deck, every “Book a call” button goes to the Let’s talk section of the agency website: https://onestop-solutions.vercel.app/#contact.
+`process/` is the same page with the sections before the process hidden, so “Our process” opens at the seven phases. On the client pitch, the process page and the Agency OS deck, every “Book a call” button goes to the Let’s talk section of the agency website: https://www.onestop-solutions.in/#contact.
 
 | Section | What it shows |
 | --- | --- |
@@ -147,18 +147,17 @@ A pitch for Heaven Gadgets, a watches, footwear and gadgets store in Ongole. It 
 | --- | --- |
 | Hero | "Only in Ongole. Soon, all of India." with a rotating ring of the eight steps and a stat bar |
 | Walkthrough | An eight-step player, one screen per step |
-| Your store | Who they are, five gaps we found on Instagram and in store, and how an order works today, with its weak links |
-| Chats to system | Scattered chats flip into one system, and eight questions answered |
-| Where sales leak | A pipe with five leaks that the system plugs, and a lost-sales estimator |
-| The new flow | One loop for online and store buyers (switch between the two), draggable step cards, and who, what, today and what it gives back for each step |
+| Your store | Who they are, what they sell (footwear, watches, gadgets, style), five gaps we found (pick one to see it on a large screen, with where we saw it and what fixes it), and how one buyer’s order works today (Ravi, who carries the story down the page), with its weak links |
+| Where sales leak | A flow chart of buyers: at five points a share turns red and falls away, and the system plugs each one (switch between today and with the system). Below it, an estimator with drag sliders for the sales won back each year |
+| The new flow | The same buyer with the system: one loop for online and store buyers (switch between the two), draggable step cards, and who, what, today and what it gives back for each step |
 | One bill | Bill once at the counter and watch seven things happen |
-| One platform | Eight tools around one database, each shown on a screen with numbered call-outs, plus the extras around it |
-| Always on | A 24-hour clock of bills, alerts, offers and calls, and the AI voice agent on a live call |
+| One platform | Eight tools around one database, each shown on a screen with numbered call-outs |
+| Always on | The second half of One platform, one gap below it: a 24-hour clock of bills, alerts, offers and calls, and the AI voice agent on a live call, then the extras around the platform |
 | Your buyers | Research on how young buyers shop, the youth loop, five buyer types and eight ways to win them |
-| Your numbers | A growth estimator with drag sliders and a before-and-after bar, the leaks it plugs, and why keeping buyers pays |
-| How we build | Our seven phases with weeks, and what we need from the store |
+| Your numbers | A growth estimator with drag sliders and a before-and-after bar, and why keeping buyers pays |
+| Why One Stop | Beere Kesava ERP, Aaravi Collectives and Nawin Golden Boy as cards, more projects as links, and buttons to all our work and the agency website |
+| How we build | Our seven phases as a week-by-week plan: one bar per phase, an approval point at the end of each, and launch day marked in week 7 |
 | Branch two | Towns around Ongole on a map, and how the system runs new branches |
-| Why One Stop | Projects we have built, linked to the agency website |
 | Next step | Store visit, plan and quote, go live, with contact details |
 
 Products, prices, names and numbers inside the screens are samples. The estimators only use the numbers the visitor sets. The research figures name their sources on the page (Meta × GWI 2025, Snap × BCG 2024, Bain & Co. 2025).
@@ -213,4 +212,4 @@ The shared version of the playbook is a Claude artifact with a shared database, 
 - Phone / WhatsApp: +91 90149 52056
 - Agency: workwithonestop@gmail.com
 - Email: leeladharabburi2032@gmail.com
-- Website: https://onestop-solutions.vercel.app/
+- Website: https://www.onestop-solutions.in/

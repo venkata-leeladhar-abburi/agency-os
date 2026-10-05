@@ -23,7 +23,7 @@ FAV_SVG = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><circle 
            'stroke="#2B4DFF" stroke-width="3"/><text x="32" y="41" text-anchor="middle" font-family="Arial,sans-serif" '
            'font-size="24" font-weight="700" fill="#fff">H<tspan fill="#FFD43A">G</tspan></text></svg>')
 FAVICON = 'data:image/svg+xml,' + FAV_SVG.replace('"', "'").replace('#', '%23').replace('<', '%3C').replace('>', '%3E')
-BLOCKS = ['HERO', 'REEL', 'INTRO', 'Vertical slider (shared)', 'PROBLEM', 'JOURNEY', 'PORTALS (dark)',
+BLOCKS = ['HERO', 'REEL', 'INTRO', 'Vertical slider (shared)', 'JOURNEY', 'PORTALS (dark)',
           'INVEST', 'FOOTER', 'MODAL CONTENT']
 TITLE = 'Heaven Gadgets × One Stop'
 DESC = ('A growth plan for Heaven Gadgets, Ongole: an online store, billing counter, inventory, customer list, '
@@ -80,6 +80,7 @@ def build():
 <link rel="preconnect" href="https://api.fontshare.com">
 <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
 <link rel="preconnect" href="https://images.unsplash.com">
+<link rel="preconnect" href="https://images.pexels.com">
 <link rel="stylesheet" href="{FONTS[0]}">
 <link rel="stylesheet" href="{FONTS[1]}">
 <style>

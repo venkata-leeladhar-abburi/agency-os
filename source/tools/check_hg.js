@@ -25,10 +25,10 @@ async function route(r, blocked) {
   blocked.push(u.slice(0, 90));
   return r.abort();
 }
-const CONTAINERS = ['radial-list', 'reel-ticker', 'found-slides', 'today-chain', 'mess-chips', 'mess-lines', 'mess-cols', 'pains', 'pipe-svg', 'pipe-holes',
+const CONTAINERS = ['radial-list', 'reel-ticker', 'found-slides', 'today-chain', 'pipe-svg', 'pipe-holes',
   'loop-svg', 'loop-stations', 'stage-cards', 'stage-detail', 'chain', 'hub-svg', 'hub-nodes', 'tool-screen', 'tool-pins', 'tool-info', 'dial-svg', 'day-list',
-  'call-wave', 'call-lines', 'ystats', 'yloop-ring', 'people-cards', 'tactics', 'plugs', 'road', 'need', 'map-svg', 'map-towns', 'proof-list', 'player-frames', 'player-progress'];
-const SECTIONS = ['top', 'reel', 'store', 'problem', 'leaks', 'flow', 'bill', 'platform', 'always', 'youth', 'money', 'process', 'scale', 'proof', 'start', 'contact'];
+  'call-wave', 'call-lines', 'ystats', 'yloop-ring', 'people-cards', 'people-faces', 'tactics', 'proof-list', 'more-list', 'road', 'map-svg', 'map-towns', 'player-frames', 'player-progress'];
+const SECTIONS = ['top', 'reel', 'store', 'leaks', 'flow', 'bill', 'platform', 'always', 'youth', 'money', 'proof', 'process', 'scale', 'start', 'contact'];
 async function run(name, opts) {
   const browser = await chromium.launch({ executablePath: CHROME });
   const ctx = await browser.newContext(opts);
@@ -59,7 +59,7 @@ async function run(name, opts) {
   });
   rep.textClip = await page.evaluate(() => {
     const out = [];
-    const skip = '.radial, .marquee, .undernav, .flick, .gslider, .k, .reel__ticker, .mess, .modal, .nav, .footer__logo, .vslider__list, .media, .pipe, .loop, .hub, .map, .yloop';
+    const skip = '.radial, .marquee, .undernav, .flick, .gslider, .k, .reel__ticker, .modal, .nav, .footer__logo, .vslider__list, .media, .pipe, .loop, .hub, .map, .yloop';
     for (const el of document.querySelectorAll('body *')) {
       if (el.closest(skip)) continue;
       const s = getComputedStyle(el);
@@ -85,7 +85,7 @@ async function run(name, opts) {
   // Leaks: back to today
   await page.evaluate(() => document.querySelector('[data-pipe-set="today"]').click());
   await page.waitForTimeout(1400);
-  act.pipe = await page.evaluate(() => ({ state: document.getElementById('pipe').dataset.state, out: document.getElementById('pipe-out').textContent, w0: document.querySelector('.pipe__water[data-i="5"]').style.strokeWidth }));
+  act.pipe = await page.evaluate(() => ({ state: document.getElementById('pipe').dataset.state, out: document.getElementById('pipe-out').textContent, w0: document.getElementById('pipe-svg').dataset.out }));
   await shotOf('.pipe__stage', 'i-pipe-today');
   // Lost calculator
   await page.evaluate(() => { const r = document.getElementById('r-lost'); r.value = 4; r.dispatchEvent(new Event('input', { bubbles: true })); });
