@@ -19,7 +19,7 @@ HL = os.path.join(SRC6, 'hairline')
 REPO = sys.argv[1] if len(sys.argv) > 1 else os.path.dirname(HERE)
 
 FONTS = ('https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700'
-         '&family=Atkinson+Hyperlegible+Next:wght@400..700&family=Anek+Telugu:wght@400..700'
+         '&family=Inter:opsz,wght@14..32,400..700&family=Anek+Telugu:wght@400..700'
          '&family=Geist+Mono:wght@400;500&family=Caveat:wght@500;600&display=swap')
 HAIRLINE = 'https://cdn.jsdelivr.net/npm/@lucasmarkes/hairline@0.3.0/dist/index.js'
 FAV_SVG = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80"><rect width="80" height="80" rx="18" fill="#201d1d"/>'
@@ -48,7 +48,56 @@ if (rest.length) {
     rest.forEach(p => { const f = p.closest('.fig'); if (f) f.classList.add('is--off'); });
   }
 }
+
+// Plays each figure by itself while it is on screen: a slow pointer path, sent as the same events a hand would send.
+// A real pointer on the plate takes over at once; the path picks up again a moment after it leaves.
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+  const TAU = Math.PI * 2;
+  const send = (a, type, x, y) => a.to.dispatchEvent(new PointerEvent(type, { bubbles: type !== 'pointerleave', clientX: x, clientY: y, pointerType: 'mouse', pointerId: 1, isPrimary: true }));
+  const autos = plates.filter(p => p.querySelector('svg')).map((p, i) => {
+    const a = { p, to: p.querySelector('svg'), box: p.matches('[data-hairline]') ? p : p.querySelector('[data-hairline]') || p, t: i * 2.3, seen: false, hand: false, wait: 0, on: false };
+    const take = e => { if (e.isTrusted) { a.hand = true; a.on = false; } };
+    p.addEventListener('pointerenter', take);
+    p.addEventListener('pointermove', take);
+    p.addEventListener('pointerdown', take);
+    p.addEventListener('pointerleave', e => { if (e.isTrusted) { a.hand = false; a.wait = performance.now() + (e.pointerType === 'mouse' ? 900 : 2400); kick(); } });
+    return a;
+  });
+  let raf = 0, last = 0;
+  const step = now => {
+    const dt = Math.min(0.05, (now - last) / 1000);
+    last = now;
+    let any = false;
+    for (const a of autos) {
+      if (!a.seen || a.hand) continue;
+      any = true;
+      if (now < a.wait) continue;
+      a.on = true;
+      a.t += dt;
+      const r = a.box.getBoundingClientRect();
+      const u = 0.5 + 0.3 * Math.sin(a.t * TAU / 11), v = 0.54 + 0.2 * Math.sin(a.t * TAU / 7 + 1);
+      send(a, 'pointermove', r.left + r.width * u, r.top + r.height * v);
+    }
+    raf = any ? requestAnimationFrame(step) : 0;
+  };
+  function kick() { if (!raf) { last = performance.now(); raf = requestAnimationFrame(step); } }
+  const io = new IntersectionObserver(es => {
+    for (const e of es) {
+      const a = autos.find(x => x.p === e.target);
+      a.seen = e.isIntersecting;
+      if (a.seen) { a.wait = performance.now() + 500; kick(); }
+      else if (a.on) { a.on = false; send(a, 'pointerleave', 0, 0); }
+    }
+  }, { threshold: 0.4 });
+  autos.forEach(a => io.observe(a.p));
+}
 '''.replace('__HAIRLINE__', HAIRLINE)
+
+
+def scaled(css):
+    """Product screens are drawn in px on fixed artboards. Every lowercase px becomes calc(var(--px) * n), so a screen
+    scales with its container. Uppercase PX is left alone (hairlines)."""
+    return re.sub(r'(?<![\w.#-])(-?\d*\.?\d+)px\b', r'calc(var(--px)*\1)', css)
 
 
 def write(path, text):
@@ -79,7 +128,7 @@ def build():
     sprite = read(SRC6, 'sprite.html').replace('__LOGO_PATH__', logo).strip()
     css = '[hidden]{display:none!important}\n' + '\n'.join([
         read(SRC, 'base.css').strip(), css_blocks(BLOCKS), read(SRC2, 'shared.css').strip(),
-        read(SRC6, 'poui.css').strip(), read(SRC6, 'po.css').strip(), read(SRC6, 'po2.css').strip()])
+        scaled(read(SRC6, 'poui.css').strip()), read(SRC6, 'po.css').strip(), read(SRC6, 'po2.css').strip()])
     body = read(SRC6, 'po.html').replace('__SPRITE__', sprite).strip()
     js = ("(() => {\n'use strict';\n" + read(SRC6, 'content.js').strip() + '\n'
           + read(SRC2, 'core.js').strip() + '\n\n' + read(SRC6, 'povis.js').strip() + '\n\n'

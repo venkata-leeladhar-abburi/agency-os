@@ -170,7 +170,7 @@ To check the page in a browser, run `node source/tools/check_hg.js heaven-gadget
 
 ## Pharmacy OS pitch deck (`pharmacy-os/`)
 
-A pitch for Pharmacy OS, software for medical stores: order from the distributor, tick what arrived against that order, bill, remind customers on WhatsApp, and see every store from the owner's phone. It is written for investors and founders in words a store owner can follow. It uses concrete, carbon indigo and honey amber on the same layout as the other pages; the product screens use Atkinson Hyperlegible Next, a typeface made for low vision, and Anek Telugu. The page asks search engines not to index it.
+A pitch for Pharmacy OS, software for medical stores: order from the distributor, tick what arrived against that order, bill, remind customers on WhatsApp, and see every store from the owner's phone. It is written for investors and founders in words a store owner can follow. The page uses concrete, carbon indigo and honey amber on the same layout as the other pages. The product screens inside it have their own design system (see below). The page asks search engines not to index it.
 
 | Section | What it shows |
 | --- | --- |
@@ -179,13 +179,13 @@ A pitch for Pharmacy OS, software for medical stores: order from the distributor
 | 01 The gap | One medicine typed three times: the chain today and with Pharmacy OS (switch between the two), notes from store visits, and the trade's own 2021 letter asking for files "to avoid manual punching" |
 | 02 Today's software | What a store runs today, a drag slider between a typical screen today and ours, eight products a store owner knows (best at, weak at, how we win, published price), a feature table and a map of the open corner |
 | 03 The flow | Buy, stock, sell, grow: eight steps as draggable cards, with who, what, today and what it gives back |
-| 04 Try it | A working sketch: build an order from a list as you type, send it, then receive it by ticking. English and Telugu, three text sizes, and a meter of fields typed |
+| 04 Try it | A working sketch in the product's own look: build an order from a list as you type, send it, then receive it by ticking. Two language buttons (English, తెలుగు), three text sizes, and a meter of fields typed |
 | 05 Distributors | The answer to "a portal for distributors?": send first (WhatsApp, PDF and a link with no login), an order desk later, then a connection to their software |
-| 06 The platform | Six jobs and twenty-four features, each on a screen, and what runs by itself |
+| 06 The platform | The overview dashboard on a counter screen, a tablet and the owner's phone; six jobs and twenty-four features, each on its own full-size screen; moving in from the old software; and what runs by itself |
 | 07 Stores | One store or many: separate stock, each store's own distributors, and rules set once |
 | 08 Customers | WhatsApp bills and refill reminders, and a campaign estimator with Meta's India rates |
 | 09 Owner app | What the owner sees on the phone |
-| 10 UX | The evidence on ageing eyes and hands, research done and planned, five personas, two flows before and after, eight design rules with live examples, and the UI kit |
+| 10 UX | The evidence on ageing eyes and hands, research done and planned, five personas, two flows before and after, eight design rules with live examples, the overview screen with eight numbered design choices, the language choice, a table of measured accessibility numbers, and the UI kit |
 | 11 What it gives back | Hours, money and typing saved each year, with drag sliders, and what reminders can earn |
 | 12 Costs | What one store costs us each year, year-one build cost, the team, unit prices, and a break-even estimator for price, stores and team cost |
 | 13 Why ours | Five reasons, what gets harder to copy, and nine investor questions answered |
@@ -195,6 +195,16 @@ A pitch for Pharmacy OS, software for medical stores: order from the distributor
 | Start | Contact details and every source |
 
 Our own price is not stated: the page shows what competitors publish and says ours is set after the pilots. Every market and competitor fact names its source at the end of the page; competitor features come from public material and are marked as such. Products, stores, medicines and amounts inside the screens are samples. The "typical screen today" is our own drawing of a common layout, not a screenshot of any product. The personas are first sketches with stock photos from Pexels, to be replaced by real interviews. The Telugu wording needs a check by a native speaker before it is shown to store owners.
+
+### The product screens
+
+Every Pharmacy OS screen on the page is drawn from one kit: `source/src6/poui.css` (the parts) and `source/src6/povis.js` (the screens). The look follows a reference dashboard the owner chose: a light side menu with grouped words, white panels in soft grey trays, numbers with a small trend line, a bar chart with today in dark navy, a list of what happened, and tables with a status icon and word on every row. Navy marks what is chosen or next; green, amber and red mean fine, soon and stop, always with an icon and a word. English is set in Inter and Telugu in Anek Telugu. Medicine photos are free stock photos from Pexels with no brand on them; if one does not load, the row shows an icon instead.
+
+- **Artboards.** Screens are drawn in px on fixed artboards: counter screen 1280 × 800, phone 360 × 704, tablet 720 × 960. `build6.py` turns every lowercase `px` in `poui.css` into `calc(var(--px) * n)`, so a screen scales with its container. Write `PX` for a hairline that must stay one pixel. A px value inside a `style` attribute in `povis.js` is scaled the same way.
+- **Close-ups.** Small cards (the hero ring, the flow cards, the player) show a screen enlarged about a point, set per step in `content.js` as `zoom: [times, x, y]`.
+- **One screen per feature.** The 24 features in section 06 each have their own screen; the keys are in `C.jobs` in `content.js`.
+- **The demo** in section 04 is real HTML in the same look (`initDemo` in `po.js`, `.dm__*` in `po.css`).
+- **Measured, not promised.** The accessibility table in section 10 comes from measuring the demo in every state, at desktop and phone widths: lowest text contrast 4.5 : 1, smallest button 44 × 44 px, smallest text 14 px, and every control reachable by keyboard with a visible focus ring. Measure again after changing the demo's colours or sizes, and update `C.a11y` in `content.js`.
 
 The five line figures come from [Hairline](https://github.com/lucasmarkes/hairline) (MIT). Four load from jsDelivr; the blister strip is our own figure on the same engine, in `source/src6/hairline/` (`kernel.js` is Hairline's engine, unchanged, with its `LICENSE` beside it and on the page; `host.js` mounts our figure on the page; `strip.js` is the figure). If the library cannot load, those figures hide and the page still works.
 
@@ -212,7 +222,7 @@ The shared version of the playbook is a Claude artifact with a shared database, 
 
 - HTML, CSS and vanilla JavaScript, one file per page
 - [GSAP 3.13](https://gsap.com/) (Draggable, InertiaPlugin, ScrollTrigger, CustomEase) and [Lenis 1.3.4](https://lenis.darkroom.engineering/) from jsDelivr
-- Geist, Geist Mono and Caveat from Google Fonts, plus Fraunces for the Beere Kesava deck. The Heaven Gadgets plan uses Clash Display and Satoshi from Fontshare. The Pharmacy OS deck uses Instrument Sans, Atkinson Hyperlegible Next and Anek Telugu from Google Fonts
+- Geist, Geist Mono and Caveat from Google Fonts, plus Fraunces for the Beere Kesava deck. The Heaven Gadgets plan uses Clash Display and Satoshi from Fontshare. The Pharmacy OS deck uses Instrument Sans for the page, and Inter and Anek Telugu for the product screens, from Google Fonts
 - [Hairline 0.3.0](https://github.com/lucasmarkes/hairline) line figures on the Pharmacy OS deck
 - Keyboard support for sliders and dialogs, and reduced motion for visitors who ask for it
 

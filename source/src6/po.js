@@ -1,8 +1,10 @@
 /* ===== Pharmacy OS pitch ===== */
 const ST = C.steps, ACT = id => C.acts.find(a => a.id === id);
 const kicon = (id, cls = 'ki') => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true"><use href="#k-${id}"/></svg>`;
-const PHONES = ['dlink', 'wabillm', 'remindm', 'ownerm', 'needsm'];
-const screen = v => `<span class="s${PHONES.includes(v) ? ' is--m' : ''}${v === 'legacy' ? ' is--old' : ''}">${V[v] ? V[v]() : ''}</span>`;
+const PHONES = ['dlink', 'wabillm', 'remindm', 'ownerm', 'needsm'], TABLETS = ['billt'];
+/* A product screen. With a zoom [times, x, y] it is shown enlarged about that point, so a small card stays readable. */
+const screen = (v, zoom) => { const big = !PHONES.includes(v) && !TABLETS.includes(v) && zoom; return `<span class="s${PHONES.includes(v) ? ' is--m' : TABLETS.includes(v) ? ' is--t' : ''}${v === 'legacy' ? ' is--old' : ''}${big ? ' is--zoom' : ''}"${big ? ` style="--zm:${zoom[0]};--fx:${zoom[1]};--fy:${zoom[2]}"` : ''}>${V[v] ? V[v]() : ''}</span>`; };
+const near = z => z && [1 + (z[0] - 1) * 0.45, z[1], z[2]];
 const ACT_THEME = { buy: 'light', stock: 'violet', sell: 'black', grow: 'volt' };
 const fmtIN = n => new Intl.NumberFormat('en-IN').format(Math.round(n));
 const rs = n => '₹' + fmtIN(n);
@@ -18,7 +20,7 @@ function renderRadial() {
   list.style.setProperty('--step', (360 / all.length) + 'deg');
   list.innerHTML = all.map((s, i) => {
     const dup = i >= ST.length, k = i % ST.length;
-    return `<div class="radial__item" style="--i:${i}"${dup ? ' aria-hidden="true"' : ''}><button class="radial__card" type="button" data-stage="${k}"${dup ? ' tabindex="-1"' : ''} aria-label="Step ${s.n}, ${esc(s.name)}: ${esc(s.line)}"><span class="media">${screen(s.vis)}</span><span class="radial__info"><span class="radial__name">${esc(s.name)}</span><span class="eyebrow">${s.n}</span></span></button></div>`;
+    return `<div class="radial__item" style="--i:${i}"${dup ? ' aria-hidden="true"' : ''}><button class="radial__card" type="button" data-stage="${k}"${dup ? ' tabindex="-1"' : ''} aria-label="Step ${s.n}, ${esc(s.name)}: ${esc(s.line)}"><span class="media">${screen(s.vis, s.zoom)}</span><span class="radial__info"><span class="radial__name">${esc(s.name)}</span><span class="eyebrow">${s.n}</span></span></button></div>`;
   }).join('');
 }
 function renderTicker() {
@@ -104,7 +106,7 @@ function initCmp() {
 /* ---------- 03 One flow ---------- */
 function renderStages() {
   $('#stage-nav').innerHTML = ST.map((s, i) => `<button class="btn" type="button" data-theme="haze" data-go-stage="${i}" aria-pressed="false"><span class="btn__label"><span class="eyebrow">${s.n}</span> ${esc(s.name)}</span></button>`).join('');
-  $('#stage-cards').innerHTML = ST.map((s, i) => `<div class="gslider__item" data-i="${i}"><article class="stage-card is--${ACT_THEME[s.act]}" aria-label="Step ${s.n}: ${esc(s.name)}"><span class="media">${screen(s.vis)}</span><div class="stage-card__top"><div class="tag-pair"><span class="tag">${esc(ACT(s.act).name)}</span><span class="tag" data-shape="round">${s.n} / 08</span></div>${kicon(s.icon)}</div><div class="stage-card__num" aria-hidden="true">${s.n}</div><div class="stage-card__body"><h3 class="h-m">${esc(s.name)}</h3><p class="p-m">${esc(s.line)}</p><p class="stage-card__out">${esc(s.gives)}</p></div></article></div>`).join('');
+  $('#stage-cards').innerHTML = ST.map((s, i) => `<div class="gslider__item" data-i="${i}"><article class="stage-card is--${ACT_THEME[s.act]}" aria-label="Step ${s.n}: ${esc(s.name)}"><span class="media">${screen(s.vis, s.zoom)}</span><div class="stage-card__top"><div class="tag-pair"><span class="tag">${esc(ACT(s.act).name)}</span><span class="tag" data-shape="round">${s.n} / 08</span></div>${kicon(s.icon)}</div><div class="stage-card__num" aria-hidden="true">${s.n}</div><div class="stage-card__body"><h3 class="h-m">${esc(s.name)}</h3><p class="p-m">${esc(s.line)}</p><p class="stage-card__out">${esc(s.gives)}</p></div></article></div>`).join('');
 }
 function setStage(i) {
   if (i === stageActive) return;
@@ -168,22 +170,22 @@ function initDemo() {
   const root = $('#demo');
   if (!root) return;
   const L = {
-    en: { order: 'Order', recv: 'Receive', text: 'Text', lang: 'తెలుగు', reset: 'Start again', add: 'Add a medicine', ph: 'Type three letters, like “par”', hist: 'From your history', low: 'Running low in your shop', have: n => `You have ${n}`, usual: n => `you usually order ${n}`, newMed: q => `Add “${q}” as a new medicine`, saved: 'Saved for next time', inOrder: 'In the order', tip: 'Try “par”, “met”, or a wrong spelling like “amoxilin”.', toOrder: 'To order', items: n => `${n} ${n === 1 ? 'item' : 'items'}`, about: 'about', send: 'Send order', empty: 'Nothing here yet. Add a medicine.', sentT: 'Sent on WhatsApp', sentMsg: n => `Order 1042 from ${STORE}. ${n} ${n === 1 ? 'item' : 'items'}, with a PDF and a link.`, reply: '5 available. Pantoprazole: only 6.', arrived: 'The goods have arrived', recvT: 'Receive · Order 1042', recvS: `${DIST} · their bill KP/3391`, tickAll: 'Tick all that match', of: 'of', scan: 'Scan pack', short: n => `Short by ${n}. Credit note asked.`, soon: 'Expires in 4 months.', keep: 'Keep', back: 'Send back', kept: 'Kept. Expiry alert set.', sentBack: 'Sent back. Return noted.', needScan: 'Scan the pack to read batch and expiry', checked: (a, b) => `${a} of ${b} checked`, addStock: 'Add to stock', doneT: 'In stock. Nothing typed.', d1: n => `${n} items added to stock, by batch`, d2: 'Purchase entry made by itself', d3: a => `${a} to pay by 7 November`, d4: '4 strips short: credit note asked', d5a: 'Expiry alert set for Cetirizine', d5b: '1 item sent back: return noted', fields: 'Fields typed', fNote: 'The same bill, typed by hand: 6 lines × 7 fields.', again: 'Do it again', taps: 'Taps', secs: 'Seconds', isNew: 'New', arrivedA: 'Arrived', pack: 'New item', size: 'Text size', smaller: 'Smaller text', larger: 'Larger text', remove: 'Remove', less: 'One less', more: 'One more' },
-    te: { order: 'ఆర్డర్', recv: 'వచ్చిన సరుకు', text: 'అక్షరాలు', lang: 'English', reset: 'మళ్లీ మొదలు', add: 'మందు చేర్చండి', ph: 'మూడు అక్షరాలు టైప్ చేయండి, ఉదా: “par”', hist: 'మీరు ఇంతకు ముందు వాడినవి', low: 'మీ షాపులో తక్కువగా ఉన్నవి', have: n => `మీ దగ్గర ${n} ఉన్నాయి`, usual: n => `సాధారణంగా ${n} ఆర్డర్ చేస్తారు`, newMed: q => `“${q}” కొత్త మందుగా చేర్చు`, saved: 'తర్వాత కోసం సేవ్ అవుతుంది', inOrder: 'ఆర్డర్‌లో ఉంది', tip: '“par”, “met” లేదా తప్పు స్పెల్లింగ్ “amoxilin” ప్రయత్నించండి.', toOrder: 'ఆర్డర్ జాబితా', items: n => `${n} మందులు`, about: 'సుమారు', send: 'ఆర్డర్ పంపు', empty: 'ఇంకా ఏమీ లేదు. మందు చేర్చండి.', sentT: 'వాట్సాప్‌లో పంపాం', sentMsg: n => `${STORE} నుండి ఆర్డర్ 1042. ${n} మందులు, PDF మరియు లింక్‌తో.`, reply: '5 ఉన్నాయి. Pantoprazole: 6 మాత్రమే.', arrived: 'సరుకు వచ్చింది', recvT: 'వచ్చిన సరుకు · ఆర్డర్ 1042', recvS: `${DIST} · వారి బిల్ KP/3391`, tickAll: 'సరిపోయినవన్నీ టిక్ చేయి', of: '/', scan: 'ప్యాక్ స్కాన్ చేయి', short: n => `${n} తక్కువ వచ్చాయి. క్రెడిట్ నోట్ అడిగాం.`, soon: '4 నెలల్లో గడువు ముగుస్తుంది.', keep: 'ఉంచు', back: 'వెనక్కి పంపు', kept: 'ఉంచాం. గడువు హెచ్చరిక పెట్టాం.', sentBack: 'వెనక్కి పంపాం. రిటర్న్ నమోదైంది.', needScan: 'బ్యాచ్, గడువు కోసం ప్యాక్ స్కాన్ చేయండి', checked: (a, b) => `${b} లో ${a} పూర్తి`, addStock: 'స్టాక్‌లో చేర్చు', doneT: 'స్టాక్‌లో చేరింది. ఏమీ టైప్ చేయలేదు.', d1: n => `${n} మందులు బ్యాచ్ వారీగా స్టాక్‌లో చేరాయి`, d2: 'కొనుగోలు ఎంట్రీ దానంతట అదే అయింది', d3: a => `${a} · 7 నవంబర్ లోపు చెల్లించాలి`, d4: '4 స్ట్రిప్‌లు తక్కువ: క్రెడిట్ నోట్ అడిగాం', d5a: 'Cetirizine కు గడువు హెచ్చరిక పెట్టాం', d5b: '1 మందు వెనక్కి పంపాం: రిటర్న్ నమోదైంది', fields: 'టైప్ చేసిన ఫీల్డ్‌లు', fNote: 'అదే బిల్ చేత్తో టైప్ చేస్తే: 6 లైన్లు × 7 ఫీల్డ్‌లు.', again: 'మళ్లీ చేయి', taps: 'ట్యాప్‌లు', secs: 'సెకన్లు', isNew: 'కొత్త', arrivedA: 'వచ్చింది', pack: 'కొత్త మందు', size: 'అక్షరాల పరిమాణం', smaller: 'చిన్న అక్షరాలు', larger: 'పెద్ద అక్షరాలు', remove: 'తీసివేయి', less: 'ఒకటి తగ్గించు', more: 'ఒకటి పెంచు' }
+    en: { order: 'Order', recv: 'Receive', langL: 'Language', reset: 'Start again', add: 'Add a medicine', ph: 'Type three letters, like “par”', hist: 'From your own history', low: 'Running low in your shop', have: n => `You have ${n}`, usual: n => `You usually order ${n}`, newMed: q => `Add “${q}” as a new medicine`, saved: 'Saved for next time', inOrder: 'In the order', tip: 'Try “par”, “met”, or a wrong spelling like “amoxilin”.', toOrder: 'This order', items: n => `${n} ${n === 1 ? 'medicine' : 'medicines'}`, about: 'about', send: 'Send on WhatsApp', empty: 'Nothing here yet. Add a medicine.', sentT: 'Sent on WhatsApp', sentMsg: n => `Order 1042 from ${STORE}. ${n} ${n === 1 ? 'medicine' : 'medicines'}, with a PDF and a link.`, reply: '5 available. Pantoprazole: only 6.', arrived: 'The goods have arrived', recvT: 'Receive order 1042', recvS: `${DIST}, their bill KP/3391`, tickAll: 'Tick all that match', of: 'of', scan: 'Scan the pack', short: n => `Short by ${n}. Credit note asked.`, soon: 'Expires in 4 months.', keep: 'Keep', back: 'Send back', kept: 'Kept. Expiry alert set.', sentBack: 'Sent back. Return noted.', needScan: 'Scan the pack to read batch and expiry', match: 'Matches the order', wait: 'Not checked yet', checked: (a, b) => `${a} of ${b} checked`, addStock: 'Add to stock', doneT: 'In stock. Nothing typed.', d1: n => `${n} medicines added to stock, by batch`, d2: 'Purchase entry made by itself', d3: a => `${a} to pay by 7 November`, d4: '4 strips short: credit note asked', d5a: 'Expiry alert set for Cetirizine', d5b: '1 medicine sent back: return noted', fields: 'Fields typed', fNote: 'The same bill, typed by hand: 6 lines × 7 fields.', again: 'Do it again', taps: 'Taps', secs: 'Seconds', isNew: 'New', arrivedA: 'Arrived', pack: 'New medicine', size: 'Text size', smaller: 'Small text', mid: 'Medium text', larger: 'Large text', remove: 'Remove', less: 'One less', more: 'One more', cMed: 'Medicine', cBatch: 'Batch', cExp: 'Expires', cSt: 'Status' },
+    te: { order: 'ఆర్డర్', recv: 'వచ్చిన సరుకు', langL: 'భాష', reset: 'మళ్లీ మొదలు', add: 'మందు చేర్చండి', ph: 'మూడు అక్షరాలు టైప్ చేయండి, ఉదా: “par”', hist: 'మీరు ఇంతకు ముందు వాడినవి', low: 'మీ షాపులో తక్కువగా ఉన్నవి', have: n => `మీ దగ్గర ${n} ఉన్నాయి`, usual: n => `సాధారణంగా ${n} ఆర్డర్ చేస్తారు`, newMed: q => `“${q}” కొత్త మందుగా చేర్చు`, saved: 'తర్వాత కోసం సేవ్ అవుతుంది', inOrder: 'ఆర్డర్‌లో ఉంది', tip: '“par”, “met” లేదా తప్పు స్పెల్లింగ్ “amoxilin” ప్రయత్నించండి.', toOrder: 'ఈ ఆర్డర్', items: n => `${n} మందులు`, about: 'సుమారు', send: 'వాట్సాప్‌లో పంపు', empty: 'ఇంకా ఏమీ లేదు. మందు చేర్చండి.', sentT: 'వాట్సాప్‌లో పంపాం', sentMsg: n => `${STORE} నుండి ఆర్డర్ 1042. ${n} మందులు, PDF మరియు లింక్‌తో.`, reply: '5 ఉన్నాయి. Pantoprazole: 6 మాత్రమే.', arrived: 'సరుకు వచ్చింది', recvT: 'వచ్చిన సరుకు: ఆర్డర్ 1042', recvS: `${DIST}, వారి బిల్ KP/3391`, tickAll: 'సరిపోయినవన్నీ టిక్ చేయి', of: '/', scan: 'ప్యాక్ స్కాన్ చేయి', short: n => `${n} తక్కువ వచ్చాయి. క్రెడిట్ నోట్ అడిగాం.`, soon: '4 నెలల్లో గడువు ముగుస్తుంది.', keep: 'ఉంచు', back: 'వెనక్కి పంపు', kept: 'ఉంచాం. గడువు హెచ్చరిక పెట్టాం.', sentBack: 'వెనక్కి పంపాం. రిటర్న్ నమోదైంది.', needScan: 'బ్యాచ్, గడువు కోసం ప్యాక్ స్కాన్ చేయండి', match: 'ఆర్డర్‌తో సరిపోయింది', wait: 'ఇంకా చూడలేదు', checked: (a, b) => `${b} లో ${a} పూర్తి`, addStock: 'స్టాక్‌లో చేర్చు', doneT: 'స్టాక్‌లో చేరింది. ఏమీ టైప్ చేయలేదు.', d1: n => `${n} మందులు బ్యాచ్ వారీగా స్టాక్‌లో చేరాయి`, d2: 'కొనుగోలు ఎంట్రీ దానంతట అదే అయింది', d3: a => `${a}, 7 నవంబర్ లోపు చెల్లించాలి`, d4: '4 స్ట్రిప్‌లు తక్కువ: క్రెడిట్ నోట్ అడిగాం', d5a: 'Cetirizine కు గడువు హెచ్చరిక పెట్టాం', d5b: '1 మందు వెనక్కి పంపాం: రిటర్న్ నమోదైంది', fields: 'టైప్ చేసిన ఫీల్డ్‌లు', fNote: 'అదే బిల్ చేత్తో టైప్ చేస్తే: 6 లైన్లు × 7 ఫీల్డ్‌లు.', again: 'మళ్లీ చేయి', taps: 'ట్యాప్‌లు', secs: 'సెకన్లు', isNew: 'కొత్త', arrivedA: 'వచ్చింది', pack: 'కొత్త మందు', size: 'అక్షరాల పరిమాణం', smaller: 'చిన్న అక్షరాలు', mid: 'మధ్యస్థ అక్షరాలు', larger: 'పెద్ద అక్షరాలు', remove: 'తీసివేయి', less: 'ఒకటి తగ్గించు', more: 'ఒకటి పెంచు', cMed: 'మందు', cBatch: 'బ్యాచ్', cExp: 'గడువు', cSt: 'స్థితి' }
   };
-  /* The shop's history: name, pack, in stock, usual order, last rate, other spellings people type */
+  /* The shop's history: name, pack, in stock, usual order, last rate, other spellings people type, pack photo */
   const HIST = [
-    { n: 'Paracetamol 650 mg', p: 'Strip of 15', have: 4, usual: 20, rate: 18.4, k: 'parasitamol pcm' },
-    { n: 'Paracetamol 500 mg', p: 'Strip of 10', have: 22, usual: 10, rate: 9.6, k: 'parasitamol pcm' },
-    { n: 'Pantoprazole 40 mg', p: 'Strip of 15', have: 3, usual: 10, rate: 58, k: 'pantaprazol gas' },
-    { n: 'Amoxicillin 500 mg', p: 'Strip of 10', have: 6, usual: 10, rate: 62.1, k: 'amoxilin amoxycillin' },
-    { n: 'Metformin 500 mg SR', p: 'Strip of 15', have: 7, usual: 15, rate: 24.9, k: 'metformine sugar' },
-    { n: 'Telmisartan 40 mg', p: 'Strip of 15', have: 9, usual: 12, rate: 71.5, k: 'telmisartin bp' },
-    { n: 'Cetirizine 10 mg', p: 'Strip of 10', have: 12, usual: 10, rate: 11.2, k: 'cetrizine cold' },
-    { n: 'Atorvastatin 10 mg', p: 'Strip of 10', have: 14, usual: 10, rate: 42.3, k: 'atorvastatine' },
-    { n: 'Azithromycin 500 mg', p: 'Strip of 3', have: 5, usual: 10, rate: 68.9, k: 'azithromicin' },
-    { n: 'ORS sachet', p: 'Box of 25', have: 2, usual: 4, rate: 310, k: 'oral' },
-    { n: 'Vitamin D3 60K', p: 'Strip of 4', have: 6, usual: 10, rate: 83, k: 'vitamin d' }
+    { n: 'Paracetamol 650 mg', p: 'Strip of 15', have: 4, usual: 20, rate: 18.4, k: 'parasitamol pcm', img: 13105348 },
+    { n: 'Paracetamol 500 mg', p: 'Strip of 10', have: 22, usual: 10, rate: 9.6, k: 'parasitamol pcm', img: 3683039 },
+    { n: 'Pantoprazole 40 mg', p: 'Strip of 15', have: 3, usual: 10, rate: 58, k: 'pantaprazol gas', img: 4210613 },
+    { n: 'Amoxicillin 500 mg', p: 'Strip of 10', have: 6, usual: 10, rate: 62.1, k: 'amoxilin amoxycillin', img: 9742749, f: 'pill' },
+    { n: 'Metformin 500 mg SR', p: 'Strip of 15', have: 7, usual: 15, rate: 24.9, k: 'metformine sugar', img: 4226771 },
+    { n: 'Telmisartan 40 mg', p: 'Strip of 15', have: 9, usual: 12, rate: 71.5, k: 'telmisartin bp', img: 9742748 },
+    { n: 'Cetirizine 10 mg', p: 'Strip of 10', have: 12, usual: 10, rate: 11.2, k: 'cetrizine cold', img: 5995306 },
+    { n: 'Atorvastatin 10 mg', p: 'Strip of 10', have: 14, usual: 10, rate: 42.3, k: 'atorvastatine', img: 3683113, f: 'pill' },
+    { n: 'Azithromycin 500 mg', p: 'Strip of 3', have: 5, usual: 10, rate: 68.9, k: 'azithromicin', img: 3923166 },
+    { n: 'ORS sachet', p: 'Box of 25', have: 2, usual: 4, rate: 310, k: 'oral', f: 'sachet' },
+    { n: 'Vitamin D3 60K', p: 'Strip of 4', have: 6, usual: 10, rate: 83, k: 'vitamin d', img: 7277984, f: 'drop' }
   ];
   /* The order that arrives: [history index, ordered, came, batch, expiry] */
   const ARR = [[0, 20, 20, 'PK2291', '08/2028'], [3, 10, 10, 'AX7730', '03/2028'], [4, 15, 15, 'MF1184', '11/2027'], [5, 12, 12, 'TL5521', '06/2028'], [2, 10, 6, 'PZ0917', '01/2028'], [6, 10, 10, 'CT3340', '02/2027']];
@@ -191,6 +193,7 @@ function initDemo() {
   let st = fresh(), lang = 'en', z = 1, timer = 0;
   const t = () => L[lang];
   const svg = (id, k) => `<svg viewBox="0 0 ${k ? 24 : 16} ${k ? 24 : 16}" aria-hidden="true"><use href="#${k ? 'k' : 'i'}-${id}"/></svg>`;
+  const pic = h => `<i class="u-ph"${h.img ? ` style="--img:url(${PEX(h.img)})"` : ''}>${svg(h.f || 'strip', 1)}</i>`;
   const dist = (a, b) => { const m = a.length, n = b.length, d = Array.from({ length: m + 1 }, (_, i) => [i]); for (let j = 1; j <= n; j++) d[0][j] = j; for (let i = 1; i <= m; i++) for (let j = 1; j <= n; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)); return d[m][n]; };
   const find = q => {
     q = q.trim().toLowerCase();
@@ -211,53 +214,56 @@ function initDemo() {
 
   function optHTML(i) {
     const h = HIST[i], inO = st.order.some(o => o.i === i);
-    return `<li role="none"><button class="dm__opt${inO ? ' is--have' : ''}" type="button" role="option" data-pick="${i}"${inO ? ' disabled' : ''}><b>${esc(h.n)}<span>${esc(h.isNew ? t().pack : h.p)}</span></b><em>${inO ? t().inOrder : `${t().have(h.have)} · ${t().usual(h.usual)}`}</em></button></li>`;
+    return `<li role="none"><button class="dm__opt${inO ? ' is--have' : ''}" type="button" role="option" data-pick="${i}"${inO ? ' disabled' : ''}>${pic(h)}<span class="dm__optn"><b>${esc(h.n)}</b><small>${esc(h.isNew ? t().pack : h.p)}</small></span><em>${inO ? t().inOrder : `<b>${t().have(h.have)}</b><br>${t().usual(h.usual)}`}</em></button></li>`;
   }
   function listHTML(q) {
     const hits = find(q), clean = q.trim();
     if (!clean) return `<li class="dm__cap" role="presentation">${t().low}</li>` + HIST.map((h, i) => ({ h, i })).filter(x => x.h.have <= 4).slice(0, 3).map(x => optHTML(x.i)).join('');
     const exact = HIST.some(h => h.n.toLowerCase() === clean.toLowerCase());
     return (hits.length ? `<li class="dm__cap" role="presentation">${t().hist}</li>` + hits.map(optHTML).join('') : '')
-      + (exact || clean.length < 3 ? '' : `<li role="none"><button class="dm__opt is--new" type="button" role="option" data-new="${esc(clean)}"><b>${esc(t().newMed(clean))}</b><span>${t().saved}</span></button></li>`);
+      + (exact || clean.length < 3 ? '' : `<li role="none"><button class="dm__opt is--new" type="button" role="option" data-new="${esc(clean)}"><i class="dm__plus" aria-hidden="true">+</i><span class="dm__optn"><b>${esc(t().newMed(clean))}</b><small>${t().saved}</small></span></button></li>`);
   }
   function linesHTML() {
     if (!st.order.length) return `<p class="dm__empty">${t().empty}</p>`;
-    return st.order.map((o, k) => { const h = HIST[o.i]; return `<li class="dm__line"><div><b>${esc(h.n)}${h.isNew ? `<span class="is--newtag">${t().isNew}</span>` : ''}</b><small>${esc(h.isNew ? t().pack : h.p)}</small></div><div class="dm__step"><button type="button" data-qty="${k},-1" aria-label="${t().less}: ${esc(h.n)}">−</button><b aria-live="polite">${o.qty}</b><button type="button" data-qty="${k},1" aria-label="${t().more}: ${esc(h.n)}">+</button></div><button class="dm__x" type="button" data-rm="${k}" aria-label="${t().remove}: ${esc(h.n)}">${svg('x')}</button></li>`; }).join('');
+    return st.order.map((o, k) => { const h = HIST[o.i]; return `<li class="dm__line">${pic(h)}<div><b>${esc(h.n)}${h.isNew ? `<span class="is--newtag">${t().isNew}</span>` : ''}</b><small>${esc(h.isNew ? t().pack : h.p)}</small></div><div class="dm__step"><button type="button" data-qty="${k},-1" aria-label="${t().less}: ${esc(h.n)}">−</button><b aria-live="polite">${o.qty}</b><button type="button" data-qty="${k},1" aria-label="${t().more}: ${esc(h.n)}">+</button></div><button class="dm__x" type="button" data-rm="${k}" aria-label="${t().remove}: ${esc(h.n)}">${svg('x')}</button></li>`; }).join('');
   }
   function orderHTML() {
-    if (st.sent) return `<div class="dm__sent"><h4>${t().sentT}</h4><p class="dm__bubble is--out">${esc(t().sentMsg(st.order.length))}</p><p class="dm__bubble"><b>${esc(DIST)}</b><br>${t().reply}</p><button class="dm__btn" type="button" data-tab="recv">${t().arrived}${svg('arrow-r')}</button></div>`;
-    return `<div class="dm__order"><div class="dm__pane"><label class="dm__label" for="dm-q">${t().add}</label><div class="dm__search">${svg('search', 1)}<input id="dm-q" type="text" inputmode="search" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${esc(t().ph)}" role="combobox" aria-expanded="true" aria-controls="dm-list" aria-autocomplete="list"></div><ul class="dm__list" id="dm-list" role="listbox" aria-label="${esc(t().hist)}">${listHTML('')}</ul><p class="dm__tip">${t().tip}</p></div>
-      <div class="dm__pane"><div class="dm__h"><h4>${t().toOrder}</h4><p>${esc(DIST)}</p></div><ul class="dm__lines" id="dm-lines">${linesHTML()}</ul><div class="dm__foot"><p id="dm-sum"></p><button class="dm__btn" type="button" data-send>${t().send}${svg('send', 1)}</button></div></div></div>`;
+    if (st.sent) return `<div class="dm__sent"><section class="dm__tray"><header><span>${t().sentT}</span><em>${esc(DIST)}</em></header><div class="dm__card dm__chat"><p class="dm__bubble is--out">${esc(t().sentMsg(st.order.length))}</p><p class="dm__bubble"><b>${esc(DIST)}</b><br>${t().reply}</p></div></section><div class="dm__act"><p>${t().recvS}</p><button class="dm__btn" type="button" data-tab="recv">${t().arrived}${svg('arrow', 1)}</button></div></div>`;
+    return `<div class="dm__order"><section class="dm__tray"><header><label for="dm-q">${t().add}</label></header><div class="dm__card"><div class="dm__search">${svg('search', 1)}<input id="dm-q" type="text" inputmode="search" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${esc(t().ph)}" role="combobox" aria-expanded="true" aria-controls="dm-list" aria-autocomplete="list"></div><ul class="dm__list" id="dm-list" role="listbox" aria-label="${esc(t().hist)}">${listHTML('')}</ul><p class="dm__tip">${svg('info', 1)}${t().tip}</p></div></section>
+      <section class="dm__tray"><header><span>${t().toOrder}</span><em>${esc(DIST)}</em></header><div class="dm__card"><ul class="dm__lines" id="dm-lines">${linesHTML()}</ul></div></section></div>
+      <div class="dm__act"><p id="dm-sum"></p><button class="dm__btn" type="button" data-send>${svg('send', 1)}${t().send}</button></div>`;
   }
   function rowHTML(a, k) {
     const h = HIST[a[0]], r = st.rows[k], short = a[2] < a[1], scan = k === 5;
     const on = r.s === 'ok', back = r.s === 'back';
-    const be = scan && !r.scanned ? `<button class="dm__btn is--ghost is--sm" type="button" data-scan="${k}">${svg('qr', 1)}${t().scan}</button>` : `<span class="dm__chip">${a[3]}</span><span class="dm__chip">${a[4]}</span>`;
-    let flag = '';
-    if (short) flag = `<div class="dm__flag is--bad"><span>${svg('alert', 1)}${t().short(a[1] - a[2])}</span></div>`;
-    if (scan && !r.scanned) flag = `<div class="dm__flag is--warn"><small>${t().needScan}</small></div>`;
-    if (scan && r.scanned && r.s === 'todo') flag = `<div class="dm__flag is--warn"><span>${svg('clock', 1)}${t().soon}</span><button class="dm__btn is--sm" type="button" data-keep="${k}">${t().keep}</button><button class="dm__btn is--ghost is--sm" type="button" data-back="${k}">${t().back}</button></div>`;
-    if (scan && on) flag = `<div class="dm__flag is--warn"><span>${svg('clock', 1)}${t().kept}</span></div>`;
-    if (back) flag = `<div class="dm__flag"><span>${svg('undo', 1)}${t().sentBack}</span></div>`;
-    return `<li class="dm__r${on ? ' is--on' : ''}${short ? ' is--short' : ''}${scan && r.scanned && !back ? ' is--soon' : ''}${back ? ' is--back' : ''}"><button class="dm__tick" type="button" role="checkbox" aria-checked="${on}" data-tick="${k}" aria-label="${t().arrivedA}: ${esc(h.n)}"${scan || back ? ' disabled' : ''}>${svg('check')}</button><div class="dm__name"><b>${esc(h.n)}</b><small>${esc(h.p)}</small></div><div class="dm__qty"><b>${a[2]}</b> <span>${t().of} ${a[1]}</span></div><div class="dm__be">${be}</div>${flag}</li>`;
+    const be = scan && !r.scanned ? `<button class="dm__btn is--ghost is--sm" type="button" data-scan="${k}">${svg('qr', 1)}${t().scan}</button>` : `<span>${a[3]}</span><span>${a[4]}</span>`;
+    let stat = on ? `<div class="dm__st is--ok"><span>${svg('tick', 1)}${t().match}</span></div>` : `<div class="dm__st is--wait"><span>${t().wait}</span></div>`;
+    if (short) stat = `<div class="dm__st is--bad"><span>${svg('alert', 1)}${t().short(a[1] - a[2])}</span></div>`;
+    if (scan && !r.scanned) stat = `<div class="dm__st is--warn"><span>${svg('qr', 1)}${t().needScan}</span></div>`;
+    if (scan && r.scanned && r.s === 'todo') stat = `<div class="dm__st is--warn"><span>${svg('clock', 1)}${t().soon}</span><button class="dm__btn is--sm" type="button" data-keep="${k}">${t().keep}</button><button class="dm__btn is--ghost is--sm" type="button" data-back="${k}">${t().back}</button></div>`;
+    if (scan && on) stat = `<div class="dm__st is--warn"><span>${svg('clock', 1)}${t().kept}</span></div>`;
+    if (back) stat = `<div class="dm__st"><span>${svg('undo', 1)}${t().sentBack}</span></div>`;
+    return `<li class="dm__r${on ? ' is--on' : ''}${short ? ' is--short' : ''}${scan && r.scanned && !back ? ' is--soon' : ''}${back ? ' is--back' : ''}"><button class="dm__tick" type="button" role="checkbox" aria-checked="${on}" data-tick="${k}" aria-label="${t().arrivedA}: ${esc(h.n)}"${scan || back ? ' disabled' : ''}>${svg('check')}</button><div class="dm__name">${pic(h)}<div><b>${esc(h.n)}</b><small>${esc(h.p)}</small></div></div><div class="dm__qty"><b>${a[2]}</b> <span>${t().of} ${a[1]}</span></div><div class="dm__be">${be}</div>${stat}</li>`;
   }
   function recvHTML() {
     if (st.done) {
       const backd = st.rows[5].s === 'back', n = backd ? 5 : 6;
       const amt = ARR.reduce((s, a, k) => s + (st.rows[k].s === 'ok' ? HIST[a[0]].rate * a[2] : 0), 0) * 1.05;
-      return `<div class="dm__done"><div class="dm__pane"><h4>${t().doneT}</h4><ul class="dm__ok"><li>${t().d1(n)}</li><li>${t().d2}</li><li>${t().d3(rs(amt))}</li><li>${t().d4}</li><li>${backd ? t().d5b : t().d5a}</li></ul></div><div class="dm__score"><div><p>${t().fields}</p><b class="is--big">0 <span style="font-size:.42em;letter-spacing:-.02em;color:#fff">/ 42</span></b></div><p>${t().fNote}</p><button class="dm__btn" type="button" data-reset>${t().again}</button></div></div>`;
+      return `<div class="dm__done"><section class="dm__tray"><header><span>${t().doneT}</span></header><div class="dm__card"><ul class="dm__ok"><li>${t().d1(n)}</li><li>${t().d2}</li><li>${t().d3(rs(amt))}</li><li>${t().d4}</li><li>${backd ? t().d5b : t().d5a}</li></ul></div></section><div class="dm__score"><div><p>${t().fields}</p><b class="is--big">0 <span>/ 42</span></b></div><p>${t().fNote}</p><button class="dm__btn" type="button" data-reset>${t().again}</button></div></div>`;
     }
     const all = resolved() === ARR.length;
-    return `<div class="dm__recv"><div class="dm__h"><div><h4>${t().recvT}</h4><p>${esc(t().recvS)}</p></div><button class="dm__btn is--ghost" type="button" data-all>${svg('check')}${t().tickAll}</button></div><ul class="dm__rows">${ARR.map(rowHTML).join('')}</ul><div class="dm__foot" style="margin-top:1em"><p aria-live="polite">${t().checked(resolved(), ARR.length)}</p><button class="dm__btn" type="button" data-stock${all ? '' : ' disabled'}>${t().addStock}${svg('arrow-r')}</button></div></div>`;
+    return `<section class="dm__tray"><header><span>${t().recvT}</span><em>${esc(t().recvS)}</em><button class="dm__btn is--ghost is--sm" type="button" data-all>${svg('ticks', 1)}${t().tickAll}</button></header><div class="dm__card is--flush"><div class="dm__r is--h" aria-hidden="true"><span></span><span>${t().cMed}</span><span>${t().arrivedA}</span><span class="dm__be"><span>${t().cBatch}</span><span>${t().cExp}</span></span><span>${t().cSt}</span></div><ul class="dm__rows">${ARR.map(rowHTML).join('')}</ul></div></section>
+      <div class="dm__act"><p aria-live="polite"><b>${t().checked(resolved(), ARR.length)}</b></p><button class="dm__btn" type="button" data-stock${all ? '' : ' disabled'}>${t().addStock}${svg('arrow', 1)}</button></div>`;
   }
-  function sum() { const el = $('#dm-sum', root); if (el) el.innerHTML = `<b>${t().items(st.order.length)}</b>${st.order.length ? ` · ${t().about} ${rs(total())}` : ''}`; const b = $('[data-send]', root); if (b) b.disabled = !st.order.length; }
+  function sum() { const el = $('#dm-sum', root); if (el) el.innerHTML = `<b>${t().items(st.order.length)}</b>${st.order.length ? `, ${t().about} ${rs(total())}` : ''}`; const b = $('[data-send]', root); if (b) b.disabled = !st.order.length; }
   function meter() { const m = $('.dm__meter', root); if (!m) return; m.hidden = st.tab !== 'recv'; m.innerHTML = `<span>${t().fields} <b>0</b> / 42</span><span>${t().taps} <b>${st.taps}</b></span><span>${t().secs} <b id="dm-secs">${secs()}</b></span>`; }
   function body() { $('.dm__body', root).innerHTML = st.tab === 'order' ? orderHTML() : recvHTML(); sum(); meter(); }
   function shell() {
     root.dataset.lang = lang;
     root.lang = lang;
+    root.classList.add('u');
     root.style.setProperty('--z', String(z));
-    root.innerHTML = `<div class="dm__bar"><div class="dm__brand"><svg viewBox="0 0 80 80" aria-hidden="true"><use href="#i-capsule"/></svg>${STORE}</div><div class="dm__tabs" role="tablist"><button type="button" role="tab" data-tab="order" aria-selected="${st.tab === 'order'}"><i>1</i>${t().order}</button><button type="button" role="tab" data-tab="recv" aria-selected="${st.tab === 'recv'}"><i>2</i>${t().recv}</button></div><div class="dm__tools"><div class="dm__size" role="group" aria-label="${t().size}"><button type="button" data-z="-1" aria-label="${t().smaller}"${z <= 1 ? ' disabled' : ''}>A−</button><span>${t().text}</span><button type="button" data-z="1" aria-label="${t().larger}"${z >= 1.3 ? ' disabled' : ''}>A+</button></div><button class="dm__pill" type="button" data-lang lang="${lang === 'en' ? 'te' : 'en'}">${svg('lang', 1)}${t().lang}</button><button class="dm__pill" type="button" data-reset>${svg('undo', 1)}${t().reset}</button></div></div><div class="dm__body" role="tabpanel"></div><div class="dm__meter" hidden></div>`;
+    root.innerHTML = `<div class="dm__bar"><div class="dm__brand"><i class="a-logo"><svg viewBox="0 0 80 80" aria-hidden="true"><use href="#i-capsule"/></svg></i><span><b>Pharmacy OS</b><small>${STORE}</small></span></div><div class="dm__tabs" role="tablist"><button type="button" role="tab" data-tab="order" aria-selected="${st.tab === 'order'}"><i>1</i>${t().order}</button><button type="button" role="tab" data-tab="recv" aria-selected="${st.tab === 'recv'}"><i>2</i>${t().recv}</button></div><div class="dm__tools"><div class="dm__seg" role="group" aria-label="${t().langL}"><button type="button" data-lang="en" lang="en" aria-pressed="${lang === 'en'}">English</button><button type="button" data-lang="te" lang="te" aria-pressed="${lang === 'te'}">తెలుగు</button></div><div class="dm__seg is--aa" role="group" aria-label="${t().size}">${[1, 1.15, 1.3].map((v, i) => `<button type="button" data-z="${v}" aria-pressed="${z === v}" aria-label="${[t().smaller, t().mid, t().larger][i]}">A</button>`).join('')}</div><button class="dm__pill" type="button" data-reset>${svg('undo', 1)}${t().reset}</button></div></div><div class="dm__body" role="tabpanel"></div><div class="dm__meter" hidden></div>`;
     body();
   }
   root.addEventListener('input', e => { if (e.target.id === 'dm-q') $('#dm-list', root).innerHTML = listHTML(e.target.value); });
@@ -271,8 +277,8 @@ function initDemo() {
     if (!b || b.disabled) return;
     const d = b.dataset;
     if (st.tab === 'recv' && !st.done && !('z' in d) && !('lang' in d) && !('tab' in d) && !('reset' in d)) { st.taps++; if (!st.t0) { st.t0 = performance.now(); clearInterval(timer); timer = setInterval(() => { const el = $('#dm-secs', root); if (el && !st.t1) el.textContent = secs(); }, 1000); } }
-    if ('z' in d) { z = clamp(Math.round((z + (+d.z) * 0.15) * 100) / 100, 1, 1.3); shell(); return; }
-    if ('lang' in d) { lang = lang === 'en' ? 'te' : 'en'; shell(); return; }
+    if ('z' in d) { z = +d.z; shell(); return; }
+    if ('lang' in d) { lang = d.lang; shell(); return; }
     if ('reset' in d) { clearInterval(timer); st = fresh(); shell(); return; }
     if ('tab' in d) { st.tab = d.tab; shell(); return; }
     if ('pick' in d) { const i = +d.pick; st.order.push({ i, qty: HIST[i].usual }); }
@@ -545,13 +551,20 @@ function renderLists() {
   $('#road').innerHTML = C.road.map(([w, t, l, gate]) => `<li class="rd"><time>${esc(w)}</time><h3>${esc(t)}</h3><ul>${l.map(x => `<li>${esc(x)}</li>`).join('')}</ul><p class="rd__gate"><span>Gate</span>${esc(gate)}</p></li>`).join('');
   $('#open').innerHTML = C.open.map(([a, b]) => `<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join('');
   $('#sources').innerHTML = Object.values(C.sources).map(([t, u]) => `<li>${u ? `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>` : esc(t)}</li>`).join('');
+  $('#anno-pins').innerHTML = C.anno.map(([x, y], i) => `<li style="--x:${x}%;--y:${y}%">${i + 1}</li>`).join('');
+  $('#anno-list').innerHTML = C.anno.map(([, , a, b], i) => `<li tabindex="0" data-anno="${i}"><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join('');
+  const pins = $$('#anno-pins li'), lit = (i, on) => pins[i] && pins[i].classList.toggle('is--on', on);
+  $$('#anno-list li').forEach(li => { const i = +li.dataset.anno; ['pointerenter', 'focus'].forEach(ev => li.addEventListener(ev, () => lit(i, true))); ['pointerleave', 'blur'].forEach(ev => li.addEventListener(ev, () => lit(i, false))); });
+  $('#lang-pts').innerHTML = C.langPts.map(([a, b]) => `<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join('');
+  $('#a11y').innerHTML = C.a11y.map(([a, b, c]) => `<tr><th scope="row">${esc(a)}</th><td>${esc(b)}</td><td>${esc(c)}</td></tr>`).join('');
+  $('#movein').innerHTML = C.movein.map(([a, b]) => `<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join('');
   $$('[data-screen]').forEach(el => { el.innerHTML = V[el.dataset.screen] ? V[el.dataset.screen]() : ''; });
 }
 
 /* ---------- Walkthrough player ---------- */
 function initPlayer() {
   const modal = $('.modal[data-modal="reel"]');
-  $('#player-frames').innerHTML = ST.map((s, i) => `<div class="pframe${i === 0 ? ' is--active' : ''}" aria-hidden="${i !== 0}"><div class="pframe__text"><span class="pframe__act">${esc(ACT(s.act).name)} · step ${s.n} of 08</span><span class="pframe__num">${s.n}</span><h3 class="h-m">${esc(s.name)}</h3><p class="p-l">${esc(s.line)}</p><p class="pframe__out">${esc(s.gives)}</p><ul class="pframe__lanes"><li><b>Who</b><span>${esc(s.who)}</span></li><li><b>Today</b><span><s>${esc(s.today)}</s></span></li></ul></div><div class="media">${screen(s.vis)}</div></div>`).join('');
+  $('#player-frames').innerHTML = ST.map((s, i) => `<div class="pframe${i === 0 ? ' is--active' : ''}" aria-hidden="${i !== 0}"><div class="pframe__text"><span class="pframe__act">${esc(ACT(s.act).name)} · step ${s.n} of 08</span><span class="pframe__num">${s.n}</span><h3 class="h-m">${esc(s.name)}</h3><p class="p-l">${esc(s.line)}</p><p class="pframe__out">${esc(s.gives)}</p><ul class="pframe__lanes"><li><b>Who</b><span>${esc(s.who)}</span></li><li><b>Today</b><span><s>${esc(s.today)}</s></span></li></ul></div><div class="media">${screen(s.vis, near(s.zoom))}</div></div>`).join('');
   $('#player-progress').innerHTML = ST.map((s, i) => `<button type="button" aria-label="Go to step ${s.n}: ${esc(s.name)}" data-pi="${i}"><span><i></i></span></button>`).join('');
   const frames = $$('.pframe'), bars = $$('#player-progress i');
   const DUR = 4600;

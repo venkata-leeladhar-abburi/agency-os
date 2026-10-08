@@ -327,12 +327,36 @@ __SPRITE__
       <h2 class="h-l" data-reveal>Only for pharmacies. <em>End to end.</em></h2>
       <p class="p-l" data-reveal>Six jobs, one app. Every report an owner asks for is already there.</p>
     </div>
+    <div class="trio" data-reveal>
+      <div class="trio__desk"><div class="media"><span class="s" data-screen="home"></span></div></div>
+      <div class="trio__tab"><div class="media is--tab"><span class="s is--t" data-screen="billt"></span></div></div>
+      <div class="trio__phone"><div class="media is--phone"><span class="s is--m" data-screen="ownerm"></span></div></div>
+    </div>
+    <ul class="trio__caps" data-reveal>
+      <li><b>The counter screen</b><span>The day in one look: sales, what happened, what to watch. Runs in a browser on the PC the shop already has.</span></li>
+      <li><b>A tablet at the counter</b><span>The same bill, with bigger buttons for fingers.</span></li>
+      <li><b>The owner’s phone</b><span>Every store, every bill, from anywhere.</span></li>
+    </ul>
+
+    <div class="plat-head" data-reveal><h3 class="h-m">Every job has <em>its own screen</em></h3><p class="p-m">Pick a job, then a feature. Each one is drawn.</p></div>
     <div class="plat" data-reveal>
       <div class="plat__tabs" id="job-tabs" role="tablist" aria-label="The six jobs"></div>
       <div class="plat__panel">
         <div class="plat__feats" id="job-feats"></div>
-        <div class="plat__screen"><div class="media"><span class="s" id="job-screen"></span></div></div>
+        <p class="eyebrow plat__swipe" aria-hidden="true">Swipe the screen sideways to see all of it</p>
+        <div class="plat__screen" tabindex="0" role="region" aria-label="The screen for the chosen feature"><div class="media"><span class="s" id="job-screen"></span></div></div>
       </div>
+    </div>
+
+    <div class="movein" data-reveal>
+      <div class="movein__text">
+        <span class="eyebrow">Moving in</span>
+        <h3 class="h-m">From the old software, <em>in an afternoon.</em></h3>
+        <p class="p-m">A shop has years of stock, customers and dues in its old software. Leaving that behind is the real reason nobody switches. So moving in is a screen of its own.</p>
+        <ol class="movein__steps" id="movein"></ol>
+        <p class="movein__note">Planned for the first release: Marg, Profitmaker and Excel. Others we move by hand, on a call.</p>
+      </div>
+      <div class="movein__screen"><div class="media"><span class="s is--zoom" style="--zm:1.25;--fx:1;--fy:.12" data-screen="migrate"></span></div></div>
     </div>
     <div class="autos" data-reveal>
       <figure class="fig is--light">
@@ -364,9 +388,9 @@ __SPRITE__
       </div>
       <div class="stores__body">
         <div class="net" id="net" role="img" aria-label="Diagram: stores, their stock and their distributors"></div>
-        <div class="stores__screen"><div class="media"><span class="s" id="stores-screen"></span></div></div>
+        <ul class="rules" id="rules"></ul>
       </div>
-      <ul class="rules" id="rules"></ul>
+      <div class="stores__screen"><div class="media"><span class="s" id="stores-screen"></span></div></div>
     </div>
   </div>
 </section>
@@ -483,35 +507,60 @@ __SPRITE__
     <div class="ux__label" data-reveal><span class="tag" data-theme="haze">UX strategy</span><h3 class="h-m">Eight rules <em>for every screen</em></h3></div>
     <ul class="uxr" id="ux-rules" data-reveal-group></ul>
 
+    <div class="ux__label" data-reveal><span class="tag" data-theme="haze">On the screen</span><h3 class="h-m">Eight choices you can <em>point at</em></h3></div>
+    <div class="anno" data-reveal>
+      <p class="eyebrow anno__swipe" aria-hidden="true">Swipe the screen sideways to see all of it</p>
+      <div class="anno__shot" tabindex="0" role="region" aria-label="The overview screen, with eight numbered points"><div class="media"><span class="s" data-screen="home"></span><ol class="anno__pins" id="anno-pins" aria-hidden="true"></ol></div></div>
+      <ol class="anno__list" id="anno-list"></ol>
+    </div>
+
+    <div class="ux__label" data-reveal><span class="tag" data-theme="haze">Language</span><h3 class="h-m">A question, <em>not a setting</em></h3></div>
+    <div class="lang2" data-reveal>
+      <div class="lang2__shot"><div class="media"><span class="s is--zoom" style="--zm:1.55;--fx:.5;--fy:.5" data-screen="lang"></span></div></div>
+      <div class="lang2__text">
+        <p class="p-l">The first screen asks one thing. After that, two buttons stay at the top of every screen.</p>
+        <ul class="lang2__pts" id="lang-pts"></ul>
+        <p class="lang2__note">The Telugu wording is a first draft. A native speaker checks every line before a store sees it.</p>
+      </div>
+    </div>
+
+    <div class="ux__label" data-reveal><span class="tag" data-theme="haze">Accessibility</span><h3 class="h-m">Measured, <em>not promised</em></h3></div>
+    <div class="a11y" data-reveal>
+      <table class="a11y__table"><thead><tr><th scope="col">What we checked</th><th scope="col">In the demo above</th><th scope="col">The web standard asks</th></tr></thead><tbody id="a11y"></tbody></table>
+      <p class="a11y__note">Measured on the working demo in section 04, against WCAG 2.2. The same parts make every screen on this page.</p>
+    </div>
+
     <div class="ux__label" data-reveal><span class="tag" data-theme="haze">UI</span><h3 class="h-m">The kit <em>the screens are made of</em></h3></div>
-    <div class="kit" data-reveal>
+    <div class="kit u" data-reveal>
       <div class="kit__cell is--type">
         <span class="eyebrow">Type</span>
-        <p class="kit__big">Aa అ</p>
-        <p class="kit__p">Atkinson Hyperlegible, drawn for readers with low vision. Telugu in Anek Telugu.</p>
-        <div class="kit__sizes"><span style="font-size:1.125rem">18 Body</span><span style="font-size:1.375rem">22 Rows</span><span style="font-size:1.75rem">28 Totals</span></div>
+        <p class="kit__big">Aa <span lang="te">అ</span></p>
+        <p class="kit__p">Inter for English, Anek Telugu for <span lang="te">తెలుగు</span>. Both drawn for screens. Numbers line up in columns.</p>
+        <div class="kit__sizes"><span style="font-size:1.0625rem">17 Body</span><span style="font-size:1.25rem">20 Large</span><span style="font-size:1.375rem">22 Largest</span></div>
       </div>
       <div class="kit__cell is--colour">
         <span class="eyebrow">Colour means one thing</span>
         <ul class="kit__swatches">
-          <li><i class="is--ink"></i><b>Ink</b><span>Do this</span></li>
-          <li><i class="is--indigo"></i><b>Indigo</b><span>Chosen, done</span></li>
+          <li><i class="is--navy"></i><b>Navy</b><span>Chosen, or the next step</span></li>
+          <li><i class="is--green"></i><b>Green</b><span>Fine</span></li>
           <li><i class="is--amber"></i><b>Amber</b><span>Soon</span></li>
-          <li><i class="is--red"></i><b>Red pen</b><span>Stop, expired, short</span></li>
+          <li><i class="is--red"></i><b>Red</b><span>Stop, expired, short</span></li>
         </ul>
+        <p class="kit__p">Everything else is white on a quiet grey.</p>
       </div>
       <div class="kit__cell is--btn">
-        <span class="eyebrow">Buttons</span>
-        <div class="kit__btns"><span class="kb is--pri">Add to stock</span><span class="kb">Scan pack</span><span class="kb is--ghost">Undo</span></div>
-        <p class="kit__p">48px tall, never less. One dark button per screen: the next step.</p>
+        <span class="eyebrow">Buttons and tabs</span>
+        <div class="kit__btns"><span class="u-btn is--lg">Add to stock<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#k-arrow"/></svg></span><span class="u-btn is--ghost"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#k-qr"/></svg>Scan a pack</span><span class="u-seg"><span class="on">English</span><span lang="te">తెలుగు</span></span></div>
+        <p class="kit__p">44 px tall or more. One dark button on a screen: the next step.</p>
       </div>
       <div class="kit__cell is--state">
         <span class="eyebrow">A row, in every state</span>
         <ul class="kit__rows">
-          <li><span class="kr is--ok"><svg viewBox="0 0 16 16"><use href="#i-check"/></svg></span>Arrived <b>10 of 10</b></li>
-          <li><span class="kr is--warn"><svg viewBox="0 0 24 24"><use href="#k-clock"/></svg></span>Expires in <b>58 days</b></li>
-          <li><span class="kr is--bad"><svg viewBox="0 0 24 24"><use href="#k-alert"/></svg></span>Short by <b>4</b></li>
+          <li><span class="u-bdg is--ok"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#k-tick"/></svg>Matches the order</span></li>
+          <li><span class="u-bdg is--warn"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#k-clock"/></svg>Expires in 4 months</span></li>
+          <li><span class="u-bdg is--bad"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#k-alert"/></svg>Short by 4</span></li>
         </ul>
+        <p class="kit__p">An icon and a word with every colour.</p>
       </div>
     </div>
   </div>

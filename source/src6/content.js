@@ -10,35 +10,35 @@ const C = {
 
   /* The one flow: a strip of tablets, from order to refill */
   steps: [
-    { id: 'order', n: '01', act: 'buy', name: 'Order', icon: 'list', vis: 'order',
+    { id: 'order', n: '01', act: 'buy', name: 'Order', icon: 'list', vis: 'order', zoom: [2.05, 0.36, 0.2],
       line: 'Low stock turns into an order. Pick, don’t type.',
       who: 'Owner or purchase staff', what: ['“To order” list fills itself', 'Type three letters, pick from your history', 'A new medicine is saved for next time'],
       today: 'Want list in a notebook', gives: 'A medicine is typed once, ever' },
-    { id: 'send', n: '02', act: 'buy', name: 'Send', icon: 'send', vis: 'send',
+    { id: 'send', n: '02', act: 'buy', name: 'Send', icon: 'send', vis: 'send', zoom: [1.3, 0.03, 0.62],
       line: 'The distributor gets it on WhatsApp. No login.',
       who: 'Distributor', what: ['Order as a message, a PDF and a link', 'They mark what they can supply', 'Their bill file or photo comes back on the same link'],
       today: 'Calls, chats and three ordering apps', gives: 'Works with every distributor from day one' },
-    { id: 'check', n: '03', act: 'stock', name: 'Check', icon: 'ticks', vis: 'check',
+    { id: 'check', n: '03', act: 'stock', name: 'Check', icon: 'ticks', vis: 'check', zoom: [1.7, 0.5, 0.55],
       line: 'Goods arrive. Tick what came. Don’t type.',
       who: 'Whoever opens the carton', what: ['Your own order is already on screen', 'Short supply and swaps stand out', 'Scan the pack for batch and expiry'],
       today: 'Every line typed again from the paper bill', gives: 'A 40-line bill checked in two minutes' },
-    { id: 'shelf', n: '04', act: 'stock', name: 'Stock', icon: 'box', vis: 'stock',
+    { id: 'shelf', n: '04', act: 'stock', name: 'Stock', icon: 'box', vis: 'stock', zoom: [1.9, 0.42, 0.3],
       line: 'One tap. On the shelf, with batch and expiry.',
       who: 'Automatic', what: ['Stock goes up by batch', 'Expiry alerts set at 90, 60 and 30 days', 'Payment due date noted'],
       today: 'Expiry found when the customer finds it', gives: 'Nothing expires quietly' },
-    { id: 'sell', n: '05', act: 'sell', name: 'Sell', icon: 'receipt', vis: 'sell',
+    { id: 'sell', n: '05', act: 'sell', name: 'Sell', icon: 'receipt', vis: 'sell', zoom: [2, 1, 0.22],
       line: 'Three items billed in under thirty seconds.',
       who: 'Counter staff', what: ['Search by brand, salt or a wrong spelling', 'Oldest batch picked first', 'Expired stock cannot be billed'],
       today: 'Exact names, function keys, tiny text', gives: 'A new helper bills on day one' },
-    { id: 'bill', n: '06', act: 'sell', name: 'Bill', icon: 'chat', vis: 'wabill',
+    { id: 'bill', n: '06', act: 'sell', name: 'Bill', icon: 'chat', vis: 'wabill', zoom: [1.3, 0.03, 0.62],
       line: 'The bill lands on WhatsApp. The customer is saved.',
       who: 'Automatic', what: ['GST bill as a link, or printed', 'Customer and doctor remembered', 'Schedule H1 register fills itself'],
       today: 'Paper bill. Register written by hand.', gives: 'Inspection-ready every day' },
-    { id: 'remind', n: '07', act: 'grow', name: 'Remind', icon: 'bell', vis: 'remind',
+    { id: 'remind', n: '07', act: 'grow', name: 'Remind', icon: 'bell', vis: 'remind', zoom: [1.3, 0.03, 0.62],
       line: 'Three days before the strip runs out, a reminder.',
       who: 'Automatic', what: ['30 tablets, one a day: remind on day 27', 'Reply YES and the order is packed', 'Offers to chosen groups, with consent'],
       today: 'The regular buys from an app next month', gives: 'Regulars stay regular' },
-    { id: 'see', n: '08', act: 'grow', name: 'See', icon: 'phone', vis: 'owner',
+    { id: 'see', n: '08', act: 'grow', name: 'See', icon: 'phone', vis: 'owner', zoom: [1.3, 0.03, 0.3],
       line: 'The whole shop, on the owner’s phone.',
       who: 'Owner', what: ['Sales, cash and profit today', 'Low stock and expiring stock', 'Approve orders from anywhere'],
       today: 'Phone calls to ask “how much today?”', gives: 'Peace of mind, away from the counter' }
@@ -165,15 +165,21 @@ const C = {
     { id: 'buy', name: 'Buy', icon: 'truck', line: 'Order, receive, pay, return.',
       f: [['To-order list', 'order', 'Low stock and usual quantities, ready to send'], ['Receive against the order', 'check', 'Tick what came. Short supply flagged.'], ['Pay the distributor', 'dues', 'Due dates, reminders three days before'], ['Expiry returns', 'returns', 'Tracked until the credit note arrives']] },
     { id: 'stock', name: 'Stock', icon: 'box', line: 'Know every strip.',
-      f: [['Expiring in 60 days', 'expiry', 'With the rupee value at risk, by distributor'], ['Running low', 'lowstock', 'Below reorder level, with one tap to order'], ['Batch and shelf', 'stock', 'Oldest batch sells first'], ['Dead stock', 'expiry', 'No sale in 90 days: return or move']] },
+      f: [['Expiring in 60 days', 'expiry', 'With the rupee value at risk, by distributor'], ['Running low', 'lowstock', 'Below reorder level, with one tap to order'], ['Batch and shelf', 'stock', 'Oldest batch sells first'], ['Dead stock', 'deadstock', 'No sale in 90 days: return or move']] },
     { id: 'sell', name: 'Sell', icon: 'receipt', line: 'Fast, legal bills.',
-      f: [['Counter bill', 'sell', 'Scan or search. UPI, cash, card, credit.'], ['Prices and discounts', 'sell', 'Never above MRP. Rules by customer and item.'], ['Returns', 'sell', 'One tap from the old bill'], ['Substitutes', 'sell', 'Same salt, in stock, shown when one runs out']] },
+      f: [['Counter bill', 'sell', 'Scan or search. UPI, cash, card, credit.'], ['Prices and discounts', 'prices', 'Never above MRP. Rules by customer and item.'], ['Returns', 'salereturn', 'One tap from the old bill'], ['Substitutes', 'substitute', 'Same salt, in stock, shown when one runs out']] },
     { id: 'serve', name: 'Serve', icon: 'chat', line: 'Customers on record.',
       f: [['Bill on WhatsApp', 'wabill', 'A link, not a photo of a printout'], ['Refill reminders', 'remind', 'Worked out from the strip and the dose'], ['Campaigns', 'campaign', 'Offers to a chosen group, with consent'], ['Customer page', 'customer', 'Purchases, dues and the family’s regular medicines']] },
     { id: 'money', name: 'Accounts & GST', icon: 'rupee', line: 'Ready for the CA.',
-      f: [['Day book', 'accounts', 'Sales, cash, UPI, expenses and profit'], ['GST files', 'gst', 'GSTR-1 and 3B summaries. Tally export.'], ['Money to collect', 'accounts', 'Credit customers, with reminders'], ['The CA’s login', 'gst', 'Read-only. Everything downloads.']] },
+      f: [['Day book', 'accounts', 'Sales, cash, UPI, expenses and profit'], ['GST files', 'gst', 'GSTR-1 and 3B summaries. Tally export.'], ['Money to collect', 'collect', 'Credit customers, with reminders'], ['The CA’s login', 'ca', 'Read-only. Everything downloads.']] },
     { id: 'law', name: 'Law', icon: 'shield', line: 'Inspection-ready.',
-      f: [['Schedule H1 register', 'h1', 'Doctor, patient, drug and quantity, filled from the bill'], ['Expired stock blocked', 'h1', 'It cannot be billed. It moves to “to return”.'], ['Inspection pack', 'h1', 'Bills, registers and licences in one download'], ['Licence reminders', 'h1', '60 and 30 days before renewal']] }
+      f: [['Schedule H1 register', 'h1', 'Doctor, patient, drug and quantity, filled from the bill'], ['Expired stock blocked', 'blocked', 'It cannot be billed. It moves to “to return”.'], ['Inspection pack', 'inspect', 'Bills, registers and licences in one download'], ['Licence reminders', 'licence', '60 and 30 days before renewal']] }
+  ],
+  /* 06 Moving in from the old software */
+  movein: [
+    ['Bring the backup file', 'From Marg, Profitmaker or an Excel sheet. Nothing is changed in the old software.'],
+    ['Check what we found', 'Medicines with batch and expiry, customers, distributors and dues. Only the doubtful ones need a look.'],
+    ['Run both for a week', 'The old software stays on, and the old keys still work. One tap undoes the move.']
   ],
   autos: [
     ['Low stock', 'Every morning, as one WhatsApp summary'], ['Near expiry', '90, 60 and 30 days before, with value'], ['Expired', 'Blocked from billing at once'],
@@ -196,6 +202,34 @@ const C = {
     ['“Needs you” list', 'Orders to approve, dues to pay, stock about to expire'],
     ['Every bill, live', 'See a bill the moment it is made'],
     ['Works on a basic phone', 'Android first. Telugu, English, Hindi.']
+  ],
+
+  /* 10 On the screen: [left %, top %, title, text]. The points sit on the overview screen. */
+  anno: [
+    [18.9, 20.5, 'Words on every menu item', 'No icon stands alone. Each one has the shop’s own word beside it.'],
+    [65, 2, 'Two buttons for language', 'English or తెలుగు. At the top of every screen, never inside a settings page.'],
+    [77.3, 2, 'Three sizes of text', 'One tap makes the whole screen bigger for whoever is at the counter.'],
+    [86.8, 2, 'One dark button', 'The next step is the only dark button on a screen. Here it is a new bill.'],
+    [20.7, 13, 'Numbers first', 'The day’s sales in large type, then one line that says better or worse.'],
+    [69.6, 41.4, 'Today stands out', 'The dark bar is today. Nobody has to read an axis to find it.'],
+    [75.6, 13.8, 'Plain words for what happened', 'Order received. Stock moved. A person’s name, not a code.'],
+    [78.4, 81.6, 'Colour, icon and word together', 'Red, amber and green never work alone. So they work for tired eyes and colour-blind eyes.']
+  ],
+  langPts: [
+    ['Both languages are always on screen', 'No flag, no hidden menu. The chosen one is dark.'],
+    ['Telugu is written in Telugu', 'Nobody has to read English to leave English.'],
+    ['Each person keeps their own', 'Imran works in English and Padma in Telugu, at the same counter.']
+  ],
+  /* Measured on the demo in section 04, at desktop and phone widths, in every state of the flow */
+  a11y: [
+    ['Main text against its background', '12 : 1 or more', '4.5 : 1 or more'],
+    ['Grey helper text', '5.4 : 1 or more', '4.5 : 1 or more'],
+    ['White text on dark buttons', '7.5 : 1 or more', '4.5 : 1 or more'],
+    ['Red, amber, green and blue words', '4.5 : 1 or more', '4.5 : 1 or more'],
+    ['Smallest button', '44 × 44 px', '24 × 24 px, and 44 for the top level'],
+    ['Smallest text', '14 px', 'No fixed size'],
+    ['Body text', '17, 20 or 22 px', 'Text must still work at twice the size'],
+    ['Without a mouse', 'Every control', 'Every control reachable by keyboard']
   ],
 
   /* 10 Design for 50+ */
