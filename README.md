@@ -1,6 +1,6 @@
 # One Stop Solutions: pitch websites
 
-Seven pages for **One Stop Solutions**. Each page has its CSS and JavaScript inline:
+Eight pages for **One Stop Solutions**. Each page has its CSS and JavaScript inline:
 
 | Page | File | Who it is for |
 | --- | --- | --- |
@@ -10,6 +10,7 @@ Seven pages for **One Stop Solutions**. Each page has its CSS and JavaScript inl
 | Our process | `process/index.html` | Clients and leads: the client pitch, starting at the seven phases |
 | Beere Kesava ERP deck | `beere-kesava/index.html` | Beere Kesava, investors and silk businesses |
 | Heaven Gadgets growth plan | `heaven-gadgets/index.html` | Heaven Gadgets, Ongole: a pitch to the store's owner |
+| Pharmacy OS pitch deck | `pharmacy-os/index.html` | Investors and founders, written so a medical-store owner can follow it |
 | Team playbook | `playbook/index.html` | The One Stop team only |
 
 Each page has its own colours:
@@ -21,6 +22,7 @@ Each page has its own colours:
 | Team playbook | Warm paper, forest green and highlighter yellow |
 | Beere Kesava ERP deck | Wine, gold and cream |
 | Heaven Gadgets growth plan | Midnight navy, cobalt and price-tag yellow, with a red accent |
+| Pharmacy OS deck | Concrete, carbon indigo and honey amber, with a red pen for notes |
 
 The pitch and the playbook share their sources with the Agency OS deck; `source/build2.py` recolours them (`PALETTES`), so the deck keeps its own look.
 
@@ -46,6 +48,7 @@ Once deployed, the pages live at:
 | `/process/` | Our process |
 | `/beere-kesava/` | Beere Kesava ERP deck |
 | `/heaven-gadgets/` | Heaven Gadgets growth plan |
+| `/pharmacy-os/` | Pharmacy OS pitch deck |
 | `/playbook/` | Team playbook |
 
 `vercel.json` adds clean URLs, a week of browser caching for images, and basic security headers. `.vercelignore` keeps the `source/` folder off the live site.
@@ -63,6 +66,7 @@ Every page is generated from the files in `source/`. Edit a source file, then ru
 | Client pitch, our process and playbook | `python3 source/build2.py` | `source/src2/` |
 | Beere Kesava deck | `python3 source/build3.py` | `source/src3/`, `source/bk/img/` |
 | Heaven Gadgets plan | `python3 source/build5.py` | `source/src5/`, `source/hg/img/` |
+| Pharmacy OS deck | `python3 source/build6.py` | `source/src6/`, `source/src6/hairline/` |
 
 The builders need Python 3 only. `api/leads.js` needs no packages. Project screenshots and logos for the agency website are WebP files in `img/`; the project list, services, products and team are at the top of `source/src4/site.js`.
 
@@ -164,6 +168,36 @@ Products, prices, names and numbers inside the screens are samples. The estimato
 
 To check the page in a browser, run `node source/tools/check_hg.js heaven-gadgets/index.html` after `npm install` in `source/tools/`. It reports console errors, overflow and empty containers, runs the main interactions and saves screenshots at desktop and phone widths.
 
+## Pharmacy OS pitch deck (`pharmacy-os/`)
+
+A pitch for Pharmacy OS, software for medical stores: order from the distributor, tick what arrived against that order, bill, remind customers on WhatsApp, and see every store from the owner's phone. It is written for investors and founders in words a store owner can follow. It uses concrete, carbon indigo and honey amber on the same layout as the other pages; the product screens use Atkinson Hyperlegible Next, a typeface made for low vision, and Anek Telugu. The page asks search engines not to index it.
+
+| Section | What it shows |
+| --- | --- |
+| Hero | "Pharmacy OS. Typed once." with a rotating ring of the eight steps and a stat bar |
+| Walkthrough | An eight-step player, one screen per step |
+| 01 The gap | One medicine typed three times: the chain today and with Pharmacy OS (switch between the two), notes from store visits, and the trade's own 2021 letter asking for files "to avoid manual punching" |
+| 02 Today's software | What a store runs today, a drag slider between a typical screen today and ours, eight products a store owner knows (best at, weak at, how we win, published price), a feature table and a map of the open corner |
+| 03 The flow | Buy, stock, sell, grow: eight steps as draggable cards, with who, what, today and what it gives back |
+| 04 Try it | A working sketch: build an order from a list as you type, send it, then receive it by ticking. English and Telugu, three text sizes, and a meter of fields typed |
+| 05 Distributors | The answer to "a portal for distributors?": send first (WhatsApp, PDF and a link with no login), an order desk later, then a connection to their software |
+| 06 The platform | Six jobs and twenty-four features, each on a screen, and what runs by itself |
+| 07 Stores | One store or many: separate stock, each store's own distributors, and rules set once |
+| 08 Customers | WhatsApp bills and refill reminders, and a campaign estimator with Meta's India rates |
+| 09 Owner app | What the owner sees on the phone |
+| 10 UX | The evidence on ageing eyes and hands, research done and planned, five personas, two flows before and after, eight design rules with live examples, and the UI kit |
+| 11 What it gives back | Hours, money and typing saved each year, with drag sliders, and what reminders can earn |
+| 12 Costs | What one store costs us each year, year-one build cost, the team, unit prices, and a break-even estimator for price, stores and team cost |
+| 13 Why ours | Five reasons, what gets harder to copy, and nine investor questions answered |
+| 14 Why now | Market numbers and a timeline of what changed |
+| 15 What we must get right | Ten risks in building it, each with what we do about it |
+| 16 Plan | Ten stores first, the roadmap, open questions and the raise |
+| Start | Contact details and every source |
+
+Our own price is not stated: the page shows what competitors publish and says ours is set after the pilots. Every market and competitor fact names its source at the end of the page; competitor features come from public material and are marked as such. Products, stores, medicines and amounts inside the screens are samples. The "typical screen today" is our own drawing of a common layout, not a screenshot of any product. The personas are first sketches with stock photos from Pexels, to be replaced by real interviews. The Telugu wording needs a check by a native speaker before it is shown to store owners.
+
+The five line figures come from [Hairline](https://github.com/lucasmarkes/hairline) (MIT). Four load from jsDelivr; the blister strip is our own figure on the same engine, in `source/src6/hairline/` (`kernel.js` is Hairline's engine, unchanged, with its `LICENSE` beside it and on the page; `host.js` mounts our figure on the page; `strip.js` is the figure). If the library cannot load, those figures hide and the page still works.
+
 ## Team playbook (`playbook/`)
 
 The team's process and library in one place: search everything with `/` or Ctrl+K.
@@ -178,7 +212,8 @@ The shared version of the playbook is a Claude artifact with a shared database, 
 
 - HTML, CSS and vanilla JavaScript, one file per page
 - [GSAP 3.13](https://gsap.com/) (Draggable, InertiaPlugin, ScrollTrigger, CustomEase) and [Lenis 1.3.4](https://lenis.darkroom.engineering/) from jsDelivr
-- Geist, Geist Mono and Caveat from Google Fonts, plus Fraunces for the Beere Kesava deck. The Heaven Gadgets plan uses Clash Display and Satoshi from Fontshare
+- Geist, Geist Mono and Caveat from Google Fonts, plus Fraunces for the Beere Kesava deck. The Heaven Gadgets plan uses Clash Display and Satoshi from Fontshare. The Pharmacy OS deck uses Instrument Sans, Atkinson Hyperlegible Next and Anek Telugu from Google Fonts
+- [Hairline 0.3.0](https://github.com/lucasmarkes/hairline) line figures on the Pharmacy OS deck
 - Keyboard support for sliders and dialogs, and reduced motion for visitors who ask for it
 
 `assets/onestop-logo.svg` is the Onestop wordmark used on every page.
