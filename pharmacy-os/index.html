@@ -1080,6 +1080,17 @@ a.contact-list__value{user-select:auto;-webkit-user-select:auto}
 .so__sum{display:flex;justify-content:flex-end;gap:2em;padding:.5em .9em;flex:none}
 .so__keys{display:flex;gap:.3em;padding:.4em .7em .6em;flex:none}
 .so__keys span{flex:1;padding:.35em .2em;text-align:center;background:#ECE9D8;border:1PX solid;border-color:#fff #716F64 #716F64 #fff;white-space:nowrap;overflow:hidden}
+
+/* ---------- Compare distributors, forecast bars ---------- */
+.u-cmp{display:grid;gap:calc(var(--px)*1);padding:calc(var(--px)*6) calc(var(--px)*10);border-radius:calc(var(--px)*9);line-height:1.25;min-width:0}
+.u-cmp b{font-size:calc(var(--px)*14.5);font-weight:500;color:var(--u-ink)}
+.u-cmp small{font-size:calc(var(--px)*12.5);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.u-cmp.on{background:var(--u-ok-s);box-shadow:inset 0 0 0 1PX #BFE5D3}
+.u-cmp.on b{color:var(--u-ok)}
+.u-cmp.on b::after{content:" · picked";font-size:calc(var(--px)*12.5);font-weight:450}
+.u-cmp.is--no b{color:var(--u-faint);font-weight:450}
+.u-bars i.is--next{background:repeating-linear-gradient(135deg,#DDE4F8 0 calc(var(--px)*5),#EEF1FB calc(var(--px)*5) calc(var(--px)*10))}
+.u-bars i.is--nil{background:#E7E7EB;border-radius:calc(var(--px)*3)}
 /* ===== Pharmacy OS skin on the Osmo base. Flat concrete, ink type, three colours taken from the counter:
    carbon indigo (the bill book), honey amber (the medicine bottle), red pen (the Rx mark, for notes only).
    Tiles are sharp (5px), controls are pills. No gradients, no shadows. ===== */
@@ -1441,6 +1452,10 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
 .dm__tray > header{display:flex;flex-wrap:wrap;align-items:center;gap:.4em .8em;min-height:2.6rem;padding:.25em .7em .35em;font-weight:500;color:#3A3E4C}
 .dm__tray > header em{font-style:normal;font-size:.88em;color:var(--u-mut);font-weight:400}
 .dm__tray > header .dm__btn{margin-left:auto}
+.dm__hbtns{display:flex;flex-wrap:wrap;gap:.4em;margin-left:auto}
+.dm__tray > header .dm__hbtns .dm__btn{margin-left:0}
+.dm__imp{display:flex;align-items:center;gap:.5em;margin:.3rem .3rem .4rem;padding:.6em .8em;border-radius:.6rem;background:var(--u-ok-s);color:var(--u-ok);font-weight:500;font-size:.95em;line-height:1.3}
+.dm__imp svg{width:1.15em;height:1.15em;flex:none;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .dm__card{flex:1;padding:.9em;border-radius:.75rem;background:#fff;box-shadow:inset 0 0 0 1px #EAEAEE,var(--u-sh);min-width:0}
 .dm__card.is--flush{padding:.3rem .3rem .1rem}
 .dm__btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;min-height:3rem;padding:.35em 1.2em;border-radius:.75rem;background:linear-gradient(180deg,var(--u-pri-2),var(--u-pri));color:#fff;font-weight:500;font-size:1em;white-space:nowrap;box-shadow:0 1px 2px rgba(22,26,40,.24);transition:filter .2s,transform .2s}
@@ -1543,12 +1558,12 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
 .dm__meter{display:flex;flex-wrap:wrap;gap:.4rem 2rem;padding:.8rem 1.1rem;border-top:1px solid var(--u-line);background:#fff;color:var(--u-mut);font-size:.9375rem}
 .dm__meter b{color:var(--u-ink);font-weight:600}
 .dm__meter span:first-child b{display:inline-grid;place-items:center;min-width:1.7em;height:1.7em;border-radius:.45rem;background:var(--u-ok-s);color:var(--u-ok)}
-.try__points{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem;max-width:68rem;margin:.5rem auto 0}
+.try__points{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.5rem;max-width:80rem;margin:.5rem auto 0}
 .try__points li{display:grid;gap:.4rem;align-content:start;padding:1.25rem;border-radius:var(--r-s);background:var(--c-card)}
 .try__points b{font-family:var(--font-display);font-stretch:84%;font-size:1.3125rem;font-weight:600;letter-spacing:-.015em}
 .try__points span{font-size:.9375rem;line-height:1.42;color:var(--c-smoke)}
 @media (max-width:1300px){.demo__note{display:none}}
-@media (max-width:600px){.dm__opt{grid-template-columns:auto minmax(0,1fr)}.dm__opt em{grid-column:2;text-align:left}.dm__line{grid-template-columns:auto minmax(0,1fr) auto;row-gap:.5em}.dm__line .dm__step{grid-column:2/-1;grid-row:2;justify-self:start}.dm__line .dm__x{grid-column:3;grid-row:1}.dm__name b{white-space:normal}.dm__tabs{order:3;width:100%}.dm__tabs button{flex:1}.dm__act .dm__btn{width:100%}}
+@media (max-width:600px){.dm__opt{grid-template-columns:auto minmax(0,1fr)}.dm__opt em{grid-column:2;text-align:left}.dm__line{grid-template-columns:auto minmax(0,1fr) auto;row-gap:.5em}.dm__line .dm__step{grid-column:2/-1;grid-row:2;justify-self:start}.dm__line .dm__x{grid-column:3;grid-row:1}.dm__name b{white-space:normal}.dm__r{grid-template-columns:3rem minmax(0,1fr)}.dm__qty,.dm__be,.dm__st{grid-column:2}.dm__hbtns{margin-left:0;width:100%}.dm__hbtns .dm__btn{flex:1 1 auto}.dm__tabs{order:3;width:100%}.dm__tabs button{flex:1}.dm__act .dm__btn{width:100%}}
 @media (max-width:991px){.dm__order,.dm__done{grid-template-columns:minmax(0,1fr)}.try__points{grid-template-columns:minmax(0,1fr)}.dm__r{grid-template-columns:3rem minmax(0,1fr) auto}.dm__r.is--h{display:none}.dm__be,.dm__st{grid-column:2/-1}.dm__be{grid-template-columns:auto auto;justify-content:start;gap:1.2em;color:var(--u-mut);font-size:.92em}}
 @media (max-width:767px){
   .dm__bar{padding:.6rem}.dm__tabs{order:3;width:100%;margin-right:0}.dm__tabs button{flex:1;justify-content:center;padding:0 .5rem}
@@ -1582,6 +1597,20 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
 .dist__phone{position:sticky;top:6.5rem;display:grid;gap:1rem}
 .dist__cap{display:grid;gap:.3rem;font-size:.9375rem;color:var(--c-graphite);text-align:center}
 .dist__cap .eyebrow{color:var(--c-steel)}
+.desk{display:grid;gap:1.5rem;margin-top:5rem}
+.desk__head{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr);gap:2.5rem;align-items:end}
+.desk__head > div{display:grid;gap:.7rem;justify-items:start}
+.desk__head .eyebrow{color:var(--c-violet)}
+.desk__head .p-m{color:var(--c-graphite)}
+.desk__pts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.4rem}
+.desk__pts li{display:grid;gap:.3rem;align-content:start;padding:1rem;border-radius:var(--r-s);background:var(--c-ash)}
+.desk__pts b{font-weight:600}
+.desk__pts span{font-size:.9375rem;line-height:1.38;color:var(--c-graphite)}
+.desk__swipe{display:none;color:var(--c-steel)}
+.desk__screen{border-radius:.9rem;scrollbar-width:thin}
+.desk__screen .media{border-radius:.9rem;box-shadow:0 0 0 1px var(--c-line)}
+@media (max-width:991px){.desk__head{grid-template-columns:minmax(0,1fr);gap:1.5rem}.desk__swipe{display:block}.desk__screen{overflow-x:auto}.desk__screen .media{min-width:54rem}}
+@media (max-width:767px){.desk{margin-top:3.5rem}.desk__pts{grid-template-columns:minmax(0,1fr)}}
 .media.is--phone{aspect-ratio:9/17.6;border-radius:2.2rem;border:.4rem solid #141414;background:#fff}
 .media.is--phone .s{border-radius:1.75rem}
 @media (max-width:991px){.dist__grid{grid-template-columns:minmax(0,1fr)}.dist__phone{position:static;justify-items:center}.dist__phone .media{width:17.5rem}}
@@ -1605,7 +1634,7 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
 .plat-head{display:grid;gap:.6rem;justify-items:center;text-align:center;margin:5rem 0 2rem}
 .plat-head .p-m{color:var(--c-graphite)}
 .plat{display:grid;gap:.5rem}
-.plat__tabs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.4rem}
+.plat__tabs{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:.4rem}
 .jt{display:grid;grid-template-columns:2.4rem minmax(0,1fr);gap:.1rem .7rem;align-items:center;padding:.8rem .85rem;border-radius:var(--r-s);background:var(--c-ash);text-align:left;transition:background-color .3s,color .3s}
 .jt i{grid-row:1/3;display:grid;place-items:center;width:2.4rem;height:2.4rem;border-radius:50%;background:var(--c-concrete);transition:background-color .3s,color .3s}
 .jt b{font-family:var(--font-display);font-stretch:84%;font-size:1.1875rem;font-weight:600;letter-spacing:-.015em;line-height:1.1;white-space:nowrap}
@@ -1615,8 +1644,8 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
 .jt[aria-selected="true"] i{background:var(--c-volt);color:var(--c-ink)}
 .jt[aria-selected="true"] span{color:var(--c-smoke)}
 .plat__panel{display:grid;gap:.6rem;padding:.6rem;border-radius:var(--r-s);background:var(--c-ash)}
-.plat__feats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.35rem}
-.jf{display:grid;gap:.2rem;align-content:start;padding:.85rem 1rem;border-radius:var(--r-s);text-align:left;border-top:3px solid transparent;transition:background-color .3s}
+.plat__feats{display:flex;flex-wrap:wrap;gap:.35rem}
+.jf{flex:1 1 calc(100% / var(--cols,4) - .35rem);min-width:0;display:grid;gap:.2rem;align-content:start;padding:.85rem 1rem;border-radius:var(--r-s);text-align:left;border-top:3px solid transparent;transition:background-color .3s}
 .jf b{font-size:1.0625rem;font-weight:600;line-height:1.25}
 .jf span{font-size:.9375rem;line-height:1.38;color:var(--c-graphite)}
 .jf:hover{background:rgba(32,29,29,.05)}
@@ -1643,8 +1672,8 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
 .autos__list li{display:grid;gap:.3rem;align-content:start;padding:1rem;border-radius:var(--r-s);background:var(--c-ash)}
 .autos__list b{font-weight:600}
 .autos__list span{font-size:.9375rem;line-height:1.35;color:var(--c-graphite)}
-@media (max-width:1199px){.plat__tabs{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media (max-width:991px){.plat__feats{grid-template-columns:repeat(2,minmax(0,1fr))}.plat__swipe{display:block}.plat__screen{overflow-x:auto}.plat__screen .media{min-width:54rem}.movein{grid-template-columns:minmax(0,1fr);gap:2rem}.trio__caps{grid-template-columns:minmax(0,1fr)}.autos{grid-template-columns:minmax(0,1fr)}.autos .fig{max-width:19rem}.autos__list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:1199px){.plat__tabs{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:991px){.plat__feats{--cols:2 !important}.plat__swipe{display:block}.plat__screen{overflow-x:auto}.plat__screen .media{min-width:54rem}.movein{grid-template-columns:minmax(0,1fr);gap:2rem}.trio__caps{grid-template-columns:minmax(0,1fr)}.autos{grid-template-columns:minmax(0,1fr)}.autos .fig{max-width:19rem}.autos__list{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:767px){.plat__tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.jt{grid-template-columns:minmax(0,1fr);padding:.7rem}.jt i{display:none}.jt span{display:none}.plat__panel{padding:.5rem}.plat-head{margin-top:3.5rem}.movein{margin-top:4rem}.trio{padding-bottom:0;display:grid;grid-template-columns:1.9fr 1fr;gap:.75rem;align-items:end}.trio__desk{grid-column:1/-1}.trio__tab,.trio__phone{position:static;width:auto}.trio__tab .media,.trio__phone .media{box-shadow:none}.autos{margin-top:3.5rem}.autos__list{grid-template-columns:minmax(0,1fr)}}
 
 /* ===== 07 One store or many ===== */
@@ -1735,6 +1764,8 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
 .app__note .scribble,.app__note .arrow-scribble{color:var(--c-volt)}
 @media (max-width:991px){.app__grid{grid-template-columns:minmax(0,1fr);gap:2rem}.app__note{display:none}}
 @media (max-width:767px){.app__points{grid-template-columns:minmax(0,1fr)}.app__phones .media{width:12.5rem}.app__phones .media.is--b{margin-left:-3.5rem;margin-top:3.5rem}}
+@media (max-width:1199px){.try__points{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:991px){.try__points{grid-template-columns:minmax(0,1fr)}}
 /* ===== 10 Design for fifty-plus ===== */
 .ux{padding-bottom:var(--section)}
 .ux__label{display:grid;gap:.9rem;justify-items:start;margin:6rem 0 2rem}
@@ -1952,6 +1983,8 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
 .win__tag svg{width:.9rem;height:.9rem}
 .win__big{font-family:var(--font-display);font-stretch:78%;font-size:9rem;margin-top:.5rem;line-height:.86;font-weight:600;letter-spacing:-.045em;white-space:nowrap}
 .win__sub{font-size:1.125rem;font-weight:500;line-height:1.35}
+.win__pay{font-size:1rem;line-height:1.35}
+.win__pay b{font-family:var(--font-display);font-stretch:84%;font-size:1.5rem;font-weight:600;letter-spacing:-.02em}
 .win__bars{display:grid;gap:.6rem;margin-top:auto;padding-top:1.25rem;border-top:1.5px solid rgba(32,29,29,.2)}
 .wbar{display:grid;grid-template-columns:10.5rem minmax(0,1fr) 5.5rem;gap:.8rem;align-items:center;font-size:.9375rem;font-weight:500}
 .wbar__t{height:1.5rem;border-radius:var(--r-xs);background:rgba(32,29,29,.12);overflow:hidden}
@@ -1976,7 +2009,7 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
 
 /* ===== 12 Our costs ===== */
 .costs .section-head{margin-bottom:3rem}
-.serve-cost{display:grid;gap:1.5rem;padding:1.75rem;border-radius:var(--r-s);background:var(--c-card)}
+.serve-cost{display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem;padding:1.75rem;border-radius:var(--r-s);background:var(--c-card)}
 .serve-cost__head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:1rem 2rem}
 .serve-cost .eyebrow{color:var(--c-smoke)}
 .serve-cost__big{display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem 1rem;margin-top:.5rem}
@@ -2040,6 +2073,7 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
 .pr__list li.is--us .pr__track i{background:repeating-linear-gradient(135deg,var(--c-volt) 0 .4rem,#E89C10 .4rem .8rem)}
 @media (max-width:1199px){.cost3{grid-template-columns:repeat(2,minmax(0,1fr))}.cost3 .cbox:last-child{grid-column:1/-1}}
 @media (max-width:991px){.xp,.pr{grid-template-columns:minmax(0,1fr)}.sleg{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.sbar i{padding-inline:.45rem;font-size:.75rem}}
 @media (max-width:767px){
   .serve-cost,.xp__in{padding:1.2rem}.serve-cost__big b{font-size:4rem}
   .sbar{height:2.75rem}.sbar i{padding-inline:.4rem;font-size:.75rem}
@@ -2051,8 +2085,8 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
 
 /* ===== 13 Why they will switch ===== */
 .why .section-head{margin-bottom:3rem}
-.whys{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.5rem}
-.wy{display:flex;flex-direction:column;gap:.7rem;min-height:19rem;padding:1.25rem;border-radius:var(--r-s);background:var(--c-ash)}
+.whys{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem}
+.wy{display:flex;flex-direction:column;gap:.7rem;min-height:15.5rem;padding:1.25rem;border-radius:var(--r-s);background:var(--c-ash)}
 .wy__n{font-family:var(--font-display);font-stretch:78%;font-size:4.4rem;line-height:.82;font-weight:600;letter-spacing:-.04em;color:var(--c-violet)}
 .wy h3{font-family:var(--font-display);font-stretch:82%;font-size:1.7rem;font-weight:600;line-height:1.02;letter-spacing:-.025em;margin-top:.4rem}
 .wy p{font-size:1rem;line-height:1.42;color:var(--c-graphite)}
@@ -2077,7 +2111,7 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
 .qa__list details[open] summary::after{rotate:45deg;background-color:var(--c-volt)}
 .qa__list summary:hover{color:var(--c-violet)}
 .qa__list details p{padding:0 3rem 1.4rem 0;font-size:1.0625rem;line-height:1.5;color:var(--c-graphite);max-width:46rem}
-@media (max-width:1199px){.whys{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:991px){.whys{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:991px){.moats,.qa{grid-template-columns:minmax(0,1fr);gap:1.5rem}.qa__head{position:static}}
 @media (max-width:767px){.whys{grid-template-columns:minmax(0,1fr)}.wy{min-height:0}.moats__list{grid-template-columns:minmax(0,1fr)}.moats,.qa{margin-top:4rem}.qa__list summary{font-size:1.2rem}.qa__list details p{padding-right:0}}
 
@@ -2187,6 +2221,40 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
 .modal.is--center .modal__panel{border-radius:.5rem}
 .toast{background:var(--c-violet);color:#fff;border-radius:var(--r-pill)}
 @media (max-width:767px){.pframe__num{font-size:3.6rem}}
+
+/* ---------- 03 A day at the store ---------- */
+.day{display:grid;gap:1.5rem;margin-top:5rem;scroll-margin-top:6rem}
+.day__head{display:grid;gap:.7rem;justify-items:start;max-width:46rem}
+.day__head .eyebrow{color:var(--c-violet)}
+.day__head .p-m{color:var(--c-graphite)}
+.day__cols,.day__list li{display:grid;grid-template-columns:6.5rem minmax(0,.8fr) minmax(0,1.6fr) minmax(0,.95fr);gap:.4rem 1.5rem;align-items:center}
+.day__cols{padding:0 1.25rem;color:var(--c-steel)}
+.day__list{display:grid;gap:.4rem}
+.day__list li{padding:.9rem 1.25rem;border-radius:var(--r-s);background:var(--c-ash)}
+.day__list time{font-family:var(--font-mono);font-size:.8125rem;letter-spacing:.04em;text-transform:uppercase;color:var(--c-steel)}
+.day__list h4{font-family:var(--font-display);font-stretch:84%;font-size:1.3125rem;font-weight:600;letter-spacing:-.015em;line-height:1.1}
+.day__app{font-size:1rem;line-height:1.4;color:var(--c-graphite)}
+.day__you{display:inline-flex;align-items:center;gap:.55rem;justify-self:start;min-height:2.4rem;padding:.3rem 1rem .3rem .8rem;border-radius:var(--r-pill);background:var(--c-ink);color:var(--c-concrete);font-weight:600;font-size:.9375rem;line-height:1.2}
+.day__you svg{width:1.1rem;height:1.1rem;flex:none;fill:none;stroke:var(--c-volt);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.day__list li:last-child .day__you{background:transparent;color:var(--c-graphite);box-shadow:inset 0 0 0 1px var(--c-line-strong)}
+.day__list li:last-child .day__you svg{stroke:var(--c-steel)}
+@media (max-width:991px){.day__cols{display:none}.day__list li{grid-template-columns:6rem minmax(0,1fr);align-items:start}.day__app,.day__you{grid-column:2}}
+@media (max-width:767px){.day{margin-top:3.5rem}.day__list li{grid-template-columns:minmax(0,1fr);padding:1rem}.day__app,.day__you{grid-column:1}}
+
+/* ---------- 13 The same feature, a different product ---------- */
+.diff{display:grid;gap:1.75rem;margin-top:6rem}
+.diff__head{display:grid;gap:.7rem;justify-items:start;max-width:46rem}
+.diff__head .eyebrow{color:var(--c-steel)}
+.diff__head .p-m{color:var(--c-graphite)}
+.diff__table{width:100%;border-collapse:separate;border-spacing:0;border-radius:var(--r-s);background:var(--c-ash);overflow:hidden;font-size:1rem;line-height:1.42}
+.diff__table th,.diff__table td{padding:1rem 1.25rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--c-line)}
+.diff__table tr:last-child td,.diff__table tr:last-child th{border-bottom:0}
+.diff__table thead th{font-family:var(--font-mono);font-size:.75rem;font-weight:400;letter-spacing:.05em;text-transform:uppercase;color:var(--c-steel)}
+.diff__table thead th:last-child{background:var(--c-ink);color:var(--c-volt)}
+.diff__table tbody th{width:11.5rem;font-family:var(--font-display);font-stretch:84%;font-size:1.3125rem;font-weight:600;letter-spacing:-.015em;line-height:1.15}
+.diff__table td:nth-child(2){width:38%;color:var(--c-graphite)}
+.diff__table td:nth-child(3){background:var(--c-ink);color:var(--c-concrete);font-weight:500;border-bottom-color:rgba(255,255,255,.12)}
+@media (max-width:767px){.diff{margin-top:4rem}.diff__table thead{display:none}.diff__table,.diff__table tbody,.diff__table tr,.diff__table th,.diff__table td{display:block;width:auto}.diff__table tbody th{width:auto;padding-bottom:.3rem;border-bottom:0}.diff__table td:nth-child(2){width:auto;border-bottom:0;padding-top:.2rem}.diff__table td::before{display:block;margin-bottom:.3rem;font-family:var(--font-mono);font-size:.6875rem;font-weight:400;letter-spacing:.06em;text-transform:uppercase}.diff__table td:nth-child(2)::before{content:"Today";color:var(--c-steel)}.diff__table td:nth-child(3)::before{content:"Pharmacy OS";color:var(--c-volt)}.diff__table tr{border-bottom:.4rem solid var(--c-concrete)}.diff__table tr:last-child{border-bottom:0}}
 </style>
 </head>
 <body>
@@ -2380,12 +2448,12 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
       <div class="marquee" style="--marquee-dur:38s" aria-hidden="true">
         <div class="marquee__list">
           <span class="marquee__item eyebrow">Pharmacy OS by One Stop Solutions <svg viewBox="0 0 80 80"><use href="#i-capsule"/></svg></span>
-          <span class="marquee__item eyebrow">Order, tick, sell, remind <svg viewBox="0 0 80 80"><use href="#i-capsule"/></svg></span>
+          <span class="marquee__item eyebrow">Order, receive, sell, remind <svg viewBox="0 0 80 80"><use href="#i-capsule"/></svg></span>
           <span class="marquee__item eyebrow">Investor preview · October 2026 <svg viewBox="0 0 80 80"><use href="#i-capsule"/></svg></span>
         </div>
         <div class="marquee__list">
           <span class="marquee__item eyebrow">Pharmacy OS by One Stop Solutions <svg viewBox="0 0 80 80"><use href="#i-capsule"/></svg></span>
-          <span class="marquee__item eyebrow">Order, tick, sell, remind <svg viewBox="0 0 80 80"><use href="#i-capsule"/></svg></span>
+          <span class="marquee__item eyebrow">Order, receive, sell, remind <svg viewBox="0 0 80 80"><use href="#i-capsule"/></svg></span>
           <span class="marquee__item eyebrow">Investor preview · October 2026 <svg viewBox="0 0 80 80"><use href="#i-capsule"/></svg></span>
         </div>
       </div>
@@ -2399,7 +2467,7 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
         <svg class="hero__glyph" viewBox="0 0 80 80" aria-hidden="true" data-hero-fade><use href="#i-capsule"/></svg>
         <span class="line-mask"><span data-hero-line>Typed Once</span></span>
       </h1>
-      <p class="hero__desc p-l" data-hero-fade>One app for the medical store. Order from the <span class="u-nowrap"><span class="hl">distributor</span>,</span> <span class="hl is--round">tick</span> what arrived, bill, remind. Nothing is typed twice.</p>
+      <p class="hero__desc p-l" data-hero-fade>One app for the medical store. Order from the <span class="u-nowrap"><span class="hl">distributor</span>,</span> receive his bill in <span class="hl is--round">one click</span>, sell, remind. Nothing is typed twice.</p>
       <div class="btn-row hero__cta" data-hero-fade>
         <button class="btn" type="button" data-theme="ink" data-size="l" data-reel-open><span class="btn__label">Watch the flow</span><svg class="btn__icon" viewBox="0 0 12 12" aria-hidden="true"><use href="#i-play"/></svg></button>
         <a class="btn" data-theme="volt" data-shape="round" data-size="l" href="#try"><span class="btn__label">Try the demo</span></a>
@@ -2539,15 +2607,15 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
       </div>
       <p class="eyebrow mx__swipe" aria-hidden="true">Swipe sideways for all six columns</p>
       <div class="mx__scroll" tabindex="0" role="region" aria-label="Feature comparison table"><table class="mx__table" id="matrix"></table></div>
-      <p class="mx__note">An empty circle means we could not find it in public material, not that it does not exist. We will confirm each one in a live demo before any investor meeting.</p>
+      <p class="mx__note">An empty circle means we could not find it in public material, not that it does not exist. We will confirm each one in a live demo before any investor meeting. WhatsApp messages cost money in every product, ours too: the half circle there marks a paid add-on.</p>
     </div>
 
     <div class="map" data-reveal>
       <div class="map__text">
         <span class="eyebrow">The open corner</span>
         <h3 class="h-m">Little typing, <em>at a small-store price.</em></h3>
-        <p class="p-m">Up: how much typing each product removes when stock arrives. Right: what a store pays in a year, from published prices.</p>
-        <p class="map__note">Our zone is a target. The price is set after pilots.</p>
+        <p class="p-m">Up: how much typing each product removes when stock arrives. Right: what a store pays in a year, from published prices and guides.</p>
+        <p class="map__note">Our zone is the plan: under ₹6,000 a year. Pilots will test it.</p>
       </div>
       <div class="map__plot" id="map" role="img" aria-label="Chart: typing removed against yearly price. Pharmacy OS aims for the corner with the least typing and a low price."></div>
     </div>
@@ -2574,6 +2642,16 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
   </div>
   <div class="container is--m">
     <div class="stage-detail" id="stage-detail" aria-live="polite"></div>
+
+    <div class="day" id="day" data-reveal>
+      <div class="day__head">
+        <span class="eyebrow">What runs by itself</span>
+        <h3 class="h-m">A day at the store. <em>The owner’s part is one tap.</em></h3>
+        <p class="p-m">The app prepares the work and a person approves it. Nothing is ordered, sent or paid without a tap.</p>
+      </div>
+      <div class="day__cols" aria-hidden="true"><span class="eyebrow">When</span><span class="eyebrow">What happens</span><span class="eyebrow">The app does this by itself</span><span class="eyebrow">You do this</span></div>
+      <ol class="day__list" id="day-list"></ol>
+    </div>
   </div>
 </section>
 
@@ -2582,7 +2660,7 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
   <div class="container is--m">
     <div class="section-head">
       <div class="tag-pair" data-reveal><span class="tag" data-theme="glass">04</span><span class="tag" data-theme="glass" data-shape="round">Try it</span></div>
-      <h2 class="h-l" data-reveal>Tick. <em>Don’t type.</em></h2>
+      <h2 class="h-l" data-reveal>Import, or tick. <em>Don’t type.</em></h2>
       <p class="p-l" data-reveal>A working sketch of two screens. Use it the way an owner would.</p>
     </div>
     <div class="demo-wrap" data-reveal>
@@ -2590,7 +2668,8 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
       <div class="demo" id="demo" data-lang="en" style="--z:1"></div>
     </div>
     <ul class="try__points" data-reveal-group>
-      <li><b>Your own order</b><span>The list on screen is what the store asked for. So only the differences need a look.</span></li>
+      <li><b>One click, if a file comes</b><span>The distributor’s Excel or CSV bill is read and matched to the order. Try “Import the bill file”.</span></li>
+      <li><b>Your own order, if not</b><span>The list on screen is what the store asked for. So only the differences need a look.</span></li>
       <li><b>The pack tells the rest</b><span>Since August 2023 the top 300 brands carry a QR code with batch and expiry inside.</span></li>
       <li><b>History, not a blank box</b><span>Type three letters. Medicines the shop has used come first. A new one is saved.</span></li>
     </ul>
@@ -2603,16 +2682,29 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
     <div class="split-head">
       <div>
         <div class="tag-pair" data-reveal><span class="tag">05</span><span class="tag" data-shape="round">The distributor</span></div>
-        <h2 class="h-l" data-reveal>A portal for distributors? <em>Not yet. Send first.</em></h2>
+        <h2 class="h-l" data-reveal>A desk for the distributor. <em>Free, nothing to install.</em></h2>
       </div>
-      <p class="p-l split-head__lead" data-reveal>A distributor already runs his own software and several ordering apps. He will not open one more. So the order goes where he already is: WhatsApp.</p>
+      <p class="p-l split-head__lead" data-reveal>A distributor already runs his own software and several ordering apps. So the order reaches him where he already is: WhatsApp. The desk is the same link, grown up.</p>
     </div>
     <div class="dist__grid">
       <ol class="ladder" id="ladder" data-reveal-group></ol>
       <div class="dist__phone" data-reveal>
         <div class="media is--phone"><span class="s is--m" data-screen="dlink"></span></div>
-        <p class="dist__cap"><span class="eyebrow">What the distributor sees</span>A link. No login. Three taps.</p>
+        <p class="dist__cap"><span class="eyebrow">What the distributor sees first</span>A link. No login. Three taps.</p>
       </div>
+    </div>
+
+    <div class="desk" data-reveal>
+      <div class="desk__head">
+        <div>
+          <span class="eyebrow">The free order desk</span>
+          <h3 class="h-m">What he sees <em>when he signs in.</em></h3>
+          <p class="p-m">A web page, in Telugu or English. No app to install, nothing to pay.</p>
+        </div>
+        <ul class="desk__pts" id="desk-pts"></ul>
+      </div>
+      <p class="eyebrow desk__swipe" aria-hidden="true">Swipe the screen sideways to see all of it</p>
+      <div class="desk__screen" tabindex="0" role="region" aria-label="The distributor’s order desk"><div class="media"><span class="s" data-screen="desk"></span></div></div>
     </div>
   </div>
 </section>
@@ -2623,7 +2715,7 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
     <div class="section-head">
       <div class="tag-pair" data-reveal><span class="tag">06</span><span class="tag" data-shape="round">One platform</span></div>
       <h2 class="h-l" data-reveal>Only for pharmacies. <em>End to end.</em></h2>
-      <p class="p-l" data-reveal>Six jobs, one app. Every report an owner asks for is already there.</p>
+      <p class="p-l" data-reveal>Seven jobs, one app. Thirty-five features, and every one has a screen.</p>
     </div>
     <div class="trio" data-reveal>
       <div class="trio__desk"><div class="media"><span class="s" data-screen="home"></span></div></div>
@@ -2638,7 +2730,7 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
 
     <div class="plat-head" data-reveal><h3 class="h-m">Every job has <em>its own screen</em></h3><p class="p-m">Pick a job, then a feature. Each one is drawn.</p></div>
     <div class="plat" data-reveal>
-      <div class="plat__tabs" id="job-tabs" role="tablist" aria-label="The six jobs"></div>
+      <div class="plat__tabs" id="job-tabs" role="tablist" aria-label="The seven jobs"></div>
       <div class="plat__panel">
         <div class="plat__feats" id="job-feats"></div>
         <p class="eyebrow plat__swipe" aria-hidden="true">Swipe the screen sideways to see all of it</p>
@@ -2881,13 +2973,14 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
         <div class="rng"><label for="r-wage">Staff cost an hour</label><output id="v-wage" for="r-wage"></output><input type="range" id="r-wage" min="40" max="250" step="5" value="70"></div>
         <div class="rng"><label for="r-exp">Stock that expires in a year</label><output id="v-exp" for="r-exp"></output><input type="range" id="r-exp" min="0" max="300000" step="5000" value="50000"></div>
         <div class="rng"><label for="r-cut">Share of that we help save</label><output id="v-cut" for="r-cut"></output><input type="range" id="r-cut" min="10" max="80" step="5" value="40"></div>
-        <p class="calc__note">26 working days a month. Ticking a line takes about two seconds. An estimate from your inputs, not a promise.</p>
+        <p class="calc__note">26 working days a month. Ticking a line takes about two seconds, and a one-click import takes less. An estimate from your inputs, not a promise.</p>
       </div>
       <div class="calc__out">
         <div class="win">
           <span class="win__tag"><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#i-check"/></svg>Won back every year</span>
           <b class="win__big tnum" id="o-year">₹0</b>
           <p class="win__sub">That is <span id="o-split"></span>.</p>
+          <p class="win__pay">Against a price under ₹6,000 a year, that is <b id="o-pay">5×</b> back.</p>
           <div class="win__bars" aria-hidden="true">
             <div class="wbar"><span class="wbar__l">Typing a bill, today</span><span class="wbar__t"><i id="b-today"></i></span><span class="wbar__v" id="b-today-v"></span></div>
             <div class="wbar is--us"><span class="wbar__l">Ticking it, with us</span><span class="wbar__t"><i id="b-us"></i></span><span class="wbar__v" id="b-us-v"></span></div>
@@ -2927,12 +3020,12 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
       <p class="p-l" data-reveal>Planning numbers from October 2026. Pilots will correct every one of them.</p>
     </div>
 
-    <div class="serve-cost" data-reveal data-meter="0">
+    <div class="serve-cost" data-reveal data-meter="1">
       <div class="serve-cost__head">
-        <div><span class="eyebrow">To keep one store running, a year</span><p class="serve-cost__big"><b class="tnum" id="o-serve">₹3,000</b><span>about ₹<span id="o-serve-m">250</span> a month</span></p></div>
+        <div><span class="eyebrow">To keep one store running, a year</span><p class="serve-cost__big"><b class="tnum" id="o-serve">₹1,800</b><span>about ₹<span id="o-serve-m">150</span> a month</span></p></div>
         <div class="seg on-dark" role="group" aria-label="How WhatsApp messages are paid for">
-          <button type="button" data-meter="0" aria-pressed="true">WhatsApp included</button>
-          <button type="button" data-meter="1" aria-pressed="false">Store pays per message</button>
+          <button type="button" data-meter="1" aria-pressed="true">Store pays per message</button>
+          <button type="button" data-meter="0" aria-pressed="false">We pay</button>
         </div>
       </div>
       <div class="sbar" id="serve-bar" aria-hidden="true"></div>
@@ -2941,9 +3034,9 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
 
     <div class="xp" data-reveal>
       <div class="xp__in">
-        <span class="eyebrow">The price is not set. Test one.</span>
+        <span class="eyebrow">The plan is under ₹6,000 a year. Test it.</span>
         <h3 class="h-s">Price, stores and the team</h3>
-        <div class="rng"><label for="r-price">Price a store pays a year</label><output id="v-price" for="r-price"></output><input type="range" id="r-price" min="3000" max="15000" step="500" value="6000"></div>
+        <div class="rng"><label for="r-price">Price a store pays a year</label><output id="v-price" for="r-price"></output><input type="range" id="r-price" min="3000" max="15000" step="500" value="5500"></div>
         <div class="rng"><label for="r-stores">Paying stores</label><output id="v-stores" for="r-stores"></output><input type="range" id="r-stores" min="100" max="10000" step="100" value="1000"></div>
         <div class="rng"><label for="r-fixed">Team and running cost a month</label><output id="v-fixed" for="r-fixed"></output><input type="range" id="r-fixed" min="300000" max="3000000" step="100000" value="1800000"></div>
         <p class="calc__note">This is a calculator, not a price list. It uses the cost to serve shown above.</p>
@@ -2977,8 +3070,8 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
     <div class="pr" data-reveal>
       <div class="pr__text">
         <span class="eyebrow">What stores pay today</span>
-        <h3 class="h-m">Our price comes <em>after the pilots.</em></h3>
-        <p class="p-m">One rule is fixed: clearly below what a store pays now, with the owner app, registers and reminders inside.</p>
+        <h3 class="h-m">Our plan: <em>under ₹6,000 a year.</em></h3>
+        <p class="p-m">Before GST, for every feature on this page. WhatsApp messages are charged as used, at Meta’s rate, with no setup fee. Pilots will test the number.</p>
       </div>
       <ul class="pr__list" id="prices"></ul>
     </div>
@@ -2991,9 +3084,20 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
     <div class="section-head">
       <div class="tag-pair" data-reveal><span class="tag">13</span><span class="tag" data-shape="round">Why they will switch</span></div>
       <h2 class="h-l" data-reveal>Many strong products. <em>Why ours?</em></h2>
-      <p class="p-l" data-reveal>Pharmacies already use software, so they can judge it. Five things an owner feels on the first day.</p>
+      <p class="p-l" data-reveal>Most of our features exist somewhere. Here is what an owner gets from us that he does not get today.</p>
     </div>
     <ol class="whys" id="whys" data-reveal-group></ol>
+
+    <div class="diff" data-reveal>
+      <div class="diff__head">
+        <span class="eyebrow">The same feature, a different product</span>
+        <h3 class="h-m">They have it too. <em>Here is the difference.</em></h3>
+        <p class="p-m">Feature lists look alike. What an owner lives with every day does not. From public material, October 2026.</p>
+      </div>
+      <div class="diff__scroll">
+        <table class="diff__table"><thead><tr><th scope="col"><span class="sr-only">Job</span></th><th scope="col">In today’s software</th><th scope="col">In Pharmacy OS</th></tr></thead><tbody id="diff"></tbody></table>
+      </div>
+    </div>
     <div class="moats" data-reveal>
       <div class="moats__head"><span class="eyebrow">Hard to copy, hard to leave</span><h3 class="h-m">Four things that <em>grow with every store</em></h3></div>
       <ul class="moats__list" id="moats"></ul>
@@ -3183,37 +3287,48 @@ const C = {
   /* The one flow: a strip of tablets, from order to refill */
   steps: [
     { id: 'order', n: '01', act: 'buy', name: 'Order', icon: 'list', vis: 'order', zoom: [2.05, 0.36, 0.2],
-      line: 'Low stock turns into an order. Pick, don’t type.',
-      who: 'Owner or purchase staff', what: ['“To order” list fills itself', 'Type three letters, pick from your history', 'A new medicine is saved for next time'],
+      line: 'The order is drafted overnight. Check it, then send.',
+      who: 'Owner or purchase staff', what: ['Drafted from sales, stock and the season', 'Best rate, scheme and credit picked for each line', 'A new medicine is typed once, then remembered'],
       today: 'Want list in a notebook', gives: 'A medicine is typed once, ever' },
     { id: 'send', n: '02', act: 'buy', name: 'Send', icon: 'send', vis: 'send', zoom: [1.3, 0.03, 0.62],
       line: 'The distributor gets it on WhatsApp. No login.',
-      who: 'Distributor', what: ['Order as a message, a PDF and a link', 'They mark what they can supply', 'Their bill file or photo comes back on the same link'],
+      who: 'Distributor', what: ['Order as a message, a PDF and a link', 'Sent, seen, packed, on the way: every step shows', 'Short items go to the next distributor in one tap'],
       today: 'Calls, chats and three ordering apps', gives: 'Works with every distributor from day one' },
-    { id: 'check', n: '03', act: 'stock', name: 'Check', icon: 'ticks', vis: 'check', zoom: [1.7, 0.5, 0.55],
-      line: 'Goods arrive. Tick what came. Don’t type.',
-      who: 'Whoever opens the carton', what: ['Your own order is already on screen', 'Short supply and swaps stand out', 'Scan the pack for batch and expiry'],
-      today: 'Every line typed again from the paper bill', gives: 'A 40-line bill checked in two minutes' },
+    { id: 'check', n: '03', act: 'stock', name: 'Receive', icon: 'ticks', vis: 'check', zoom: [1.7, 0.5, 0.55],
+      line: 'Their bill file comes in with one click. No file? Tick what came.',
+      who: 'Whoever opens the carton', what: ['The Excel or CSV bill is matched to your order', 'Only the differences show, with the rupees', 'Scan the pack for batch and expiry'],
+      today: 'Every line typed again from the paper bill', gives: 'Stock received with nothing typed' },
     { id: 'shelf', n: '04', act: 'stock', name: 'Stock', icon: 'box', vis: 'stock', zoom: [1.9, 0.42, 0.3],
       line: 'One tap. On the shelf, with batch and expiry.',
-      who: 'Automatic', what: ['Stock goes up by batch', 'Expiry alerts set at 90, 60 and 30 days', 'Payment due date noted'],
+      who: 'Automatic', what: ['Stock goes up by batch', 'Expiry and return-date alerts are set', 'The payment date goes on the cash calendar'],
       today: 'Expiry found when the customer finds it', gives: 'Nothing expires quietly' },
-    { id: 'sell', n: '05', act: 'sell', name: 'Sell', icon: 'receipt', vis: 'sell', zoom: [2, 1, 0.22],
-      line: 'Three items billed in under thirty seconds.',
-      who: 'Counter staff', what: ['Search by brand, salt or a wrong spelling', 'Oldest batch picked first', 'Expired stock cannot be billed'],
+    { id: 'sell', n: '05', act: 'sell', name: 'Sell', icon: 'receipt', vis: 'sell', zoom: [1.75, 0.47, 0.12],
+      line: 'Scan the pack, or type three letters.',
+      who: 'Counter staff', what: ['Where the pack has a QR code, it picks the exact batch', 'Oldest batch first. Expired stock cannot be billed.', '“Not in stock” is one tap, and joins the next order'],
       today: 'Exact names, function keys, tiny text', gives: 'A new helper bills on day one' },
     { id: 'bill', n: '06', act: 'sell', name: 'Bill', icon: 'chat', vis: 'wabill', zoom: [1.3, 0.03, 0.62],
-      line: 'The bill lands on WhatsApp. The customer is saved.',
-      who: 'Automatic', what: ['GST bill as a link, or printed', 'Customer and doctor remembered', 'Schedule H1 register fills itself'],
+      line: 'The bill reaches the buyer on WhatsApp. The customer is saved.',
+      who: 'Automatic', what: ['Sent to the buyer as the sale closes, or printed', 'Customer and doctor remembered', 'Schedule H1 register fills itself'],
       today: 'Paper bill. Register written by hand.', gives: 'Inspection-ready every day' },
     { id: 'remind', n: '07', act: 'grow', name: 'Remind', icon: 'bell', vis: 'remind', zoom: [1.3, 0.03, 0.62],
       line: 'Three days before the strip runs out, a reminder.',
-      who: 'Automatic', what: ['30 tablets, one a day: remind on day 27', 'Reply YES and the order is packed', 'Offers to chosen groups, with consent'],
+      who: 'Automatic', what: ['30 tablets, one a day: remind on day 27', 'Reply YES and the order is packed', 'Next week’s refills are stocked ahead'],
       today: 'The regular buys from an app next month', gives: 'Regulars stay regular' },
     { id: 'see', n: '08', act: 'grow', name: 'See', icon: 'phone', vis: 'owner', zoom: [1.3, 0.03, 0.3],
       line: 'The whole shop, on the owner’s phone.',
-      who: 'Owner', what: ['Sales, cash and profit today', 'Low stock and expiring stock', 'Approve orders from anywhere'],
+      who: 'Owner', what: ['Sales, cash and profit today', 'Ask a question, get a number', 'A store score every Monday'],
       today: 'Phone calls to ask “how much today?”', gives: 'Peace of mind, away from the counter' }
+  ],
+
+  /* 03 A day at the store: [when, what, what the app does by itself, what a person does] */
+  day: [
+    ['6:00 am', 'The order is drafted', 'From yesterday’s sales, the stock and the season. The best distributor is picked for each line.', 'Tap Send'],
+    ['11:00 am', 'The distributor replies', 'Short items are offered to the next distributor, at his rate.', 'Tap Yes'],
+    ['2:00 pm', 'Stock arrives', 'The bill file is read and laid beside the order. Differences show in rupees.', 'Check the differences'],
+    ['All day', 'Every sale', 'Oldest batch picked. Expired stock stopped. Bill sent on WhatsApp. Register filled. Refill reminder set.', 'Scan, take the money'],
+    ['9:00 pm', 'The day is closed', 'Cash, UPI and credit are added up from the bills, by person.', 'Count the drawer once'],
+    ['Monday', 'The week is scored', 'Missed sales, expiry loss, returning regulars and dues, with one thing to do for each.', 'Read one page'],
+    ['Days ahead', 'Warnings', 'Return dates, licence renewals, bills to pay and refills due.', 'Nothing, until one needs you']
   ],
 
   /* 01 The gap: today's chain against ours. t = typed again */
@@ -3221,14 +3336,14 @@ const C = {
     today: [
       { t: 'Order', s: 'Notebook, calls, WhatsApp or an ordering app', typed: 1 },
       { t: 'Goods arrive', s: 'A paper bill with 20 to 40 lines' },
-      { t: 'Purchase entry', s: 'Every line typed into the billing software', typed: 1 },
+      { t: 'Purchase entry', s: 'Typed line by line, unless the distributor sends a file the software can read', typed: 1 },
       { t: 'Sale', s: 'Billed at the counter' },
       { t: 'Registers and accounts', s: 'H1 book by hand. Tally typed again.', typed: 1 }
     ],
     os: [
-      { t: 'Order', s: 'Picked from the store’s own history', typed: 1 },
-      { t: 'Goods arrive', s: 'The order is already on screen' },
-      { t: 'Tick', s: 'What came is ticked. Batch and expiry scanned.' },
+      { t: 'Order', s: 'Drafted from the store’s own sales. A new medicine is typed once.', typed: 1 },
+      { t: 'Goods arrive', s: 'With the distributor’s bill file. The order is already on screen.' },
+      { t: 'Receive', s: 'The file is imported in one click. No file? What came is ticked.' },
       { t: 'Sale', s: 'Billed at the counter' },
       { t: 'Registers and accounts', s: 'Fill themselves from the bill' }
     ]
@@ -3250,10 +3365,10 @@ const C = {
   ],
   rivals: [
     { n: 'Marg ERP 9+', from: 'Delhi', kind: 'Billing', big: '1 million+', bigL: 'users, by its own count',
-      best: 'Reach. Dealers in every town, a thousand reports, a low one-time licence.',
+      best: 'Reach. Dealers in every town and a thousand reports. One-click purchase import, and orders that go straight into the distributor’s software.',
       weak: 'Screens from the desktop era. Support through dealers. 3.2 of 5 on Capterra, 39% of reviews negative.',
-      win: 'Readable screens, tick-first buying, a fixed yearly price and a free move.',
-      price: '₹8,100 to ₹25,200 once, plus ₹2,500 to ₹5,000 a year', src: ['marg', 'margprice', 'cost', 'capterra'] },
+      win: 'The same one-click import, on screens an owner can read. One published price and a free move.',
+      price: '₹8,100 to ₹25,200 once, plus ₹2,500 to ₹5,000 a year', src: ['marg', 'margpharm', 'margprice', 'cost', 'capterra'] },
     { n: 'Profitmaker', from: 'Hyderabad · Daxinsoft, since 1999', kind: 'Billing', big: '20,000+', bigL: 'customers, by its own count',
       best: 'Local and long-trusted. Light on old PCs. Customised per shop. Has an order app.',
       weak: 'Windows first. At the counter we found its screens hard to use for older owners. Serves many trades, not only pharmacies.',
@@ -3261,14 +3376,14 @@ const C = {
       price: 'Not published', src: ['daxin', 'daxinplay', 'visits'] },
     { n: 'GoFrugal', from: 'Chennai · a Zoho company', kind: 'Billing', big: '3-way', bigL: 'order, goods and bill matching',
       best: 'Chain control. Its GoSure app already checks goods against the order.',
-      weak: 'Priced for chains. Matching, alerts and ordering are separate apps to buy and learn.',
+      weak: 'Built and priced for chains. Matching, alerts and ordering are separate apps to buy and learn.',
       win: 'The same check, built in, for the single store.',
-      price: '₹18,000 to ₹50,000 a store, every year', src: ['gosure', 'cost'] },
+      price: 'Not published now. A June 2026 guide put it at ₹18,000 to ₹50,000 a store, a year.', src: ['gosure', 'gofrugalimport', 'cost', 'prices26'] },
     { n: 'eVitalRx', from: 'Ahmedabad', kind: 'Billing', big: '10,000+', bigL: 'active pharmacies, by its own count',
-      best: 'Cloud and phone first. WhatsApp bills, refill reminders, CSV bill upload.',
-      weak: 'The upload needs a file from the distributor. Offline working is not documented. Many stores only on the ₹50,000 plan.',
-      win: 'We start from the store’s own order, so it works with any distributor, online or off.',
-      price: '₹7,500 to ₹50,000 a year', src: ['evital', 'evitalprice', 'evitalapp'] },
+      best: 'Cloud and phone first. Orders from a digital shortbook. CSV bill upload for 3,000+ distributors, by its own count.',
+      weak: 'WhatsApp bills need a ₹25,000 one-time add-on, with messages charged on top. Moving data in costs ₹3,000 to ₹5,000. Offline working is not documented.',
+      win: 'When no file comes, we tick against the store’s own order. We work offline. WhatsApp has no setup fee.',
+      price: '₹7,500 to ₹50,000 a year, plus add-ons', src: ['evital', 'evitalprice', 'evitalapp'] },
     { n: 'C-Square · Ecogreen', from: 'Owned 82% by Reliance since 2019', kind: 'Billing', big: 'Chains', bigL: 'and distributors first',
       best: 'Strong with distributors. LiveOrder takes orders from chemists, even offline.',
       weak: 'Built for distributors and chains. Its owner also runs Netmeds, a rival to the corner store.',
@@ -3280,31 +3395,34 @@ const C = {
       win: 'Touch and keyboard both. The owner sees everything on a phone.',
       price: 'Not published', src: ['medivision'] },
     { n: 'Vyapar · myBillBook', from: 'Bengaluru', kind: 'General billing', big: '₹399', bigL: 'a year, to start',
-      best: 'Very cheap. Simple. On the phone.',
+      best: 'Very cheap. Simple. On the phone. Lists Telugu among its support languages.',
       weak: 'Made for every kind of shop. No H1 register, no expiry returns, no distributor flow.',
       win: 'Everything a pharmacy needs, at a small-shop price.',
-      price: '₹399 to ₹4,299 a year', src: ['cost', 'blueprint'] },
+      price: '₹399 to ₹4,299 a year', src: ['cost', 'vyapar', 'blueprint'] },
     { n: 'Pharmarack', from: 'Pune · owned by drug makers', kind: 'Ordering', big: '2.3 lakh+', bigL: 'chemists, by its own count',
       best: 'The biggest ordering network: 15,900+ distributors in 110+ cities.',
       weak: 'It orders. It does not bill. Stock that arrives is still entered in the billing software. Revenue ₹41.8 crore, loss ₹58.9 crore in FY25.',
       win: 'Order, receive and bill in one place. Their network can become a partner.',
-      price: 'No fee listed for chemists', src: ['pharmarack', 'pharmarackfin'] }
+      price: 'Free to download. Reviews on Google Play report order and subscription charges.', src: ['pharmarack', 'pharmarackplay', 'pharmarackfin'] }
   ],
   /* Feature matrix: 2 = documented, 1 = partial, add-on or higher plan, 0 = not found in public material */
   matrixCols: ['Us (plan)', 'Marg', 'Profitmaker', 'GoFrugal', 'eVitalRx', 'Vyapar'],
   matrix: [
     ['Order to the distributor from the app', [2, 2, 2, 2, 2, 1]],
+    ['Compare distributors’ rates and schemes before ordering', [2, 2, 0, 0, 1, 0]],
+    ['Distributor’s bill file imported in one click', [2, 2, 0, 2, 2, 0]],
     ['Receive against your own order: tick, don’t type', [2, 1, 0, 1, 1, 0]],
-    ['Batch and expiry from the pack’s QR code', [2, 0, 0, 0, 0, 0]],
-    ['Pick medicines from a list as you type', [2, 2, 2, 2, 2, 2]],
+    ['Batch and expiry from the pack’s QR code', [2, 1, 0, 0, 0, 0]],
     ['Works with no internet', [2, 2, 2, 2, 0, 2]],
     ['Owner’s phone app', [2, 1, 1, 1, 2, 2]],
-    ['WhatsApp bills and refill reminders', [2, 1, 0, 1, 2, 1]],
+    ['WhatsApp bills and refill reminders', [2, 2, 1, 1, 1, 1]],
+    ['Ask the app a question', [2, 0, 0, 1, 1, 0]],
     ['Expiry and low-stock reports', [2, 2, 2, 2, 2, 1]],
-    ['GST reports and Tally export', [2, 2, 2, 2, 2, 2]],
-    ['Telugu screens', [2, 0, 0, 0, 0, 0]],
-    ['Text-size control and 48px buttons', [2, 0, 0, 0, 0, 0]],
-    ['Many stores, one owner view', [2, 1, 1, 2, 1, 0]]
+    ['GST reports and Tally export', [2, 2, 2, 2, 1, 2]],
+    ['Telugu screens', [2, 0, 0, 0, 0, 1]],
+    ['Text-size control and 44px buttons', [2, 0, 0, 0, 0, 0]],
+    ['Many stores, one owner view', [2, 1, 1, 2, 1, 0]],
+    ['Price published on its own website', [2, 1, 0, 0, 2, 2]]
   ],
   /* Map: x = published price per store per year (₹ thousand, mid of range), y = typing removed on purchases (0 to 3) */
   map: [
@@ -3312,40 +3430,48 @@ const C = {
     { n: 'Marg', x: 8, y: 1, lo: 5, hi: 13, note: 'yearly cost over 3 years' },
     { n: 'eVitalRx', x: 15, y: 1, lo: 7.5, hi: 50 },
     { n: 'GoFrugal', x: 30, y: 2, lo: 18, hi: 50 },
-    { n: 'Pharmacy OS', x: 5, y: 3, lo: 3, hi: 8, us: 1 }
+    { n: 'Pharmacy OS', x: 5, y: 3, lo: 4, hi: 6, us: 1 }
   ],
-  mapY: ['Type every line', 'Import a file, if one is sent', 'Check against the order', 'Tick, scan, done'],
+  mapY: ['Type every line', 'Import a file, if one is sent', 'Check against the order', 'Import, tick or scan, against your own order'],
 
   /* 05 Distributor: portal or just send */
   ladder: [
     { n: '1', t: 'Send', when: 'From day one', tag: 'Start here',
       line: 'The order goes as a WhatsApp message, a PDF and a link.',
-      pts: ['No login, no app, nothing to learn', 'They mark “available” or “short” on the link', 'They can attach their bill file or a photo'],
+      pts: ['No login, no app, nothing to learn', 'They mark “available” or “short” on the link', 'They attach the bill file their software already makes'],
       store: 'Works with every distributor', dist: 'Zero effort', us: 'Costs paise per order' },
-    { n: '2', t: 'Free order desk', when: 'When many of their chemists use us', tag: 'Then',
-      line: 'One inbox for every order from Pharmacy OS stores.',
-      pts: ['All orders and dues in one list', 'Send a scheme to every store at once', 'Free for the distributor, always'],
-      store: 'Faster replies, live stock', dist: 'Fewer calls, faster payment', us: 'Each distributor brings stores' },
+    { n: '2', t: 'Free order desk', when: 'In the launch release', tag: 'Then',
+      line: 'One page for every order from Pharmacy OS stores. He opens it when it saves him work.',
+      pts: ['All orders in one list, with their status', 'One bill file a day: each store imports its own', 'Rates and schemes posted to every store', 'Dues and payments in one place'],
+      store: 'One-click receiving, today’s rates', dist: 'Fewer calls, faster payment', us: 'Each distributor brings stores' },
     { n: '3', t: 'Connect their software', when: 'Later', tag: 'Later',
       line: 'Their billing software sends the bill back by itself.',
-      pts: ['Works with what they already run', 'Bill lines arrive with batch and expiry', 'Receiving becomes one tap'],
-      store: 'Nothing to scan', dist: 'Nothing to re-enter', us: 'A network that is hard to copy' }
+      pts: ['Works with what they already run', 'Bill lines arrive with batch and expiry', 'Nothing to upload'],
+      store: 'Nothing to wait for', dist: 'Nothing to export', us: 'A network that is hard to copy' }
+  ],
+  deskPts: [
+    ['One file, every store', 'He exports the day’s bills once. Each store receives its own in one click.'],
+    ['Rates and schemes, posted once', 'Every store sees today’s rate before it orders.'],
+    ['Fewer calls', 'Orders arrive clear and complete. “Short” is one tap, before the van leaves.'],
+    ['Paid sooner', 'Stores see what is due. A reminder goes three days before.']
   ],
 
   /* 06 One platform: six jobs, each a list of features with a screen */
   jobs: [
-    { id: 'buy', name: 'Buy', icon: 'truck', line: 'Order, receive, pay, return.',
-      f: [['To-order list', 'order', 'Low stock and usual quantities, ready to send'], ['Receive against the order', 'check', 'Tick what came. Short supply flagged.'], ['Pay the distributor', 'dues', 'Due dates, reminders three days before'], ['Expiry returns', 'returns', 'Tracked until the credit note arrives']] },
+    { id: 'buy', name: 'Buy', icon: 'truck', line: 'Order to pay.',
+      f: [['Morning order', 'order', 'Drafted overnight from sales and stock. One tap sends it.'], ['Compare distributors', 'compare', 'Rate, scheme and credit, side by side. The best is picked.'], ['Order status', 'send', 'Sent, seen, packed, on the way. Short items go to the next distributor.'], ['Receive in one click', 'check', 'Their bill file is matched to your order. Or tick what came.'], ['Rate and scheme watch', 'watch', 'Overcharges and missing schemes, in rupees, claimed in one tap.'], ['Pay the distributor', 'dues', 'Due dates, with a reminder three days before'], ['Expiry returns', 'returns', 'A warning before each return date closes. Followed to the credit note.']] },
     { id: 'stock', name: 'Stock', icon: 'box', line: 'Know every strip.',
-      f: [['Expiring in 60 days', 'expiry', 'With the rupee value at risk, by distributor'], ['Running low', 'lowstock', 'Below reorder level, with one tap to order'], ['Batch and shelf', 'stock', 'Oldest batch sells first'], ['Dead stock', 'deadstock', 'No sale in 90 days: return or move']] },
+      f: [['Expiring in 60 days', 'expiry', 'With the rupee value at risk, by distributor'], ['Running low', 'lowstock', 'Days of stock left, with one tap to order'], ['Batch and shelf', 'stock', 'Oldest batch sells first'], ['Dead stock', 'deadstock', 'No sale in 90 days: return or move']] },
     { id: 'sell', name: 'Sell', icon: 'receipt', line: 'Fast, legal bills.',
-      f: [['Counter bill', 'sell', 'Scan or search. UPI, cash, card, credit.'], ['Prices and discounts', 'prices', 'Never above MRP. Rules by customer and item.'], ['Returns', 'salereturn', 'One tap from the old bill'], ['Substitutes', 'substitute', 'Same salt, in stock, shown when one runs out']] },
-    { id: 'serve', name: 'Serve', icon: 'chat', line: 'Customers on record.',
-      f: [['Bill on WhatsApp', 'wabill', 'A link, not a photo of a printout'], ['Refill reminders', 'remind', 'Worked out from the strip and the dose'], ['Campaigns', 'campaign', 'Offers to a chosen group, with consent'], ['Customer page', 'customer', 'Purchases, dues and the family’s regular medicines']] },
-    { id: 'money', name: 'Accounts & GST', icon: 'rupee', line: 'Ready for the CA.',
-      f: [['Day book', 'accounts', 'Sales, cash, UPI, expenses and profit'], ['GST files', 'gst', 'GSTR-1 and 3B summaries. Tally export.'], ['Money to collect', 'collect', 'Credit customers, with reminders'], ['The CA’s login', 'ca', 'Read-only. Everything downloads.']] },
-    { id: 'law', name: 'Law', icon: 'shield', line: 'Inspection-ready.',
-      f: [['Schedule H1 register', 'h1', 'Doctor, patient, drug and quantity, filled from the bill'], ['Expired stock blocked', 'blocked', 'It cannot be billed. It moves to “to return”.'], ['Inspection pack', 'inspect', 'Bills, registers and licences in one download'], ['Licence reminders', 'licence', '60 and 30 days before renewal']] }
+      f: [['Counter bill', 'sell', 'Scan the pack or type three letters. UPI, cash, card, credit.'], ['“Not in stock” button', 'missed', 'One tap counts the missed sale and adds it to the next order.'], ['Substitutes', 'substitute', 'Same salt, in stock, shown when one runs out'], ['Prices and discounts', 'prices', 'Never above MRP. Rules by customer and item.'], ['Returns', 'salereturn', 'One tap from the old bill']] },
+    { id: 'serve', name: 'Serve', icon: 'chat', line: 'Keep customers.',
+      f: [['Bill on WhatsApp', 'wabill', 'To the buyer, as the sale closes. A link, not a photo.'], ['Refill reminders', 'remind', 'Worked out from the strip and the dose'], ['Campaigns', 'campaign', 'Offers to a chosen group, with consent'], ['Customer page', 'customer', 'Purchases, dues and the family’s regular medicines']] },
+    { id: 'money', name: 'Accounts', icon: 'rupee', line: 'CA-ready.',
+      f: [['Day book', 'accounts', 'Sales, cash, UPI, expenses and profit'], ['Day close', 'dayclose', 'Cash counted against the bills, by person. Every edit shown.'], ['Money to collect', 'collect', 'Credit customers, with reminders'], ['GST files', 'gst', 'GSTR-1 and 3B summaries. Tally export.'], ['The CA’s login', 'ca', 'Read-only. Everything downloads.']] },
+    { id: 'law', name: 'Law', icon: 'shield', line: 'Always legal.',
+      f: [['Schedule H1 register', 'h1', 'Doctor, patient, drug and quantity, filled from the bill'], ['Expired stock blocked', 'blocked', 'It cannot be billed. It moves to “to return”.'], ['Inspection pack', 'inspect', 'Bills, registers and licences in one download'], ['Licence reminders', 'licence', '60 and 30 days before renewal']] },
+    { id: 'ahead', name: 'Look ahead', icon: 'trend', line: 'Know it first.',
+      f: [['Ask the app', 'ask', 'Tap a question. Get a number and a list.'], ['Weekly store score', 'score', 'Four numbers, and one thing to do for each'], ['Next week’s demand', 'forecast', 'From the shop’s own bills, with the season learnt'], ['Refills due next week', 'refills', 'Who will come, and for what. Stock is ready first.'], ['Cash calendar', 'cash', 'What goes out and what comes in, day by day'], ['Expiry risk', 'risk', 'Batches that will not sell before their date']] }
   ],
   /* 06 Moving in from the old software */
   movein: [
@@ -3354,7 +3480,8 @@ const C = {
     ['Run both for a week', 'The old software stays on, and the old keys still work. One tap undoes the move.']
   ],
   autos: [
-    ['Low stock', 'Every morning, as one WhatsApp summary'], ['Near expiry', '90, 60 and 30 days before, with value'], ['Expired', 'Blocked from billing at once'],
+    ['Morning order', 'Drafted at 6 am, ready to send'], ['Low stock', 'Every morning, as one WhatsApp summary'], ['Overcharge or missing scheme', 'Found as the bill is read'],
+    ['Near expiry', '90, 60 and 30 days before, with value'], ['Return date', 'Before a distributor stops taking stock back'], ['Expired', 'Blocked from billing at once'],
     ['Pay distributor', 'Three days before the due date'], ['Refill due', 'Three days before the strip ends'], ['Licence renewal', '60 and 30 days before']
   ],
 
@@ -3372,6 +3499,8 @@ const C = {
   appPoints: [
     ['Today, in one look', 'Sales, cash, UPI and profit, for one store or all'],
     ['“Needs you” list', 'Orders to approve, dues to pay, stock about to expire'],
+    ['Ask it a question', '“What is low today?” A number and a list come back.'],
+    ['A score every Monday', 'Four numbers, and one thing to do for each'],
     ['Every bill, live', 'See a bill the moment it is made'],
     ['Works on a basic phone', 'Android first. Telugu, English, Hindi.']
   ],
@@ -3408,7 +3537,7 @@ const C = {
   evidence: [
     { big: '50.9%', t: 'of adults developed reading-glass eyes within 15 years', s: 'Andhra Pradesh Eye Disease Study, 5,395 people in AP and Telangana. The thirties and forties are when it starts.', src: 'apeds' },
     { big: '0.8%', t: 'a year: how much harder websites get between 25 and 60', s: 'Nielsen Norman Group, from three rounds of testing with 123 people over 65.', src: 'nng' },
-    { big: '24px', t: 'is the smallest tap target the web standard allows', s: 'WCAG 2.2 asks for 24px, and 44px for its top level. We use 48.', src: 'wcag' },
+    { big: '24px', t: 'is the smallest tap target the web standard allows', s: 'WCAG 2.2 asks for 24px, and 44px for its top level. We use 44 or more.', src: 'wcag' },
     { big: '“manual punching”', t: 'is what the chemists’ own association asked suppliers to end', s: 'AIOCD letter to drug makers, 20 January 2021: send a file, match the batch to the stock.', src: 'aiocd' }
   ],
   research: {
@@ -3445,17 +3574,17 @@ const C = {
       quote: 'Orders come by call, by chat and from three apps.',
       wants: ['A clear order he can read once', 'No new login', 'To say “short” before the van leaves'],
       pains: ['Voice notes and handwriting photos', 'Returns for the wrong item', 'Chasing payments'],
-      win: 'A clean order on WhatsApp with a link. He taps what is short. Nothing to install.' }
+      win: 'A clean order on WhatsApp with a link. He taps what is short. A free desk when he wants one. Nothing to install.' }
   ],
   flows: [
     { id: 'buy', name: 'Buying stock', today: ['Check shelves by eye', 'Write the want list', 'Call or message the distributor', 'Goods and a paper bill arrive', 'Count against the paper', 'Type every line into the software', 'Fix batch and expiry mistakes', 'File the bill', 'Remember the due date'],
-      os: ['Open “To order”. It is filled.', 'Send', 'Tick what arrived', 'Done. Stock, expiry and dues are set.'] },
+      os: ['Open “To order”. It is drafted, with the best distributor picked.', 'Send', 'Import the bill file in one click, or tick what arrived', 'Done. Stock, expiry and dues are set.'] },
     { id: 'sell', name: 'Selling at the counter', today: ['Ask what they need', 'Search by the exact name', 'Pick a batch', 'Type the quantity', 'Write the H1 register', 'Print the bill', 'The customer is forgotten'],
-      os: ['Type three letters', 'Tap the quantity', 'Take UPI or cash', 'Done. Bill on WhatsApp, register filled, reminder set.'] }
+      os: ['Scan the pack, or type three letters', 'Tap the quantity', 'Take UPI or cash', 'Done. Bill on WhatsApp, register filled, reminder set.'] }
   ],
   ux: [
-    { n: '01', t: 'Text they can read', s: 'Body text starts at 18px. One control sets the size for the whole app.', demo: 'type' },
-    { n: '02', t: 'Buttons they can hit', s: 'Every target is 48px or more, with space around it.', demo: 'target' },
+    { n: '01', t: 'Text they can read', s: 'Body text starts at 17px. One control sets the size for the whole app.', demo: 'type' },
+    { n: '02', t: 'Buttons they can hit', s: 'Every target is 44px or more, with space around it.', demo: 'target' },
     { n: '03', t: 'One job per screen', s: 'Six words in the menu: Order, Receive, Stock, Bill, Customers, Reports.', demo: 'menu' },
     { n: '04', t: 'Their words, their language', s: '“Stock received”, not “GRN”. Telugu, English and Hindi.', demo: 'words' },
     { n: '05', t: 'Search that remembers', s: 'Three letters, any spelling. What the shop has used before comes first.', demo: 'search' },
@@ -3481,7 +3610,6 @@ const C = {
   unit: [
     ['One bill or reminder on WhatsApp', '₹0.115', 'Meta, from 1 Jan 2026, before GST'],
     ['One offer message on WhatsApp', '₹0.86', 'Meta, from 1 Jan 2026, before GST'],
-    ['Reading one bill photo by machine', 'about ₹1', 'Google Document AI list price, $0.10 for 10 pages'],
     ['Google Play listing', '$25 once', 'Developer account'],
     ['Apple App Store', '$99 a year', 'Developer account']
   ],
@@ -3489,16 +3617,27 @@ const C = {
     { n: 'Vyapar, myBillBook', lo: 399, hi: 4299, s: 'a year' },
     { n: 'eVitalRx', lo: 7500, hi: 50000, s: 'a year' },
     { n: 'Marg ERP', lo: 8100, hi: 25200, s: 'once, plus ₹2,500 to ₹5,000 a year' },
-    { n: 'GoFrugal', lo: 18000, hi: 50000, s: 'a store, a year' }
+    { n: 'GoFrugal', lo: 18000, hi: 50000, s: 'a store, a year, by a June 2026 guide. Not published now.' }
   ],
 
   /* 13 Why we win */
   whys: [
-    { n: '1', t: 'Less work on day one', s: 'They tick what arrived. They don’t type it.', go: '#try', cta: 'Try it' },
+    { n: '1', t: 'Nothing typed twice', s: 'One click when the distributor sends a file. Ticks when he does not.', go: '#try', cta: 'Try it' },
     { n: '2', t: 'The owner can read it', s: 'Large text, big buttons, plain words, Telugu.', go: '#ux', cta: 'See the rules' },
-    { n: '3', t: 'We move them, free', s: 'Items, stock, customers and dues, moved by our team in one or two days.', go: '#care', cta: 'How' },
-    { n: '4', t: 'One price, nothing hidden', s: 'Owner app, registers and reminders are part of the product, not add-ons.', go: '#costs', cta: 'The costs' },
-    { n: '5', t: 'Help in Telugu, in minutes', s: 'On WhatsApp and on the phone. A short video on every screen.', go: '#start', cta: 'Talk to us' }
+    { n: '3', t: 'It finds his money', s: 'Overcharges, missing schemes, return dates and expiry risk, shown in rupees.', go: '#platform', cta: 'See the screens' },
+    { n: '4', t: 'It tells him first', s: 'The morning order, next week’s refills and the heavy payment day, before they arrive.', go: '#day', cta: 'See a day' },
+    { n: '5', t: 'One price, on the page', s: 'Under ₹6,000 a year for every feature here. WhatsApp messages are extra, at cost.', go: '#costs', cta: 'The costs' },
+    { n: '6', t: 'We move him in, free', s: 'Stock, customers and dues moved by our team. Help in Telugu, on the phone.', go: '#care', cta: 'How' }
+  ],
+  /* 13 The same feature, a different product: [what, in today's software, in Pharmacy OS] */
+  diff: [
+    ['Ordering', 'Inside the billing software for distributors on the same network. For the rest: another app, WhatsApp or a call.', 'One screen for every distributor, with the best rate and scheme picked. A WhatsApp link for those with no software.'],
+    ['Receiving stock', 'One-click import when a file comes. Line-by-line typing when it does not.', 'One-click import when a file comes. Ticks against your own order when it does not.'],
+    ['Checking the bill', 'A separate app or a paid add-on, where it exists.', 'Order, bill and goods side by side as stock is received. Differences shown in rupees.'],
+    ['WhatsApp bills', 'Often a paid add-on. One product lists ₹25,000 to switch it on, with messages on top.', 'On from the first day. No setup fee. The store pays only for messages sent.'],
+    ['Reading the screen', 'We found no pharmacy product that documents Telugu screens or a text-size control.', 'Telugu or English, three text sizes and 44px buttons, on every screen.'],
+    ['The price', 'Often quoted by a dealer, with renewals and add-ons on top.', 'One price on the website: under ₹6,000 a year.'],
+    ['Moving in', 'Charged for, where a price is listed: ₹3,000 to ₹5,000 at one product.', 'Done by our team, free. One tap takes it back in the first 30 days.']
   ],
   moats: [
     ['Every distributor’s format', 'Each bill format we learn makes the next store faster to set up.'],
@@ -3508,14 +3647,17 @@ const C = {
   ],
   asks: [
     ['Strong products exist. Why would a store switch?', 'Because their daily work does not shrink with those products. Ours removes the typing, the owner can read it, and we move the data for free. Owners switched to UPI in two years: they change when it is easier on the first day.'],
-    ['GoFrugal already checks goods against the order.', 'Yes, in its GoSure app, inside a product that costs ₹18,000 to ₹50,000 a store each year. We make the same check the normal way to receive stock in a small store.'],
-    ['eVitalRx already uploads the distributor’s bill.', 'From a CSV file the distributor must send. We start from the store’s own order, so it works with any distributor, and we read batch and expiry from the pack.'],
+    ['Marg already imports the distributor’s bill in one click.', 'Yes, and one-click import is in our first release too. What we add is the store’s own order beside the bill, so only the differences need a look, on screens an owner over fifty can read, in Telugu.'],
+    ['A Marg store renews for ₹2,500 to ₹5,000 a year. Why pay more?', 'We do not beat a renewal on price. We win on hours and on money found: no purchase typing, no register by hand, overcharges and return dates caught. The calculator in section 11 shows the store’s own number.'],
+    ['GoFrugal already checks goods against the order.', 'Yes, in its GoSure app, a separate app in a product built for chains. We make the same check the normal way to receive stock in a small store.'],
+    ['eVitalRx already uploads the distributor’s bill.', 'Yes, and so do we. The difference shows when no file comes: we start from the store’s own order, so receiving takes ticks, not typing. And WhatsApp is not a ₹25,000 add-on.'],
+    ['New apps read a photo of the bill. Why not you?', 'A photo still needs a person to check every line. A file is exact. So we import files first, and tick against the order when there is none. Photo reading can come later.'],
     ['Will owners over fifty change software?', 'They will if the first day is easier than their last one. We move the data in one or two days, keep the old software readable for thirty, and sit with them in Telugu.'],
-    ['Will distributors cooperate?', 'They do not need to. Stage one asks for nothing but WhatsApp. The free order desk comes only when it helps them.'],
+    ['Will distributors cooperate?', 'They do not have to. Stage one asks for nothing but WhatsApp. The free order desk saves their clerk calls and brings payments sooner, so they have a reason to open it.'],
     ['Why can’t Marg or Profitmaker copy this?', 'Features, yes. An offline-and-cloud rebuild with large type, Telugu and tick-first buying on a twenty-year-old codebase, at our price, not quickly. That is our judgement, not a fact.'],
     ['Won’t chains finish the independent store?', 'Organised retail is forecast at about 23% of sales in 2027. Three rupees in four still go through independents, and they need tools to keep them.'],
-    ['How do you earn if you charge less?', 'Cost to serve a store is ₹1,800 to ₹3,000 a year, mostly WhatsApp and support. The price, the free message quota and paid add-ons will be set with pilot stores.'],
-    ['What if WhatsApp rules change?', 'Messages carry no prescription-drug names. SMS is the fallback. Messages can be metered.']
+    ['How do you earn at under ₹6,000 a year?', 'A store costs us about ₹1,800 a year to serve: cloud, support and payments. WhatsApp messages are paid by the store as used. At ₹5,500 that leaves about ₹3,700 from each store.'],
+    ['What if WhatsApp rules change?', 'Messages carry no prescription-drug names. SMS is the fallback. Messages are paid as used, so a price change does not touch our margin.']
   ],
 
   /* 14 Why now */
@@ -3550,12 +3692,12 @@ const C = {
   /* 16 Plan */
   road: [
     ['Months 0–2', 'Discover', ['30 owner interviews', '10 design partners', 'Medicine list', 'Clickable prototype'], '10 design partners signed'],
-    ['Months 2–7', 'Build', ['Order, receive, stock', 'Offline billing', 'H1 register, GST', 'Owner app, Telugu', 'Move from Marg and Profitmaker'], '50 pilot stores billing daily'],
-    ['Months 7–12', 'Launch', ['Refill reminders, campaigns', 'Many-store rules', 'Free order desk for distributors', 'Dealer network'], '300 paying stores'],
-    ['Months 12–36', 'Scale', ['Reorder advice', 'Distributor software links', 'GST filing', 'Karnataka next'], '3,000 stores']
+    ['Months 2–7', 'Build', ['Morning order, compare distributors', 'One-click bill import, tick to receive', 'Offline billing with pack scan', 'H1 register, GST', 'Owner app, Telugu', 'Move from Marg and Profitmaker'], '50 pilot stores billing daily'],
+    ['Months 7–12', 'Launch', ['Free order desk for distributors', 'Rate and scheme watch, return dates', 'Refill reminders, campaigns', 'Day close, cash calendar', 'Many-store rules', 'Dealer network'], '300 paying stores'],
+    ['Months 12–36', 'Scale', ['Demand forecast, expiry risk', 'Ask the app, store score', 'Distributor software links', 'Pay-later credit, with a lending partner', 'GST filing', 'Karnataka next'], '3,000 stores']
   ],
   open: [
-    ['The price', 'Below what stores pay today. The number comes from pilots, not from this page.'],
+    ['Yearly or monthly', 'The plan is under ₹6,000 a year. Should a store pay once a year, or about ₹500 a month?'],
     ['When to open the free order desk', 'How many of a distributor’s chemists must use us first?'],
     ['Desktop app or browser', 'Which one stays fast and offline on old shop PCs?'],
     ['Medicine list: buy or build', 'Licence a database, or build ours from bills?'],
@@ -3573,23 +3715,29 @@ const C = {
     daxin: ['Daxinsoft: Profitmaker', 'https://www.daxinsoft.com/'],
     daxinplay: ['Google Play: Profitmaker order app', 'https://play.google.com/store/apps/details?id=com.daxinsoft.profitmaker'],
     marg: ['Marg ERP: user counts, company statement 2023', 'https://www.zee5.com/articles/marg-erp-is-on-a-mission-to-computerize-2-5-lakh-chemists-for-the-2023-24-financial-year'],
+    margpharm: ['Marg ERP: pharmacy software page', 'https://margcompusoft.com/pharmacy-software.html'],
     margprice: ['IT for SME: Marg ERP editions and prices', 'https://itforsme.in/pricing/marg-erp-india'],
     capterra: ['Capterra: Marg ERP 9+ reviews', 'https://www.capterra.com/p/151832/Erp-Software-9/'],
     cost: ['Codingclave: pharmacy software cost in India, June 2026', 'https://codingclave.com/guides/pharmacy-management-software-cost-india-2026'],
     gosure: ['GoFrugal: GoSure goods-received app', 'https://www.gofrugal.com/inventory-app/grn-goods-received-note.html'],
+    gofrugalimport: ['GoFrugal: purchase import', 'https://community.gofrugal.com/portal/en/kb/articles/purchase-import'],
+    prices26: ['Nesayo: pharmacy software prices checked 6 September 2026', 'https://nesayo.com/blog/best-pharmacy-software-india-2026'],
     evital: ['eVitalRx: product site', 'https://www.evitalrx.in/'],
     evitalprice: ['eVitalRx plans: prices', 'https://www.evitalrx.in/pricing'],
     evitalapp: ['App Store: eVitalRx listing, CSV upload', 'https://apps.apple.com/app/id1637429769'],
     csquare: ['Fibre2Fashion: Reliance to acquire C-Square', 'https://www.fibre2fashion.com/news/e-commerce-logistics/reliance-to-acquire-c-square-to-augment-e-com-services-247815-newsdetails.htm'],
     medivision: ['Techjockey: Medivision Gold Retail', 'https://techjockey.com/detail/medivision-gold-retail'],
     pharmarack: ['Pharmarack: company site', 'https://pharmarack.org/'],
+    pharmarackplay: ['Google Play: Pharmarack Retailer 2.0, listing and reviews', 'https://play.google.com/store/apps/details?id=com.growthaccel.pharmarack_retailer.pharmarack_retailer&hl=en_IN'],
     pharmarackfin: ['Inc42: Pharmarack financials', 'https://inc42.com/company/pharmarack/financials/'],
+    retailio: ['App Store: Retailio retailer app', 'https://apps.apple.com/app/id1245047831'],
+    vyapar: ['Vyapar: languages listed on its site', 'https://vyaparapp.in/'],
+    photo: ['Pharmacy Pro: purchase bills read from email', 'https://pharmacypro.io/features/purchase-inward'],
     apeds: ['L V Prasad Eye Institute: 15-year incidence of presbyopia, APEDS (BJO 2025)', 'https://www.lvpei.org/news/fifteen-year-incidence-of-presbyopia-in-andhra-pradesh/'],
     nng: ['Nielsen Norman Group: usability for older adults', 'https://www.nngroup.com/articles/usability-for-senior-citizens/'],
     wcag: ['W3C: WCAG 2.2, target size', 'https://www.w3.org/TR/WCAG22/#target-size-minimum'],
     older: ['W3C: older users and web accessibility', 'https://www.w3.org/WAI/older-users/'],
     wa: ['AiSensy: WhatsApp per-message prices from 1 Jan 2026', 'https://news.aisensy.com/123053-whatsapp-per-message-pricing-update-effective-january-1-2026'],
-    ocr: ['Google Cloud: Document AI pricing', 'https://cloud.google.com/document-ai/pricing'],
     gst: ['Lakshmikumaran & Sridharan: GST rate changes for pharma', 'https://lakshmisri.com/newsroom/news-briefings/impact-of-gst-rate-changes-on-the-health-and-pharma-sector'],
     raid: ['Telangana Today: TG SAFE raids, 2 Sep 2026', 'https://telanganatoday.com/tg-safe-raids-medical-shops-over-illegal-sale-of-habit-forming-drugs'],
     bandh: ['Outlook: chemists’ bandh on 20 May 2026', 'https://www.outlookindia.com/amp/story/healthcare-spotlight/chemists-intensify-protest-against-e-pharmacies-call-for-nationwide-bandh-on-may-20'],
@@ -3927,7 +4075,7 @@ const MED = [
   { n: 'Paracetamol 500 mg', p: 'Strip of 10', f: 'strip', img: 3683039 },
   { n: 'Telma 40', p: 'Strip of 15', f: 'strip', img: 13779114 }
 ];
-const FACE = { imran: PEX(13119975, 96, 96, '&crop=focalpoint&fp-x=0.47&fp-y=0.3&fp-z=1.5'), rao: PEX(10823559, 96, 96, '&crop=focalpoint&fp-x=0.27&fp-y=0.32&fp-z=1.25') };
+const FACE = { imran: PEX(13119975, 96, 96, '&crop=focalpoint&fp-x=0.47&fp-y=0.3&fp-z=1.5'), rao: PEX(10823559, 96, 96, '&crop=focalpoint&fp-x=0.27&fp-y=0.32&fp-z=1.25'), ramesh: PEX(36876208, 96, 96, '&crop=focalpoint&fp-x=0.5&fp-y=0.35&fp-z=1') };
 const WHO = { imran: ['Imran', 'Counter 1, Main road'], rao: ['Subba Rao', 'Owner, all stores'] };
 
 /* Parts */
@@ -3961,21 +4109,26 @@ const SPARK = (v, tone = 'ok') => {
 const TRAY = (title, icon, body, o = {}) => `<section class="u-tray${o.cls ? ' ' + o.cls : ''}"><header>${o.lead ? KI(icon) : ''}<span>${title}</span><span class="sp"></span>${o.right || ''}${o.lead ? '' : KI(icon)}</header>${body}</section>`;
 const KPI = (t, ic, n, d, tone, vs, data) => TRAY(t, ic, `<div class="u-card u-kpi"><div><b class="u-num">${n}</b><span class="u-delta"><b class="u-${tone}">${d}</b>${vs}</span></div>${data ? SPARK(data, tone) : ''}</div>`, { cls: 'is--kpi' });
 const KPIS = items => `<div class="u-kpis" style="--n:${items.length}">${items.map(k => KPI(...k)).join('')}</div>`;
-const PLOT = (v, on, tip, ys, xs, xon) => `<div class="u-plot"><div class="u-bars">${v.map((h, i) => `<i class="${i === on ? 'on' : ''}" style="--h:${h}%">${i === on ? `<span class="u-tip">${tip}</span>` : ''}</i>`).join('')}</div><div class="u-yax">${ys.map(y => `<span>${y}</span>`).join('')}</div><div class="u-xax">${xs.map((x, i) => i === xon ? `<b>${x}</b>` : `<span>${x}</span>`).join('')}</div></div>`;
+const PLOT = (v, on, tip, ys, xs, xon, next = 99) => `<div class="u-plot"><div class="u-bars">${v.map((h, i) => `<i class="${i === on ? 'on' : h < 3 ? 'is--nil' : i > next ? 'is--next' : ''}" style="--h:${h}%">${i === on ? `<span class="u-tip">${tip}</span>` : ''}</i>`).join('')}</div><div class="u-yax">${ys.map(y => `<span>${y}</span>`).join('')}</div><div class="u-xax">${xs.map((x, i) => i === xon ? `<b>${x}</b>` : `<span>${x}</span>`).join('')}</div></div>`;
 const MINI = (v, on) => `<div class="u-mini">${v.map((h, i) => `<i class="${i === on ? 'on' : ''}" style="--h:${h}%"></i>`).join('')}</div>`;
 const FEED = items => `<ul class="u-feed">${items.map(([ic, c, t, time, p]) => `<li style="--c:var(--u-${c})"><i>${KI(ic)}</i><b>${t}</b><time>${time}</time><p>${p}</p></li>`).join('')}</ul>`;
 const STEPS = items => `<ul class="u-steps">${items.map(([a, b, c]) => `<li class="${c || ''}"><i>${c === 'on' ? KI('tick') : ''}</i><div><b>${a}</b><small>${b}</small></div></li>`).join('')}</ul>`;
 const DAYS = [58, 66, 49, 62, 71, 44, 60, 74, 68, 57, 65, 70, 52, 67];
+/* One distributor's offer for a line: rate, then scheme and credit. `on` is the one picked. */
+const CMP = (rate, note, on) => `<span class="u-cmp${on ? ' on' : ''}${rate ? '' : ' is--no'}"><b>${rate ? '₹' + rate : 'Not stocked'}</b><small>${note}</small></span>`;
+const METER = (w, tone = 'pri') => `<span class="u-meter" style="--c:var(--u-${{ ok: 'ok-l', warn: 'warn', bad: 'bad-l' }[tone] || 'pri'})"><i style="--w:${w}%"></i></span>`;
+const ROWI = (icon, t, sub) => `<span class="u-med"><span class="u-ico">${KI(icon)}</span><div><b>${t}</b><small>${sub}</small></div></span>`;
+const ROW = cells => `<div class="u-tr">${cells.map(CELL).join('')}</div>`;
 
 /* The frame every counter screen sits in: grouped words on the left, the work on the right */
 const MENU = [
-  ['Main navigation', [['home', 'grid', 'Overview'], ['bill', 'receipt', 'Billing', 0, [['sell', 'New bill'], ['salereturn', 'Returns'], ['prices', 'Prices and discounts']]], ['buy', 'truck', 'Orders', 12, [['order', 'To order'], ['check', 'Receive'], ['dues', 'Pay distributors']]], ['stock', 'box', 'Stock', 0, [['stock', 'On the shelf'], ['expiry', 'Expiring'], ['lowstock', 'Running low']]], ['cust', 'users', 'Customers']]],
+  ['Main navigation', [['home', 'grid', 'Overview'], ['bill', 'receipt', 'Billing', 0, [['sell', 'New bill'], ['salereturn', 'Returns'], ['prices', 'Prices and discounts']]], ['buy', 'truck', 'Orders', 12, [['order', 'To order'], ['check', 'Receive'], ['watch', 'Claims'], ['dues', 'Pay distributors']]], ['stock', 'box', 'Stock', 0, [['stock', 'On the shelf'], ['expiry', 'Expiring'], ['lowstock', 'Running low']]], ['cust', 'users', 'Customers']]],
   ['Money and reports', [['money', 'rupee', 'Day book'], ['gst', 'file', 'GST and accountant'], ['reports', 'chart', 'Reports']]],
   ['Support', [['help', 'headset', 'Help in Telugu'], ['set', 'gear', 'Settings']]]
 ];
 const SIDE = (on, sub, who = 'imran') => {
   const open = on === 'home' || on === 'cust' ? 'bill' : on;
-  return `<div class="a-side"><div class="a-brand"><i class="a-logo">${CAP}</i><b>Pharmacy OS</b>${KI('panel')}</div><div class="a-dash"></div>${INP('Search anything', 'Ctrl K')}
+  return `<div class="a-side"><div class="a-brand"><i class="a-logo">${CAP}</i><b>Pharmacy OS</b>${KI('panel')}</div><div class="a-dash"></div>${INP('Search or ask', 'Ctrl K')}
     ${MENU.map(([cap, items]) => `<div class="a-cap">${cap}</div>${items.map(([k, ic, t, n, subs]) => `<span class="a-nav${k === on && !sub ? ' on' : ''}">${KI(ic)}${t}${n ? `<em>${n}</em>` : ''}${subs ? KI(k === open ? 'chevu' : 'chevd', 'chev') : ''}</span>${subs && k === open ? subs.map(([sk, st]) => `<span class="a-sub${sk === sub ? ' on' : ''}">${st}</span>`).join('') : ''}`).join('')}`).join('')}
     <div class="a-user">${AV('', '', FACE[who])}<span><b>${WHO[who][0]}</b>${WHO[who][1]}</span>${KI('updown')}</div></div>`;
 };
@@ -4012,7 +4165,7 @@ const NEEDS = `<div class="m-top"><div><small>Bus stand store</small><b>Order 10
   <div class="m-act">${BTN('Approve', 'is--wide is--lg', 'tick')}${BTN('Open the list', 'is--ghost is--wide')}</div>${TABS(3)}`;
 const DLINK = `<div class="m-url">${KI('lock')}Order link. Opens in the browser.</div><div class="m-top" style="padding-top:14px"><div><small>Order 1042 from</small><b class="m-big">${STORE}</b><small>6 medicines. No login needed.</small></div></div><div class="m-body">
   ${TRAY('Tap what you can send', 'ticks', `<div class="u-card m-list" style="padding:2px 12px">${MED.slice(0, 6).map((m, i) => `<div>${PH(m)}<span><b>${m.n}</b>${m.q} × ${m.p.toLowerCase()}</span>${i === 4 ? BDG('bad', 'alert', 'Only 6') : BDG('ok', 'tick', 'Available')}</div>`).join('')}</div>`)}</div>
-  <div class="m-act">${BTN('Send reply', 'is--wide is--lg', 'send')}${BTN('Attach your bill', 'is--ghost is--wide', 'clip')}</div>`;
+  <div class="m-act">${BTN('Send reply', 'is--wide is--lg', 'send')}${BTN('Attach your bill file', 'is--ghost is--wide', 'clip')}</div>`;
 
 const V = {
   /* ----- Overview: the day in one look, what happened, and what to watch ----- */
@@ -4022,7 +4175,7 @@ const V = {
       ${KPI('Bills today', 'receipt', '62', '+2%', 'ok', 'vs last week', [8, 9, 14, 12, 15, 13, 17, 14, 16])}
       ${KPI('Found on the shelf', 'box', '92%', '−1.3%', 'bad', 'vs last week', [16, 12, 14, 19, 13, 14, 20, 21, 12, 15])}
       ${TRAY('Latest updates', 'book', `<div class="u-card">${SEG(['Today', 'Yesterday', 'This week'], 0)}${INP('Search activity')}<p class="h-count"><b>8</b>new things today</p>
-        ${FEED([['truck', 'blue', 'Order received', '11:20 AM', `Order <b>1042</b> from ${DSHORT}`], ['user', 'ok-l', 'New customer saved', '11:15 AM', '<b>Lakshmi</b>, with her doctor'], ['swap', 'vio', 'Stock moved', '11:00 AM', '20 strips to <b>Bus stand</b>'], ['alert', 'bad-l', 'Expiry risk', '10:45 AM', '<b>Cetirizine 10 mg</b>, 18 days left'], ['bell', 'warn', 'Refill reminder', '10:30 AM', '<b>Lakshmi</b> replied YES']])}</div>`, { cls: 'h-feed' })}
+        ${FEED([['truck', 'blue', 'Order received', '11:20 AM', 'Order <b>1042</b>: bill read, 3 to check'], ['user', 'ok-l', 'New customer saved', '11:15 AM', '<b>Lakshmi</b>, with her doctor'], ['swap', 'vio', 'Stock moved', '11:00 AM', '20 strips to <b>Bus stand</b>'], ['alert', 'bad-l', 'Expiry risk', '10:45 AM', '<b>Cetirizine 10 mg</b>, 18 days left'], ['bell', 'warn', 'Refill reminder', '10:30 AM', '<b>Lakshmi</b> replied YES']])}</div>`, { cls: 'h-feed' })}
       ${TRAY('Sales in the last 14 days', 'chart', `<div class="u-card"><div class="h-big"><b class="u-num">₹2,71,300</b><span class="u-delta"><b class="u-ok">+8%</b>vs the 14 days before</span></div>${PLOT(DAYS, 13, 'Today : ₹21,400', ['0', '8k', '16k', '24k', '32k'], ['26 Sep', '28', '30', '2 Oct', '4', '6', '8 Oct'], 6)}</div>`, { lead: 1, cls: 'h-chart', right: `<span class="u-chip">${KI('calendar')}Last 14 days${KI('chevd')}</span>` })}
       ${TRAY('Stock to watch', 'eye', TBL('18px minmax(0,1.9fr) .65fr .75fr minmax(0,1.3fr) 1.05fr .7fr .7fr 18px', [CHK(0), 'Medicine', 'Batch', 'Risk', 'Distributor', 'Status', 'Expires', 'Left', ''],
         [[CHK(1), MEDC(MED[5], 'Strip of 10'), 'CT2217', LVL(3, 'High'), PERSON(DSHORT, 'amber'), STAT('bad', 'alert', 'Expiring'), '26 Oct', '18 days', MORE],
@@ -4031,7 +4184,7 @@ const V = {
     </div>`),
 
   /* ----- Orders ----- */
-  order: () => APP('buy', 'order', `${HD('To order', 'Twelve medicines are running low. Five are in this order.')}
+  order: () => APP('buy', 'order', `${HD('To order', 'Drafted at 6 am from your sales and stock. Check it, then send.')}
     <div class="a-body"><div class="a-split" style="--side:470px">
       ${TRAY('Add a medicine', 'search', `<div class="u-card u-col"><div class="u-find">${KI('search')}<b>par</b><i class="u-caret"></i><span>Type three letters</span></div>
         <div class="u-drop"><small>From your own history</small>
@@ -4041,16 +4194,17 @@ const V = {
         ${NOTE('info', 'A wrong spelling is fine. “Parasitamol” finds it too.')}
         <div class="u-drop" style="margin-top:6px"><small>Also running low. One tap adds it.</small>
           ${[[6, 6, 10], [8, 5, 10], [9, 2, 4]].map(([k, have, usual]) => `<div class="u-opt">${MEDC(MED[k], `You have ${have}. You usually order ${usual}.`)}${BTN('Add', 'is--ghost is--sm', 'plus')}</div>`).join('')}</div></div>`, { lead: 1, cls: 'is--fill' })}
-      ${TRAY('This order', 'truck', TBL('minmax(0,1fr) auto 64px 18px', null, [1, 2, 3, 4, 5].map(k => [MEDC(MED[k], `You have ${[6, 7, 9, 3, 12][k - 1]}`), QTY(MED[k].q), `>₹${Math.round(MED[k].q * MED[k].r)}`, MORE]), 'is--tall'), { lead: 1, cls: 'is--fill', right: CHIP(DSHORT, 1, 5) + CHIP('Godavari', 0, 3) })}
-    </div>${BAR('<b>5 medicines</b>, about ₹2,670<small>The final amount is fixed when the goods arrive.</small>', BTN('Save for later', 'is--ghost') + BTN('Send on WhatsApp', '', 'send'))}</div>`),
+      ${TRAY('This order', 'truck', TBL('minmax(0,1fr) auto 64px 18px', null, [1, 2, 3, 4, 5].map(k => [MEDC(MED[k], `Have ${[6, 7, 9, 3, 12][k - 1]}. Lasts ${[5, 4, 6, 2, 9][k - 1]} days.`), QTY(MED[k].q), `>₹${Math.round(MED[k].q * MED[k].r)}`, MORE]), 'is--tall'), { lead: 1, cls: 'is--fill', right: CHIP(DSHORT, 1, 5) + CHIP('Godavari', 0, 3) })}
+    </div>${BAR('<b>5 medicines</b>, about ₹2,670<small>The best rate and scheme is picked for each line. You can change any of it.</small>', BTN('Compare distributors', 'is--ghost', 'swap') + BTN('Send on WhatsApp', '', 'send'))}</div>`),
 
-  send: () => DUO(WA_ORDER, 'Order 1042 is with the distributor', 'They got a message, a PDF and a link. No login.', [['Sent on WhatsApp', '10:42 am', 'on'], ['Opened', '10:44 am', 'on'], ['Confirmed: 5 of 6 available', '11:05 am', 'on'], ['Arriving today, with the bill', 'You will tick it in', 'is--now']]),
+  send: () => DUO(WA_ORDER, 'Order 1042, every step in the open', 'A message, a PDF and a link. The distributor needs no login.', [['Sent on WhatsApp', '10:42 am', 'on'], ['Seen by Krishna Pharma', '10:44 am', 'on'], ['Confirmed: 5 of 6. Pantoprazole, only 6.', '11:05 am', 'on'], ['Packed, with the bill file', '1:30 pm', 'on'], ['On the way', 'Arrives by 4 pm', 'is--now']],
+    `<div class="a-act" style="min-height:0;padding:10px 10px 10px 14px"><div><b>4 strips of Pantoprazole are short</b><small>Godavari has them, at ₹58.60 a strip.</small></div><div class="u-row">${BTN('Send to Godavari', 'is--ghost is--sm', 'send')}</div></div>`),
 
-  check: () => APP('buy', 'check', `${HD('Receive order 1042', `From ${DIST}. Their bill is KP/3391.`)}
-    <div class="a-body">${KPIS([['Ordered', 'list', '₹3,060', '6', 'ok', 'medicines'], ['Arrived', 'truck', '₹2,815', '−₹244', 'bad', 'short supply'], ['Checked', 'ticks', '6 of 6', '0', 'ok', 'fields typed'], ['To pay by', 'calendar', '7 Nov', '30', 'ok', 'days credit']])}
-    ${TRAY('Tick what arrived', 'ticks', TBL('28px minmax(0,1.7fr) .7fr .7fr .7fr minmax(0,1.5fr)', [CHK(0, 'is--lg'), 'Medicine', 'Arrived', 'Batch', 'Expires', 'Status'],
-      MED.slice(0, 6).map((m, i) => ({ c: i === 4 ? 'is--bad' : i === 5 ? 'is--warn' : '', v: [CHK(1, 'is--lg'), MEDC(m), i === 4 ? '<b class="u-bad">6 of 10</b>' : `<b>${m.q}</b> of ${m.q}`, m.b, m.e, i === 4 ? STAT('bad', 'alert', 'Short by 4. Credit note asked.') : i === 5 ? STAT('warn', 'clock', 'Expires in 4 months. Kept.') : STAT('ok', 'tick', 'Matches the order')] })), 'is--tall'), { lead: 1, cls: 'is--fill', right: `<span class="u-chip">${KI('ticks')}Tick all that match</span><span class="u-chip">${KI('qr')}Scan a pack</span>` })}
-    ${BAR('<b>6 of 6 checked.</b> Nothing typed.<small>Stock, expiry alerts and the payment date are set in one tap.</small>', BTN('Add to stock', '', '', KI('arrow')))}</div>`),
+  check: () => APP('buy', 'check', `${HD('Receive order 1042', `From ${DIST}. Their bill file came on the link.`)}
+    <div class="a-body">${KPIS([['Bill file read', 'upload', '6 lines', '1 click', 'ok', 'KP-3391.xlsx'], ['Match your order', 'ticks', '3 of 6', '3', 'bad', 'need a look'], ['To claim back', 'rupee', '₹316', '2', 'bad', 'differences'], ['To pay by', 'calendar', '7 Nov', '30', 'ok', 'days credit']])}
+    ${TRAY('Order, bill and goods, side by side', 'ticks', TBL('28px minmax(0,1.8fr) .62fr .55fr .55fr .6fr .62fr minmax(0,1.6fr)', [CHK(0, 'is--lg'), 'Medicine', 'Ordered', 'Billed', 'Came', 'Batch', 'Expires', 'Status'],
+      MED.slice(0, 6).map((m, i) => ({ c: i === 4 ? 'is--bad' : i === 3 || i === 5 ? 'is--warn' : '', v: [CHK(1, 'is--lg'), MEDC(m), m.q, m.q, i === 4 ? '<b class="u-bad">6</b>' : `<b>${m.q}</b>`, m.b, m.e, i === 3 ? STAT('warn', 'tag', 'Free strip missing: ₹72') : i === 4 ? STAT('bad', 'alert', 'Billed 10, 6 came: ₹244') : i === 5 ? STAT('warn', 'clock', 'Expires in 4 months') : STAT('ok', 'tick', 'Matches the order')] })), 'is--tall'), { lead: 1, cls: 'is--fill', right: `<span class="u-chip on">${KI('upload')}KP-3391.xlsx</span><span class="u-chip">${KI('ticks')}Tick by hand</span><span class="u-chip">${KI('qr')}Scan a pack</span>` })}
+    ${BAR('<b>3 lines match. 3 need a look.</b> Nothing typed.<small>No file from the distributor? Tick what came against your own order instead.</small>', BTN('Send the claim', 'is--ghost', 'send') + BTN('Add to stock', '', '', KI('arrow')))}</div>`),
 
   stock: () => APP('stock', 'stock', `${HD('On the shelf', '1,284 medicines, worth ₹6.2 lakh')}
     <div class="a-body">${KPIS([['In good shape', 'tick', '86%', '+1.2%', 'ok', 'vs last week', [10, 12, 11, 13, 12, 14, 13, 15, 16]], ['Running low', 'box', '12', '+3', 'bad', 'since Monday', [4, 5, 5, 7, 8, 8, 9, 11, 12]], ['Expiring in 60 days', 'clock', '9', '₹3,140', 'bad', 'at risk', [3, 4, 4, 5, 7, 6, 8, 9, 9]], ['Just added', 'truck', '6', 'Order 1042', 'ok', 'today', [2, 2, 3, 2, 4, 3, 5, 4, 6]]])}
@@ -4060,9 +4214,9 @@ const V = {
     [{ c: 'is--warn', v: [WHOC(DIST, '30 days credit', 'amber'), '2', '<b>₹18,200</b>', '9 October', STAT('warn', 'clock', 'Tomorrow'), MORE] }, [WHOC('Godavari Distributors', '21 days credit', 'vio'), '1', '<b>₹9,640</b>', '12 October', STAT('ok', 'tick', 'On time'), MORE], [WHOC('Sri Venkat Pharma', '30 days credit', 'ok'), '3', '<b>₹31,075</b>', '15 October', STAT('ok', 'tick', 'On time'), MORE], [WHOC(DIST, 'Order 1042, received today', 'amber'), '1', '<b>₹2,815</b>', '7 November', STAT('pri', 'file', 'New today'), MORE]],
     BAR('<b>₹18,200</b> to Krishna Pharma is due tomorrow<small>You get 30 days of credit from them.</small>', BTN('Mark as paid', 'is--ghost') + BTN('Pay ₹18,200', '', 'rupee'))),
 
-  returns: () => LIST('stock', 'expiry', 'Expiry returns', 'Each return is followed until the credit note arrives.', [['Waiting to come back', 'undo', '₹5,070', '3', 'bad', 'returns open'], ['Credited this year', 'tick', '₹18,400', '11', 'ok', 'credit notes', [2, 3, 5, 6, 8, 11, 14, 18]], ['Oldest open', 'clock', '40 days', 'Sri Venkat', 'bad', 'Pharma'], ['Thrown away', 'shield', '₹0', 'Nothing', 'ok', 'without a note']], 'Sent back to distributors', 'undo', CHIP('Open', 1, 4) + CHIP('Credited'), 'minmax(0,1.6fr) .6fr .7fr .9fr 1.2fr 18px', ['Sent back to', 'Medicines', 'Value', 'Sent on', 'Where it stands', ''],
+  returns: () => LIST('stock', 'expiry', 'Expiry returns', 'You are told before each distributor’s return date closes.', [['Waiting to come back', 'undo', '₹5,070', '3', 'bad', 'returns open'], ['Credited this year', 'tick', '₹18,400', '11', 'ok', 'credit notes', [2, 3, 5, 6, 8, 11, 14, 18]], ['Oldest open', 'clock', '40 days', 'Sri Venkat', 'bad', 'Pharma'], ['Next return date', 'calendar', '31 Oct', '23 days', 'bad', 'left to send back']], 'Sent back to distributors', 'undo', CHIP('Open', 1, 4) + CHIP('Credited'), 'minmax(0,1.6fr) .6fr .7fr .9fr 1.2fr 18px', ['Sent back to', 'Medicines', 'Value', 'Sent on', 'Where it stands', ''],
     [[WHOC(DIST, 'Return note 31', 'amber'), '7', '<b>₹2,310</b>', '26 September', STAT('warn', 'clock', 'Waiting, 12 days'), MORE], [WHOC('Godavari Distributors', 'Return note 30', 'vio'), '3', '<b>₹890</b>', '18 September', STAT('ok', 'tick', 'Credit note received'), MORE], [WHOC('Sri Venkat Pharma', 'Return note 29', 'ok'), '5', '<b>₹1,640</b>', '29 August', STAT('bad', 'alert', 'No reply, 40 days'), MORE], [WHOC('Godavari Distributors', 'Return note 32', 'vio'), '4', '<b>₹1,120</b>', 'This week', STAT('pri', 'box', 'Packed, not sent'), MORE]],
-    BAR('<b>₹5,070</b> is waiting to come back<small>Expired stock is never thrown away without a return note.</small>', BTN('Remind all three', 'is--ghost', 'bell'))),
+    BAR('<b>₹5,070</b> is waiting to come back<small>Each return is followed until its credit note arrives. Nothing is thrown away without a note.</small>', BTN('Remind all three', 'is--ghost', 'bell'))),
 
   /* ----- Stock ----- */
   expiry: () => LIST('stock', 'expiry', 'Expiring', 'Sell these first, or send them back while they still count.', [['At risk in 60 days', 'clock', '₹3,140', '9', 'bad', 'medicines', [3, 4, 4, 5, 7, 6, 8, 9, 9]], ['Expires this month', 'alert', '₹134', '1', 'bad', 'medicine'], ['Sent back in time', 'undo', '₹5,070', '16', 'ok', 'medicines', [2, 3, 5, 6, 8, 11, 14, 16]], ['Blocked at the counter', 'lock', '1', 'strip', 'ink', 'this week']], 'Expiring in 60 days', 'clock', CHIP('60 days', 1) + CHIP('90 days') + CHIP('This year'), '18px minmax(0,1.6fr) .5fr .9fr .7fr 1fr 18px', [CHK(0), 'Medicine', 'Have', 'Expires', 'Value', 'Risk', ''],
@@ -4080,10 +4234,10 @@ const V = {
   /* ----- Billing ----- */
   sell: () => APP('bill', 'sell', `${HD('New bill', 'Bill 2281, at Counter 1')}
     <div class="a-body"><div class="a-split" style="--side:384px">
-      ${TRAY('Find a medicine', 'search', `<div class="u-card u-col"><div class="u-find is--idle">${KI('search')}<span>Scan a pack, or type three letters</span></div><small class="u-lbl">Sold most often here</small>
+      ${TRAY('Find a medicine', 'search', `<div class="u-card u-col"><div class="u-find is--idle">${KI('search')}<span>Type three letters</span></div><div class="b-two">${BTN('Scan a pack', 'is--ghost is--wide', 'qr')}${BTN('Not in stock', 'is--ghost is--wide', 'alert')}</div><small class="u-lbl">Sold most often here</small>
         <div class="b-fav">${[[0, 36, 24], [3, 118, 15], [2, 44, 19], [1, 96, 14], [5, 19, 12], [7, 85, 6]].map(([k, mrp, have]) => `<div>${PH(MED[k], 'is--lg')}<div><b>${MED[k].n}</b><small><span>₹${mrp}</span><span>${have} left</span></small></div></div>`).join('')}</div></div>`, { lead: 1, right: STAT('ok', 'tick', 'Oldest batch sells first') })}
       ${TRAY('This bill', 'receipt', `<div class="u-card b-pay"><div class="b-cust">${AV('L', 'amber', '', 'is--lg')}<div><b>Lakshmi</b>98765 •••43</div>${BDG('pri', '', '4th visit')}</div>
-        <div class="b-lines">${[[3, 2, 236, 1], [2, 3, 132, 1], [0, 4, 144, 0]].map(([k, q, amt, rx]) => `<div class="b-line">${PH(MED[k], 'is--sm')}<div><b>${MED[k].n}${rx ? RX : ''}</b><small>${q} × ₹${MED[k].mrp}</small></div><em>₹${amt}</em></div>`).join('')}</div>
+        <div class="b-lines">${[[3, 2, 236, 1], [2, 3, 132, 1], [0, 4, 144, 0]].map(([k, q, amt, rx]) => `<div class="b-line">${PH(MED[k], 'is--sm')}<div><b>${MED[k].n}${rx ? RX : ''}</b><small>${q} × ₹${MED[k].mrp} · batch ${MED[k].b}</small></div><em>₹${amt}</em></div>`).join('')}</div>
         <div class="b-doc">${KI('user')}<div><b>Dr. Rao</b>Remembered for her two prescription medicines</div>${KI('tick')}</div>
         <div class="b-sum"><div><span>MRP total</span><span>₹512</span></div><div class="u-ok"><span>Regular customer, 5% off</span><span>−₹26</span></div><div class="is--tot"><span>To pay</span><b>₹486</b></div></div>
         <div class="b-ways"><span class="on">UPI</span><span>Cash</span><span>Card</span><span>Credit</span></div>
@@ -4227,7 +4381,7 @@ const V = {
 
   /* ----- Tablet: the touch counter ----- */
   billt: () => `<div class="t-top"><div class="a-brand"><i class="a-logo">${CAP}</i><b>Pharmacy OS</b></div><span class="u-grow"></span>${LANG()}${SIZE(2)}</div>
-    <div class="t-body"><div class="a-hd" style="padding:0"><div><b class="a-t" style="font-size:26px">New bill</b><small>Bill 2281, Counter 1, Imran</small></div></div><div class="u-find is--idle" style="height:56px;font-size:18px">${KI('search')}<span>Scan a pack, or type three letters</span></div>
+    <div class="t-body"><div class="a-hd" style="padding:0"><div><b class="a-t" style="font-size:26px">New bill</b><small>Bill 2281, Counter 1, Imran</small></div></div><div class="u-row" style="gap:10px"><div class="u-find is--idle" style="flex:1;height:56px;font-size:18px">${KI('search')}<span>Type three letters</span></div>${BTN('Scan a pack', 'is--ghost is--lg', 'qr')}</div>
       ${TRAY('This bill', 'receipt', `<div class="u-card b-pay" style="gap:14px;padding:18px"><div class="b-cust">${AV('L', 'amber', '', 'is--lg')}<div><b style="font-size:17px">Lakshmi</b>98765 •••43</div>${BDG('pri', '', '4th visit')}</div>
         <div class="b-lines" style="gap:14px">${[[3, 2, 236, 1], [2, 3, 132, 1], [0, 4, 144, 0]].map(([k, q, amt, rx]) => `<div class="b-line" style="grid-template-columns:44px minmax(0,1fr) auto auto;gap:14px"><i class="u-ph" style="width:44px;height:44px;--img:url(${PEX(MED[k].img)})">${KI(MED[k].f)}</i><div><b style="font-size:17px">${MED[k].n}${rx ? RX : ''}</b><small style="font-size:14px">₹${MED[k].mrp} a strip</small></div>${QTY(q)}<em style="font-size:18px;min-width:70px;text-align:right">₹${amt}</em></div>`).join('')}</div>
         <div class="b-doc">${KI('user')}<div><b>Dr. Rao</b>Remembered for her two prescription medicines</div>${KI('tick')}</div>
@@ -4236,6 +4390,95 @@ const V = {
         ${BTN('Take ₹486', 'is--wide is--lg', '', KI('arrow'))}<div class="b-two">${BTN('Print', 'is--ghost is--wide is--lg', 'printer')}${BTN('Hold this bill', 'is--ghost is--wide is--lg', 'clock')}</div></div>`, { lead: 1, right: STAT('ok', 'tick', 'Oldest batch sells first') })}
       ${NOTE('chat', 'The bill goes to her WhatsApp. The H1 register fills itself.')}</div>
     <div class="t-tabs">${[['grid', 'Overview'], ['receipt', 'Billing'], ['box', 'Stock'], ['truck', 'Orders'], ['users', 'Customers']].map(([ic, t], i) => `<span class="${i === 1 ? 'on' : ''}">${KI(ic)}${t}</span>`).join('')}</div>`,
+
+  /* ----- Buying, with the numbers beside each other ----- */
+  compare: () => APP('buy', 'order', `${HD('Compare distributors', 'Rate, scheme and credit for every line. The best one is already picked.')}
+    <div class="a-body">${KPIS([['To order today', 'list', '9', '2', 'ink', 'distributors'], ['Saved by picking the best', 'rupee', '₹221', 'Less', 'ok', 'than from one distributor'], ['Free strips', 'tag', '3', '2', 'ok', 'schemes used'], ['Credit', 'calendar', '30 days', 'Longest', 'ink', 'wins a tie']])}
+    ${TRAY('Rate, scheme and credit, side by side', 'swap', TBL('minmax(0,1.45fr) .45fr 1fr 1fr 1fr', ['Medicine', 'Order', DSHORT, 'Godavari Dist.', 'Sri Venkat Pharma'],
+      [[MEDC(MED[1]), '<b>10</b>', CMP('62.10', '30 days', 1), CMP('63.40', '21 days'), CMP('62.90', '30 days')],
+        [MEDC(MED[3]), '<b>12</b>', CMP('71.50', '10+1 · 30 days', 1), CMP('72.00', '21 days'), CMP('71.50', '30 days')],
+        [MEDC(MED[4]), '<b>10</b>', CMP('58.00', '30 days', 1), CMP('58.60', '21 days'), CMP('', 'Not with them')],
+        [MEDC(MED[6]), '<b>10</b>', CMP('83.00', '30 days'), CMP('79.50', '5+1 · 21 days', 1), CMP('82.00', '30 days')],
+        [MEDC(MED[8]), '<b>10</b>', CMP('68.90', '30 days'), CMP('66.20', '21 days', 1), CMP('67.80', '30 days')]], 'is--tall'), { lead: 1, cls: 'is--fill', right: CHIP('Best for each line', 1) + CHIP('All from one') })}
+    ${BAR('<b>Krishna Pharma: 6 lines. Godavari: 3 lines.</b><small>Rates come from your own last bills. A distributor on the free desk shows today’s rate and stock.</small>', BTN('Change by hand', 'is--ghost') + BTN('Send both orders', '', 'send'))}</div>`),
+
+  watch: () => LIST('buy', 'watch', 'Rate and scheme watch', 'Every bill is laid beside your order and your last rate.', [['Found this month', 'eye', '₹1,460', '9', 'bad', 'differences'], ['Credited back', 'tick', '₹1,128', '6', 'ok', 'credit notes', [1, 2, 2, 4, 5, 6, 8, 11]], ['Still open', 'clock', '₹332', '3', 'bad', 'claims'], ['Typed by you', 'keyboard', '0', 'None', 'ok', 'of these']], 'Three claims are open', 'tag', CHIP('Open', 1, 3) + CHIP('Credited', 0, 6), 'minmax(0,1.45fr) minmax(0,1.35fr) 1fr .55fr 1.15fr 18px', ['Medicine', 'What we found', 'Distributor', 'Value', 'Where it stands', ''],
+    [{ c: 'is--bad', v: [MEDC(MED[4], 'Order 1042, today'), 'Billed 10, 6 came', PERSON(DSHORT, 'amber'), '<b>₹244</b>', STAT('warn', 'clock', 'Claim sent today'), MORE] }, { c: 'is--warn', v: [MEDC(MED[3], 'Order 1042, today'), 'Free strip missing, 10+1', PERSON(DSHORT, 'amber'), '<b>₹72</b>', STAT('warn', 'clock', 'Claim sent today'), MORE] }, [MEDC(MED[8], 'Order 1031, 2 October'), 'Rate ₹1.60 above your last bill', PERSON('Godavari Dist.', 'vio'), '<b>₹16</b>', STAT('bad', 'alert', 'No reply, 6 days'), MORE], [MEDC(MED[1], 'Order 1024, 28 September'), 'Bill MRP above the pack', PERSON('Sri Venkat Pharma', 'ok'), '<b>₹96</b>', STAT('ok', 'tick', 'Credit note received'), MORE]],
+    BAR('<b>₹332</b> is still to come back, from 3 claims<small>Each claim goes on WhatsApp with the bill line attached. Nothing to write.</small>', BTN('Remind all three', 'is--ghost', 'bell'))),
+
+  missed: () => LIST('bill', 'sell', 'Asked for, not on the shelf', 'One tap at the counter. The missed sale is counted, and the medicine joins the next order.', [['Asked, not found', 'users', '7', 'times', 'bad', 'this week', [1, 0, 2, 1, 1, 0, 2]], ['Sales missed', 'rupee', '₹917', 'About', 'bad', 'this week'], ['Now in the order', 'list', '5', 'of 7', 'ok', 'medicines'], ['Given a substitute', 'swap', '2', 'times', 'ok', 'same salt']], 'Missed this week', 'alert', BTN('Not in stock', 'is--ghost is--sm', 'alert'), 'minmax(0,1.5fr) .6fr .9fr .6fr 1.3fr 18px', ['Medicine', 'Asked', 'Last asked', 'Missed', 'What happens next', ''],
+    [[MEDC(MED[11], 'Strip of 15'), '<b>3 times</b>', 'Today, 5:40 pm', '<b>₹354</b>', STAT('ok', 'list', 'In tomorrow’s order'), MORE], [MEDC(MED[7], 'Bottle'), '<b>2 times</b>', 'Yesterday', '<b>₹170</b>', STAT('ok', 'list', 'In tomorrow’s order'), MORE], [MEDC(MED[9], 'Box of 25'), '<b>1 time</b>', 'Monday', '<b>₹310</b>', STAT('pri', 'swap', 'A substitute was given'), MORE], [MEDC(MED[6], 'Strip of 4'), '<b>1 time</b>', 'Monday', '<b>₹83</b>', STAT('warn', 'clock', 'Waiting for the distributor'), MORE]],
+    BAR('<b>7 customers</b> asked for something that was not there<small>Without this button, a missed sale leaves no trace.</small>', BTN('Add all to the order', '', 'plus'))),
+
+  /* ----- Customers and money, a week ahead ----- */
+  refills: () => LIST('cust', '', 'Refills due next week', 'Who will come, and for what. So the stock is ready before they are.', [['Refills due', 'bell', '38', 'customers', 'ink', 'in 7 days', [3, 4, 6, 5, 7, 6, 7]], ['Worth', 'rupee', '₹31,200', 'If all', 'ok', 'come back'], ['Stock ready', 'tick', '34 of 38', '4', 'bad', 'need an order'], ['Came back last month', 'trend', '71%', '+9%', 'ok', 'after a reminder', [5, 6, 6, 7, 8, 8, 9]]], 'Due in the next 7 days', 'calendar', CHIP('This week', 1, 38) + CHIP('Next week', 0, 41), 'minmax(0,1fr) minmax(0,1.6fr) .55fr 1.1fr 1.1fr 18px', ['Customer', 'Medicine', 'Due', 'On the shelf', 'Reminder', ''],
+    [[PERSON('Lakshmi', 'amber'), MEDC(MED[3], '1 a day. A strip lasts 15 days.', RX), '11 Oct', STAT('ok', 'tick', '15 strips'), STAT('ok', 'bell', 'Sent today'), MORE], [PERSON('Venkatesh', 'ink'), MEDC(MED[2], '2 a day', RX), '12 Oct', STAT('ok', 'tick', '19 strips'), STAT('pri', 'clock', 'Goes on 9 Oct'), MORE], { c: 'is--bad', v: [PERSON('Suresh', 'vio'), MEDC(MED[11], '1 a day', RX), '13 Oct', STAT('bad', 'alert', 'None. In the order.'), STAT('pri', 'clock', 'Goes on 10 Oct'), MORE] }, [PERSON('Anitha', 'ok'), MEDC(MED[6], '1 a week'), '14 Oct', STAT('ok', 'tick', '6 strips'), STAT('pri', 'clock', 'Goes on 11 Oct'), MORE]],
+    BAR('<b>4 medicines</b> join tomorrow’s order, so every refill is ready<small>Messages carry no medicine names. Only people who said yes get them.</small>', BTN('See the order', 'is--ghost') + BTN('Send today’s reminders', '', 'send'))),
+
+  dayclose: () => APP('money', '', `${HD('Close the day', 'Thursday, 8 October. Count each drawer once.')}
+    <div class="a-body">${KPIS([['Sales today', 'rupee', '₹21,400', '62', 'ink', 'bills'], ['Cash the bills expect', 'wallet', '₹8,330', '2', 'ink', 'drawers'], ['Cash counted', 'ticks', '₹8,280', '−₹50', 'bad', 'difference'], ['UPI received', 'phone', '₹13,150', 'Matches', 'ok', 'the bank']])}
+    ${TRAY('By person', 'users', TBL('minmax(0,1.3fr) .5fr .9fr .9fr .8fr 1.2fr', ['Person', 'Bills', 'Cash expected', 'Cash counted', 'UPI', 'Status'], [[PERSON('Imran', '', FACE.imran), '38', '₹5,120', '<b>₹5,120</b>', '₹8,030', STAT('ok', 'tick', 'Matches')], { c: 'is--warn', v: [PERSON('Padma', 'amber'), '24', '₹3,210', '<b>₹3,160</b>', '₹5,120', STAT('warn', 'alert', '₹50 less. Noted.')] }]), { lead: 1, right: STAT('ok', 'lock', 'Counted once, then locked') })}
+    ${TRAY('Changed today', 'eye', TBL('.5fr minmax(0,1.7fr) .9fr .6fr 1.3fr', ['Bill', 'What changed', 'Who', 'When', 'Status'], [['2274', 'One strip of Amoxicillin came back', PERSON('Imran', '', FACE.imran), '4:10 pm', STAT('pri', 'undo', 'Refund ₹96')], ['2259', 'Discount raised from 5% to 8%', PERSON('Padma', 'amber'), '1:22 pm', STAT('ok', 'tick', 'Inside her limit')], ['—', 'An expired strip was scanned', PERSON('Imran', '', FACE.imran), '11:02 am', STAT('bad', 'lock', 'Stopped at the counter')]]), { lead: 1, cls: 'is--fill', right: CHIP('Today', 1) + CHIP('This week') })}
+    ${BAR('<b>₹50</b> less in one drawer today<small>Nothing is rounded away. The owner sees the same page on his phone.</small>', BTN('Count again', 'is--ghost') + BTN('Close the day', '', 'lock'))}</div>`, 'rao'),
+
+  cash: () => APP('money', '', `${HD('Cash calendar', 'The next 14 days: what goes out, what comes in.')}
+    <div class="a-body">${KPIS([['To pay in 30 days', 'rupee', '₹61,730', '4', 'ink', 'bills'], ['Heavy day', 'alert', '15 Oct', '₹31,075', 'bad', 'goes out'], ['To collect', 'wallet', '₹2,960', '3', 'ink', 'customers'], ['GST to pay', 'file', '₹3,390', 'By', 'ink', '20 October']])}
+    <div class="a-split" style="--side:540px">
+      ${TRAY('Going out, day by day', 'chart', `<div class="u-card" style="display:flex;flex-direction:column;gap:6px;padding:14px 16px 10px 18px"><div class="h-big"><b class="u-num">₹62,305</b><span class="u-delta"><b class="u-bad">4 payments</b>in the next 14 days</span></div>${PLOT([1, 46, 1, 1, 24, 1, 1, 78, 1, 1, 1, 1, 8, 1], 7, '15 Oct : ₹31,075', ['0', '10k', '20k', '30k', '40k'], ['8 Oct', '10', '12', '14', '16', '18', '20 Oct'], 0)}</div>`, { lead: 1 })}
+      ${TRAY('In order of date', 'calendar', TBL('.55fr minmax(0,1.7fr) .7fr 1.05fr', ['Date', 'What', 'Amount', 'Status'], [{ c: 'is--warn', v: ['9 Oct', 'Pay Krishna Pharma', '<b>₹18,200</b>', STAT('warn', 'clock', 'Tomorrow')] }, ['12 Oct', 'Pay Godavari Dist.', '<b>₹9,640</b>', STAT('ok', 'calendar', 'In 4 days')], { c: 'is--bad', v: ['15 Oct', 'Pay Sri Venkat Pharma', '<b>₹31,075</b>', STAT('bad', 'alert', 'Heavy day')] }, ['20 Oct', 'GST for September', '<b>₹3,390</b>', STAT('ok', 'calendar', 'In 12 days')], ['Any day', 'Collect from Venkatesh', '<b class="u-ok">+₹1,640</b>', STAT('pri', 'bell', 'Remind')]], 'is--tall'), { lead: 1, cls: 'is--fill' })}
+    </div>
+    ${BAR('<b>15 October</b> is the heavy day: ₹31,075 to Sri Venkat Pharma<small>You are told a week before, so the money is ready.</small>', BTN('Remind who owes you', 'is--ghost', 'bell') + BTN('Plan the payments', '', 'calendar'))}</div>`, 'rao'),
+
+  /* ----- Look ahead ----- */
+  ask: () => APP('home', '', `${HD('Ask the app', 'Tap a question, or type your own. In English or in Telugu.')}
+    <div class="a-body"><div class="a-split" style="--side:548px">
+      ${TRAY('Your question', 'search', `<div class="u-card u-col"><div class="u-find">${KI('search')}<b>What will run out this week?</b><i class="u-caret" style="margin-left:0"></i></div>
+        <small class="u-lbl">Ready questions. One tap.</small>
+        <div class="u-pick">${['What is low today?', 'What expires this month?', 'How much do I owe Krishna Pharma?', 'Who has not paid me?', 'What sold most this week?', 'How was yesterday?'].map(q => CHIP(q)).join('')}</div>
+        <small class="u-lbl">In Telugu too</small>
+        <div class="u-pick"><span class="u-chip" lang="te">ఈ రోజు అమ్మకాలు ఎంత?</span><span class="u-chip" lang="te">ఏ మందులు తక్కువగా ఉన్నాయి?</span></div>
+        ${NOTE('info', 'Every answer shows where its numbers came from.')}</div>`, { lead: 1, cls: 'is--fill' })}
+      ${TRAY('The answer', 'chat', `<div class="u-card u-col"><div><b class="u-num">7 medicines</b><span class="u-delta">will run out before Friday, at the speed they sell now</span></div>
+        <div class="u-tbl" style="--cols:minmax(0,1.6fr) .45fr 1fr;padding:0;margin:0 -6px">${[[0, 4, 3, 'Out in 2 days'], [4, 3, 3, 'Out in 3 days'], [1, 6, 2, 'Out in 5 days'], [2, 7, 2, 'Out in 5 days']].map(([k, have, lv, t]) => ROW([MEDC(MED[k], `Sells ${[18, 8, 11, 0, 9][k]} strips a week`), `<b class="u-bad">${have}</b>`, LVL(lv, t)])).join('')}</div>
+        ${STAT('ok', 'tick', 'From today’s stock and 30 days of bills')}
+        <div class="b-two" style="margin-top:auto">${BTN('Add all 7 to the order', 'is--wide', 'plus')}${BTN('Show all 7', 'is--ghost is--wide')}</div></div>`, { lead: 1, cls: 'is--fill' })}
+    </div></div>`, 'rao'),
+
+  score: () => APP('reports', '', `${HD('Your store this week', 'Monday 5 to Sunday 11 October. One thing to do for each number.')}
+    <div class="a-body">${KPIS([['Store score', 'star', '82', '+4', 'ok', 'vs last week', [70, 72, 71, 75, 76, 78, 78, 82]], ['Found on the shelf', 'box', '92%', '−1.3%', 'bad', 'vs last week', [16, 12, 14, 19, 13, 14, 20, 21, 12, 15]], ['Lost to expiry', 'alert', '₹134', '−₹410', 'ok', 'vs last month'], ['Regulars who came back', 'users', '71%', '+9%', 'ok', 'after a reminder', [5, 6, 6, 7, 8, 8, 9]]])}
+    ${TRAY('One thing to do for each', 'list', TBL('minmax(0,1.5fr) .62fr .9fr minmax(0,1.6fr) 150px', ['What we measure', 'This week', 'How it stands', 'Do this', ''],
+      [[ROWI('box', 'Found on the shelf', 'Asked for, and in stock'), '<b>92%</b>', METER(92, 'warn'), 'Order the 7 medicines people asked for', BTN('Add to order', 'is--ghost is--sm', 'plus')],
+        [ROWI('clock', 'Lost to expiry', 'Stock that passed its date'), '<b>₹134</b>', METER(96, 'ok'), 'Send back 1 medicine before 26 October', BTN('Start the return', 'is--ghost is--sm', 'undo')],
+        [ROWI('users', 'Regulars who came back', 'After a refill reminder'), '<b>71%</b>', METER(71, 'ok'), 'Remind 4 people who are a week late', BTN('Remind them', 'is--ghost is--sm', 'bell')],
+        [ROWI('rupee', 'Bills paid on time', 'To distributors'), '<b>96%</b>', METER(96, 'ok'), 'Pay Krishna Pharma tomorrow: ₹18,200', BTN('Pay now', 'is--ghost is--sm', 'rupee')]], 'is--tall'), { lead: 1, cls: 'is--fill', right: CHIP('This week', 1) + CHIP('Last 8 weeks') })}
+    ${BAR('<b>82 out of 100</b> this week. Four more than last week.<small>The same page reaches the owner’s phone every Monday morning.</small>', BTN('Share with the staff', 'is--ghost', 'send'))}</div>`, 'rao'),
+
+  forecast: () => APP('reports', '', `${HD('Next week, worked out', 'From your own bills: the season, the weekday, what really sells.')}
+    <div class="a-body">${KPIS([['Sales expected next week', 'trend', '₹1.42 lakh', '+6%', 'ok', 'vs this week', [12, 14, 13, 15, 16, 15, 17, 18]], ['Will run out', 'alert', '7', 'medicines', 'bad', 'before Friday'], ['Season now', 'calendar', 'Monsoon', '+38%', 'ink', 'fever and cold'], ['Order to place', 'list', '₹18,400', '9', 'ink', 'medicines']])}
+    <div class="a-split" style="--side:520px">
+      ${TRAY('Sales, day by day', 'chart', `<div class="u-card" style="display:flex;flex-direction:column;gap:6px;padding:14px 16px 10px 18px"><div class="h-big"><b class="u-num">₹1,42,000</b><span class="u-delta"><b class="u-ok">+6%</b>expected next week</span></div>${PLOT([58, 66, 49, 62, 71, 44, 60, 64, 70, 55, 66, 76, 50, 63], 6, 'Today : ₹21,400', ['0', '8k', '16k', '24k', '32k'], ['2 Oct', '4', '6', '8 Oct', '10', '12', '14 Oct'], 3, 6)}</div>`, { lead: 1, right: STAT('pri', 'trend', 'Striped bars are expected') })}
+      ${TRAY('Have these ready', 'box', TBL('minmax(0,1.5fr) .45fr .5fr 100px', ['Medicine', 'Have', 'Need', 'Order'], [[MEDC(MED[0], 'Fever season'), '<b class="u-bad">4</b>', '26', QTY(24)], [MEDC(MED[5], 'Colds, this month'), '12', '21', QTY(10)], [MEDC(MED[4], 'Sells steadily'), '<b class="u-bad">3</b>', '9', QTY(10)], [MEDC(MED[8], 'After the rains'), '8', '14', QTY(10)], [MEDC(MED[9], 'Fever season'), '<b class="u-bad">2</b>', '6', QTY(4)]], 'is--tall'), { lead: 1, cls: 'is--fill' })}
+    </div>
+    ${BAR('<b>7 medicines</b> will run out before next Friday<small>The numbers get better each month. You can change any of them.</small>', BTN('Add all to the order', '', 'plus'))}</div>`, 'rao'),
+
+  risk: () => LIST('stock', 'expiry', 'Will it sell before its date?', 'Each batch, at the speed it really sells.', [['Will not sell in time', 'hourglass', '₹1,088', '4', 'bad', 'batches'], ['Can still go back', 'undo', '₹651', '2', 'ok', 'inside the return date'], ['Next return date', 'calendar', '31 Oct', '23 days', 'bad', 'left to send back'], ['Saved this year', 'tick', '₹18,400', '11', 'ok', 'credit notes', [2, 3, 5, 6, 8, 11, 14, 18]]], 'Four batches will outlast their date', 'hourglass', CHIP('At risk', 1, 4) + CHIP('All batches'), 'minmax(0,1.5fr) .45fr .8fr .8fr .8fr 1.3fr 18px', ['Medicine', 'Have', 'Sells a month', 'Expires', 'Will be left', 'Best move', ''],
+    [{ c: 'is--bad', v: [MEDC(MED[9], 'From Sri Venkat Pharma'), '30', '8 sachets', '29 Nov 2026', '<b class="u-bad">16 sachets</b>', STAT('pri', 'undo', 'Send back by 31 Oct'), MORE] }, [MEDC(MED[6], 'Batch VD1180'), '20', '3 strips', 'Mar 2027', '<b class="u-bad">5 strips</b>', STAT('pri', 'swap', 'Move to Bus stand'), MORE], [MEDC(MED[8], 'From Godavari Distributors'), '8', '4 strips', '18 Nov 2026', '<b class="u-bad">3 strips</b>', STAT('pri', 'undo', 'Send back by 31 Oct'), MORE], [MEDC(MED[5], 'Batch CT2217'), '12', '16 strips', '26 Oct 2026', '<b class="u-bad">2 strips</b>', STAT('ok', 'tag', 'Offer 10% off'), MORE]],
+    BAR('<b>₹1,088</b> will expire on the shelf unless something changes<small>You are told while the distributor still takes it back.</small>', BTN('Offer 10% off', 'is--ghost', 'tag') + BTN('Start the returns', '', 'undo'))),
+
+  /* ----- The distributor's side: a free page, no app ----- */
+  desk: () => `<div class="a-side"><div class="a-brand"><i class="a-logo">${CAP}</i><b>Pharmacy OS</b>${KI('panel')}</div><div class="a-dash"></div>${INP('Search orders', 'Ctrl K')}
+    <div class="a-cap">Order desk</div>${[['list', 'Orders', 7, 1], ['file', 'Bills sent'], ['tag', 'Rates and schemes'], ['store', 'Stores'], ['rupee', 'Payments']].map(([ic, t, n, on]) => `<span class="a-nav${on ? ' on' : ''}">${KI(ic)}${t}${n ? `<em>${n}</em>` : ''}</span>`).join('')}
+    <div class="a-cap">Support</div><span class="a-nav">${KI('headset')}Help in Telugu</span><span class="a-nav">${KI('gear')}Settings</span>
+    <div class="a-user">${AV('', '', FACE.ramesh)}<span><b>Ramesh</b>${DSHORT}</span>${KI('updown')}</div></div>
+    <div class="a-main">${HD('Orders from your stores', `${DIST}. Thursday, 8 October.`)}
+    <div class="a-body">${KPIS([['New orders', 'list', '7', '₹48,300', 'ink', 'today'], ['To pack', 'box', '4', '3', 'ok', 'packed'], ['Schemes live', 'tag', '4', 'Seen by', 'ink', 'every store'], ['To collect', 'wallet', '₹1.84 lakh', '₹18,200', 'bad', 'due tomorrow']])}
+    ${TRAY('Today’s orders', 'list', TBL('minmax(0,1.6fr) 1fr .45fr .6fr 1.35fr 1.2fr 106px', ['Store', 'Order', 'Lines', 'Value', 'Status', 'Bill file', ''],
+      [{ c: 'is--warn', v: [WHOC(STORE, 'Main road', 'amber'), '1042, 10:42 am', '6', '<b>₹3,060</b>', STAT('warn', 'alert', 'Short: Pantoprazole'), STAT('pri', 'clock', 'Not sent yet'), BTN('Send file', 'is--ghost is--sm', 'upload')] },
+        [WHOC('Sri Sai Medicals', 'Bus stand road', 'vio'), '311, 10:15 am', '14', '<b>₹9,420</b>', STAT('ok', 'box', 'Packed'), STAT('pri', 'clock', 'Not sent yet'), BTN('Send file', 'is--ghost is--sm', 'upload')],
+        [WHOC('Lakshmi Medicals', 'Temple street', 'ok'), '87, 9:50 am', '9', '<b>₹5,180</b>', STAT('pri', 'truck', 'On the way'), STAT('ok', 'tick', 'File sent'), ''],
+        [WHOC('New Life Pharmacy', 'Hospital gate', 'ink'), '164, 9:20 am', '22', '<b>₹14,760</b>', STAT('ok', 'tick', 'Received'), STAT('ok', 'tick', 'Imported'), ''],
+        [WHOC('Balaji Medicals', 'Market road', 'amber'), '52, 9:05 am', '11', '<b>₹6,240</b>', STAT('pri', 'eye', 'New. Not opened.'), '—', BTN('Open', 'is--ghost is--sm')]], 'is--tall'), { lead: 1, cls: 'is--fill', right: CHIP('New', 1, 7) + CHIP('Packed', 0, 3) + CHIP('Sent', 0, 5) })}
+    ${BAR('<b>One file for the whole day.</b> Export today’s bills and drop the file here.<small>Each store gets its own bill and adds it to stock in one click. Free for distributors.</small>', BTN('Post a scheme', 'is--ghost', 'tag') + BTN('Upload the bill file', '', 'upload'))}</div></div>`,
 
   /* ----- Phone-only artboards ----- */
   dlink: () => DLINK,
@@ -4419,8 +4662,8 @@ function initDemo() {
   const root = $('#demo');
   if (!root) return;
   const L = {
-    en: { order: 'Order', recv: 'Receive', langL: 'Language', reset: 'Start again', add: 'Add a medicine', ph: 'Type three letters, like “par”', hist: 'From your own history', low: 'Running low in your shop', have: n => `You have ${n}`, usual: n => `You usually order ${n}`, newMed: q => `Add “${q}” as a new medicine`, saved: 'Saved for next time', inOrder: 'In the order', tip: 'Try “par”, “met”, or a wrong spelling like “amoxilin”.', toOrder: 'This order', items: n => `${n} ${n === 1 ? 'medicine' : 'medicines'}`, about: 'about', send: 'Send on WhatsApp', empty: 'Nothing here yet. Add a medicine.', sentT: 'Sent on WhatsApp', sentMsg: n => `Order 1042 from ${STORE}. ${n} ${n === 1 ? 'medicine' : 'medicines'}, with a PDF and a link.`, reply: '5 available. Pantoprazole: only 6.', arrived: 'The goods have arrived', recvT: 'Receive order 1042', recvS: `${DIST}, their bill KP/3391`, tickAll: 'Tick all that match', of: 'of', scan: 'Scan the pack', short: n => `Short by ${n}. Credit note asked.`, soon: 'Expires in 4 months.', keep: 'Keep', back: 'Send back', kept: 'Kept. Expiry alert set.', sentBack: 'Sent back. Return noted.', needScan: 'Scan the pack to read batch and expiry', match: 'Matches the order', wait: 'Not checked yet', checked: (a, b) => `${a} of ${b} checked`, addStock: 'Add to stock', doneT: 'In stock. Nothing typed.', d1: n => `${n} medicines added to stock, by batch`, d2: 'Purchase entry made by itself', d3: a => `${a} to pay by 7 November`, d4: '4 strips short: credit note asked', d5a: 'Expiry alert set for Cetirizine', d5b: '1 medicine sent back: return noted', fields: 'Fields typed', fNote: 'The same bill, typed by hand: 6 lines × 7 fields.', again: 'Do it again', taps: 'Taps', secs: 'Seconds', isNew: 'New', arrivedA: 'Arrived', pack: 'New medicine', size: 'Text size', smaller: 'Small text', mid: 'Medium text', larger: 'Large text', remove: 'Remove', less: 'One less', more: 'One more', cMed: 'Medicine', cBatch: 'Batch', cExp: 'Expires', cSt: 'Status' },
-    te: { order: 'ఆర్డర్', recv: 'వచ్చిన సరుకు', langL: 'భాష', reset: 'మళ్లీ మొదలు', add: 'మందు చేర్చండి', ph: 'మూడు అక్షరాలు టైప్ చేయండి, ఉదా: “par”', hist: 'మీరు ఇంతకు ముందు వాడినవి', low: 'మీ షాపులో తక్కువగా ఉన్నవి', have: n => `మీ దగ్గర ${n} ఉన్నాయి`, usual: n => `సాధారణంగా ${n} ఆర్డర్ చేస్తారు`, newMed: q => `“${q}” కొత్త మందుగా చేర్చు`, saved: 'తర్వాత కోసం సేవ్ అవుతుంది', inOrder: 'ఆర్డర్‌లో ఉంది', tip: '“par”, “met” లేదా తప్పు స్పెల్లింగ్ “amoxilin” ప్రయత్నించండి.', toOrder: 'ఈ ఆర్డర్', items: n => `${n} మందులు`, about: 'సుమారు', send: 'వాట్సాప్‌లో పంపు', empty: 'ఇంకా ఏమీ లేదు. మందు చేర్చండి.', sentT: 'వాట్సాప్‌లో పంపాం', sentMsg: n => `${STORE} నుండి ఆర్డర్ 1042. ${n} మందులు, PDF మరియు లింక్‌తో.`, reply: '5 ఉన్నాయి. Pantoprazole: 6 మాత్రమే.', arrived: 'సరుకు వచ్చింది', recvT: 'వచ్చిన సరుకు: ఆర్డర్ 1042', recvS: `${DIST}, వారి బిల్ KP/3391`, tickAll: 'సరిపోయినవన్నీ టిక్ చేయి', of: '/', scan: 'ప్యాక్ స్కాన్ చేయి', short: n => `${n} తక్కువ వచ్చాయి. క్రెడిట్ నోట్ అడిగాం.`, soon: '4 నెలల్లో గడువు ముగుస్తుంది.', keep: 'ఉంచు', back: 'వెనక్కి పంపు', kept: 'ఉంచాం. గడువు హెచ్చరిక పెట్టాం.', sentBack: 'వెనక్కి పంపాం. రిటర్న్ నమోదైంది.', needScan: 'బ్యాచ్, గడువు కోసం ప్యాక్ స్కాన్ చేయండి', match: 'ఆర్డర్‌తో సరిపోయింది', wait: 'ఇంకా చూడలేదు', checked: (a, b) => `${b} లో ${a} పూర్తి`, addStock: 'స్టాక్‌లో చేర్చు', doneT: 'స్టాక్‌లో చేరింది. ఏమీ టైప్ చేయలేదు.', d1: n => `${n} మందులు బ్యాచ్ వారీగా స్టాక్‌లో చేరాయి`, d2: 'కొనుగోలు ఎంట్రీ దానంతట అదే అయింది', d3: a => `${a}, 7 నవంబర్ లోపు చెల్లించాలి`, d4: '4 స్ట్రిప్‌లు తక్కువ: క్రెడిట్ నోట్ అడిగాం', d5a: 'Cetirizine కు గడువు హెచ్చరిక పెట్టాం', d5b: '1 మందు వెనక్కి పంపాం: రిటర్న్ నమోదైంది', fields: 'టైప్ చేసిన ఫీల్డ్‌లు', fNote: 'అదే బిల్ చేత్తో టైప్ చేస్తే: 6 లైన్లు × 7 ఫీల్డ్‌లు.', again: 'మళ్లీ చేయి', taps: 'ట్యాప్‌లు', secs: 'సెకన్లు', isNew: 'కొత్త', arrivedA: 'వచ్చింది', pack: 'కొత్త మందు', size: 'అక్షరాల పరిమాణం', smaller: 'చిన్న అక్షరాలు', mid: 'మధ్యస్థ అక్షరాలు', larger: 'పెద్ద అక్షరాలు', remove: 'తీసివేయి', less: 'ఒకటి తగ్గించు', more: 'ఒకటి పెంచు', cMed: 'మందు', cBatch: 'బ్యాచ్', cExp: 'గడువు', cSt: 'స్థితి' }
+    en: { order: 'Order', recv: 'Receive', langL: 'Language', reset: 'Start again', add: 'Add a medicine', ph: 'Type three letters, like “par”', hist: 'From your own history', low: 'Running low in your shop', have: n => `You have ${n}`, usual: n => `You usually order ${n}`, newMed: q => `Add “${q}” as a new medicine`, saved: 'Saved for next time', inOrder: 'In the order', tip: 'Try “par”, “met”, or a wrong spelling like “amoxilin”.', toOrder: 'This order', items: n => `${n} ${n === 1 ? 'medicine' : 'medicines'}`, about: 'about', send: 'Send on WhatsApp', empty: 'Nothing here yet. Add a medicine.', sentT: 'Sent on WhatsApp', sentMsg: n => `Order 1042 from ${STORE}. ${n} ${n === 1 ? 'medicine' : 'medicines'}, with a PDF and a link.`, reply: '5 available. Pantoprazole: only 6.', arrived: 'The goods have arrived', recvT: 'Receive order 1042', recvS: `${DIST}, their bill KP/3391`, imp: 'Import the bill file', impDone: 'KP-3391.xlsx read. 6 lines laid beside your order.', tickAll: 'Tick all that match', of: 'of', scan: 'Scan the pack', short: n => `Short by ${n}. Credit note asked.`, soon: 'Expires in 4 months.', keep: 'Keep', back: 'Send back', kept: 'Kept. Expiry alert set.', sentBack: 'Sent back. Return noted.', needScan: 'Scan the pack to read batch and expiry', match: 'Matches the order', wait: 'Not checked yet', checked: (a, b) => `${a} of ${b} checked`, addStock: 'Add to stock', doneT: 'In stock. Nothing typed.', d1: n => `${n} medicines added to stock, by batch`, d2: 'Purchase entry made by itself', d3: a => `${a} to pay by 7 November`, d4: '4 strips short: credit note asked', d5a: 'Expiry alert set for Cetirizine', d5b: '1 medicine sent back: return noted', fields: 'Fields typed', fNote: 'The same bill, typed by hand: 6 lines × 7 fields.', again: 'Do it again', taps: 'Taps', secs: 'Seconds', isNew: 'New', arrivedA: 'Arrived', pack: 'New medicine', size: 'Text size', smaller: 'Small text', mid: 'Medium text', larger: 'Large text', remove: 'Remove', less: 'One less', more: 'One more', cMed: 'Medicine', cBatch: 'Batch', cExp: 'Expires', cSt: 'Status' },
+    te: { order: 'ఆర్డర్', recv: 'వచ్చిన సరుకు', langL: 'భాష', reset: 'మళ్లీ మొదలు', add: 'మందు చేర్చండి', ph: 'మూడు అక్షరాలు టైప్ చేయండి, ఉదా: “par”', hist: 'మీరు ఇంతకు ముందు వాడినవి', low: 'మీ షాపులో తక్కువగా ఉన్నవి', have: n => `మీ దగ్గర ${n} ఉన్నాయి`, usual: n => `సాధారణంగా ${n} ఆర్డర్ చేస్తారు`, newMed: q => `“${q}” కొత్త మందుగా చేర్చు`, saved: 'తర్వాత కోసం సేవ్ అవుతుంది', inOrder: 'ఆర్డర్‌లో ఉంది', tip: '“par”, “met” లేదా తప్పు స్పెల్లింగ్ “amoxilin” ప్రయత్నించండి.', toOrder: 'ఈ ఆర్డర్', items: n => `${n} మందులు`, about: 'సుమారు', send: 'వాట్సాప్‌లో పంపు', empty: 'ఇంకా ఏమీ లేదు. మందు చేర్చండి.', sentT: 'వాట్సాప్‌లో పంపాం', sentMsg: n => `${STORE} నుండి ఆర్డర్ 1042. ${n} మందులు, PDF మరియు లింక్‌తో.`, reply: '5 ఉన్నాయి. Pantoprazole: 6 మాత్రమే.', arrived: 'సరుకు వచ్చింది', recvT: 'వచ్చిన సరుకు: ఆర్డర్ 1042', recvS: `${DIST}, వారి బిల్ KP/3391`, imp: 'బిల్ ఫైల్ దిగుమతి చేయి', impDone: 'KP-3391.xlsx చదివాం. 6 లైన్లు మీ ఆర్డర్ పక్కన పెట్టాం.', tickAll: 'సరిపోయినవన్నీ టిక్ చేయి', of: '/', scan: 'ప్యాక్ స్కాన్ చేయి', short: n => `${n} తక్కువ వచ్చాయి. క్రెడిట్ నోట్ అడిగాం.`, soon: '4 నెలల్లో గడువు ముగుస్తుంది.', keep: 'ఉంచు', back: 'వెనక్కి పంపు', kept: 'ఉంచాం. గడువు హెచ్చరిక పెట్టాం.', sentBack: 'వెనక్కి పంపాం. రిటర్న్ నమోదైంది.', needScan: 'బ్యాచ్, గడువు కోసం ప్యాక్ స్కాన్ చేయండి', match: 'ఆర్డర్‌తో సరిపోయింది', wait: 'ఇంకా చూడలేదు', checked: (a, b) => `${b} లో ${a} పూర్తి`, addStock: 'స్టాక్‌లో చేర్చు', doneT: 'స్టాక్‌లో చేరింది. ఏమీ టైప్ చేయలేదు.', d1: n => `${n} మందులు బ్యాచ్ వారీగా స్టాక్‌లో చేరాయి`, d2: 'కొనుగోలు ఎంట్రీ దానంతట అదే అయింది', d3: a => `${a}, 7 నవంబర్ లోపు చెల్లించాలి`, d4: '4 స్ట్రిప్‌లు తక్కువ: క్రెడిట్ నోట్ అడిగాం', d5a: 'Cetirizine కు గడువు హెచ్చరిక పెట్టాం', d5b: '1 మందు వెనక్కి పంపాం: రిటర్న్ నమోదైంది', fields: 'టైప్ చేసిన ఫీల్డ్‌లు', fNote: 'అదే బిల్ చేత్తో టైప్ చేస్తే: 6 లైన్లు × 7 ఫీల్డ్‌లు.', again: 'మళ్లీ చేయి', taps: 'ట్యాప్‌లు', secs: 'సెకన్లు', isNew: 'కొత్త', arrivedA: 'వచ్చింది', pack: 'కొత్త మందు', size: 'అక్షరాల పరిమాణం', smaller: 'చిన్న అక్షరాలు', mid: 'మధ్యస్థ అక్షరాలు', larger: 'పెద్ద అక్షరాలు', remove: 'తీసివేయి', less: 'ఒకటి తగ్గించు', more: 'ఒకటి పెంచు', cMed: 'మందు', cBatch: 'బ్యాచ్', cExp: 'గడువు', cSt: 'స్థితి' }
   };
   /* The shop's history: name, pack, in stock, usual order, last rate, other spellings people type, pack photo */
   const HIST = [
@@ -4438,7 +4681,7 @@ function initDemo() {
   ];
   /* The order that arrives: [history index, ordered, came, batch, expiry] */
   const ARR = [[0, 20, 20, 'PK2291', '08/2028'], [3, 10, 10, 'AX7730', '03/2028'], [4, 15, 15, 'MF1184', '11/2027'], [5, 12, 12, 'TL5521', '06/2028'], [2, 10, 6, 'PZ0917', '01/2028'], [6, 10, 10, 'CT3340', '02/2027']];
-  const fresh = () => ({ tab: 'order', sent: false, order: [{ i: 3, qty: 10 }, { i: 4, qty: 15 }], rows: ARR.map(() => ({ s: 'todo', scanned: false })), done: false, taps: 0, t0: 0, t1: 0 });
+  const fresh = () => ({ tab: 'order', sent: false, order: [{ i: 3, qty: 10 }, { i: 4, qty: 15 }], rows: ARR.map(() => ({ s: 'todo', scanned: false })), imp: false, done: false, taps: 0, t0: 0, t1: 0 });
   let st = fresh(), lang = 'en', z = 1, timer = 0;
   const t = () => L[lang];
   const svg = (id, k) => `<svg viewBox="0 0 ${k ? 24 : 16} ${k ? 24 : 16}" aria-hidden="true"><use href="#${k ? 'k' : 'i'}-${id}"/></svg>`;
@@ -4501,7 +4744,7 @@ function initDemo() {
       return `<div class="dm__done"><section class="dm__tray"><header><span>${t().doneT}</span></header><div class="dm__card"><ul class="dm__ok"><li>${t().d1(n)}</li><li>${t().d2}</li><li>${t().d3(rs(amt))}</li><li>${t().d4}</li><li>${backd ? t().d5b : t().d5a}</li></ul></div></section><div class="dm__score"><div><p>${t().fields}</p><b class="is--big">0 <span>/ 42</span></b></div><p>${t().fNote}</p><button class="dm__btn" type="button" data-reset>${t().again}</button></div></div>`;
     }
     const all = resolved() === ARR.length;
-    return `<section class="dm__tray"><header><span>${t().recvT}</span><em>${esc(t().recvS)}</em><button class="dm__btn is--ghost is--sm" type="button" data-all>${svg('ticks', 1)}${t().tickAll}</button></header><div class="dm__card is--flush"><div class="dm__r is--h" aria-hidden="true"><span></span><span>${t().cMed}</span><span>${t().arrivedA}</span><span class="dm__be"><span>${t().cBatch}</span><span>${t().cExp}</span></span><span>${t().cSt}</span></div><ul class="dm__rows">${ARR.map(rowHTML).join('')}</ul></div></section>
+    return `<section class="dm__tray"><header><span>${t().recvT}</span><em>${esc(t().recvS)}</em><span class="dm__hbtns"><button class="dm__btn is--sm${!st.imp && resolved() ? ' is--ghost' : ''}" type="button" data-imp${st.imp ? ' disabled' : ''}>${svg('upload', 1)}${t().imp}</button><button class="dm__btn is--ghost is--sm" type="button" data-all>${svg('ticks', 1)}${t().tickAll}</button></span></header><div class="dm__card is--flush">${st.imp ? `<p class="dm__imp">${svg('tick', 1)}${t().impDone}</p>` : ''}<div class="dm__r is--h" aria-hidden="true"><span></span><span>${t().cMed}</span><span>${t().arrivedA}</span><span class="dm__be"><span>${t().cBatch}</span><span>${t().cExp}</span></span><span>${t().cSt}</span></div><ul class="dm__rows">${ARR.map(rowHTML).join('')}</ul></div></section>
       <div class="dm__act"><p aria-live="polite"><b>${t().checked(resolved(), ARR.length)}</b></p><button class="dm__btn" type="button" data-stock${all ? '' : ' disabled'}>${t().addStock}${svg('arrow', 1)}</button></div>`;
   }
   function sum() { const el = $('#dm-sum', root); if (el) el.innerHTML = `<b>${t().items(st.order.length)}</b>${st.order.length ? `, ${t().about} ${rs(total())}` : ''}`; const b = $('[data-send]', root); if (b) b.disabled = !st.order.length; }
@@ -4538,6 +4781,7 @@ function initDemo() {
     if ('send' in d) { st.sent = true; body(); return; }
     if ('tick' in d) { const r = st.rows[+d.tick]; r.s = r.s === 'ok' ? 'todo' : 'ok'; }
     if ('all' in d) st.rows.forEach((r, k) => { if (k < 4) r.s = 'ok'; });
+    if ('imp' in d) { st.imp = true; st.rows.forEach((r, k) => { if (k < 4) r.s = 'ok'; }); st.rows[5].scanned = true; }
     if ('scan' in d) st.rows[+d.scan].scanned = true;
     if ('keep' in d) st.rows[+d.keep].s = 'ok';
     if ('back' in d) st.rows[+d.back].s = 'back';
@@ -4559,6 +4803,8 @@ function initJobs() {
   tabs.innerHTML = C.jobs.map((j, i) => `<button class="jt" type="button" role="tab" data-job="${i}" aria-selected="${i === 0}"><i>${kicon(j.icon)}</i><b>${esc(j.name)}</b><span>${esc(j.line)}</span></button>`).join('');
   const paint = () => {
     $$('.jt', tabs).forEach((b, i) => b.setAttribute('aria-selected', String(i === job)));
+    const n = C.jobs[job].f.length;
+    feats.style.setProperty('--cols', String(n <= 5 ? n : Math.ceil(n / 2)));
     feats.innerHTML = C.jobs[job].f.map((f, i) => `<button class="jf" type="button" data-feat="${i}" aria-pressed="${i === feat}"><b>${esc(f[0])}</b><span>${esc(f[2])}</span></button>`).join('');
     const cur = $('#job-screen'); cur.outerHTML = `<span class="s" id="job-screen">${V[C.jobs[job].f[feat][1]]()}</span>`;
   };
@@ -4734,6 +4980,8 @@ function initCalc() {
     const timeYear = hours * wage * 12, expYear = exp * cut, year = timeYear + expYear;
     tweenText($('#o-year'), year, rs);
     $('#o-split').textContent = `${rs(timeYear)} of staff time and ${rs(expYear)} of stock that does not expire`;
+    const back = year / 6000;
+    $('#o-pay').textContent = (back >= 10 ? String(Math.round(back)) : back.toFixed(1).replace(/\.0$/, '')) + '×';
     tweenText($('#o-hours'), hours, v => String(Math.round(v)));
     tweenText($('#o-fields'), bills * lines * 7 * days, fmtIN);
     const max = Math.max(perBillToday, 1);
@@ -4754,7 +5002,7 @@ function initCalc() {
 /* ---------- 12 Our costs ---------- */
 function initCosts() {
   const box = $('.serve-cost');
-  let meter = 0;
+  let meter = 1;
   const direct = () => C.serve.reduce((s, x) => s + (meter && x.meter ? 0 : x.v), 0);
   $('#serve-leg').innerHTML = C.serve.map(x => `<li class="${x.meter ? 'is--meter' : ''}"><b>${esc(x.k)}<em>${rs(x.v)}</em></b><span>${esc(x.s)}</span></li>`).join('');
   $('#build').innerHTML = C.build.map(([k, v, n]) => `<li><span>${esc(k)}</span><b>${esc(v)}</b><i style="--w:${(n / 150 * 100).toFixed(0)}%"></i></li>`).join('');
@@ -4763,11 +5011,11 @@ function initCosts() {
   unit.innerHTML = C.unit.map(([k, v, s]) => `<tr><td>${esc(k)}</td><td>${esc(v)}</td><td>${esc(s)}</td></tr>`).join('');
   const PMAX = 50000;
   $('#prices').innerHTML = C.prices.map(p => `<li><b>${esc(p.n)}</b><div class="pr__track"><i style="--l:${(p.lo / PMAX * 100).toFixed(1)}%;--w:${((p.hi - p.lo) / PMAX * 100).toFixed(1)}%"></i></div><small>${rs(p.lo)} to ${rs(p.hi)} ${esc(p.s)}</small></li>`).join('')
-    + `<li class="is--us"><b>Pharmacy OS</b><div class="pr__track"><i style="--l:4%;--w:12%"></i></div><small>Not set. Below what a store pays today.</small></li>`;
+    + `<li class="is--us"><b>Pharmacy OS</b><div class="pr__track"><i style="--l:0%;--w:12%"></i></div><small>Under ₹6,000 a year, the plan. WhatsApp messages as used.</small></li>`;
   const g = id => +$('#' + id).value;
   const update = () => {
     const d = direct();
-    $('#serve-bar').innerHTML = C.serve.map(x => `<i style="flex-grow:${meter && x.meter ? 300 : x.v}">${esc(x.k)}${meter && x.meter ? ' · the store pays' : ''}</i>`).join('');
+    $('#serve-bar').innerHTML = C.serve.map(x => `<i style="flex-grow:${meter && x.meter ? 300 : x.v}">${esc(x.k)}${meter && x.meter ? ' · store pays' : ''}</i>`).join('');
     tweenText($('#o-serve'), d, rs);
     $('#o-serve-m').textContent = fmtIN(d / 12);
     const price = g('r-price'), stores = g('r-stores'), fixed = g('r-fixed');
@@ -4783,7 +5031,7 @@ function initCosts() {
     const left = gp * stores - fixed * 12;
     $('#o-read').innerHTML = !isFinite(be) ? 'At this price a store pays no more than it costs to serve.'
       : left >= 0 ? `At <b>${fmtIN(stores)}</b> stores this covers the team and leaves <b>${lakh(left)}</b> a year.`
-      : `At <b>${fmtIN(stores)}</b> stores this is <b>${lakh(-left)}</b> a year short of the team’s cost. A lower price needs a lower cost to serve: that is why messages can be paid per use.`;
+      : `At <b>${fmtIN(stores)}</b> stores this is <b>${lakh(-left)}</b> a year short of the team’s cost. It needs more stores, or a leaner team.`;
   };
   $$('[data-meter]', box).forEach(b => b.tagName === 'BUTTON' && b.addEventListener('click', () => { meter = +b.dataset.meter; box.dataset.meter = String(meter); $$('button[data-meter]', box).forEach(x => x.setAttribute('aria-pressed', String(x === b))); update(); }));
   bindRanges(['r-price', 'r-stores', 'r-fixed'], update);
@@ -4807,6 +5055,9 @@ function renderLists() {
   $('#lang-pts').innerHTML = C.langPts.map(([a, b]) => `<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join('');
   $('#a11y').innerHTML = C.a11y.map(([a, b, c]) => `<tr><th scope="row">${esc(a)}</th><td>${esc(b)}</td><td>${esc(c)}</td></tr>`).join('');
   $('#movein').innerHTML = C.movein.map(([a, b]) => `<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join('');
+  $('#day-list').innerHTML = C.day.map(([w, t, app, you]) => `<li><time>${esc(w)}</time><h4>${esc(t)}</h4><p class="day__app">${esc(app)}</p><p class="day__you">${kicon('hand', '')}${esc(you)}</p></li>`).join('');
+  $('#desk-pts').innerHTML = C.deskPts.map(([a, b]) => `<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join('');
+  $('#diff').innerHTML = C.diff.map(([k, a, b]) => `<tr><th scope="row">${esc(k)}</th><td>${esc(a)}</td><td>${esc(b)}</td></tr>`).join('');
   $$('[data-screen]').forEach(el => { el.innerHTML = V[el.dataset.screen] ? V[el.dataset.screen]() : ''; });
 }
 

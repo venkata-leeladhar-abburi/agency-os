@@ -21,7 +21,7 @@ const MED = [
   { n: 'Paracetamol 500 mg', p: 'Strip of 10', f: 'strip', img: 3683039 },
   { n: 'Telma 40', p: 'Strip of 15', f: 'strip', img: 13779114 }
 ];
-const FACE = { imran: PEX(13119975, 96, 96, '&crop=focalpoint&fp-x=0.47&fp-y=0.3&fp-z=1.5'), rao: PEX(10823559, 96, 96, '&crop=focalpoint&fp-x=0.27&fp-y=0.32&fp-z=1.25') };
+const FACE = { imran: PEX(13119975, 96, 96, '&crop=focalpoint&fp-x=0.47&fp-y=0.3&fp-z=1.5'), rao: PEX(10823559, 96, 96, '&crop=focalpoint&fp-x=0.27&fp-y=0.32&fp-z=1.25'), ramesh: PEX(36876208, 96, 96, '&crop=focalpoint&fp-x=0.5&fp-y=0.35&fp-z=1') };
 const WHO = { imran: ['Imran', 'Counter 1, Main road'], rao: ['Subba Rao', 'Owner, all stores'] };
 
 /* Parts */
@@ -55,21 +55,26 @@ const SPARK = (v, tone = 'ok') => {
 const TRAY = (title, icon, body, o = {}) => `<section class="u-tray${o.cls ? ' ' + o.cls : ''}"><header>${o.lead ? KI(icon) : ''}<span>${title}</span><span class="sp"></span>${o.right || ''}${o.lead ? '' : KI(icon)}</header>${body}</section>`;
 const KPI = (t, ic, n, d, tone, vs, data) => TRAY(t, ic, `<div class="u-card u-kpi"><div><b class="u-num">${n}</b><span class="u-delta"><b class="u-${tone}">${d}</b>${vs}</span></div>${data ? SPARK(data, tone) : ''}</div>`, { cls: 'is--kpi' });
 const KPIS = items => `<div class="u-kpis" style="--n:${items.length}">${items.map(k => KPI(...k)).join('')}</div>`;
-const PLOT = (v, on, tip, ys, xs, xon) => `<div class="u-plot"><div class="u-bars">${v.map((h, i) => `<i class="${i === on ? 'on' : ''}" style="--h:${h}%">${i === on ? `<span class="u-tip">${tip}</span>` : ''}</i>`).join('')}</div><div class="u-yax">${ys.map(y => `<span>${y}</span>`).join('')}</div><div class="u-xax">${xs.map((x, i) => i === xon ? `<b>${x}</b>` : `<span>${x}</span>`).join('')}</div></div>`;
+const PLOT = (v, on, tip, ys, xs, xon, next = 99) => `<div class="u-plot"><div class="u-bars">${v.map((h, i) => `<i class="${i === on ? 'on' : h < 3 ? 'is--nil' : i > next ? 'is--next' : ''}" style="--h:${h}%">${i === on ? `<span class="u-tip">${tip}</span>` : ''}</i>`).join('')}</div><div class="u-yax">${ys.map(y => `<span>${y}</span>`).join('')}</div><div class="u-xax">${xs.map((x, i) => i === xon ? `<b>${x}</b>` : `<span>${x}</span>`).join('')}</div></div>`;
 const MINI = (v, on) => `<div class="u-mini">${v.map((h, i) => `<i class="${i === on ? 'on' : ''}" style="--h:${h}%"></i>`).join('')}</div>`;
 const FEED = items => `<ul class="u-feed">${items.map(([ic, c, t, time, p]) => `<li style="--c:var(--u-${c})"><i>${KI(ic)}</i><b>${t}</b><time>${time}</time><p>${p}</p></li>`).join('')}</ul>`;
 const STEPS = items => `<ul class="u-steps">${items.map(([a, b, c]) => `<li class="${c || ''}"><i>${c === 'on' ? KI('tick') : ''}</i><div><b>${a}</b><small>${b}</small></div></li>`).join('')}</ul>`;
 const DAYS = [58, 66, 49, 62, 71, 44, 60, 74, 68, 57, 65, 70, 52, 67];
+/* One distributor's offer for a line: rate, then scheme and credit. `on` is the one picked. */
+const CMP = (rate, note, on) => `<span class="u-cmp${on ? ' on' : ''}${rate ? '' : ' is--no'}"><b>${rate ? '₹' + rate : 'Not stocked'}</b><small>${note}</small></span>`;
+const METER = (w, tone = 'pri') => `<span class="u-meter" style="--c:var(--u-${{ ok: 'ok-l', warn: 'warn', bad: 'bad-l' }[tone] || 'pri'})"><i style="--w:${w}%"></i></span>`;
+const ROWI = (icon, t, sub) => `<span class="u-med"><span class="u-ico">${KI(icon)}</span><div><b>${t}</b><small>${sub}</small></div></span>`;
+const ROW = cells => `<div class="u-tr">${cells.map(CELL).join('')}</div>`;
 
 /* The frame every counter screen sits in: grouped words on the left, the work on the right */
 const MENU = [
-  ['Main navigation', [['home', 'grid', 'Overview'], ['bill', 'receipt', 'Billing', 0, [['sell', 'New bill'], ['salereturn', 'Returns'], ['prices', 'Prices and discounts']]], ['buy', 'truck', 'Orders', 12, [['order', 'To order'], ['check', 'Receive'], ['dues', 'Pay distributors']]], ['stock', 'box', 'Stock', 0, [['stock', 'On the shelf'], ['expiry', 'Expiring'], ['lowstock', 'Running low']]], ['cust', 'users', 'Customers']]],
+  ['Main navigation', [['home', 'grid', 'Overview'], ['bill', 'receipt', 'Billing', 0, [['sell', 'New bill'], ['salereturn', 'Returns'], ['prices', 'Prices and discounts']]], ['buy', 'truck', 'Orders', 12, [['order', 'To order'], ['check', 'Receive'], ['watch', 'Claims'], ['dues', 'Pay distributors']]], ['stock', 'box', 'Stock', 0, [['stock', 'On the shelf'], ['expiry', 'Expiring'], ['lowstock', 'Running low']]], ['cust', 'users', 'Customers']]],
   ['Money and reports', [['money', 'rupee', 'Day book'], ['gst', 'file', 'GST and accountant'], ['reports', 'chart', 'Reports']]],
   ['Support', [['help', 'headset', 'Help in Telugu'], ['set', 'gear', 'Settings']]]
 ];
 const SIDE = (on, sub, who = 'imran') => {
   const open = on === 'home' || on === 'cust' ? 'bill' : on;
-  return `<div class="a-side"><div class="a-brand"><i class="a-logo">${CAP}</i><b>Pharmacy OS</b>${KI('panel')}</div><div class="a-dash"></div>${INP('Search anything', 'Ctrl K')}
+  return `<div class="a-side"><div class="a-brand"><i class="a-logo">${CAP}</i><b>Pharmacy OS</b>${KI('panel')}</div><div class="a-dash"></div>${INP('Search or ask', 'Ctrl K')}
     ${MENU.map(([cap, items]) => `<div class="a-cap">${cap}</div>${items.map(([k, ic, t, n, subs]) => `<span class="a-nav${k === on && !sub ? ' on' : ''}">${KI(ic)}${t}${n ? `<em>${n}</em>` : ''}${subs ? KI(k === open ? 'chevu' : 'chevd', 'chev') : ''}</span>${subs && k === open ? subs.map(([sk, st]) => `<span class="a-sub${sk === sub ? ' on' : ''}">${st}</span>`).join('') : ''}`).join('')}`).join('')}
     <div class="a-user">${AV('', '', FACE[who])}<span><b>${WHO[who][0]}</b>${WHO[who][1]}</span>${KI('updown')}</div></div>`;
 };
@@ -106,7 +111,7 @@ const NEEDS = `<div class="m-top"><div><small>Bus stand store</small><b>Order 10
   <div class="m-act">${BTN('Approve', 'is--wide is--lg', 'tick')}${BTN('Open the list', 'is--ghost is--wide')}</div>${TABS(3)}`;
 const DLINK = `<div class="m-url">${KI('lock')}Order link. Opens in the browser.</div><div class="m-top" style="padding-top:14px"><div><small>Order 1042 from</small><b class="m-big">${STORE}</b><small>6 medicines. No login needed.</small></div></div><div class="m-body">
   ${TRAY('Tap what you can send', 'ticks', `<div class="u-card m-list" style="padding:2px 12px">${MED.slice(0, 6).map((m, i) => `<div>${PH(m)}<span><b>${m.n}</b>${m.q} × ${m.p.toLowerCase()}</span>${i === 4 ? BDG('bad', 'alert', 'Only 6') : BDG('ok', 'tick', 'Available')}</div>`).join('')}</div>`)}</div>
-  <div class="m-act">${BTN('Send reply', 'is--wide is--lg', 'send')}${BTN('Attach your bill', 'is--ghost is--wide', 'clip')}</div>`;
+  <div class="m-act">${BTN('Send reply', 'is--wide is--lg', 'send')}${BTN('Attach your bill file', 'is--ghost is--wide', 'clip')}</div>`;
 
 const V = {
   /* ----- Overview: the day in one look, what happened, and what to watch ----- */
@@ -116,7 +121,7 @@ const V = {
       ${KPI('Bills today', 'receipt', '62', '+2%', 'ok', 'vs last week', [8, 9, 14, 12, 15, 13, 17, 14, 16])}
       ${KPI('Found on the shelf', 'box', '92%', '−1.3%', 'bad', 'vs last week', [16, 12, 14, 19, 13, 14, 20, 21, 12, 15])}
       ${TRAY('Latest updates', 'book', `<div class="u-card">${SEG(['Today', 'Yesterday', 'This week'], 0)}${INP('Search activity')}<p class="h-count"><b>8</b>new things today</p>
-        ${FEED([['truck', 'blue', 'Order received', '11:20 AM', `Order <b>1042</b> from ${DSHORT}`], ['user', 'ok-l', 'New customer saved', '11:15 AM', '<b>Lakshmi</b>, with her doctor'], ['swap', 'vio', 'Stock moved', '11:00 AM', '20 strips to <b>Bus stand</b>'], ['alert', 'bad-l', 'Expiry risk', '10:45 AM', '<b>Cetirizine 10 mg</b>, 18 days left'], ['bell', 'warn', 'Refill reminder', '10:30 AM', '<b>Lakshmi</b> replied YES']])}</div>`, { cls: 'h-feed' })}
+        ${FEED([['truck', 'blue', 'Order received', '11:20 AM', 'Order <b>1042</b>: bill read, 3 to check'], ['user', 'ok-l', 'New customer saved', '11:15 AM', '<b>Lakshmi</b>, with her doctor'], ['swap', 'vio', 'Stock moved', '11:00 AM', '20 strips to <b>Bus stand</b>'], ['alert', 'bad-l', 'Expiry risk', '10:45 AM', '<b>Cetirizine 10 mg</b>, 18 days left'], ['bell', 'warn', 'Refill reminder', '10:30 AM', '<b>Lakshmi</b> replied YES']])}</div>`, { cls: 'h-feed' })}
       ${TRAY('Sales in the last 14 days', 'chart', `<div class="u-card"><div class="h-big"><b class="u-num">₹2,71,300</b><span class="u-delta"><b class="u-ok">+8%</b>vs the 14 days before</span></div>${PLOT(DAYS, 13, 'Today : ₹21,400', ['0', '8k', '16k', '24k', '32k'], ['26 Sep', '28', '30', '2 Oct', '4', '6', '8 Oct'], 6)}</div>`, { lead: 1, cls: 'h-chart', right: `<span class="u-chip">${KI('calendar')}Last 14 days${KI('chevd')}</span>` })}
       ${TRAY('Stock to watch', 'eye', TBL('18px minmax(0,1.9fr) .65fr .75fr minmax(0,1.3fr) 1.05fr .7fr .7fr 18px', [CHK(0), 'Medicine', 'Batch', 'Risk', 'Distributor', 'Status', 'Expires', 'Left', ''],
         [[CHK(1), MEDC(MED[5], 'Strip of 10'), 'CT2217', LVL(3, 'High'), PERSON(DSHORT, 'amber'), STAT('bad', 'alert', 'Expiring'), '26 Oct', '18 days', MORE],
@@ -125,7 +130,7 @@ const V = {
     </div>`),
 
   /* ----- Orders ----- */
-  order: () => APP('buy', 'order', `${HD('To order', 'Twelve medicines are running low. Five are in this order.')}
+  order: () => APP('buy', 'order', `${HD('To order', 'Drafted at 6 am from your sales and stock. Check it, then send.')}
     <div class="a-body"><div class="a-split" style="--side:470px">
       ${TRAY('Add a medicine', 'search', `<div class="u-card u-col"><div class="u-find">${KI('search')}<b>par</b><i class="u-caret"></i><span>Type three letters</span></div>
         <div class="u-drop"><small>From your own history</small>
@@ -135,16 +140,17 @@ const V = {
         ${NOTE('info', 'A wrong spelling is fine. “Parasitamol” finds it too.')}
         <div class="u-drop" style="margin-top:6px"><small>Also running low. One tap adds it.</small>
           ${[[6, 6, 10], [8, 5, 10], [9, 2, 4]].map(([k, have, usual]) => `<div class="u-opt">${MEDC(MED[k], `You have ${have}. You usually order ${usual}.`)}${BTN('Add', 'is--ghost is--sm', 'plus')}</div>`).join('')}</div></div>`, { lead: 1, cls: 'is--fill' })}
-      ${TRAY('This order', 'truck', TBL('minmax(0,1fr) auto 64px 18px', null, [1, 2, 3, 4, 5].map(k => [MEDC(MED[k], `You have ${[6, 7, 9, 3, 12][k - 1]}`), QTY(MED[k].q), `>₹${Math.round(MED[k].q * MED[k].r)}`, MORE]), 'is--tall'), { lead: 1, cls: 'is--fill', right: CHIP(DSHORT, 1, 5) + CHIP('Godavari', 0, 3) })}
-    </div>${BAR('<b>5 medicines</b>, about ₹2,670<small>The final amount is fixed when the goods arrive.</small>', BTN('Save for later', 'is--ghost') + BTN('Send on WhatsApp', '', 'send'))}</div>`),
+      ${TRAY('This order', 'truck', TBL('minmax(0,1fr) auto 64px 18px', null, [1, 2, 3, 4, 5].map(k => [MEDC(MED[k], `Have ${[6, 7, 9, 3, 12][k - 1]}. Lasts ${[5, 4, 6, 2, 9][k - 1]} days.`), QTY(MED[k].q), `>₹${Math.round(MED[k].q * MED[k].r)}`, MORE]), 'is--tall'), { lead: 1, cls: 'is--fill', right: CHIP(DSHORT, 1, 5) + CHIP('Godavari', 0, 3) })}
+    </div>${BAR('<b>5 medicines</b>, about ₹2,670<small>The best rate and scheme is picked for each line. You can change any of it.</small>', BTN('Compare distributors', 'is--ghost', 'swap') + BTN('Send on WhatsApp', '', 'send'))}</div>`),
 
-  send: () => DUO(WA_ORDER, 'Order 1042 is with the distributor', 'They got a message, a PDF and a link. No login.', [['Sent on WhatsApp', '10:42 am', 'on'], ['Opened', '10:44 am', 'on'], ['Confirmed: 5 of 6 available', '11:05 am', 'on'], ['Arriving today, with the bill', 'You will tick it in', 'is--now']]),
+  send: () => DUO(WA_ORDER, 'Order 1042, every step in the open', 'A message, a PDF and a link. The distributor needs no login.', [['Sent on WhatsApp', '10:42 am', 'on'], ['Seen by Krishna Pharma', '10:44 am', 'on'], ['Confirmed: 5 of 6. Pantoprazole, only 6.', '11:05 am', 'on'], ['Packed, with the bill file', '1:30 pm', 'on'], ['On the way', 'Arrives by 4 pm', 'is--now']],
+    `<div class="a-act" style="min-height:0;padding:10px 10px 10px 14px"><div><b>4 strips of Pantoprazole are short</b><small>Godavari has them, at ₹58.60 a strip.</small></div><div class="u-row">${BTN('Send to Godavari', 'is--ghost is--sm', 'send')}</div></div>`),
 
-  check: () => APP('buy', 'check', `${HD('Receive order 1042', `From ${DIST}. Their bill is KP/3391.`)}
-    <div class="a-body">${KPIS([['Ordered', 'list', '₹3,060', '6', 'ok', 'medicines'], ['Arrived', 'truck', '₹2,815', '−₹244', 'bad', 'short supply'], ['Checked', 'ticks', '6 of 6', '0', 'ok', 'fields typed'], ['To pay by', 'calendar', '7 Nov', '30', 'ok', 'days credit']])}
-    ${TRAY('Tick what arrived', 'ticks', TBL('28px minmax(0,1.7fr) .7fr .7fr .7fr minmax(0,1.5fr)', [CHK(0, 'is--lg'), 'Medicine', 'Arrived', 'Batch', 'Expires', 'Status'],
-      MED.slice(0, 6).map((m, i) => ({ c: i === 4 ? 'is--bad' : i === 5 ? 'is--warn' : '', v: [CHK(1, 'is--lg'), MEDC(m), i === 4 ? '<b class="u-bad">6 of 10</b>' : `<b>${m.q}</b> of ${m.q}`, m.b, m.e, i === 4 ? STAT('bad', 'alert', 'Short by 4. Credit note asked.') : i === 5 ? STAT('warn', 'clock', 'Expires in 4 months. Kept.') : STAT('ok', 'tick', 'Matches the order')] })), 'is--tall'), { lead: 1, cls: 'is--fill', right: `<span class="u-chip">${KI('ticks')}Tick all that match</span><span class="u-chip">${KI('qr')}Scan a pack</span>` })}
-    ${BAR('<b>6 of 6 checked.</b> Nothing typed.<small>Stock, expiry alerts and the payment date are set in one tap.</small>', BTN('Add to stock', '', '', KI('arrow')))}</div>`),
+  check: () => APP('buy', 'check', `${HD('Receive order 1042', `From ${DIST}. Their bill file came on the link.`)}
+    <div class="a-body">${KPIS([['Bill file read', 'upload', '6 lines', '1 click', 'ok', 'KP-3391.xlsx'], ['Match your order', 'ticks', '3 of 6', '3', 'bad', 'need a look'], ['To claim back', 'rupee', '₹316', '2', 'bad', 'differences'], ['To pay by', 'calendar', '7 Nov', '30', 'ok', 'days credit']])}
+    ${TRAY('Order, bill and goods, side by side', 'ticks', TBL('28px minmax(0,1.8fr) .62fr .55fr .55fr .6fr .62fr minmax(0,1.6fr)', [CHK(0, 'is--lg'), 'Medicine', 'Ordered', 'Billed', 'Came', 'Batch', 'Expires', 'Status'],
+      MED.slice(0, 6).map((m, i) => ({ c: i === 4 ? 'is--bad' : i === 3 || i === 5 ? 'is--warn' : '', v: [CHK(1, 'is--lg'), MEDC(m), m.q, m.q, i === 4 ? '<b class="u-bad">6</b>' : `<b>${m.q}</b>`, m.b, m.e, i === 3 ? STAT('warn', 'tag', 'Free strip missing: ₹72') : i === 4 ? STAT('bad', 'alert', 'Billed 10, 6 came: ₹244') : i === 5 ? STAT('warn', 'clock', 'Expires in 4 months') : STAT('ok', 'tick', 'Matches the order')] })), 'is--tall'), { lead: 1, cls: 'is--fill', right: `<span class="u-chip on">${KI('upload')}KP-3391.xlsx</span><span class="u-chip">${KI('ticks')}Tick by hand</span><span class="u-chip">${KI('qr')}Scan a pack</span>` })}
+    ${BAR('<b>3 lines match. 3 need a look.</b> Nothing typed.<small>No file from the distributor? Tick what came against your own order instead.</small>', BTN('Send the claim', 'is--ghost', 'send') + BTN('Add to stock', '', '', KI('arrow')))}</div>`),
 
   stock: () => APP('stock', 'stock', `${HD('On the shelf', '1,284 medicines, worth ₹6.2 lakh')}
     <div class="a-body">${KPIS([['In good shape', 'tick', '86%', '+1.2%', 'ok', 'vs last week', [10, 12, 11, 13, 12, 14, 13, 15, 16]], ['Running low', 'box', '12', '+3', 'bad', 'since Monday', [4, 5, 5, 7, 8, 8, 9, 11, 12]], ['Expiring in 60 days', 'clock', '9', '₹3,140', 'bad', 'at risk', [3, 4, 4, 5, 7, 6, 8, 9, 9]], ['Just added', 'truck', '6', 'Order 1042', 'ok', 'today', [2, 2, 3, 2, 4, 3, 5, 4, 6]]])}
@@ -154,9 +160,9 @@ const V = {
     [{ c: 'is--warn', v: [WHOC(DIST, '30 days credit', 'amber'), '2', '<b>₹18,200</b>', '9 October', STAT('warn', 'clock', 'Tomorrow'), MORE] }, [WHOC('Godavari Distributors', '21 days credit', 'vio'), '1', '<b>₹9,640</b>', '12 October', STAT('ok', 'tick', 'On time'), MORE], [WHOC('Sri Venkat Pharma', '30 days credit', 'ok'), '3', '<b>₹31,075</b>', '15 October', STAT('ok', 'tick', 'On time'), MORE], [WHOC(DIST, 'Order 1042, received today', 'amber'), '1', '<b>₹2,815</b>', '7 November', STAT('pri', 'file', 'New today'), MORE]],
     BAR('<b>₹18,200</b> to Krishna Pharma is due tomorrow<small>You get 30 days of credit from them.</small>', BTN('Mark as paid', 'is--ghost') + BTN('Pay ₹18,200', '', 'rupee'))),
 
-  returns: () => LIST('stock', 'expiry', 'Expiry returns', 'Each return is followed until the credit note arrives.', [['Waiting to come back', 'undo', '₹5,070', '3', 'bad', 'returns open'], ['Credited this year', 'tick', '₹18,400', '11', 'ok', 'credit notes', [2, 3, 5, 6, 8, 11, 14, 18]], ['Oldest open', 'clock', '40 days', 'Sri Venkat', 'bad', 'Pharma'], ['Thrown away', 'shield', '₹0', 'Nothing', 'ok', 'without a note']], 'Sent back to distributors', 'undo', CHIP('Open', 1, 4) + CHIP('Credited'), 'minmax(0,1.6fr) .6fr .7fr .9fr 1.2fr 18px', ['Sent back to', 'Medicines', 'Value', 'Sent on', 'Where it stands', ''],
+  returns: () => LIST('stock', 'expiry', 'Expiry returns', 'You are told before each distributor’s return date closes.', [['Waiting to come back', 'undo', '₹5,070', '3', 'bad', 'returns open'], ['Credited this year', 'tick', '₹18,400', '11', 'ok', 'credit notes', [2, 3, 5, 6, 8, 11, 14, 18]], ['Oldest open', 'clock', '40 days', 'Sri Venkat', 'bad', 'Pharma'], ['Next return date', 'calendar', '31 Oct', '23 days', 'bad', 'left to send back']], 'Sent back to distributors', 'undo', CHIP('Open', 1, 4) + CHIP('Credited'), 'minmax(0,1.6fr) .6fr .7fr .9fr 1.2fr 18px', ['Sent back to', 'Medicines', 'Value', 'Sent on', 'Where it stands', ''],
     [[WHOC(DIST, 'Return note 31', 'amber'), '7', '<b>₹2,310</b>', '26 September', STAT('warn', 'clock', 'Waiting, 12 days'), MORE], [WHOC('Godavari Distributors', 'Return note 30', 'vio'), '3', '<b>₹890</b>', '18 September', STAT('ok', 'tick', 'Credit note received'), MORE], [WHOC('Sri Venkat Pharma', 'Return note 29', 'ok'), '5', '<b>₹1,640</b>', '29 August', STAT('bad', 'alert', 'No reply, 40 days'), MORE], [WHOC('Godavari Distributors', 'Return note 32', 'vio'), '4', '<b>₹1,120</b>', 'This week', STAT('pri', 'box', 'Packed, not sent'), MORE]],
-    BAR('<b>₹5,070</b> is waiting to come back<small>Expired stock is never thrown away without a return note.</small>', BTN('Remind all three', 'is--ghost', 'bell'))),
+    BAR('<b>₹5,070</b> is waiting to come back<small>Each return is followed until its credit note arrives. Nothing is thrown away without a note.</small>', BTN('Remind all three', 'is--ghost', 'bell'))),
 
   /* ----- Stock ----- */
   expiry: () => LIST('stock', 'expiry', 'Expiring', 'Sell these first, or send them back while they still count.', [['At risk in 60 days', 'clock', '₹3,140', '9', 'bad', 'medicines', [3, 4, 4, 5, 7, 6, 8, 9, 9]], ['Expires this month', 'alert', '₹134', '1', 'bad', 'medicine'], ['Sent back in time', 'undo', '₹5,070', '16', 'ok', 'medicines', [2, 3, 5, 6, 8, 11, 14, 16]], ['Blocked at the counter', 'lock', '1', 'strip', 'ink', 'this week']], 'Expiring in 60 days', 'clock', CHIP('60 days', 1) + CHIP('90 days') + CHIP('This year'), '18px minmax(0,1.6fr) .5fr .9fr .7fr 1fr 18px', [CHK(0), 'Medicine', 'Have', 'Expires', 'Value', 'Risk', ''],
@@ -174,10 +180,10 @@ const V = {
   /* ----- Billing ----- */
   sell: () => APP('bill', 'sell', `${HD('New bill', 'Bill 2281, at Counter 1')}
     <div class="a-body"><div class="a-split" style="--side:384px">
-      ${TRAY('Find a medicine', 'search', `<div class="u-card u-col"><div class="u-find is--idle">${KI('search')}<span>Scan a pack, or type three letters</span></div><small class="u-lbl">Sold most often here</small>
+      ${TRAY('Find a medicine', 'search', `<div class="u-card u-col"><div class="u-find is--idle">${KI('search')}<span>Type three letters</span></div><div class="b-two">${BTN('Scan a pack', 'is--ghost is--wide', 'qr')}${BTN('Not in stock', 'is--ghost is--wide', 'alert')}</div><small class="u-lbl">Sold most often here</small>
         <div class="b-fav">${[[0, 36, 24], [3, 118, 15], [2, 44, 19], [1, 96, 14], [5, 19, 12], [7, 85, 6]].map(([k, mrp, have]) => `<div>${PH(MED[k], 'is--lg')}<div><b>${MED[k].n}</b><small><span>₹${mrp}</span><span>${have} left</span></small></div></div>`).join('')}</div></div>`, { lead: 1, right: STAT('ok', 'tick', 'Oldest batch sells first') })}
       ${TRAY('This bill', 'receipt', `<div class="u-card b-pay"><div class="b-cust">${AV('L', 'amber', '', 'is--lg')}<div><b>Lakshmi</b>98765 •••43</div>${BDG('pri', '', '4th visit')}</div>
-        <div class="b-lines">${[[3, 2, 236, 1], [2, 3, 132, 1], [0, 4, 144, 0]].map(([k, q, amt, rx]) => `<div class="b-line">${PH(MED[k], 'is--sm')}<div><b>${MED[k].n}${rx ? RX : ''}</b><small>${q} × ₹${MED[k].mrp}</small></div><em>₹${amt}</em></div>`).join('')}</div>
+        <div class="b-lines">${[[3, 2, 236, 1], [2, 3, 132, 1], [0, 4, 144, 0]].map(([k, q, amt, rx]) => `<div class="b-line">${PH(MED[k], 'is--sm')}<div><b>${MED[k].n}${rx ? RX : ''}</b><small>${q} × ₹${MED[k].mrp} · batch ${MED[k].b}</small></div><em>₹${amt}</em></div>`).join('')}</div>
         <div class="b-doc">${KI('user')}<div><b>Dr. Rao</b>Remembered for her two prescription medicines</div>${KI('tick')}</div>
         <div class="b-sum"><div><span>MRP total</span><span>₹512</span></div><div class="u-ok"><span>Regular customer, 5% off</span><span>−₹26</span></div><div class="is--tot"><span>To pay</span><b>₹486</b></div></div>
         <div class="b-ways"><span class="on">UPI</span><span>Cash</span><span>Card</span><span>Credit</span></div>
@@ -321,7 +327,7 @@ const V = {
 
   /* ----- Tablet: the touch counter ----- */
   billt: () => `<div class="t-top"><div class="a-brand"><i class="a-logo">${CAP}</i><b>Pharmacy OS</b></div><span class="u-grow"></span>${LANG()}${SIZE(2)}</div>
-    <div class="t-body"><div class="a-hd" style="padding:0"><div><b class="a-t" style="font-size:26px">New bill</b><small>Bill 2281, Counter 1, Imran</small></div></div><div class="u-find is--idle" style="height:56px;font-size:18px">${KI('search')}<span>Scan a pack, or type three letters</span></div>
+    <div class="t-body"><div class="a-hd" style="padding:0"><div><b class="a-t" style="font-size:26px">New bill</b><small>Bill 2281, Counter 1, Imran</small></div></div><div class="u-row" style="gap:10px"><div class="u-find is--idle" style="flex:1;height:56px;font-size:18px">${KI('search')}<span>Type three letters</span></div>${BTN('Scan a pack', 'is--ghost is--lg', 'qr')}</div>
       ${TRAY('This bill', 'receipt', `<div class="u-card b-pay" style="gap:14px;padding:18px"><div class="b-cust">${AV('L', 'amber', '', 'is--lg')}<div><b style="font-size:17px">Lakshmi</b>98765 •••43</div>${BDG('pri', '', '4th visit')}</div>
         <div class="b-lines" style="gap:14px">${[[3, 2, 236, 1], [2, 3, 132, 1], [0, 4, 144, 0]].map(([k, q, amt, rx]) => `<div class="b-line" style="grid-template-columns:44px minmax(0,1fr) auto auto;gap:14px"><i class="u-ph" style="width:44px;height:44px;--img:url(${PEX(MED[k].img)})">${KI(MED[k].f)}</i><div><b style="font-size:17px">${MED[k].n}${rx ? RX : ''}</b><small style="font-size:14px">₹${MED[k].mrp} a strip</small></div>${QTY(q)}<em style="font-size:18px;min-width:70px;text-align:right">₹${amt}</em></div>`).join('')}</div>
         <div class="b-doc">${KI('user')}<div><b>Dr. Rao</b>Remembered for her two prescription medicines</div>${KI('tick')}</div>
@@ -330,6 +336,95 @@ const V = {
         ${BTN('Take ₹486', 'is--wide is--lg', '', KI('arrow'))}<div class="b-two">${BTN('Print', 'is--ghost is--wide is--lg', 'printer')}${BTN('Hold this bill', 'is--ghost is--wide is--lg', 'clock')}</div></div>`, { lead: 1, right: STAT('ok', 'tick', 'Oldest batch sells first') })}
       ${NOTE('chat', 'The bill goes to her WhatsApp. The H1 register fills itself.')}</div>
     <div class="t-tabs">${[['grid', 'Overview'], ['receipt', 'Billing'], ['box', 'Stock'], ['truck', 'Orders'], ['users', 'Customers']].map(([ic, t], i) => `<span class="${i === 1 ? 'on' : ''}">${KI(ic)}${t}</span>`).join('')}</div>`,
+
+  /* ----- Buying, with the numbers beside each other ----- */
+  compare: () => APP('buy', 'order', `${HD('Compare distributors', 'Rate, scheme and credit for every line. The best one is already picked.')}
+    <div class="a-body">${KPIS([['To order today', 'list', '9', '2', 'ink', 'distributors'], ['Saved by picking the best', 'rupee', '₹221', 'Less', 'ok', 'than from one distributor'], ['Free strips', 'tag', '3', '2', 'ok', 'schemes used'], ['Credit', 'calendar', '30 days', 'Longest', 'ink', 'wins a tie']])}
+    ${TRAY('Rate, scheme and credit, side by side', 'swap', TBL('minmax(0,1.45fr) .45fr 1fr 1fr 1fr', ['Medicine', 'Order', DSHORT, 'Godavari Dist.', 'Sri Venkat Pharma'],
+      [[MEDC(MED[1]), '<b>10</b>', CMP('62.10', '30 days', 1), CMP('63.40', '21 days'), CMP('62.90', '30 days')],
+        [MEDC(MED[3]), '<b>12</b>', CMP('71.50', '10+1 · 30 days', 1), CMP('72.00', '21 days'), CMP('71.50', '30 days')],
+        [MEDC(MED[4]), '<b>10</b>', CMP('58.00', '30 days', 1), CMP('58.60', '21 days'), CMP('', 'Not with them')],
+        [MEDC(MED[6]), '<b>10</b>', CMP('83.00', '30 days'), CMP('79.50', '5+1 · 21 days', 1), CMP('82.00', '30 days')],
+        [MEDC(MED[8]), '<b>10</b>', CMP('68.90', '30 days'), CMP('66.20', '21 days', 1), CMP('67.80', '30 days')]], 'is--tall'), { lead: 1, cls: 'is--fill', right: CHIP('Best for each line', 1) + CHIP('All from one') })}
+    ${BAR('<b>Krishna Pharma: 6 lines. Godavari: 3 lines.</b><small>Rates come from your own last bills. A distributor on the free desk shows today’s rate and stock.</small>', BTN('Change by hand', 'is--ghost') + BTN('Send both orders', '', 'send'))}</div>`),
+
+  watch: () => LIST('buy', 'watch', 'Rate and scheme watch', 'Every bill is laid beside your order and your last rate.', [['Found this month', 'eye', '₹1,460', '9', 'bad', 'differences'], ['Credited back', 'tick', '₹1,128', '6', 'ok', 'credit notes', [1, 2, 2, 4, 5, 6, 8, 11]], ['Still open', 'clock', '₹332', '3', 'bad', 'claims'], ['Typed by you', 'keyboard', '0', 'None', 'ok', 'of these']], 'Three claims are open', 'tag', CHIP('Open', 1, 3) + CHIP('Credited', 0, 6), 'minmax(0,1.45fr) minmax(0,1.35fr) 1fr .55fr 1.15fr 18px', ['Medicine', 'What we found', 'Distributor', 'Value', 'Where it stands', ''],
+    [{ c: 'is--bad', v: [MEDC(MED[4], 'Order 1042, today'), 'Billed 10, 6 came', PERSON(DSHORT, 'amber'), '<b>₹244</b>', STAT('warn', 'clock', 'Claim sent today'), MORE] }, { c: 'is--warn', v: [MEDC(MED[3], 'Order 1042, today'), 'Free strip missing, 10+1', PERSON(DSHORT, 'amber'), '<b>₹72</b>', STAT('warn', 'clock', 'Claim sent today'), MORE] }, [MEDC(MED[8], 'Order 1031, 2 October'), 'Rate ₹1.60 above your last bill', PERSON('Godavari Dist.', 'vio'), '<b>₹16</b>', STAT('bad', 'alert', 'No reply, 6 days'), MORE], [MEDC(MED[1], 'Order 1024, 28 September'), 'Bill MRP above the pack', PERSON('Sri Venkat Pharma', 'ok'), '<b>₹96</b>', STAT('ok', 'tick', 'Credit note received'), MORE]],
+    BAR('<b>₹332</b> is still to come back, from 3 claims<small>Each claim goes on WhatsApp with the bill line attached. Nothing to write.</small>', BTN('Remind all three', 'is--ghost', 'bell'))),
+
+  missed: () => LIST('bill', 'sell', 'Asked for, not on the shelf', 'One tap at the counter. The missed sale is counted, and the medicine joins the next order.', [['Asked, not found', 'users', '7', 'times', 'bad', 'this week', [1, 0, 2, 1, 1, 0, 2]], ['Sales missed', 'rupee', '₹917', 'About', 'bad', 'this week'], ['Now in the order', 'list', '5', 'of 7', 'ok', 'medicines'], ['Given a substitute', 'swap', '2', 'times', 'ok', 'same salt']], 'Missed this week', 'alert', BTN('Not in stock', 'is--ghost is--sm', 'alert'), 'minmax(0,1.5fr) .6fr .9fr .6fr 1.3fr 18px', ['Medicine', 'Asked', 'Last asked', 'Missed', 'What happens next', ''],
+    [[MEDC(MED[11], 'Strip of 15'), '<b>3 times</b>', 'Today, 5:40 pm', '<b>₹354</b>', STAT('ok', 'list', 'In tomorrow’s order'), MORE], [MEDC(MED[7], 'Bottle'), '<b>2 times</b>', 'Yesterday', '<b>₹170</b>', STAT('ok', 'list', 'In tomorrow’s order'), MORE], [MEDC(MED[9], 'Box of 25'), '<b>1 time</b>', 'Monday', '<b>₹310</b>', STAT('pri', 'swap', 'A substitute was given'), MORE], [MEDC(MED[6], 'Strip of 4'), '<b>1 time</b>', 'Monday', '<b>₹83</b>', STAT('warn', 'clock', 'Waiting for the distributor'), MORE]],
+    BAR('<b>7 customers</b> asked for something that was not there<small>Without this button, a missed sale leaves no trace.</small>', BTN('Add all to the order', '', 'plus'))),
+
+  /* ----- Customers and money, a week ahead ----- */
+  refills: () => LIST('cust', '', 'Refills due next week', 'Who will come, and for what. So the stock is ready before they are.', [['Refills due', 'bell', '38', 'customers', 'ink', 'in 7 days', [3, 4, 6, 5, 7, 6, 7]], ['Worth', 'rupee', '₹31,200', 'If all', 'ok', 'come back'], ['Stock ready', 'tick', '34 of 38', '4', 'bad', 'need an order'], ['Came back last month', 'trend', '71%', '+9%', 'ok', 'after a reminder', [5, 6, 6, 7, 8, 8, 9]]], 'Due in the next 7 days', 'calendar', CHIP('This week', 1, 38) + CHIP('Next week', 0, 41), 'minmax(0,1fr) minmax(0,1.6fr) .55fr 1.1fr 1.1fr 18px', ['Customer', 'Medicine', 'Due', 'On the shelf', 'Reminder', ''],
+    [[PERSON('Lakshmi', 'amber'), MEDC(MED[3], '1 a day. A strip lasts 15 days.', RX), '11 Oct', STAT('ok', 'tick', '15 strips'), STAT('ok', 'bell', 'Sent today'), MORE], [PERSON('Venkatesh', 'ink'), MEDC(MED[2], '2 a day', RX), '12 Oct', STAT('ok', 'tick', '19 strips'), STAT('pri', 'clock', 'Goes on 9 Oct'), MORE], { c: 'is--bad', v: [PERSON('Suresh', 'vio'), MEDC(MED[11], '1 a day', RX), '13 Oct', STAT('bad', 'alert', 'None. In the order.'), STAT('pri', 'clock', 'Goes on 10 Oct'), MORE] }, [PERSON('Anitha', 'ok'), MEDC(MED[6], '1 a week'), '14 Oct', STAT('ok', 'tick', '6 strips'), STAT('pri', 'clock', 'Goes on 11 Oct'), MORE]],
+    BAR('<b>4 medicines</b> join tomorrow’s order, so every refill is ready<small>Messages carry no medicine names. Only people who said yes get them.</small>', BTN('See the order', 'is--ghost') + BTN('Send today’s reminders', '', 'send'))),
+
+  dayclose: () => APP('money', '', `${HD('Close the day', 'Thursday, 8 October. Count each drawer once.')}
+    <div class="a-body">${KPIS([['Sales today', 'rupee', '₹21,400', '62', 'ink', 'bills'], ['Cash the bills expect', 'wallet', '₹8,330', '2', 'ink', 'drawers'], ['Cash counted', 'ticks', '₹8,280', '−₹50', 'bad', 'difference'], ['UPI received', 'phone', '₹13,150', 'Matches', 'ok', 'the bank']])}
+    ${TRAY('By person', 'users', TBL('minmax(0,1.3fr) .5fr .9fr .9fr .8fr 1.2fr', ['Person', 'Bills', 'Cash expected', 'Cash counted', 'UPI', 'Status'], [[PERSON('Imran', '', FACE.imran), '38', '₹5,120', '<b>₹5,120</b>', '₹8,030', STAT('ok', 'tick', 'Matches')], { c: 'is--warn', v: [PERSON('Padma', 'amber'), '24', '₹3,210', '<b>₹3,160</b>', '₹5,120', STAT('warn', 'alert', '₹50 less. Noted.')] }]), { lead: 1, right: STAT('ok', 'lock', 'Counted once, then locked') })}
+    ${TRAY('Changed today', 'eye', TBL('.5fr minmax(0,1.7fr) .9fr .6fr 1.3fr', ['Bill', 'What changed', 'Who', 'When', 'Status'], [['2274', 'One strip of Amoxicillin came back', PERSON('Imran', '', FACE.imran), '4:10 pm', STAT('pri', 'undo', 'Refund ₹96')], ['2259', 'Discount raised from 5% to 8%', PERSON('Padma', 'amber'), '1:22 pm', STAT('ok', 'tick', 'Inside her limit')], ['—', 'An expired strip was scanned', PERSON('Imran', '', FACE.imran), '11:02 am', STAT('bad', 'lock', 'Stopped at the counter')]]), { lead: 1, cls: 'is--fill', right: CHIP('Today', 1) + CHIP('This week') })}
+    ${BAR('<b>₹50</b> less in one drawer today<small>Nothing is rounded away. The owner sees the same page on his phone.</small>', BTN('Count again', 'is--ghost') + BTN('Close the day', '', 'lock'))}</div>`, 'rao'),
+
+  cash: () => APP('money', '', `${HD('Cash calendar', 'The next 14 days: what goes out, what comes in.')}
+    <div class="a-body">${KPIS([['To pay in 30 days', 'rupee', '₹61,730', '4', 'ink', 'bills'], ['Heavy day', 'alert', '15 Oct', '₹31,075', 'bad', 'goes out'], ['To collect', 'wallet', '₹2,960', '3', 'ink', 'customers'], ['GST to pay', 'file', '₹3,390', 'By', 'ink', '20 October']])}
+    <div class="a-split" style="--side:540px">
+      ${TRAY('Going out, day by day', 'chart', `<div class="u-card" style="display:flex;flex-direction:column;gap:6px;padding:14px 16px 10px 18px"><div class="h-big"><b class="u-num">₹62,305</b><span class="u-delta"><b class="u-bad">4 payments</b>in the next 14 days</span></div>${PLOT([1, 46, 1, 1, 24, 1, 1, 78, 1, 1, 1, 1, 8, 1], 7, '15 Oct : ₹31,075', ['0', '10k', '20k', '30k', '40k'], ['8 Oct', '10', '12', '14', '16', '18', '20 Oct'], 0)}</div>`, { lead: 1 })}
+      ${TRAY('In order of date', 'calendar', TBL('.55fr minmax(0,1.7fr) .7fr 1.05fr', ['Date', 'What', 'Amount', 'Status'], [{ c: 'is--warn', v: ['9 Oct', 'Pay Krishna Pharma', '<b>₹18,200</b>', STAT('warn', 'clock', 'Tomorrow')] }, ['12 Oct', 'Pay Godavari Dist.', '<b>₹9,640</b>', STAT('ok', 'calendar', 'In 4 days')], { c: 'is--bad', v: ['15 Oct', 'Pay Sri Venkat Pharma', '<b>₹31,075</b>', STAT('bad', 'alert', 'Heavy day')] }, ['20 Oct', 'GST for September', '<b>₹3,390</b>', STAT('ok', 'calendar', 'In 12 days')], ['Any day', 'Collect from Venkatesh', '<b class="u-ok">+₹1,640</b>', STAT('pri', 'bell', 'Remind')]], 'is--tall'), { lead: 1, cls: 'is--fill' })}
+    </div>
+    ${BAR('<b>15 October</b> is the heavy day: ₹31,075 to Sri Venkat Pharma<small>You are told a week before, so the money is ready.</small>', BTN('Remind who owes you', 'is--ghost', 'bell') + BTN('Plan the payments', '', 'calendar'))}</div>`, 'rao'),
+
+  /* ----- Look ahead ----- */
+  ask: () => APP('home', '', `${HD('Ask the app', 'Tap a question, or type your own. In English or in Telugu.')}
+    <div class="a-body"><div class="a-split" style="--side:548px">
+      ${TRAY('Your question', 'search', `<div class="u-card u-col"><div class="u-find">${KI('search')}<b>What will run out this week?</b><i class="u-caret" style="margin-left:0"></i></div>
+        <small class="u-lbl">Ready questions. One tap.</small>
+        <div class="u-pick">${['What is low today?', 'What expires this month?', 'How much do I owe Krishna Pharma?', 'Who has not paid me?', 'What sold most this week?', 'How was yesterday?'].map(q => CHIP(q)).join('')}</div>
+        <small class="u-lbl">In Telugu too</small>
+        <div class="u-pick"><span class="u-chip" lang="te">ఈ రోజు అమ్మకాలు ఎంత?</span><span class="u-chip" lang="te">ఏ మందులు తక్కువగా ఉన్నాయి?</span></div>
+        ${NOTE('info', 'Every answer shows where its numbers came from.')}</div>`, { lead: 1, cls: 'is--fill' })}
+      ${TRAY('The answer', 'chat', `<div class="u-card u-col"><div><b class="u-num">7 medicines</b><span class="u-delta">will run out before Friday, at the speed they sell now</span></div>
+        <div class="u-tbl" style="--cols:minmax(0,1.6fr) .45fr 1fr;padding:0;margin:0 -6px">${[[0, 4, 3, 'Out in 2 days'], [4, 3, 3, 'Out in 3 days'], [1, 6, 2, 'Out in 5 days'], [2, 7, 2, 'Out in 5 days']].map(([k, have, lv, t]) => ROW([MEDC(MED[k], `Sells ${[18, 8, 11, 0, 9][k]} strips a week`), `<b class="u-bad">${have}</b>`, LVL(lv, t)])).join('')}</div>
+        ${STAT('ok', 'tick', 'From today’s stock and 30 days of bills')}
+        <div class="b-two" style="margin-top:auto">${BTN('Add all 7 to the order', 'is--wide', 'plus')}${BTN('Show all 7', 'is--ghost is--wide')}</div></div>`, { lead: 1, cls: 'is--fill' })}
+    </div></div>`, 'rao'),
+
+  score: () => APP('reports', '', `${HD('Your store this week', 'Monday 5 to Sunday 11 October. One thing to do for each number.')}
+    <div class="a-body">${KPIS([['Store score', 'star', '82', '+4', 'ok', 'vs last week', [70, 72, 71, 75, 76, 78, 78, 82]], ['Found on the shelf', 'box', '92%', '−1.3%', 'bad', 'vs last week', [16, 12, 14, 19, 13, 14, 20, 21, 12, 15]], ['Lost to expiry', 'alert', '₹134', '−₹410', 'ok', 'vs last month'], ['Regulars who came back', 'users', '71%', '+9%', 'ok', 'after a reminder', [5, 6, 6, 7, 8, 8, 9]]])}
+    ${TRAY('One thing to do for each', 'list', TBL('minmax(0,1.5fr) .62fr .9fr minmax(0,1.6fr) 150px', ['What we measure', 'This week', 'How it stands', 'Do this', ''],
+      [[ROWI('box', 'Found on the shelf', 'Asked for, and in stock'), '<b>92%</b>', METER(92, 'warn'), 'Order the 7 medicines people asked for', BTN('Add to order', 'is--ghost is--sm', 'plus')],
+        [ROWI('clock', 'Lost to expiry', 'Stock that passed its date'), '<b>₹134</b>', METER(96, 'ok'), 'Send back 1 medicine before 26 October', BTN('Start the return', 'is--ghost is--sm', 'undo')],
+        [ROWI('users', 'Regulars who came back', 'After a refill reminder'), '<b>71%</b>', METER(71, 'ok'), 'Remind 4 people who are a week late', BTN('Remind them', 'is--ghost is--sm', 'bell')],
+        [ROWI('rupee', 'Bills paid on time', 'To distributors'), '<b>96%</b>', METER(96, 'ok'), 'Pay Krishna Pharma tomorrow: ₹18,200', BTN('Pay now', 'is--ghost is--sm', 'rupee')]], 'is--tall'), { lead: 1, cls: 'is--fill', right: CHIP('This week', 1) + CHIP('Last 8 weeks') })}
+    ${BAR('<b>82 out of 100</b> this week. Four more than last week.<small>The same page reaches the owner’s phone every Monday morning.</small>', BTN('Share with the staff', 'is--ghost', 'send'))}</div>`, 'rao'),
+
+  forecast: () => APP('reports', '', `${HD('Next week, worked out', 'From your own bills: the season, the weekday, what really sells.')}
+    <div class="a-body">${KPIS([['Sales expected next week', 'trend', '₹1.42 lakh', '+6%', 'ok', 'vs this week', [12, 14, 13, 15, 16, 15, 17, 18]], ['Will run out', 'alert', '7', 'medicines', 'bad', 'before Friday'], ['Season now', 'calendar', 'Monsoon', '+38%', 'ink', 'fever and cold'], ['Order to place', 'list', '₹18,400', '9', 'ink', 'medicines']])}
+    <div class="a-split" style="--side:520px">
+      ${TRAY('Sales, day by day', 'chart', `<div class="u-card" style="display:flex;flex-direction:column;gap:6px;padding:14px 16px 10px 18px"><div class="h-big"><b class="u-num">₹1,42,000</b><span class="u-delta"><b class="u-ok">+6%</b>expected next week</span></div>${PLOT([58, 66, 49, 62, 71, 44, 60, 64, 70, 55, 66, 76, 50, 63], 6, 'Today : ₹21,400', ['0', '8k', '16k', '24k', '32k'], ['2 Oct', '4', '6', '8 Oct', '10', '12', '14 Oct'], 3, 6)}</div>`, { lead: 1, right: STAT('pri', 'trend', 'Striped bars are expected') })}
+      ${TRAY('Have these ready', 'box', TBL('minmax(0,1.5fr) .45fr .5fr 100px', ['Medicine', 'Have', 'Need', 'Order'], [[MEDC(MED[0], 'Fever season'), '<b class="u-bad">4</b>', '26', QTY(24)], [MEDC(MED[5], 'Colds, this month'), '12', '21', QTY(10)], [MEDC(MED[4], 'Sells steadily'), '<b class="u-bad">3</b>', '9', QTY(10)], [MEDC(MED[8], 'After the rains'), '8', '14', QTY(10)], [MEDC(MED[9], 'Fever season'), '<b class="u-bad">2</b>', '6', QTY(4)]], 'is--tall'), { lead: 1, cls: 'is--fill' })}
+    </div>
+    ${BAR('<b>7 medicines</b> will run out before next Friday<small>The numbers get better each month. You can change any of them.</small>', BTN('Add all to the order', '', 'plus'))}</div>`, 'rao'),
+
+  risk: () => LIST('stock', 'expiry', 'Will it sell before its date?', 'Each batch, at the speed it really sells.', [['Will not sell in time', 'hourglass', '₹1,088', '4', 'bad', 'batches'], ['Can still go back', 'undo', '₹651', '2', 'ok', 'inside the return date'], ['Next return date', 'calendar', '31 Oct', '23 days', 'bad', 'left to send back'], ['Saved this year', 'tick', '₹18,400', '11', 'ok', 'credit notes', [2, 3, 5, 6, 8, 11, 14, 18]]], 'Four batches will outlast their date', 'hourglass', CHIP('At risk', 1, 4) + CHIP('All batches'), 'minmax(0,1.5fr) .45fr .8fr .8fr .8fr 1.3fr 18px', ['Medicine', 'Have', 'Sells a month', 'Expires', 'Will be left', 'Best move', ''],
+    [{ c: 'is--bad', v: [MEDC(MED[9], 'From Sri Venkat Pharma'), '30', '8 sachets', '29 Nov 2026', '<b class="u-bad">16 sachets</b>', STAT('pri', 'undo', 'Send back by 31 Oct'), MORE] }, [MEDC(MED[6], 'Batch VD1180'), '20', '3 strips', 'Mar 2027', '<b class="u-bad">5 strips</b>', STAT('pri', 'swap', 'Move to Bus stand'), MORE], [MEDC(MED[8], 'From Godavari Distributors'), '8', '4 strips', '18 Nov 2026', '<b class="u-bad">3 strips</b>', STAT('pri', 'undo', 'Send back by 31 Oct'), MORE], [MEDC(MED[5], 'Batch CT2217'), '12', '16 strips', '26 Oct 2026', '<b class="u-bad">2 strips</b>', STAT('ok', 'tag', 'Offer 10% off'), MORE]],
+    BAR('<b>₹1,088</b> will expire on the shelf unless something changes<small>You are told while the distributor still takes it back.</small>', BTN('Offer 10% off', 'is--ghost', 'tag') + BTN('Start the returns', '', 'undo'))),
+
+  /* ----- The distributor's side: a free page, no app ----- */
+  desk: () => `<div class="a-side"><div class="a-brand"><i class="a-logo">${CAP}</i><b>Pharmacy OS</b>${KI('panel')}</div><div class="a-dash"></div>${INP('Search orders', 'Ctrl K')}
+    <div class="a-cap">Order desk</div>${[['list', 'Orders', 7, 1], ['file', 'Bills sent'], ['tag', 'Rates and schemes'], ['store', 'Stores'], ['rupee', 'Payments']].map(([ic, t, n, on]) => `<span class="a-nav${on ? ' on' : ''}">${KI(ic)}${t}${n ? `<em>${n}</em>` : ''}</span>`).join('')}
+    <div class="a-cap">Support</div><span class="a-nav">${KI('headset')}Help in Telugu</span><span class="a-nav">${KI('gear')}Settings</span>
+    <div class="a-user">${AV('', '', FACE.ramesh)}<span><b>Ramesh</b>${DSHORT}</span>${KI('updown')}</div></div>
+    <div class="a-main">${HD('Orders from your stores', `${DIST}. Thursday, 8 October.`)}
+    <div class="a-body">${KPIS([['New orders', 'list', '7', '₹48,300', 'ink', 'today'], ['To pack', 'box', '4', '3', 'ok', 'packed'], ['Schemes live', 'tag', '4', 'Seen by', 'ink', 'every store'], ['To collect', 'wallet', '₹1.84 lakh', '₹18,200', 'bad', 'due tomorrow']])}
+    ${TRAY('Today’s orders', 'list', TBL('minmax(0,1.6fr) 1fr .45fr .6fr 1.35fr 1.2fr 106px', ['Store', 'Order', 'Lines', 'Value', 'Status', 'Bill file', ''],
+      [{ c: 'is--warn', v: [WHOC(STORE, 'Main road', 'amber'), '1042, 10:42 am', '6', '<b>₹3,060</b>', STAT('warn', 'alert', 'Short: Pantoprazole'), STAT('pri', 'clock', 'Not sent yet'), BTN('Send file', 'is--ghost is--sm', 'upload')] },
+        [WHOC('Sri Sai Medicals', 'Bus stand road', 'vio'), '311, 10:15 am', '14', '<b>₹9,420</b>', STAT('ok', 'box', 'Packed'), STAT('pri', 'clock', 'Not sent yet'), BTN('Send file', 'is--ghost is--sm', 'upload')],
+        [WHOC('Lakshmi Medicals', 'Temple street', 'ok'), '87, 9:50 am', '9', '<b>₹5,180</b>', STAT('pri', 'truck', 'On the way'), STAT('ok', 'tick', 'File sent'), ''],
+        [WHOC('New Life Pharmacy', 'Hospital gate', 'ink'), '164, 9:20 am', '22', '<b>₹14,760</b>', STAT('ok', 'tick', 'Received'), STAT('ok', 'tick', 'Imported'), ''],
+        [WHOC('Balaji Medicals', 'Market road', 'amber'), '52, 9:05 am', '11', '<b>₹6,240</b>', STAT('pri', 'eye', 'New. Not opened.'), '—', BTN('Open', 'is--ghost is--sm')]], 'is--tall'), { lead: 1, cls: 'is--fill', right: CHIP('New', 1, 7) + CHIP('Packed', 0, 3) + CHIP('Sent', 0, 5) })}
+    ${BAR('<b>One file for the whole day.</b> Export today’s bills and drop the file here.<small>Each store gets its own bill and adds it to stock in one click. Free for distributors.</small>', BTN('Post a scheme', 'is--ghost', 'tag') + BTN('Upload the bill file', '', 'upload'))}</div></div>`,
 
   /* ----- Phone-only artboards ----- */
   dlink: () => DLINK,

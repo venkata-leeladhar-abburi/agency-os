@@ -170,8 +170,8 @@ function initDemo() {
   const root = $('#demo');
   if (!root) return;
   const L = {
-    en: { order: 'Order', recv: 'Receive', langL: 'Language', reset: 'Start again', add: 'Add a medicine', ph: 'Type three letters, like “par”', hist: 'From your own history', low: 'Running low in your shop', have: n => `You have ${n}`, usual: n => `You usually order ${n}`, newMed: q => `Add “${q}” as a new medicine`, saved: 'Saved for next time', inOrder: 'In the order', tip: 'Try “par”, “met”, or a wrong spelling like “amoxilin”.', toOrder: 'This order', items: n => `${n} ${n === 1 ? 'medicine' : 'medicines'}`, about: 'about', send: 'Send on WhatsApp', empty: 'Nothing here yet. Add a medicine.', sentT: 'Sent on WhatsApp', sentMsg: n => `Order 1042 from ${STORE}. ${n} ${n === 1 ? 'medicine' : 'medicines'}, with a PDF and a link.`, reply: '5 available. Pantoprazole: only 6.', arrived: 'The goods have arrived', recvT: 'Receive order 1042', recvS: `${DIST}, their bill KP/3391`, tickAll: 'Tick all that match', of: 'of', scan: 'Scan the pack', short: n => `Short by ${n}. Credit note asked.`, soon: 'Expires in 4 months.', keep: 'Keep', back: 'Send back', kept: 'Kept. Expiry alert set.', sentBack: 'Sent back. Return noted.', needScan: 'Scan the pack to read batch and expiry', match: 'Matches the order', wait: 'Not checked yet', checked: (a, b) => `${a} of ${b} checked`, addStock: 'Add to stock', doneT: 'In stock. Nothing typed.', d1: n => `${n} medicines added to stock, by batch`, d2: 'Purchase entry made by itself', d3: a => `${a} to pay by 7 November`, d4: '4 strips short: credit note asked', d5a: 'Expiry alert set for Cetirizine', d5b: '1 medicine sent back: return noted', fields: 'Fields typed', fNote: 'The same bill, typed by hand: 6 lines × 7 fields.', again: 'Do it again', taps: 'Taps', secs: 'Seconds', isNew: 'New', arrivedA: 'Arrived', pack: 'New medicine', size: 'Text size', smaller: 'Small text', mid: 'Medium text', larger: 'Large text', remove: 'Remove', less: 'One less', more: 'One more', cMed: 'Medicine', cBatch: 'Batch', cExp: 'Expires', cSt: 'Status' },
-    te: { order: 'ఆర్డర్', recv: 'వచ్చిన సరుకు', langL: 'భాష', reset: 'మళ్లీ మొదలు', add: 'మందు చేర్చండి', ph: 'మూడు అక్షరాలు టైప్ చేయండి, ఉదా: “par”', hist: 'మీరు ఇంతకు ముందు వాడినవి', low: 'మీ షాపులో తక్కువగా ఉన్నవి', have: n => `మీ దగ్గర ${n} ఉన్నాయి`, usual: n => `సాధారణంగా ${n} ఆర్డర్ చేస్తారు`, newMed: q => `“${q}” కొత్త మందుగా చేర్చు`, saved: 'తర్వాత కోసం సేవ్ అవుతుంది', inOrder: 'ఆర్డర్‌లో ఉంది', tip: '“par”, “met” లేదా తప్పు స్పెల్లింగ్ “amoxilin” ప్రయత్నించండి.', toOrder: 'ఈ ఆర్డర్', items: n => `${n} మందులు`, about: 'సుమారు', send: 'వాట్సాప్‌లో పంపు', empty: 'ఇంకా ఏమీ లేదు. మందు చేర్చండి.', sentT: 'వాట్సాప్‌లో పంపాం', sentMsg: n => `${STORE} నుండి ఆర్డర్ 1042. ${n} మందులు, PDF మరియు లింక్‌తో.`, reply: '5 ఉన్నాయి. Pantoprazole: 6 మాత్రమే.', arrived: 'సరుకు వచ్చింది', recvT: 'వచ్చిన సరుకు: ఆర్డర్ 1042', recvS: `${DIST}, వారి బిల్ KP/3391`, tickAll: 'సరిపోయినవన్నీ టిక్ చేయి', of: '/', scan: 'ప్యాక్ స్కాన్ చేయి', short: n => `${n} తక్కువ వచ్చాయి. క్రెడిట్ నోట్ అడిగాం.`, soon: '4 నెలల్లో గడువు ముగుస్తుంది.', keep: 'ఉంచు', back: 'వెనక్కి పంపు', kept: 'ఉంచాం. గడువు హెచ్చరిక పెట్టాం.', sentBack: 'వెనక్కి పంపాం. రిటర్న్ నమోదైంది.', needScan: 'బ్యాచ్, గడువు కోసం ప్యాక్ స్కాన్ చేయండి', match: 'ఆర్డర్‌తో సరిపోయింది', wait: 'ఇంకా చూడలేదు', checked: (a, b) => `${b} లో ${a} పూర్తి`, addStock: 'స్టాక్‌లో చేర్చు', doneT: 'స్టాక్‌లో చేరింది. ఏమీ టైప్ చేయలేదు.', d1: n => `${n} మందులు బ్యాచ్ వారీగా స్టాక్‌లో చేరాయి`, d2: 'కొనుగోలు ఎంట్రీ దానంతట అదే అయింది', d3: a => `${a}, 7 నవంబర్ లోపు చెల్లించాలి`, d4: '4 స్ట్రిప్‌లు తక్కువ: క్రెడిట్ నోట్ అడిగాం', d5a: 'Cetirizine కు గడువు హెచ్చరిక పెట్టాం', d5b: '1 మందు వెనక్కి పంపాం: రిటర్న్ నమోదైంది', fields: 'టైప్ చేసిన ఫీల్డ్‌లు', fNote: 'అదే బిల్ చేత్తో టైప్ చేస్తే: 6 లైన్లు × 7 ఫీల్డ్‌లు.', again: 'మళ్లీ చేయి', taps: 'ట్యాప్‌లు', secs: 'సెకన్లు', isNew: 'కొత్త', arrivedA: 'వచ్చింది', pack: 'కొత్త మందు', size: 'అక్షరాల పరిమాణం', smaller: 'చిన్న అక్షరాలు', mid: 'మధ్యస్థ అక్షరాలు', larger: 'పెద్ద అక్షరాలు', remove: 'తీసివేయి', less: 'ఒకటి తగ్గించు', more: 'ఒకటి పెంచు', cMed: 'మందు', cBatch: 'బ్యాచ్', cExp: 'గడువు', cSt: 'స్థితి' }
+    en: { order: 'Order', recv: 'Receive', langL: 'Language', reset: 'Start again', add: 'Add a medicine', ph: 'Type three letters, like “par”', hist: 'From your own history', low: 'Running low in your shop', have: n => `You have ${n}`, usual: n => `You usually order ${n}`, newMed: q => `Add “${q}” as a new medicine`, saved: 'Saved for next time', inOrder: 'In the order', tip: 'Try “par”, “met”, or a wrong spelling like “amoxilin”.', toOrder: 'This order', items: n => `${n} ${n === 1 ? 'medicine' : 'medicines'}`, about: 'about', send: 'Send on WhatsApp', empty: 'Nothing here yet. Add a medicine.', sentT: 'Sent on WhatsApp', sentMsg: n => `Order 1042 from ${STORE}. ${n} ${n === 1 ? 'medicine' : 'medicines'}, with a PDF and a link.`, reply: '5 available. Pantoprazole: only 6.', arrived: 'The goods have arrived', recvT: 'Receive order 1042', recvS: `${DIST}, their bill KP/3391`, imp: 'Import the bill file', impDone: 'KP-3391.xlsx read. 6 lines laid beside your order.', tickAll: 'Tick all that match', of: 'of', scan: 'Scan the pack', short: n => `Short by ${n}. Credit note asked.`, soon: 'Expires in 4 months.', keep: 'Keep', back: 'Send back', kept: 'Kept. Expiry alert set.', sentBack: 'Sent back. Return noted.', needScan: 'Scan the pack to read batch and expiry', match: 'Matches the order', wait: 'Not checked yet', checked: (a, b) => `${a} of ${b} checked`, addStock: 'Add to stock', doneT: 'In stock. Nothing typed.', d1: n => `${n} medicines added to stock, by batch`, d2: 'Purchase entry made by itself', d3: a => `${a} to pay by 7 November`, d4: '4 strips short: credit note asked', d5a: 'Expiry alert set for Cetirizine', d5b: '1 medicine sent back: return noted', fields: 'Fields typed', fNote: 'The same bill, typed by hand: 6 lines × 7 fields.', again: 'Do it again', taps: 'Taps', secs: 'Seconds', isNew: 'New', arrivedA: 'Arrived', pack: 'New medicine', size: 'Text size', smaller: 'Small text', mid: 'Medium text', larger: 'Large text', remove: 'Remove', less: 'One less', more: 'One more', cMed: 'Medicine', cBatch: 'Batch', cExp: 'Expires', cSt: 'Status' },
+    te: { order: 'ఆర్డర్', recv: 'వచ్చిన సరుకు', langL: 'భాష', reset: 'మళ్లీ మొదలు', add: 'మందు చేర్చండి', ph: 'మూడు అక్షరాలు టైప్ చేయండి, ఉదా: “par”', hist: 'మీరు ఇంతకు ముందు వాడినవి', low: 'మీ షాపులో తక్కువగా ఉన్నవి', have: n => `మీ దగ్గర ${n} ఉన్నాయి`, usual: n => `సాధారణంగా ${n} ఆర్డర్ చేస్తారు`, newMed: q => `“${q}” కొత్త మందుగా చేర్చు`, saved: 'తర్వాత కోసం సేవ్ అవుతుంది', inOrder: 'ఆర్డర్‌లో ఉంది', tip: '“par”, “met” లేదా తప్పు స్పెల్లింగ్ “amoxilin” ప్రయత్నించండి.', toOrder: 'ఈ ఆర్డర్', items: n => `${n} మందులు`, about: 'సుమారు', send: 'వాట్సాప్‌లో పంపు', empty: 'ఇంకా ఏమీ లేదు. మందు చేర్చండి.', sentT: 'వాట్సాప్‌లో పంపాం', sentMsg: n => `${STORE} నుండి ఆర్డర్ 1042. ${n} మందులు, PDF మరియు లింక్‌తో.`, reply: '5 ఉన్నాయి. Pantoprazole: 6 మాత్రమే.', arrived: 'సరుకు వచ్చింది', recvT: 'వచ్చిన సరుకు: ఆర్డర్ 1042', recvS: `${DIST}, వారి బిల్ KP/3391`, imp: 'బిల్ ఫైల్ దిగుమతి చేయి', impDone: 'KP-3391.xlsx చదివాం. 6 లైన్లు మీ ఆర్డర్ పక్కన పెట్టాం.', tickAll: 'సరిపోయినవన్నీ టిక్ చేయి', of: '/', scan: 'ప్యాక్ స్కాన్ చేయి', short: n => `${n} తక్కువ వచ్చాయి. క్రెడిట్ నోట్ అడిగాం.`, soon: '4 నెలల్లో గడువు ముగుస్తుంది.', keep: 'ఉంచు', back: 'వెనక్కి పంపు', kept: 'ఉంచాం. గడువు హెచ్చరిక పెట్టాం.', sentBack: 'వెనక్కి పంపాం. రిటర్న్ నమోదైంది.', needScan: 'బ్యాచ్, గడువు కోసం ప్యాక్ స్కాన్ చేయండి', match: 'ఆర్డర్‌తో సరిపోయింది', wait: 'ఇంకా చూడలేదు', checked: (a, b) => `${b} లో ${a} పూర్తి`, addStock: 'స్టాక్‌లో చేర్చు', doneT: 'స్టాక్‌లో చేరింది. ఏమీ టైప్ చేయలేదు.', d1: n => `${n} మందులు బ్యాచ్ వారీగా స్టాక్‌లో చేరాయి`, d2: 'కొనుగోలు ఎంట్రీ దానంతట అదే అయింది', d3: a => `${a}, 7 నవంబర్ లోపు చెల్లించాలి`, d4: '4 స్ట్రిప్‌లు తక్కువ: క్రెడిట్ నోట్ అడిగాం', d5a: 'Cetirizine కు గడువు హెచ్చరిక పెట్టాం', d5b: '1 మందు వెనక్కి పంపాం: రిటర్న్ నమోదైంది', fields: 'టైప్ చేసిన ఫీల్డ్‌లు', fNote: 'అదే బిల్ చేత్తో టైప్ చేస్తే: 6 లైన్లు × 7 ఫీల్డ్‌లు.', again: 'మళ్లీ చేయి', taps: 'ట్యాప్‌లు', secs: 'సెకన్లు', isNew: 'కొత్త', arrivedA: 'వచ్చింది', pack: 'కొత్త మందు', size: 'అక్షరాల పరిమాణం', smaller: 'చిన్న అక్షరాలు', mid: 'మధ్యస్థ అక్షరాలు', larger: 'పెద్ద అక్షరాలు', remove: 'తీసివేయి', less: 'ఒకటి తగ్గించు', more: 'ఒకటి పెంచు', cMed: 'మందు', cBatch: 'బ్యాచ్', cExp: 'గడువు', cSt: 'స్థితి' }
   };
   /* The shop's history: name, pack, in stock, usual order, last rate, other spellings people type, pack photo */
   const HIST = [
@@ -189,7 +189,7 @@ function initDemo() {
   ];
   /* The order that arrives: [history index, ordered, came, batch, expiry] */
   const ARR = [[0, 20, 20, 'PK2291', '08/2028'], [3, 10, 10, 'AX7730', '03/2028'], [4, 15, 15, 'MF1184', '11/2027'], [5, 12, 12, 'TL5521', '06/2028'], [2, 10, 6, 'PZ0917', '01/2028'], [6, 10, 10, 'CT3340', '02/2027']];
-  const fresh = () => ({ tab: 'order', sent: false, order: [{ i: 3, qty: 10 }, { i: 4, qty: 15 }], rows: ARR.map(() => ({ s: 'todo', scanned: false })), done: false, taps: 0, t0: 0, t1: 0 });
+  const fresh = () => ({ tab: 'order', sent: false, order: [{ i: 3, qty: 10 }, { i: 4, qty: 15 }], rows: ARR.map(() => ({ s: 'todo', scanned: false })), imp: false, done: false, taps: 0, t0: 0, t1: 0 });
   let st = fresh(), lang = 'en', z = 1, timer = 0;
   const t = () => L[lang];
   const svg = (id, k) => `<svg viewBox="0 0 ${k ? 24 : 16} ${k ? 24 : 16}" aria-hidden="true"><use href="#${k ? 'k' : 'i'}-${id}"/></svg>`;
@@ -252,7 +252,7 @@ function initDemo() {
       return `<div class="dm__done"><section class="dm__tray"><header><span>${t().doneT}</span></header><div class="dm__card"><ul class="dm__ok"><li>${t().d1(n)}</li><li>${t().d2}</li><li>${t().d3(rs(amt))}</li><li>${t().d4}</li><li>${backd ? t().d5b : t().d5a}</li></ul></div></section><div class="dm__score"><div><p>${t().fields}</p><b class="is--big">0 <span>/ 42</span></b></div><p>${t().fNote}</p><button class="dm__btn" type="button" data-reset>${t().again}</button></div></div>`;
     }
     const all = resolved() === ARR.length;
-    return `<section class="dm__tray"><header><span>${t().recvT}</span><em>${esc(t().recvS)}</em><button class="dm__btn is--ghost is--sm" type="button" data-all>${svg('ticks', 1)}${t().tickAll}</button></header><div class="dm__card is--flush"><div class="dm__r is--h" aria-hidden="true"><span></span><span>${t().cMed}</span><span>${t().arrivedA}</span><span class="dm__be"><span>${t().cBatch}</span><span>${t().cExp}</span></span><span>${t().cSt}</span></div><ul class="dm__rows">${ARR.map(rowHTML).join('')}</ul></div></section>
+    return `<section class="dm__tray"><header><span>${t().recvT}</span><em>${esc(t().recvS)}</em><span class="dm__hbtns"><button class="dm__btn is--sm${!st.imp && resolved() ? ' is--ghost' : ''}" type="button" data-imp${st.imp ? ' disabled' : ''}>${svg('upload', 1)}${t().imp}</button><button class="dm__btn is--ghost is--sm" type="button" data-all>${svg('ticks', 1)}${t().tickAll}</button></span></header><div class="dm__card is--flush">${st.imp ? `<p class="dm__imp">${svg('tick', 1)}${t().impDone}</p>` : ''}<div class="dm__r is--h" aria-hidden="true"><span></span><span>${t().cMed}</span><span>${t().arrivedA}</span><span class="dm__be"><span>${t().cBatch}</span><span>${t().cExp}</span></span><span>${t().cSt}</span></div><ul class="dm__rows">${ARR.map(rowHTML).join('')}</ul></div></section>
       <div class="dm__act"><p aria-live="polite"><b>${t().checked(resolved(), ARR.length)}</b></p><button class="dm__btn" type="button" data-stock${all ? '' : ' disabled'}>${t().addStock}${svg('arrow', 1)}</button></div>`;
   }
   function sum() { const el = $('#dm-sum', root); if (el) el.innerHTML = `<b>${t().items(st.order.length)}</b>${st.order.length ? `, ${t().about} ${rs(total())}` : ''}`; const b = $('[data-send]', root); if (b) b.disabled = !st.order.length; }
@@ -289,6 +289,7 @@ function initDemo() {
     if ('send' in d) { st.sent = true; body(); return; }
     if ('tick' in d) { const r = st.rows[+d.tick]; r.s = r.s === 'ok' ? 'todo' : 'ok'; }
     if ('all' in d) st.rows.forEach((r, k) => { if (k < 4) r.s = 'ok'; });
+    if ('imp' in d) { st.imp = true; st.rows.forEach((r, k) => { if (k < 4) r.s = 'ok'; }); st.rows[5].scanned = true; }
     if ('scan' in d) st.rows[+d.scan].scanned = true;
     if ('keep' in d) st.rows[+d.keep].s = 'ok';
     if ('back' in d) st.rows[+d.back].s = 'back';
@@ -310,6 +311,8 @@ function initJobs() {
   tabs.innerHTML = C.jobs.map((j, i) => `<button class="jt" type="button" role="tab" data-job="${i}" aria-selected="${i === 0}"><i>${kicon(j.icon)}</i><b>${esc(j.name)}</b><span>${esc(j.line)}</span></button>`).join('');
   const paint = () => {
     $$('.jt', tabs).forEach((b, i) => b.setAttribute('aria-selected', String(i === job)));
+    const n = C.jobs[job].f.length;
+    feats.style.setProperty('--cols', String(n <= 5 ? n : Math.ceil(n / 2)));
     feats.innerHTML = C.jobs[job].f.map((f, i) => `<button class="jf" type="button" data-feat="${i}" aria-pressed="${i === feat}"><b>${esc(f[0])}</b><span>${esc(f[2])}</span></button>`).join('');
     const cur = $('#job-screen'); cur.outerHTML = `<span class="s" id="job-screen">${V[C.jobs[job].f[feat][1]]()}</span>`;
   };
@@ -485,6 +488,8 @@ function initCalc() {
     const timeYear = hours * wage * 12, expYear = exp * cut, year = timeYear + expYear;
     tweenText($('#o-year'), year, rs);
     $('#o-split').textContent = `${rs(timeYear)} of staff time and ${rs(expYear)} of stock that does not expire`;
+    const back = year / 6000;
+    $('#o-pay').textContent = (back >= 10 ? String(Math.round(back)) : back.toFixed(1).replace(/\.0$/, '')) + '×';
     tweenText($('#o-hours'), hours, v => String(Math.round(v)));
     tweenText($('#o-fields'), bills * lines * 7 * days, fmtIN);
     const max = Math.max(perBillToday, 1);
@@ -505,7 +510,7 @@ function initCalc() {
 /* ---------- 12 Our costs ---------- */
 function initCosts() {
   const box = $('.serve-cost');
-  let meter = 0;
+  let meter = 1;
   const direct = () => C.serve.reduce((s, x) => s + (meter && x.meter ? 0 : x.v), 0);
   $('#serve-leg').innerHTML = C.serve.map(x => `<li class="${x.meter ? 'is--meter' : ''}"><b>${esc(x.k)}<em>${rs(x.v)}</em></b><span>${esc(x.s)}</span></li>`).join('');
   $('#build').innerHTML = C.build.map(([k, v, n]) => `<li><span>${esc(k)}</span><b>${esc(v)}</b><i style="--w:${(n / 150 * 100).toFixed(0)}%"></i></li>`).join('');
@@ -514,11 +519,11 @@ function initCosts() {
   unit.innerHTML = C.unit.map(([k, v, s]) => `<tr><td>${esc(k)}</td><td>${esc(v)}</td><td>${esc(s)}</td></tr>`).join('');
   const PMAX = 50000;
   $('#prices').innerHTML = C.prices.map(p => `<li><b>${esc(p.n)}</b><div class="pr__track"><i style="--l:${(p.lo / PMAX * 100).toFixed(1)}%;--w:${((p.hi - p.lo) / PMAX * 100).toFixed(1)}%"></i></div><small>${rs(p.lo)} to ${rs(p.hi)} ${esc(p.s)}</small></li>`).join('')
-    + `<li class="is--us"><b>Pharmacy OS</b><div class="pr__track"><i style="--l:4%;--w:12%"></i></div><small>Not set. Below what a store pays today.</small></li>`;
+    + `<li class="is--us"><b>Pharmacy OS</b><div class="pr__track"><i style="--l:0%;--w:12%"></i></div><small>Under ₹6,000 a year, the plan. WhatsApp messages as used.</small></li>`;
   const g = id => +$('#' + id).value;
   const update = () => {
     const d = direct();
-    $('#serve-bar').innerHTML = C.serve.map(x => `<i style="flex-grow:${meter && x.meter ? 300 : x.v}">${esc(x.k)}${meter && x.meter ? ' · the store pays' : ''}</i>`).join('');
+    $('#serve-bar').innerHTML = C.serve.map(x => `<i style="flex-grow:${meter && x.meter ? 300 : x.v}">${esc(x.k)}${meter && x.meter ? ' · store pays' : ''}</i>`).join('');
     tweenText($('#o-serve'), d, rs);
     $('#o-serve-m').textContent = fmtIN(d / 12);
     const price = g('r-price'), stores = g('r-stores'), fixed = g('r-fixed');
@@ -534,7 +539,7 @@ function initCosts() {
     const left = gp * stores - fixed * 12;
     $('#o-read').innerHTML = !isFinite(be) ? 'At this price a store pays no more than it costs to serve.'
       : left >= 0 ? `At <b>${fmtIN(stores)}</b> stores this covers the team and leaves <b>${lakh(left)}</b> a year.`
-      : `At <b>${fmtIN(stores)}</b> stores this is <b>${lakh(-left)}</b> a year short of the team’s cost. A lower price needs a lower cost to serve: that is why messages can be paid per use.`;
+      : `At <b>${fmtIN(stores)}</b> stores this is <b>${lakh(-left)}</b> a year short of the team’s cost. It needs more stores, or a leaner team.`;
   };
   $$('[data-meter]', box).forEach(b => b.tagName === 'BUTTON' && b.addEventListener('click', () => { meter = +b.dataset.meter; box.dataset.meter = String(meter); $$('button[data-meter]', box).forEach(x => x.setAttribute('aria-pressed', String(x === b))); update(); }));
   bindRanges(['r-price', 'r-stores', 'r-fixed'], update);
@@ -558,6 +563,9 @@ function renderLists() {
   $('#lang-pts').innerHTML = C.langPts.map(([a, b]) => `<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join('');
   $('#a11y').innerHTML = C.a11y.map(([a, b, c]) => `<tr><th scope="row">${esc(a)}</th><td>${esc(b)}</td><td>${esc(c)}</td></tr>`).join('');
   $('#movein').innerHTML = C.movein.map(([a, b]) => `<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join('');
+  $('#day-list').innerHTML = C.day.map(([w, t, app, you]) => `<li><time>${esc(w)}</time><h4>${esc(t)}</h4><p class="day__app">${esc(app)}</p><p class="day__you">${kicon('hand', '')}${esc(you)}</p></li>`).join('');
+  $('#desk-pts').innerHTML = C.deskPts.map(([a, b]) => `<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join('');
+  $('#diff').innerHTML = C.diff.map(([k, a, b]) => `<tr><th scope="row">${esc(k)}</th><td>${esc(a)}</td><td>${esc(b)}</td></tr>`).join('');
   $$('[data-screen]').forEach(el => { el.innerHTML = V[el.dataset.screen] ? V[el.dataset.screen]() : ''; });
 }
 
