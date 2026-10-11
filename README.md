@@ -1,6 +1,6 @@
 # One Stop Solutions: pitch websites
 
-Eight pages for **One Stop Solutions**. Each page has its CSS and JavaScript inline:
+Nine pages for **One Stop Solutions**. Each page has its CSS and JavaScript inline:
 
 | Page | File | Who it is for |
 | --- | --- | --- |
@@ -12,6 +12,7 @@ Eight pages for **One Stop Solutions**. Each page has its CSS and JavaScript inl
 | Heaven Gadgets growth plan | `heaven-gadgets/index.html` | Heaven Gadgets, Ongole: a pitch to the store's owner |
 | Pharmacy OS pitch deck | `pharmacy-os/index.html` | Investors and founders, written so a medical-store owner can follow it |
 | Team playbook | `playbook/index.html` | The One Stop team only |
+| AI website workshop plan | `workshop/index.html` | The One Stop team: the trainer's plan for the three-hour Sunday workshop |
 
 Each page has its own colours:
 
@@ -23,6 +24,7 @@ Each page has its own colours:
 | Beere Kesava ERP deck | Wine, gold and cream |
 | Heaven Gadgets growth plan | Midnight navy, cobalt and price-tag yellow, with a red accent |
 | Pharmacy OS deck | Concrete, carbon indigo and honey amber, with a red pen for notes |
+| AI website workshop plan | Warm ivory, soft black and burnt orange |
 
 The pitch and the playbook share their sources with the Agency OS deck; `source/build2.py` recolours them (`PALETTES`), so the deck keeps its own look.
 
@@ -50,6 +52,7 @@ Once deployed, the pages live at:
 | `/heaven-gadgets/` | Heaven Gadgets growth plan |
 | `/pharmacy-os/` | Pharmacy OS pitch deck |
 | `/playbook/` | Team playbook |
+| `/workshop/` | AI website workshop plan |
 
 `vercel.json` adds clean URLs, a week of browser caching for images, and basic security headers. `.vercelignore` keeps the `source/` folder off the live site.
 
@@ -67,6 +70,7 @@ Every page is generated from the files in `source/`. Edit a source file, then ru
 | Beere Kesava deck | `python3 source/build3.py` | `source/src3/`, `source/bk/img/` |
 | Heaven Gadgets plan | `python3 source/build5.py` | `source/src5/`, `source/hg/img/` |
 | Pharmacy OS deck | `python3 source/build6.py` | `source/src6/`, `source/src6/hairline/` |
+| AI website workshop plan | `python3 source/build7.py` | `source/src7/` |
 
 The builders need Python 3 only. `api/leads.js` needs no packages. Project screenshots and logos for the agency website are WebP files in `img/`; the project list, services, products and team are at the top of `source/src4/site.js`.
 
@@ -100,6 +104,24 @@ Briefs are saved by `api/leads.js`, a Vercel function, in an Upstash Redis datab
 The code is checked on the server, never in the page. After 8 wrong codes from one network, unlocking pauses for 15 minutes. Without the database, the form offers to send the brief on WhatsApp instead.
 
 To try the whole site locally, with working leads in memory, run `node source/tools/dev-server.js` from the repository root and open `http://localhost:4173/` (local code `123456`, or set `LEADS_CODE`).
+
+## AI website workshop plan (`workshop/`)
+
+The trainer's plan for a three-hour Sunday workshop: build websites with AI that don't look AI-made. It uses the client pitch's layout and components in warm ivory, soft black and burnt orange, and needs no script libraries. Everything is rendered at build time from `source/src7/ws_content.py`.
+
+**It is for the team.** The page carries a `noindex` tag and nothing links to it, but anyone with the link can open it. The Backstage section is written for the trainer, not for students.
+
+| Section | What it shows |
+| --- | --- |
+| Hero | "Built with AI. Doesn't look it." with a ring of the mini screens students make |
+| The hook | One stage that flips between a prompt-only site and a spec-first site, and the seven tells with their fixes |
+| The method | Seven steps as colour cards, with AI as step five, and one diagram card per step |
+| Run sheet | The day as a double diamond, a 180-minute dial, the minute-by-minute sheet and twelve block cards |
+| Blocks | One panel per block: you teach, students do, in the chat, say it, plus its mini screens and copyable prompts |
+| Three builds | Portfolio, scroll-animation site and dashboard on a dark stage |
+| Take-home | The seven-day feed reset, and three prices for one project with the route to a first client |
+| Backstage | Six habits, seventeen chat moments, the before-Sunday checklist, the kit and the tools by step |
+| What comes next | Three hours in the workshop against forty in The Complete Product Journey |
 
 ## Client pitch (`pitch/`)
 
