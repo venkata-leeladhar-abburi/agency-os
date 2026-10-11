@@ -310,7 +310,7 @@ RING = [('spec', 'One-page spec', 'Steps 1–4'), ('interview', 'ChatGPT intervi
 
 
 def radial():
-    items = RING * 4
+    items = RING * 3
     out = []
     for i, (v, t, l) in enumerate(items):
         dup = i >= len(RING)

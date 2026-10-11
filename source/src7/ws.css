@@ -57,7 +57,9 @@ a.btn,a.pillar,a.stage-card,a.svc__open,a.dd__half,a.dd__node,a.radial__card,a.r
 .leave li{display:flex;gap:.55rem;align-items:baseline}
 .leave li::before{content:"";flex:none;width:.7rem;height:.4rem;border-left:2px solid var(--c-violet-lite);border-bottom:2px solid var(--c-violet-lite);rotate:-45deg;translate:0 -.2rem}
 .about-card{min-height:33rem}
-.about-card__badge{top:79%;right:-5.5rem}
+.about-card__badge{top:auto;right:1.25rem;bottom:1.25rem;width:13rem;height:13rem;translate:none}
+.about-card__glyph{width:36%;height:36%;margin:-18% 0 0 -18%}
+.about-card__dots{inset:-.75rem;width:calc(100% + 1.5rem);height:calc(100% + 1.5rem)}
 .vslider__bullet{border:0;padding:0}
 
 /* ===== The hook: one stage, two sites ===== */
@@ -459,6 +461,8 @@ a.gt__row:hover .gt__n b{color:var(--c-volt)}
 }
 @media (max-width:767px){
   .nav__bar{width:100%}
+  .about-card__badge{width:9rem;height:9rem;right:1.5rem;bottom:1.5rem}
+  .radial{--card-w:10.25rem}
   .hero__facts{gap:.75rem 1.25rem}
   .hero__facts li{min-width:calc(50% - .7rem)}
   .pillars.is--seven{grid-template-columns:repeat(2,minmax(0,1fr))}
