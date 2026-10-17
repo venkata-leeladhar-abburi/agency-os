@@ -2410,6 +2410,73 @@ h1 em,h2 em,h3 em,.h-xl em,.h-l em,.h-ml em,.h-m em,.h-s em,.hl-em{font-style:no
 </style>
 </head>
 <body>
+<!-- Code gate: the plan opens with a 6-digit code. The code is kept as a SHA-256 hash; once entered, this browser remembers it. -->
+<style>
+.gate{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:1.5rem var(--gutter,1rem);background:var(--c-concrete);color:var(--c-ink);overflow-y:auto;transition:opacity .5s,visibility .5s}
+.gate.is--out{opacity:0;visibility:hidden}
+html.is-gated{overflow:hidden}
+html.is-gated body > :not(.gate){visibility:hidden}
+.gate__card{display:grid;justify-items:center;gap:1rem;width:min(26rem,100%);padding:2.25rem 1.5rem 2rem;border-radius:var(--r-l);background:var(--c-white);box-shadow:inset 0 0 0 1px var(--c-line);text-align:center}
+.gate__icon{display:grid;place-items:center;width:3.5rem;height:3.5rem;border-radius:50%;background:var(--c-ink);color:var(--c-volt)}
+.gate__icon svg{width:1.4rem;height:1.4rem}
+.gate__card h1{margin:0;font-size:1.75rem;font-weight:500;letter-spacing:-.03em;line-height:1.1}
+.gate__card p{margin:0;color:var(--c-graphite)}
+.gate__code{position:relative;display:block;cursor:text}
+.gate__code input{position:absolute;inset:0;z-index:2;width:100%;height:100%;opacity:0;font-size:16px}
+.gate__boxes{display:flex;gap:.45rem}
+.gate__boxes i{display:grid;place-items:center;width:2.75rem;height:3.4rem;border-radius:var(--r-m);background:var(--c-concrete);box-shadow:inset 0 0 0 1.5px var(--c-line-strong);font-style:normal;font-size:1.4rem;font-weight:500;font-family:var(--font-mono);transition:box-shadow .2s}
+.gate__code:focus-within .gate__boxes i.is--on{box-shadow:inset 0 0 0 2px var(--c-ink)}
+.gate__err{min-height:1.3em;color:#b42318;font-weight:500;font-size:.9375rem}
+.gate__card.is--shake{animation:gate-shake .45s}
+@keyframes gate-shake{20%,60%{transform:translateX(-.5rem)}40%,80%{transform:translateX(.5rem)}}
+@media (max-width:400px){.gate__boxes i{width:2.4rem;height:3rem}}
+</style>
+<div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+  <form class="gate__card" id="gate-form" novalidate>
+    <span class="gate__icon"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span>
+    <h1 id="gate-title">Heaven Gadgets × One Stop</h1>
+    <p>Enter your 6-digit code to open the plan.</p>
+    <label class="gate__code"><input id="gate-code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]*" aria-label="6-digit code"><span class="gate__boxes" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span></label>
+    <p class="gate__err" role="alert"></p>
+    <button class="btn" type="submit" data-theme="volt"><span class="btn__label">Open the plan</span></button>
+  </form>
+</div>
+<script>
+(() => {
+  const HASH = 'e90866f3d2b3db52711a5330bd88c3d5eecdcddb81e9098244c1c2ddb177a9fa', KEY = 'onestop-plan-code';
+  const html = document.documentElement, gate = document.getElementById('gate');
+  let open;
+  window.planGate = new Promise(r => { open = r; });
+  let saved = '';
+  try { saved = localStorage.getItem(KEY) || ''; } catch (e) { /* storage blocked: ask every time */ }
+  if (saved === HASH) { gate.remove(); open(); return; }
+  html.classList.add('is-gated');
+  const form = document.getElementById('gate-form'), inp = document.getElementById('gate-code');
+  const boxes = gate.querySelectorAll('.gate__boxes i'), err = gate.querySelector('.gate__err');
+  const paint = () => boxes.forEach((b, i) => { b.textContent = inp.value[i] || ''; b.classList.toggle('is--on', i === Math.min(inp.value.length, 5)); });
+  const sha = async s => [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)))].map(b => b.toString(16).padStart(2, '0')).join('');
+  async function check(code) {
+    if (!/^\d{6}$/.test(code)) { err.textContent = 'Enter all 6 digits.'; return; }
+    let h = '';
+    try { h = await sha(code); } catch (e) { err.textContent = 'Open this page over https to unlock it.'; return; }
+    if (h !== HASH) {
+      form.classList.remove('is--shake'); void form.offsetWidth; form.classList.add('is--shake');
+      inp.value = ''; paint(); err.textContent = 'Wrong code. Try again.';
+      return;
+    }
+    try { localStorage.setItem(KEY, HASH); } catch (e) { /* remembered for this visit only */ }
+    html.classList.remove('is-gated');
+    gate.classList.add('is--out');
+    setTimeout(() => gate.remove(), 600);
+    open();
+  }
+  inp.addEventListener('input', () => { inp.value = inp.value.replace(/\D/g, '').slice(0, 6); err.textContent = ''; paint(); if (inp.value.length === 6) check(inp.value); });
+  form.addEventListener('submit', e => { e.preventDefault(); check(inp.value); });
+  paint();
+  inp.focus({ preventScroll: true });
+})();
+</script>
+
 <a class="skip-link" href="#main">Skip to content</a>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -4750,6 +4817,7 @@ safe('render', () => {
 });
 safe('buttons', () => initButtons());
 safe('lenis', initLenis);
+if (lenis && window.planGate) { lenis.stop(); window.planGate.then(() => lenis.start()); }
 safe('nav', initNav);
 safe('events', initGlobalEvents);
 safe('vsliders', () => $$('[data-vslider]').forEach(r => initVSlider(r)));
@@ -4769,7 +4837,7 @@ safe('work', initWork);
 safe('player', initPlayer);
 safe('copy', initCopy);
 safe('cursor', () => initCursor('.flick__item.is--active'));
-safe('hero', initHero);
+(window.planGate || Promise.resolve()).then(() => safe('hero', initHero));
 safe('radial', initRadialMotion);
 safe('reveals', initReveals);
 if (hasG && window.ScrollTrigger) window.addEventListener('load', () => ScrollTrigger.refresh());
