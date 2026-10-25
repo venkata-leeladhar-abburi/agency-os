@@ -513,7 +513,7 @@ function initCosts() {
   let meter = 1;
   const direct = () => C.serve.reduce((s, x) => s + (meter && x.meter ? 0 : x.v), 0);
   $('#serve-leg').innerHTML = C.serve.map(x => `<li class="${x.meter ? 'is--meter' : ''}"><b>${esc(x.k)}<em>${rs(x.v)}</em></b><span>${esc(x.s)}</span></li>`).join('');
-  $('#build').innerHTML = C.build.map(([k, v, n]) => `<li><span>${esc(k)}</span><b>${esc(v)}</b><i style="--w:${(n / 150 * 100).toFixed(0)}%"></i></li>`).join('');
+  $('#build').innerHTML = C.build.map(([k, v, n]) => `<li><span>${esc(k)}</span><b>${esc(v)}</b><i style="--w:${(n / 180 * 100).toFixed(0)}%"></i></li>`).join('');
   $('#team').innerHTML = C.team.map(([k, n, v]) => `<tr><td>${esc(k)}</td><td>${esc(n)}</td><td>${esc(v)}</td></tr>`).join('');
   const unit = $('#unit'); unit.classList.add('is--unit');
   unit.innerHTML = C.unit.map(([k, v, s]) => `<tr><td>${esc(k)}</td><td>${esc(v)}</td><td>${esc(s)}</td></tr>`).join('');
@@ -565,6 +565,13 @@ function renderLists() {
   $('#movein').innerHTML = C.movein.map(([a, b]) => `<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join('');
   $('#day-list').innerHTML = C.day.map(([w, t, app, you]) => `<li><time>${esc(w)}</time><h4>${esc(t)}</h4><p class="day__app">${esc(app)}</p><p class="day__you">${kicon('hand', '')}${esc(you)}</p></li>`).join('');
   $('#desk-pts').innerHTML = C.deskPts.map(([a, b]) => `<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join('');
+  $('#glance').innerHTML = C.chapters.map(c => `<li><a class="gl" href="${esc(c.go)}"><span class="gl__n">Chapter ${c.n}</span><b class="gl__t">${esc(c.t)}</b><span class="gl__line">${esc(c.line)}</span><span class="gl__big"><b>${esc(c.big)}</b><small>${esc(c.bigL)}</small></span><span class="gl__secs">${c.secs.map(x => `<i>${esc(x)}</i>`).join('')}</span></a></li>`).join('');
+  $$('[data-chap]').forEach(el => { const c = C.chapters[+el.dataset.chap - 1]; el.innerHTML = `<div class="container is--m chap__in"><span class="chap__n" aria-hidden="true">${c.n}</span><div><span class="eyebrow">Chapter ${c.n} of 6</span><h2 class="chap__t">${esc(c.t)}</h2><p class="chap__p">${esc(c.line)}</p></div><ul class="chap__secs">${c.secs.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>`; });
+  $('#pains').innerHTML = C.pains.map((x, i) => `<li class="pn${i === 0 ? ' is--store' : ''}"><span class="eyebrow">${esc(x.who)}</span><p class="pn__q">“${esc(x.q)}”</p><ul>${x.pts.map(t => `<li>${esc(t)}</li>`).join('')}</ul><p class="pn__cost"><b>${esc(x.cost)}</b><span>${esc(x.costL)}</span></p></li>`).join('');
+  $('#acc-pts').innerHTML = C.accPts.map(([a, b]) => `<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join('');
+  $('#eco').innerHTML = C.eco.map((e, i) => `<li class="ec${i === 0 ? ' is--store' : ''}"><div class="ec__top"><span class="tag" data-shape="round"${i ? ' data-theme="volt"' : ''}>${esc(e.price)}</span></div><h3 class="h-s">${esc(e.who)}</h3><p class="ec__sub">${esc(e.sub)}</p><ul>${e.uses.map(u => `<li>${esc(u)}</li>`).join('')}</ul><p class="ec__rep"><span>Replaces</span>${esc(e.replaces)}</p></li>`).join('');
+  $('#eco-flow').innerHTML = C.ecoFlow.map(([a, b]) => `<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join('');
+  $$('[data-desk]').forEach(b => b.addEventListener('click', () => { $$('[data-desk]').forEach(x => x.setAttribute('aria-pressed', String(x === b))); const el = $('#desk-screen'); el.innerHTML = V[b.dataset.desk](); }));
   $('#diff').innerHTML = C.diff.map(([k, a, b]) => `<tr><th scope="row">${esc(k)}</th><td>${esc(a)}</td><td>${esc(b)}</td></tr>`).join('');
   $$('[data-screen]').forEach(el => { el.innerHTML = V[el.dataset.screen] ? V[el.dataset.screen]() : ''; });
 }
@@ -647,6 +654,7 @@ function initRadialMotion() {
 safe('render', () => { renderRadial(); renderTicker(); renderChain('today'); renderToday(); renderStages(); renderLadder(); renderUX(); renderLists(); });
 safe('buttons', () => initButtons());
 safe('lenis', initLenis);
+if (lenis && window.planGate) { lenis.stop(); window.planGate.then(() => lenis.start()); }
 safe('nav', initNav);
 safe('events', initGlobalEvents);
 safe('chain', initChain);
@@ -663,6 +671,6 @@ safe('costs', initCosts);
 safe('player', initPlayer);
 safe('copy', initCopy);
 safe('cursor', () => initCursor('.flick__item.is--active'));
-safe('hero', initHero);
+(window.planGate || Promise.resolve()).then(() => safe('hero', initHero));
 safe('radial', initRadialMotion);
 safe('reveals', initReveals);

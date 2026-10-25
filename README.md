@@ -78,145 +78,31 @@ The builders need Python 3 only. `api/leads.js` needs no packages. Project scree
 
 One Stop Solutions’ own website: our work, services, products, process and team, in black, white and signal orange on the same layout as the other pages.
 
-| Section | What it shows |
-| --- | --- |
-| Hero | The Onestop wordmark, what we do, shortcuts to our process, playbook, client pitch and product decks, and a reel of real project screens |
-| Brands | Logos of the brands we’ve built for |
-| Selected work | Beere Kesava ERP, Ornate ’26, Aaravi Collectives, NGB and LimitX: what each one is, its real screens, a live preview, and a case study from research to launch (competitor analysis, user research, empathy map, users and flows, a wireframe-to-UI slider, build, test and launch, result) |
-| All projects | Every project, filtered by type, with live previews and links |
-| Services | Four core services with what each includes, plus what we help with around a product |
-| Products | Silk ERP, Agency OS and S-Campus, each drawn as a simple diagram, with pitch decks, live previews and “Build something like this” |
-| How we work | Three stages, seven draggable phase cards, and diagrams of our process, playbook and client pitch |
-| Proof, team, questions | A client quote, facts, the team and answers |
-| Have a project in mind? | A short chat; a project map draws itself from the answers, and the brief is saved to our leads |
-| Footer | Links, and **Leads**: enter the code to see, search, export or delete every brief |
-
-Live previews load a project’s real website inside the page when someone clicks. A site that blocks this shows a blank box, so the preview always has an **Open site** button. Team photos load from the current Framer site and fall back to initials.
-
-### Leads setup (one time, in Vercel)
-
-Briefs are saved by `api/leads.js`, a Vercel function, in an Upstash Redis database.
-
-1. In the Vercel project, open **Storage → Create Database**, choose **Upstash for Redis** (free plan), and connect it to this project. That adds `KV_REST_API_URL` and `KV_REST_API_TOKEN`.
-2. In **Settings → Environment Variables**, add `LEADS_CODE` with your 6-digit code, for Production and Preview.
-3. Redeploy. Then use **Leads** in the footer and enter the code.
-
-The code is checked on the server, never in the page. After 8 wrong codes from one network, unlocking pauses for 15 minutes. Without the database, the form offers to send the brief on WhatsApp instead.
-
-To try the whole site locally, with working leads in memory, run `node source/tools/dev-server.js` from the repository root and open `http://localhost:4173/` (local code `123456`, or set `LEADS_CODE`).
-
-## AI website workshop plan (`workshop/`)
-
-The trainer's plan for a three-hour Sunday workshop: build websites with AI that don't look AI-made. It uses the client pitch's layout and components in warm ivory, soft black and burnt orange, and needs no script libraries. Everything is rendered at build time from `source/src7/ws_content.py`.
-
-**It is for the team.** The page carries a `noindex` tag and nothing links to it, but anyone with the link can open it. The Backstage section is written for the trainer, not for students.
+The page is told as one pitch in six chapters. An "at a glance" map under the hero shows all six, and a band opens each chapter: 1 The problem (01), 2 Today's tools (02), 3 Our answer (03 to 05), 4 The product (06 to 10), 5 Why we win (11, 12), 6 The business (13 to 16). The chapters live in `C.chapters` in `content.js`.
 
 | Section | What it shows |
 | --- | --- |
-| Hero | "Built with AI. Doesn't look it." with a ring of the mini screens students make |
-| The hook | One stage that flips between a prompt-only site and a spec-first site, and the seven tells with their fixes |
-| The method | Seven steps as colour cards, with AI as step five, and one diagram card per step |
-| Run sheet | The day as a double diamond, a 180-minute dial, the minute-by-minute sheet and twelve block cards |
-| Blocks | One panel per block: you teach, students do, in the chat, say it, plus its mini screens and copyable prompts |
-| Three builds | Portfolio, scroll-animation site and dashboard on a dark stage |
-| Take-home | The seven-day feed reset, and three prices for one project with the route to a first client |
-| Backstage | Six habits, seventeen chat moments, the before-Sunday checklist, the kit and the tools by step |
-| What comes next | Three hours in the workshop against forty in The Complete Product Journey |
-
-## Client pitch (`pitch/`)
-
-A short, visual pitch for clients. Every line is a few words.
-
-`process/` is the same page with the sections before the process hidden, so “Our process” opens at the seven phases. On the client pitch, the process page and the Agency OS deck, every “Book a call” button goes to the Let’s talk section of the agency website: https://www.onestop-solutions.in/#contact.
-
-| Section | What it shows |
-| --- | --- |
-| Hero | "Build once. Earn for years." with a rotating ring of all sixteen services |
-| Process reel | A seven-phase walkthrough player |
-| Our work | Who we are, and four products we have built |
-| Why one team | Hiring separately versus One Stop (flip between the two) and five differences |
-| Services | Five practices and sixteen services. Each card opens its delivery route, deliverables and phases |
-| How we work | The Double Diamond as a clickable diagram, draggable phase cards, and what we do, what you get and what we need in each phase |
-| Research pack | Ten research documents as flick cards, each with what is inside |
-| What you keep | Twenty-one deliverables, phase by phase |
-| Working together | Six promises and what guides us |
-| Start | Discovery call, proposal, kickoff, and contact details with copy buttons |
-
-## Beere Kesava ERP deck (`beere-kesava/`)
-
-A pitch for the ERP One Stop built for Beere Kesava & Brothers Silks, Dharmavaram. It uses the ERP's own wine, gold and cream colours, its Fraunces headings and its brand photos, on the same layout as the other pages. Every line is a few words, and every product fact comes from the ERP's code. The images are embedded, so the file works on its own.
-
-| Section | What it shows |
-| --- | --- |
-| Hero | "From yarn to sale. One portal." with a rotating ring of the twelve steps and a stat bar |
-| Walkthrough | A twelve-step player, one ERP screen per step |
-| Built for | Who it is for, and simplified ERP screens in a slider |
-| Before and after | Paper books flip into ERP screens, plus eight questions answered |
-| Journey | Buy, Make, Check, Sell as a clickable diagram, draggable step cards, and who, what and what it replaces for each step |
-| One scan | Scan a sample saree tag and its whole story appears |
-| Six portals | Flick cards for every role, each opening what that role uses and what is kept from them |
-| Night shift | A 24-hour dial with the overnight checks and WhatsApp reports |
-| Documents | Eight GST-ready documents in a fan, and WhatsApp delivery |
-| Control | OTP sign-in, sign-in location, hidden money, approvals, signatures and the audit log |
-| What it gives back | Work removed, a savings estimator with drag sliders, leaks plugged, and the one-time investment |
-| Built to last | Data tables, modules, tests and the stack, for investors |
-| Paper to portal | A six-step roll-out trail, ideas for later, and other silk towns |
-| See it live | Walkthrough steps and contact details with copy buttons |
-
-The savings estimator only uses the numbers the visitor sets. No prices are quoted anywhere.
-
-## Heaven Gadgets growth plan (`heaven-gadgets/`)
-
-A pitch for Heaven Gadgets, a watches, footwear and gadgets store in Ongole. It shows what the store faces today, the system One Stop would build, the new flow from a reel to a repeat order, and what it earns back. It uses midnight navy, cobalt and price-tag yellow, with the store's logo and photos from its Instagram profile, on the same layout as the other pages. Every line is a few words. The store's own images are embedded. The mock screens (store, product page, checkout, tracking, phone app, admin and counter) use their own neutral look, grey canvas, black pills and big condensed type, with free-licence studio product photos that load from Unsplash, so those need a connection. The page asks search engines not to index it.
-
-| Section | What it shows |
-| --- | --- |
-| Hero | "Only in Ongole. Soon, all of India." with a rotating ring of the eight steps and a stat bar |
+| Hero | "Pharmacy OS. Typed once." with a rotating ring of the eight steps and a stat bar, then the six chapters at a glance |
 | Walkthrough | An eight-step player, one screen per step |
-| Your store | Who they are, what they sell (footwear, watches, gadgets, style), five gaps we found (pick one to see it on a large screen, with where we saw it and what fixes it), and how one buyer’s order works today (Ravi, who carries the story down the page), with its weak links |
-| Where sales leak | A flow chart of buyers: at five points a share turns red and falls away, and the system plugs each one (switch between today and with the system). Below it, an estimator with drag sliders for the sales won back each year |
-| The new flow | The same buyer with the system: one loop for online and store buyers (switch between the two), draggable step cards, and who, what, today and what it gives back for each step |
-| One bill | Bill once at the counter and watch seven things happen |
-| One platform | Eight tools around one database, each shown on a screen with numbered call-outs |
-| Always on | The second half of One platform, one gap below it: a 24-hour clock of bills, alerts, offers and calls, and the AI voice agent on a live call, then the extras around the platform |
-| Your buyers | Research on how young buyers shop, the youth loop, five buyer types and eight ways to win them |
-| Your numbers | A growth estimator with drag sliders and a before-and-after bar, and why keeping buyers pays |
-| Why One Stop | Beere Kesava ERP, Aaravi Collectives and Nawin Golden Boy as cards, more projects as links, and buttons to all our work and the agency website |
-| How we build | Our seven phases as a week-by-week plan: one bar per phase, an approval point at the end of each, and launch day marked in week 7 |
-| Branch two | Towns around Ongole on a map, and how the system runs new branches |
-| Next step | Store visit, plan and quote, go live, with contact details |
-
-Products, prices, names and numbers inside the screens are samples. The estimators only use the numbers the visitor sets. The research figures name their sources on the page (Meta × GWI 2025, Snap × BCG 2024, Bain & Co. 2025).
-
-To check the page in a browser, run `node source/tools/check_hg.js heaven-gadgets/index.html` after `npm install` in `source/tools/`. It reports console errors, overflow and empty containers, runs the main interactions and saves screenshots at desktop and phone widths.
-
-## Pharmacy OS pitch deck (`pharmacy-os/`)
-
-A pitch for Pharmacy OS, software for medical stores: an order drafted each morning with the best distributor picked, the distributor's bill file received in one click (or ticked against the order when no file comes), billing with a pack scan, WhatsApp bills and refill reminders, and every store on the owner's phone. It is written for investors and founders in words a store owner can follow. The page uses concrete, carbon indigo and honey amber on the same layout as the other pages. The product screens inside it have their own design system (see below). The page asks search engines not to index it.
-
-| Section | What it shows |
-| --- | --- |
-| Hero | "Pharmacy OS. Typed once." with a rotating ring of the eight steps and a stat bar |
-| Walkthrough | An eight-step player, one screen per step |
-| 01 The gap | One medicine typed three times: the chain today and with Pharmacy OS (switch between the two), notes from store visits, and the trade's own 2021 letter asking for files "to avoid manual punching" |
-| 02 Today's software | What a store runs today, a drag slider between a typical screen today and ours, eight products a store owner knows (best at, weak at, how we win, published price), a fifteen-row feature table and a map of the open corner |
-| 03 The flow | Buy, stock, sell, grow: eight steps as draggable cards, with who, what, today and what it gives back. Then a day at the store: what the app does by itself at each hour, and the one tap left to a person |
-| 04 Try it | A working sketch in the product's own look: build an order from a list as you type, send it, then receive it by importing the bill file in one click or by ticking. Two language buttons (English, తెలుగు), three text sizes, and a meter of fields typed |
-| 05 Distributors | Three stages: send first (WhatsApp, PDF and a link with no login), a free order desk in the launch release (drawn as a full screen), then a connection to their software |
-| 06 The platform | The overview dashboard on a counter screen, a tablet and the owner's phone; seven jobs and thirty-five features, each on its own full-size screen; moving in from the old software; and what runs by itself |
-| 07 Stores | One store or many: separate stock, each store's own distributors, and rules set once |
-| 08 Customers | WhatsApp bills and refill reminders, and a campaign estimator with Meta's India rates |
+| 01 The problem | One bill, three people: where it hurts for the store owner, the distributor and the accountant; the chain today and with Pharmacy OS; notes from store visits; the trade's 2021 letter |
+| 02 Today's software | What the store, the distributor and the accountant run today, a drag slider between a typical screen and ours, eight products (best at, weak at, how we win, price), a twenty-row feature table and a map of the open corner |
+| 03 The whole chain | One system for store, distributor and accountant: what each pays (store under ₹6,000 a year, distributor and accountant free) and what passes between them; the distributor's free desk (orders, dispatch, payments) and free billing at launch; the accountant's portal, invited from the store |
+| 04 One flow | Eight steps as draggable cards, then a day at the store: what runs by itself |
+| 05 Try it | A working demo: order, send, then receive by importing the bill file or ticking. English or తెలుగు, three text sizes |
+| 06 One platform | The overview on a counter screen, a tablet and a phone; eight jobs and thirty-nine features, each on its own screen; moving in; what runs by itself |
+| 07 One store or many | Separate stock, each store's own distributors, rules set once |
+| 08 Customers | WhatsApp bills, refill reminders and a campaign estimator |
 | 09 Owner app | What the owner sees on the phone |
-| 10 UX | The evidence on ageing eyes and hands, research done and planned, five personas, two flows before and after, eight design rules with live examples, the overview screen with eight numbered design choices, the language choice, a table of measured accessibility numbers, and the UI kit |
-| 11 What it gives back | Hours, money and typing saved each year, with drag sliders, and what reminders can earn |
-| 12 Costs | What one store costs us each year, year-one build cost, the team, unit prices, and a break-even estimator for price, stores and team cost |
-| 13 Why ours | Six reasons, a table of the same feature in today's software and in ours, what gets harder to copy, and twelve investor questions answered |
-| 14 Why now | Market numbers and a timeline of what changed |
-| 15 What we must get right | Ten risks in building it, each with what we do about it |
-| 16 Plan | Ten stores first, the roadmap, open questions and the raise |
+| 10 Design for fifty-plus | Evidence, research, personas, flows, design rules, annotated screen, language, measured accessibility, the UI kit |
+| 11 Why they will switch | Six reasons, the same feature in today's software and in ours, what gets harder to copy, investor questions |
+| 12 What it gives back | Hours, money and typing saved, and what reminders can earn |
+| 13 Our costs | Cost to serve, the price plan, year-one cost, the team, unit prices, break-even |
+| 14 Why now | Market numbers and a timeline |
+| 15 Build with care | Ten things we must get right |
+| 16 The plan | Roadmap with gates, open questions and the raise |
 | Start | Contact details and every source |
 
-Our planned price is stated as under ₹6,000 a store a year before GST, with WhatsApp messages charged as used; the page shows what competitors publish beside it and says pilots will test the number. The feature set and the price were agreed with the owner on 10 October 2026, after a fresh check of the competitors' public pages: one-click import of the distributor's bill file, comparing distributors by rate, scheme and credit, an optional order-bill-goods check, short items sent to the next distributor, asking the app a question, and pay-later credit through a partner are in; voice billing, prescription photo reading, bill photo reading and approval from WhatsApp are out. Every market and competitor fact names its source at the end of the page; competitor features come from public material and are marked as such. Products, stores, medicines and amounts inside the screens are samples. The "typical screen today" is our own drawing of a common layout, not a screenshot of any product. The personas are first sketches with stock photos from Pexels, to be replaced by real interviews. The Telugu wording needs a check by a native speaker before it is shown to store owners.
+Our planned price is stated as under ₹6,000 a store a year before GST, with WhatsApp messages charged as used; the page shows what competitors publish beside it and says pilots will test the number. The feature set and the price were agreed with the owner on 10 October 2026, after a fresh check of the competitors' public pages: one-click import of the distributor's bill file, comparing distributors by rate, scheme and credit, an optional order-bill-goods check, short items sent to the next distributor, asking the app a question, and pay-later credit through a partner are in; voice billing, prescription photo reading, bill photo reading and approval from WhatsApp are out. The page opens behind a 6-digit code (a SHA-256 hash in `po.html`; the browser remembers it once entered). Every market and competitor fact names its source at the end of the page; competitor features come from public material and are marked as such. Products, stores, medicines and amounts inside the screens are samples. The "typical screen today" is our own drawing of a common layout, not a screenshot of any product. The personas are first sketches with stock photos from Pexels, to be replaced by real interviews. The Telugu wording needs a check by a native speaker before it is shown to store owners.
 
 ### The product screens
 
@@ -224,8 +110,8 @@ Every Pharmacy OS screen on the page is drawn from one kit: `source/src6/poui.cs
 
 - **Artboards.** Screens are drawn in px on fixed artboards: counter screen 1280 × 800, phone 360 × 704, tablet 720 × 960. `build6.py` turns every lowercase `px` in `poui.css` into `calc(var(--px) * n)`, so a screen scales with its container. Write `PX` for a hairline that must stay one pixel. A px value inside a `style` attribute in `povis.js` is scaled the same way.
 - **Close-ups.** Small cards (the hero ring, the flow cards, the player) show a screen enlarged about a point, set per step in `content.js` as `zoom: [times, x, y]`.
-- **One screen per feature.** The 35 features in section 06 each have their own screen; the keys are in `C.jobs` in `content.js`. The distributor's order desk in section 05 is the `desk` screen.
-- **The demo** in section 04 is real HTML in the same look (`initDemo` in `po.js`, `.dm__*` in `po.css`).
+- **One screen per feature.** The 39 features in section 06 each have their own screen; the keys are in `C.jobs` in `content.js`. The distributor's screens in section 03 are `desk`, `dispatch` and `dpay`; the accountant's portal is `cahome`.
+- **The demo** in section 05 is real HTML in the same look (`initDemo` in `po.js`, `.dm__*` in `po.css`).
 - **Measured, not promised.** The accessibility table in section 10 comes from measuring the demo in every state, at desktop and phone widths: lowest text contrast 4.5 : 1, smallest button 44 × 44 px, smallest text 14 px, and every control reachable by keyboard with a visible focus ring. Measure again after changing the demo's colours or sizes, and update `C.a11y` in `content.js`.
 
 The five line figures come from [Hairline](https://github.com/lucasmarkes/hairline) (MIT). Four load from jsDelivr; the blister strip is our own figure on the same engine, in `source/src6/hairline/` (`kernel.js` is Hairline's engine, unchanged, with its `LICENSE` beside it and on the page; `host.js` mounts our figure on the page; `strip.js` is the figure). If the library cannot load, those figures hide and the page still works.

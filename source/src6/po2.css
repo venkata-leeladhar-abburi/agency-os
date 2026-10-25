@@ -487,3 +487,62 @@
 .diff__table td:nth-child(2){width:38%;color:var(--c-graphite)}
 .diff__table td:nth-child(3){background:var(--c-ink);color:var(--c-concrete);font-weight:500;border-bottom-color:rgba(255,255,255,.12)}
 @media (max-width:767px){.diff{margin-top:4rem}.diff__table thead{display:none}.diff__table,.diff__table tbody,.diff__table tr,.diff__table th,.diff__table td{display:block;width:auto}.diff__table tbody th{width:auto;padding-bottom:.3rem;border-bottom:0}.diff__table td:nth-child(2){width:auto;border-bottom:0;padding-top:.2rem}.diff__table td::before{display:block;margin-bottom:.3rem;font-family:var(--font-mono);font-size:.6875rem;font-weight:400;letter-spacing:.06em;text-transform:uppercase}.diff__table td:nth-child(2)::before{content:"Today";color:var(--c-steel)}.diff__table td:nth-child(3)::before{content:"Pharmacy OS";color:var(--c-volt)}.diff__table tr{border-bottom:.4rem solid var(--c-concrete)}.diff__table tr:last-child{border-bottom:0}}
+
+/* ---------- The pitch at a glance ---------- */
+.glance{padding:5rem 0 1rem}
+.glance__head{display:grid;gap:.7rem;justify-items:start;max-width:48rem;margin-bottom:2rem}
+.glance__head .eyebrow{color:var(--c-violet)}
+.glance__list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem;counter-reset:gl}
+.gl{display:flex;flex-direction:column;gap:.6rem;height:100%;padding:1.35rem;border-radius:var(--r-s);background:var(--c-ash);color:var(--c-ink);text-decoration:none;transition:background-color .3s,transform .3s var(--ease-out)}
+.gl:hover{background:var(--c-bone);transform:translateY(-2px)}
+.gl:focus-visible{outline:2px solid var(--c-violet);outline-offset:2px}
+.gl__n{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--c-violet)}
+.gl__t{font-family:var(--font-display);font-stretch:82%;font-size:1.9rem;font-weight:600;line-height:1;letter-spacing:-.025em}
+.gl__line{font-size:1rem;line-height:1.42;color:var(--c-graphite)}
+.gl__big{display:flex;align-items:baseline;gap:.6rem;margin-top:auto;padding-top:.6rem;border-top:1px solid var(--c-line)}
+.gl__big b{font-family:var(--font-display);font-stretch:78%;font-size:2.6rem;font-weight:600;line-height:1;letter-spacing:-.035em;color:var(--c-violet);white-space:nowrap}
+.gl__big small{font-size:.875rem;line-height:1.3;color:var(--c-graphite)}
+.gl__secs{display:flex;flex-wrap:wrap;gap:.3rem}
+.gl__secs i{font-style:normal;padding:.15rem .55rem;border-radius:var(--r-pill);background:var(--c-concrete);font-size:.8125rem;color:var(--c-graphite)}
+.glance__list li:first-child .gl{background:var(--c-ink);color:var(--c-concrete)}
+.glance__list li:first-child .gl__line,.glance__list li:first-child .gl__big small{color:var(--c-smoke)}
+.glance__list li:first-child .gl__n,.glance__list li:first-child .gl__big b{color:var(--c-volt)}
+.glance__list li:first-child .gl__big{border-top-color:rgba(255,255,255,.15)}
+.glance__list li:first-child .gl__secs i{background:rgba(255,255,255,.1);color:var(--c-smoke)}
+.glance__list li:first-child .gl:hover{background:#2a2626}
+
+/* ---------- The band that opens each chapter ---------- */
+.chap{padding-top:5.5rem;scroll-margin-top:5rem}
+.chap__in{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:.5rem 2rem;align-items:end;padding-top:1.75rem;border-top:2px solid var(--c-ink)}
+.chap__n{font-family:var(--font-display);font-stretch:78%;font-size:8rem;font-weight:600;line-height:.78;letter-spacing:-.05em;color:var(--c-violet)}
+.chap__in > div{display:grid;gap:.45rem}
+.chap__in .eyebrow{color:var(--c-steel)}
+.chap__t{font-family:var(--font-display);font-stretch:82%;font-size:3rem;font-weight:600;line-height:.95;letter-spacing:-.03em}
+.chap__p{font-size:1.125rem;line-height:1.4;color:var(--c-graphite);max-width:40rem}
+.chap__secs{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:.3rem;max-width:26rem}
+.chap__secs li{padding:.2rem .65rem;border-radius:var(--r-pill);background:var(--c-ash);font-size:.875rem;color:var(--c-graphite)}
+
+/* ---------- 01 Where it hurts ---------- */
+.pains{display:grid;gap:1.25rem;margin-top:3.5rem}
+.pains__head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.5rem 2rem}
+.pains__head .eyebrow{color:var(--c-vermillion)}
+.pains__note{font-size:.875rem;color:var(--c-steel);max-width:34rem}
+.pains__list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem}
+.pn{display:flex;flex-direction:column;gap:.9rem;padding:1.5rem;border-radius:var(--r-s);background:var(--c-ash)}
+.pn .eyebrow{color:var(--c-steel)}
+.pn__q{font-family:var(--font-display);font-stretch:84%;font-size:1.6rem;font-weight:600;line-height:1.08;letter-spacing:-.02em}
+.pn ul{display:grid;gap:.45rem}
+.pn ul li{display:flex;gap:.6rem;font-size:1rem;line-height:1.38;color:var(--c-graphite)}
+.pn ul li::before{content:"";flex:none;width:.7rem;height:2px;margin-top:.65em;background:var(--c-vermillion)}
+.pn__cost{display:grid;gap:.15rem;margin-top:auto;padding:.9rem 1rem;border-radius:var(--r-s);background:var(--c-concrete)}
+.pn__cost b{font-family:var(--font-display);font-stretch:84%;font-size:1.4rem;font-weight:600;letter-spacing:-.015em;color:var(--c-vermillion)}
+.pn__cost span{font-size:.875rem;color:var(--c-graphite)}
+.pn.is--store{background:var(--c-ink);color:var(--c-concrete)}
+.pn.is--store .eyebrow{color:var(--c-volt)}
+.pn.is--store ul li{color:var(--c-smoke)}
+.pn.is--store .pn__cost{background:rgba(255,255,255,.08)}
+.pn.is--store .pn__cost b{color:var(--c-volt)}
+.pn.is--store .pn__cost span{color:var(--c-smoke)}
+@media (max-width:991px){.glance__list{grid-template-columns:repeat(2,minmax(0,1fr))}.pains__list{grid-template-columns:minmax(0,1fr)}.chap__in{grid-template-columns:auto minmax(0,1fr)}.chap__secs{grid-column:1/-1;justify-content:flex-start;max-width:none}.chap__n{font-size:6rem}}
+@media (max-width:767px){.glance{padding-top:3.5rem}.glance__list{grid-template-columns:minmax(0,1fr)}.chap{padding-top:4rem}.chap__n{font-size:4.6rem}.chap__t{font-size:2.3rem}.pn{padding:1.15rem}}
+.chap + .section{padding-top:4rem}

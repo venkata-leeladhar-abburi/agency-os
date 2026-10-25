@@ -1,6 +1,21 @@
 /* ===== Pharmacy OS pitch. Every line is short on purpose. Store, medicine and people names inside the screens are samples.
    Facts carry a source id (see C.sources). Estimates are marked as estimates where they appear. ===== */
 const C = {
+  /* The pitch in six chapters: the glance map at the top and the band that opens each chapter */
+  chapters: [
+    { n: 1, t: 'The problem', go: '#chapter-1', line: 'One bill is typed again by the store, the distributor and the accountant.', big: '3×', bigL: 'the same bill, typed again', secs: ['01 The problem'] },
+    { n: 2, t: 'Today’s tools', go: '#chapter-2', line: 'What each of them uses now, and how it compares, feature by feature.', big: '20', bigL: 'features compared', secs: ['02 Today’s software'] },
+    { n: 3, t: 'Our answer', go: '#chapter-3', line: 'One system for the whole chain, from the order to the refill.', big: '1', bigL: 'system for all three', secs: ['03 The whole chain', '04 One flow', '05 Try it'] },
+    { n: 4, t: 'The product', go: '#chapter-4', line: 'Eight jobs, each feature on its own screen, built for eyes over fifty.', big: '39', bigL: 'features, each drawn', secs: ['06 One platform', '07 One store or many', '08 Customers', '09 Owner app', '10 Design for fifty-plus'] },
+    { n: 5, t: 'Why we win', go: '#chapter-5', line: 'What an owner gets that he does not get today, in hours and rupees.', big: '5.5×', bigL: 'back for each rupee, at our starting numbers', secs: ['11 Why they will switch', '12 What it gives back'] },
+    { n: 6, t: 'The business', go: '#chapter-6', line: 'Price and costs, the market, the risks, the plan and the raise.', big: '₹4 cr', bigL: 'raise, for 18 months', secs: ['13 Our costs', '14 Why now', '15 Build with care', '16 The plan'] }
+  ],
+  /* 01 Where it hurts, for each of the three */
+  pains: [
+    { who: 'The store owner', q: 'I type the same bill again every night.', pts: ['Every distributor bill typed line by line, 20 to 40 lines, several a day', 'Expired strips found by the customer. Return dates missed.', 'The H1 register written by hand', 'Deleted bills and big discounts that nobody sees', 'Small text and function keys'], cost: 'About 16 hours a month of typing', costL: 'at the calculator’s starting numbers' },
+    { who: 'The distributor', q: 'Orders come by call, by chat and from three apps.', pts: ['Orders as calls, voice notes and photos of handwriting', '“Where is my parcel?” calls, all day', 'Payments chased store by store', 'Short supply and returns argued on the phone'], cost: 'No one place', costL: 'for orders, dispatch and dues' },
+    { who: 'The accountant', q: 'Every month I ask for the same files.', pts: ['Bill photos on WhatsApp, typed again into Tally', 'Purchases that do not match the distributor’s bill', 'Month-end chasing of thirty owners', 'No login to the store’s numbers'], cost: 'Days of collecting', costL: 'before the real work starts' }
+  ],
   acts: [
     { id: 'buy', name: 'Buy', sub: 'From the distributor' },
     { id: 'stock', name: 'Stock', sub: 'Onto the shelf' },
@@ -85,7 +100,9 @@ const C = {
     { k: 'Ordering', v: ['Pharmarack', 'Retailio', 'LiveOrder', 'Distributor’s own app', 'WhatsApp', 'Phone'] },
     { k: 'Registers', v: ['Paper H1 book', 'Prescription file'] },
     { k: 'Customers', v: ['Personal WhatsApp', 'Memory'] },
-    { k: 'Accounts', v: ['Tally', 'The CA’s Excel'] }
+    { k: 'Accounts', v: ['Tally', 'Busy', 'The CA’s Excel', 'Bill photos on WhatsApp'] },
+    { k: 'Distributor’s side', v: ['Marg ERP', 'Unisolve', 'C-Square', 'Logic ERP', 'Busy', 'Calls and chat'] },
+    { k: 'Delivery', v: ['Own van', 'Courier', 'A phone call to ask where it is'] }
   ],
   rivals: [
     { n: 'Marg ERP 9+', from: 'Delhi', kind: 'Billing', big: '1 million+', bigL: 'users, by its own count',
@@ -146,7 +163,12 @@ const C = {
     ['Telugu screens', [2, 0, 0, 0, 0, 1]],
     ['Text-size control and 44px buttons', [2, 0, 0, 0, 0, 0]],
     ['Many stores, one owner view', [2, 1, 1, 2, 1, 0]],
-    ['Price published on its own website', [2, 1, 0, 0, 2, 2]]
+    ['Price published on its own website', [2, 1, 0, 0, 2, 2]],
+    ['Sales, discounts and edits, person by person', [2, 1, 1, 1, 1, 0]],
+    ['Alerts to the owner for unusual events', [2, 0, 0, 1, 0, 0]],
+    ['Parcel tracking from dispatch to the door', [2, 0, 0, 0, 0, 0]],
+    ['A free portal for the distributor', [2, 0, 0, 0, 0, 0]],
+    ['The accountant sees every store in one login', [2, 0, 0, 0, 0, 0]]
   ],
   /* Map: x = published price per store per year (₹ thousand, mid of range), y = typing removed on purchases (0 to 3) */
   map: [
@@ -164,26 +186,46 @@ const C = {
       line: 'The order goes as a WhatsApp message, a PDF and a link.',
       pts: ['No login, no app, nothing to learn', 'They mark “available” or “short” on the link', 'They attach the bill file their software already makes'],
       store: 'Works with every distributor', dist: 'Zero effort', us: 'Costs paise per order' },
-    { n: '2', t: 'Free order desk', when: 'In the launch release', tag: 'Then',
-      line: 'One page for every order from Pharmacy OS stores. He opens it when it saves him work.',
-      pts: ['All orders in one list, with their status', 'One bill file a day: each store imports its own', 'Rates and schemes posted to every store', 'Dues and payments in one place'],
-      store: 'One-click receiving, today’s rates', dist: 'Fewer calls, faster payment', us: 'Each distributor brings stores' },
-    { n: '3', t: 'Connect their software', when: 'Later', tag: 'Later',
-      line: 'Their billing software sends the bill back by itself.',
-      pts: ['Works with what they already run', 'Bill lines arrive with batch and expiry', 'Nothing to upload'],
-      store: 'Nothing to wait for', dist: 'Nothing to export', us: 'A network that is hard to copy' }
+    { n: '2', t: 'Free distributor desk', when: 'In the launch release', tag: 'Then',
+      line: 'One page for every order, every parcel and every payment from Pharmacy OS stores.',
+      pts: ['Orders in one list, with their status', 'One bill file a day: each store imports its own', 'Dispatch with vehicle, LR and e-way bill', 'Delivery closed with an OTP', 'Payments matched to bills'],
+      store: 'One-click receiving, a tracked parcel', dist: 'Fewer calls, faster payment', us: 'Each distributor brings stores' },
+    { n: '3', t: 'Their billing too, free', when: 'At launch, if he wants it', tag: 'Also at launch',
+      line: 'A full billing system for the distributor, for those ready to leave Marg or Unisolve.',
+      pts: ['Stock, batches, GST and e-invoices', 'Their stores already connected', 'Or keep their software: we link to it'],
+      store: 'Bills arrive by themselves', dist: 'No software fee, ever', us: 'A network that is hard to copy' }
   ],
   deskPts: [
     ['One file, every store', 'He exports the day’s bills once. Each store receives its own in one click.'],
-    ['Rates and schemes, posted once', 'Every store sees today’s rate before it orders.'],
-    ['Fewer calls', 'Orders arrive clear and complete. “Short” is one tap, before the van leaves.'],
-    ['Paid sooner', 'Stores see what is due. A reminder goes three days before.']
+    ['Dispatch in one place', 'Vehicle, LR and e-way bill. The store watches the parcel move.'],
+    ['Paid sooner', 'Reminders three days before. UPI payments matched to the bill.'],
+    ['Free, for good', 'We earn from stores, not from distributors.']
+  ],
+  /* 05 The whole chain: who uses it, what for, what it replaces, what it costs */
+  eco: [
+    { who: 'The store', price: 'Under ₹6,000 a year', sub: 'One counter, many counters, or many branches', uses: ['Order, receive, bill, remind', 'Team, alerts and every branch on the owner’s phone', 'Gives the accountant access'], replaces: 'Billing software, ordering apps, the H1 book, phone calls' },
+    { who: 'The distributor', price: 'Free', sub: 'Order desk, dispatch and payments', uses: ['Takes orders from every store in one list', 'Sends the bill file and the parcel’s journey', 'Collects payments, matched to bills'], replaces: 'Order calls, chat groups, three ordering apps, “where is my parcel” calls' },
+    { who: 'The accountant', price: 'Free, invited by the store', sub: 'Every store he serves, in one login', uses: ['Sales, purchases and GST, ready each month', 'Tally files for every store and branch', 'Asks the owner about a missing bill'], replaces: 'Bill photos on WhatsApp, Excel, typing purchases again into Tally' }
+  ],
+  ecoFlow: [
+    ['Store to distributor', 'The order, and the payment'],
+    ['Distributor to store', 'Short items, the bill file, the parcel on its way'],
+    ['Store to accountant', 'Access, given once: sales, purchases, GST, Tally'],
+    ['Accountant to store', 'A question on a missing or different bill'],
+    ['Everything to the owner', 'Alerts, the weekly score and every branch, on one phone'],
+    ['Branch to branch', 'Stock moved, tracked until the other store ticks it in']
+  ],
+  accPts: [
+    ['Access from the store', 'The owner adds his accountant once, by phone number. He can take it back any time.'],
+    ['Every store, one login', 'Thirty shops, three branches each: one list, with what is ready and what is missing.'],
+    ['Nothing typed again', 'Sales and purchases come from the bills. GST summaries and Tally files are ready on the first.'],
+    ['Read-only, logged', 'He sees and downloads. He cannot change a bill. Every look is recorded.']
   ],
 
   /* 06 One platform: six jobs, each a list of features with a screen */
   jobs: [
     { id: 'buy', name: 'Buy', icon: 'truck', line: 'Order to pay.',
-      f: [['Morning order', 'order', 'Drafted overnight from sales and stock. One tap sends it.'], ['Compare distributors', 'compare', 'Rate, scheme and credit, side by side. The best is picked.'], ['Order status', 'send', 'Sent, seen, packed, on the way. Short items go to the next distributor.'], ['Receive in one click', 'check', 'Their bill file is matched to your order. Or tick what came.'], ['Rate and scheme watch', 'watch', 'Overcharges and missing schemes, in rupees, claimed in one tap.'], ['Pay the distributor', 'dues', 'Due dates, with a reminder three days before'], ['Expiry returns', 'returns', 'A warning before each return date closes. Followed to the credit note.']] },
+      f: [['Morning order', 'order', 'Drafted overnight from sales and stock. One tap sends it.'], ['Compare distributors', 'compare', 'Rate, scheme and credit, side by side. The best is picked.'], ['Order status', 'send', 'Sent, seen, packed. Short items go to the next distributor.'], ['Parcel tracking', 'track', 'From packed to delivered, closed with an OTP at the door.'], ['Receive in one click', 'check', 'Their bill file is matched to your order. Or tick what came.'], ['Rate and scheme watch', 'watch', 'Overcharges and missing schemes, in rupees, claimed in one tap.'], ['Pay the distributor', 'dues', 'Due dates, with a reminder three days before'], ['Expiry returns', 'returns', 'A warning before each return date closes. Followed to the credit note.']] },
     { id: 'stock', name: 'Stock', icon: 'box', line: 'Know every strip.',
       f: [['Expiring in 60 days', 'expiry', 'With the rupee value at risk, by distributor'], ['Running low', 'lowstock', 'Days of stock left, with one tap to order'], ['Batch and shelf', 'stock', 'Oldest batch sells first'], ['Dead stock', 'deadstock', 'No sale in 90 days: return or move']] },
     { id: 'sell', name: 'Sell', icon: 'receipt', line: 'Fast, legal bills.',
@@ -191,9 +233,11 @@ const C = {
     { id: 'serve', name: 'Serve', icon: 'chat', line: 'Keep customers.',
       f: [['Bill on WhatsApp', 'wabill', 'To the buyer, as the sale closes. A link, not a photo.'], ['Refill reminders', 'remind', 'Worked out from the strip and the dose'], ['Campaigns', 'campaign', 'Offers to a chosen group, with consent'], ['Customer page', 'customer', 'Purchases, dues and the family’s regular medicines']] },
     { id: 'money', name: 'Accounts', icon: 'rupee', line: 'CA-ready.',
-      f: [['Day book', 'accounts', 'Sales, cash, UPI, expenses and profit'], ['Day close', 'dayclose', 'Cash counted against the bills, by person. Every edit shown.'], ['Money to collect', 'collect', 'Credit customers, with reminders'], ['GST files', 'gst', 'GSTR-1 and 3B summaries. Tally export.'], ['The CA’s login', 'ca', 'Read-only. Everything downloads.']] },
+      f: [['Day book', 'accounts', 'Sales, cash, UPI, expenses and profit'], ['Day close', 'dayclose', 'Cash counted against the bills, by person. Every edit shown.'], ['Money to collect', 'collect', 'Credit customers, with reminders'], ['GST files', 'gst', 'GSTR-1 and 3B summaries. Tally export.'], ['Accountant access', 'ca', 'Given by the owner. Read-only, every branch, everything downloads.']] },
     { id: 'law', name: 'Law', icon: 'shield', line: 'Always legal.',
       f: [['Schedule H1 register', 'h1', 'Doctor, patient, drug and quantity, filled from the bill'], ['Expired stock blocked', 'blocked', 'It cannot be billed. It moves to “to return”.'], ['Inspection pack', 'inspect', 'Bills, registers and licences in one download'], ['Licence reminders', 'licence', '60 and 30 days before renewal']] },
+    { id: 'team', name: 'Team', icon: 'users', line: 'Who did what.',
+      f: [['Team performance', 'staffperf', 'Bills, sales, discounts and edits, per person'], ['People and roles', 'staff', 'Their own phone login. What each person may do.'], ['Owner alerts', 'alerts', 'Deleted bills, big discounts, cash differences, late parcels']] },
     { id: 'ahead', name: 'Look ahead', icon: 'trend', line: 'Know it first.',
       f: [['Ask the app', 'ask', 'Tap a question. Get a number and a list.'], ['Weekly store score', 'score', 'Four numbers, and one thing to do for each'], ['Next week’s demand', 'forecast', 'From the shop’s own bills, with the season learnt'], ['Refills due next week', 'refills', 'Who will come, and for what. Stock is ready first.'], ['Cash calendar', 'cash', 'What goes out and what comes in, day by day'], ['Expiry risk', 'risk', 'Batches that will not sell before their date']] }
   ],
@@ -206,7 +250,8 @@ const C = {
   autos: [
     ['Morning order', 'Drafted at 6 am, ready to send'], ['Low stock', 'Every morning, as one WhatsApp summary'], ['Overcharge or missing scheme', 'Found as the bill is read'],
     ['Near expiry', '90, 60 and 30 days before, with value'], ['Return date', 'Before a distributor stops taking stock back'], ['Expired', 'Blocked from billing at once'],
-    ['Pay distributor', 'Three days before the due date'], ['Refill due', 'Three days before the strip ends'], ['Licence renewal', '60 and 30 days before']
+    ['Pay distributor', 'Three days before the due date'], ['Refill due', 'Three days before the strip ends'], ['Licence renewal', '60 and 30 days before'],
+    ['Parcel late', 'When a delivery misses its time'], ['Deleted bill or big discount', 'To the owner, at once'], ['Cash difference', 'At day close, by person']
   ],
 
   /* 07 One store or many */
@@ -225,7 +270,7 @@ const C = {
     ['“Needs you” list', 'Orders to approve, dues to pay, stock about to expire'],
     ['Ask it a question', '“What is low today?” A number and a list come back.'],
     ['A score every Monday', 'Four numbers, and one thing to do for each'],
-    ['Every bill, live', 'See a bill the moment it is made'],
+    ['Alerts that matter', 'Deleted bills, big discounts, cash short, late parcels'],
     ['Works on a basic phone', 'Android first. Telugu, English, Hindi.']
   ],
 
@@ -245,7 +290,7 @@ const C = {
     ['Telugu is written in Telugu', 'Nobody has to read English to leave English.'],
     ['Each person keeps their own', 'Imran works in English and Padma in Telugu, at the same counter.']
   ],
-  /* Measured on the demo in section 04, at desktop and phone widths, in every state of the flow */
+  /* Measured on the demo in section 05, at desktop and phone widths, in every state of the flow */
   a11y: [
     ['Main text against its background', '12 : 1 or more', '4.5 : 1 or more'],
     ['Grey helper text', '5.4 : 1 or more', '4.5 : 1 or more'],
@@ -265,7 +310,7 @@ const C = {
     { big: '“manual punching”', t: 'is what the chemists’ own association asked suppliers to end', s: 'AIOCD letter to drug makers, 20 January 2021: send a file, match the batch to the stock.', src: 'aiocd' }
   ],
   research: {
-    done: [['Store visits', 'First conversations with owners at the counter, October 2026'], ['Nine products studied', 'Sites, price lists, app listings and help pages'], ['Reviews read', 'What users say after they pay'], ['Trade letters and rules', 'AIOCD, drug control, GST, WhatsApp policy']],
+    done: [['Store visits', 'First conversations with owners at the counter, October 2026'], ['Nine products studied', 'Sites, price lists, app listings and help pages'], ['Reviews read', 'What users say after they pay'], ['Trade letters and rules', 'AIOCD, drug control, GST, WhatsApp policy'], ['The rest of the chain', 'What distributors and accountants use: Marg, Unisolve, C-Square, Logic ERP, Tally, Busy']],
     next: [['30 owner interviews', 'Hyderabad, Vijayawada, Ongole and nearby towns'], ['A day behind the counter', 'Time every purchase bill and every sale'], ['10 design partners', 'Stores that test each screen before we build it'], ['Tests with owners over 50', 'Five owners try every release']]
   },
   people: [
@@ -284,7 +329,7 @@ const C = {
     { first: 'Kiran', at: 43, name: 'The owner of four stores', img: 31695306, fp: [0.74, 0.4, 1],
       where: 'Four stores in two towns', uses: 'A separate installation in each store', device: 'Phone, mostly', lang: 'Telugu, English',
       quote: 'I call each store to ask how the day went.',
-      wants: ['All four stores on his phone', 'To approve big orders himself', 'Stock moved before it expires'],
+      wants: ['All four stores on his phone', 'To know who sold what, and who changed a bill', 'An alert when something is wrong'],
       pains: ['Four sets of numbers', 'Stock “lost” between stores', 'No idea who changed a bill'],
       win: 'One owner view, approval rules, tracked transfers and a log of every edit.' },
     { first: 'Padma', at: 38, name: 'The accountant', img: 8837758, fp: [0.72, 0.4, 1.7],
@@ -292,13 +337,13 @@ const C = {
       quote: 'Every month I ask for the same files.',
       wants: ['GST files without asking', 'A clean purchase register', 'Her own login'],
       pains: ['Photos of bills on WhatsApp', 'Purchases typed twice, with mistakes', 'Chasing owners at month end'],
-      win: 'A read-only login, GST summaries and a Tally export, ready on the first of the month.' },
+      win: 'Every store he serves in one free login, given by the owners. GST summaries and Tally files ready on the first of the month.' },
     { first: 'Ramesh', at: 35, name: 'The distributor’s order desk', img: 36876208, fp: [0.5, 0.35, 1],
       where: 'Takes orders from 400 chemists', uses: 'His firm’s software and three ordering apps', device: 'Desktop and WhatsApp', lang: 'Telugu, Hindi',
       quote: 'Orders come by call, by chat and from three apps.',
       wants: ['A clear order he can read once', 'No new login', 'To say “short” before the van leaves'],
       pains: ['Voice notes and handwriting photos', 'Returns for the wrong item', 'Chasing payments'],
-      win: 'A clean order on WhatsApp with a link. He taps what is short. A free desk when he wants one. Nothing to install.' }
+      win: 'A clean order on WhatsApp with a link. A free desk for orders, dispatch, tracking and payments. Nothing to install, nothing to pay.' }
   ],
   flows: [
     { id: 'buy', name: 'Buying stock', today: ['Check shelves by eye', 'Write the want list', 'Call or message the distributor', 'Goods and a paper bill arrive', 'Count against the paper', 'Type every line into the software', 'Fix batch and expiry mistakes', 'File the bill', 'Remember the due date'],
@@ -325,11 +370,11 @@ const C = {
     { k: 'Payments, other', v: 200, s: 'SMS fallback, payment links', meter: 0 }
   ],
   build: [
-    ['Salaries, 12 months', '₹120–180 L', 150], ['Sales and dealers', '₹30–50 L', 40], ['Cloud and tools', '₹6–18 L', 12], ['Medicine data', '₹5–15 L', 10], ['Legal and setup', '₹5–10 L', 7.5]
+    ['Salaries, 12 months', '₹145–215 L', 180], ['Sales and dealers', '₹30–50 L', 40], ['Cloud and tools', '₹6–18 L', 12], ['Medicine data', '₹5–15 L', 10], ['Legal and setup', '₹5–10 L', 7.5]
   ],
   team: [
     ['Tech lead', '1', '₹2.5–3.5 L a month'], ['Full-stack developers', '4', '₹1–1.7 L each'], ['Mobile developer', '1', '₹1–1.5 L'], ['UI/UX designer', '1', '₹0.8–1.2 L'],
-    ['QA tester', '1', '₹0.6–0.9 L'], ['Pharmacist, part-time', '1', '₹0.4–0.6 L'], ['Onboarding and support', '2', 'From month 6']
+    ['QA tester', '1', '₹0.6–0.9 L'], ['Distributor billing developers', '2', '₹1–1.7 L each'], ['Pharmacist, part-time', '1', '₹0.4–0.6 L'], ['Onboarding and support', '2', 'From month 6']
   ],
   unit: [
     ['One bill or reminder on WhatsApp', '₹0.115', 'Meta, from 1 Jan 2026, before GST'],
@@ -348,10 +393,10 @@ const C = {
   whys: [
     { n: '1', t: 'Nothing typed twice', s: 'One click when the distributor sends a file. Ticks when he does not.', go: '#try', cta: 'Try it' },
     { n: '2', t: 'The owner can read it', s: 'Large text, big buttons, plain words, Telugu.', go: '#ux', cta: 'See the rules' },
-    { n: '3', t: 'It finds his money', s: 'Overcharges, missing schemes, return dates and expiry risk, shown in rupees.', go: '#platform', cta: 'See the screens' },
+    { n: '3', t: 'It watches the shop for him', s: 'Staff edits, big discounts, cash differences, overcharges and late parcels, in one alert list.', go: '#platform', cta: 'See the screens' },
     { n: '4', t: 'It tells him first', s: 'The morning order, next week’s refills and the heavy payment day, before they arrive.', go: '#day', cta: 'See a day' },
     { n: '5', t: 'One price, on the page', s: 'Under ₹6,000 a year for every feature here. WhatsApp messages are extra, at cost.', go: '#costs', cta: 'The costs' },
-    { n: '6', t: 'We move him in, free', s: 'Stock, customers and dues moved by our team. Help in Telugu, on the phone.', go: '#care', cta: 'How' }
+    { n: '6', t: 'His distributor and accountant come free', s: 'Orders, bill files, parcels and GST flow between them. Nobody types the same bill twice.', go: '#distributor', cta: 'See the chain' }
   ],
   /* 13 The same feature, a different product: [what, in today's software, in Pharmacy OS] */
   diff: [
@@ -361,7 +406,11 @@ const C = {
     ['WhatsApp bills', 'Often a paid add-on. One product lists ₹25,000 to switch it on, with messages on top.', 'On from the first day. No setup fee. The store pays only for messages sent.'],
     ['Reading the screen', 'We found no pharmacy product that documents Telugu screens or a text-size control.', 'Telugu or English, three text sizes and 44px buttons, on every screen.'],
     ['The price', 'Often quoted by a dealer, with renewals and add-ons on top.', 'One price on the website: under ₹6,000 a year.'],
-    ['Moving in', 'Charged for, where a price is listed: ₹3,000 to ₹5,000 at one product.', 'Done by our team, free. One tap takes it back in the first 30 days.']
+    ['Moving in', 'Charged for, where a price is listed: ₹3,000 to ₹5,000 at one product.', 'Done by our team, free. One tap takes it back in the first 30 days.'],
+    ['The distributor', 'His own billing software, plus calls, chat groups and ordering apps to take orders.', 'A free desk for orders, dispatch, tracking and payments, linked to every store.'],
+    ['The accountant', 'Bill photos on WhatsApp, typed again into Tally.', 'Free access from the store: every branch, GST and Tally files ready, nothing to type.'],
+    ['Delivery', 'A phone call to ask where the parcel is.', 'Tracked from packed to delivered, closed with an OTP.'],
+    ['The staff', 'Often one shared login. Hard to tell who changed a bill.', 'Each person signs in with their own phone: sales, discounts and edits by name.']
   ],
   moats: [
     ['Every distributor’s format', 'Each bill format we learn makes the next store faster to set up.'],
@@ -372,11 +421,14 @@ const C = {
   asks: [
     ['Strong products exist. Why would a store switch?', 'Because their daily work does not shrink with those products. Ours removes the typing, the owner can read it, and we move the data for free. Owners switched to UPI in two years: they change when it is easier on the first day.'],
     ['Marg already imports the distributor’s bill in one click.', 'Yes, and one-click import is in our first release too. What we add is the store’s own order beside the bill, so only the differences need a look, on screens an owner over fifty can read, in Telugu.'],
-    ['A Marg store renews for ₹2,500 to ₹5,000 a year. Why pay more?', 'We do not beat a renewal on price. We win on hours and on money found: no purchase typing, no register by hand, overcharges and return dates caught. The calculator in section 11 shows the store’s own number.'],
+    ['A Marg store renews for ₹2,500 to ₹5,000 a year. Why pay more?', 'We do not beat a renewal on price. We win on hours and on money found: no purchase typing, no register by hand, overcharges and return dates caught. The calculator in section 12 shows the store’s own number.'],
     ['GoFrugal already checks goods against the order.', 'Yes, in its GoSure app, a separate app in a product built for chains. We make the same check the normal way to receive stock in a small store.'],
     ['eVitalRx already uploads the distributor’s bill.', 'Yes, and so do we. The difference shows when no file comes: we start from the store’s own order, so receiving takes ticks, not typing. And WhatsApp is not a ₹25,000 add-on.'],
     ['New apps read a photo of the bill. Why not you?', 'A photo still needs a person to check every line. A file is exact. So we import files first, and tick against the order when there is none. Photo reading can come later.'],
     ['Will owners over fifty change software?', 'They will if the first day is easier than their last one. We move the data in one or two days, keep the old software readable for thirty, and sit with them in Telugu.'],
+    ['Distributors already run Marg or Unisolve. Why open yours?', 'They do not have to leave it. The free desk takes orders, sends the bill file and tracks dispatch beside their billing. A free billing system is ready at launch, for those who want to leave their old one.'],
+    ['If distributors and accountants pay nothing, who pays?', 'The store, under ₹6,000 a year. Each distributor and accountant who joins brings his stores with him. Later: payments, and credit through a lending partner.'],
+    ['Will accountants use it?', 'An accountant with thirty shops spends days collecting files. Here every store he serves is one login, with GST and Tally files ready. He tells his other shops.'],
     ['Will distributors cooperate?', 'They do not have to. Stage one asks for nothing but WhatsApp. The free order desk saves their clerk calls and brings payments sooner, so they have a reason to open it.'],
     ['Why can’t Marg or Profitmaker copy this?', 'Features, yes. An offline-and-cloud rebuild with large type, Telugu and tick-first buying on a twenty-year-old codebase, at our price, not quickly. That is our judgement, not a fact.'],
     ['Won’t chains finish the independent store?', 'Organised retail is forecast at about 23% of sales in 2027. Three rupees in four still go through independents, and they need tools to keep them.'],
@@ -386,6 +438,7 @@ const C = {
 
   /* 14 Why now */
   now: [
+    ['Apr 2018', 'E-way bill above ₹50,000 in AP and Telangana', 'Bigger deliveries already carry one. It travels with the order.', 'eway', 1],
     ['Aug 2023', 'QR codes on the top 300 brands', 'Batch and expiry sit inside the code. We scan it.', 'qr', 1],
     ['22 Sep 2025', 'GST on most medicines: 12% to 5%', 'Every price changed overnight. Old software needed updates.', 'gst', 1],
     ['1 Jan 2026', 'A WhatsApp bill costs ₹0.115', 'Sending every bill is now affordable.', 'wa', 1],
@@ -416,9 +469,9 @@ const C = {
   /* 16 Plan */
   road: [
     ['Months 0–2', 'Discover', ['30 owner interviews', '10 design partners', 'Medicine list', 'Clickable prototype'], '10 design partners signed'],
-    ['Months 2–7', 'Build', ['Morning order, compare distributors', 'One-click bill import, tick to receive', 'Offline billing with pack scan', 'H1 register, GST', 'Owner app, Telugu', 'Move from Marg and Profitmaker'], '50 pilot stores billing daily'],
-    ['Months 7–12', 'Launch', ['Free order desk for distributors', 'Rate and scheme watch, return dates', 'Refill reminders, campaigns', 'Day close, cash calendar', 'Many-store rules', 'Dealer network'], '300 paying stores'],
-    ['Months 12–36', 'Scale', ['Demand forecast, expiry risk', 'Ask the app, store score', 'Distributor software links', 'Pay-later credit, with a lending partner', 'GST filing', 'Karnataka next'], '3,000 stores']
+    ['Months 2–7', 'Build', ['Morning order, compare distributors', 'One-click bill import, tick to receive', 'Offline billing with pack scan', 'Staff logins, owner alerts', 'H1 register, GST, owner app, Telugu', 'Move from Marg and Profitmaker'], '50 pilot stores billing daily'],
+    ['Months 7–12', 'Launch', ['Free distributor desk: orders, dispatch, tracking, payments', 'Free distributor billing, Unisolve-class', 'Free accountant portal', 'Rate and scheme watch, return dates', 'Refill reminders, day close, cash calendar', 'Many-store rules', 'Dealer network'], '300 paying stores'],
+    ['Months 12–36', 'Scale', ['Demand forecast, expiry risk', 'Ask the app, store score', 'Links to distributors’ old software', 'Pay-later credit, with a lending partner', 'GST filing', 'Karnataka next'], '3,000 stores']
   ],
   open: [
     ['Yearly or monthly', 'The plan is under ₹6,000 a year. Should a store pay once a year, or about ₹500 a month?'],
@@ -457,6 +510,9 @@ const C = {
     retailio: ['App Store: Retailio retailer app', 'https://apps.apple.com/app/id1245047831'],
     vyapar: ['Vyapar: languages listed on its site', 'https://vyaparapp.in/'],
     photo: ['Pharmacy Pro: purchase bills read from email', 'https://pharmacypro.io/features/purchase-inward'],
+    eway: ['Busy: state-wise e-way bill limits', 'https://busy.in/gst/state-wise-threshold-limits-for-e-way-bills'],
+    unisolve: ['SWIL: Unisolve for pharma distributors', 'https://www.swindia.com/unisolve-software/'],
+    logicerp: ['Logic ERP: pharma distribution software', 'https://www.logicerp.com/distribution/pharma-and-healthcare/pharmacy-distribution-software'],
     apeds: ['L V Prasad Eye Institute: 15-year incidence of presbyopia, APEDS (BJO 2025)', 'https://www.lvpei.org/news/fifteen-year-incidence-of-presbyopia-in-andhra-pradesh/'],
     nng: ['Nielsen Norman Group: usability for older adults', 'https://www.nngroup.com/articles/usability-for-senior-citizens/'],
     wcag: ['W3C: WCAG 2.2, target size', 'https://www.w3.org/TR/WCAG22/#target-size-minimum'],

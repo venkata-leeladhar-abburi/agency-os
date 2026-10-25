@@ -1,3 +1,70 @@
+<!-- Code gate: the plan opens with a 6-digit code. The code is kept as a SHA-256 hash; once entered, this browser remembers it. -->
+<style>
+.gate{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:1.5rem var(--gutter,1rem);background:var(--c-concrete);color:var(--c-ink);overflow-y:auto;transition:opacity .5s,visibility .5s}
+.gate.is--out{opacity:0;visibility:hidden}
+html.is-gated{overflow:hidden}
+html.is-gated body > :not(.gate){visibility:hidden}
+.gate__card{display:grid;justify-items:center;gap:1rem;width:min(26rem,100%);padding:2.25rem 1.5rem 2rem;border-radius:var(--r-l);background:var(--c-white);box-shadow:inset 0 0 0 1px var(--c-line);text-align:center}
+.gate__icon{display:grid;place-items:center;width:3.5rem;height:3.5rem;border-radius:50%;background:var(--c-ink);color:var(--c-volt)}
+.gate__icon svg{width:1.4rem;height:1.4rem}
+.gate__card h1{margin:0;font-size:1.75rem;font-weight:500;letter-spacing:-.03em;line-height:1.1}
+.gate__card p{margin:0;color:var(--c-graphite)}
+.gate__code{position:relative;display:block;cursor:text}
+.gate__code input{position:absolute;inset:0;z-index:2;width:100%;height:100%;opacity:0;font-size:16px}
+.gate__boxes{display:flex;gap:.45rem}
+.gate__boxes i{display:grid;place-items:center;width:2.75rem;height:3.4rem;border-radius:var(--r-m);background:var(--c-concrete);box-shadow:inset 0 0 0 1.5px var(--c-line-strong);font-style:normal;font-size:1.4rem;font-weight:500;font-family:var(--font-mono);transition:box-shadow .2s}
+.gate__code:focus-within .gate__boxes i.is--on{box-shadow:inset 0 0 0 2px var(--c-ink)}
+.gate__err{min-height:1.3em;color:#b42318;font-weight:500;font-size:.9375rem}
+.gate__card.is--shake{animation:gate-shake .45s}
+@keyframes gate-shake{20%,60%{transform:translateX(-.5rem)}40%,80%{transform:translateX(.5rem)}}
+@media (max-width:400px){.gate__boxes i{width:2.4rem;height:3rem}}
+</style>
+<div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+  <form class="gate__card" id="gate-form" novalidate>
+    <span class="gate__icon"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span>
+    <h1 id="gate-title">Pharmacy OS</h1>
+    <p>Enter your 6-digit code to open the plan.</p>
+    <label class="gate__code"><input id="gate-code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]*" aria-label="6-digit code"><span class="gate__boxes" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span></label>
+    <p class="gate__err" role="alert"></p>
+    <button class="btn" type="submit" data-theme="volt"><span class="btn__label">Open the plan</span></button>
+  </form>
+</div>
+<script>
+(() => {
+  const HASH = 'e90866f3d2b3db52711a5330bd88c3d5eecdcddb81e9098244c1c2ddb177a9fa', KEY = 'onestop-plan-code';
+  const html = document.documentElement, gate = document.getElementById('gate');
+  let open;
+  window.planGate = new Promise(r => { open = r; });
+  let saved = '';
+  try { saved = localStorage.getItem(KEY) || ''; } catch (e) { /* storage blocked: ask every time */ }
+  if (saved === HASH) { gate.remove(); open(); return; }
+  html.classList.add('is-gated');
+  const form = document.getElementById('gate-form'), inp = document.getElementById('gate-code');
+  const boxes = gate.querySelectorAll('.gate__boxes i'), err = gate.querySelector('.gate__err');
+  const paint = () => boxes.forEach((b, i) => { b.textContent = inp.value[i] || ''; b.classList.toggle('is--on', i === Math.min(inp.value.length, 5)); });
+  const sha = async s => [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)))].map(b => b.toString(16).padStart(2, '0')).join('');
+  async function check(code) {
+    if (!/^\d{6}$/.test(code)) { err.textContent = 'Enter all 6 digits.'; return; }
+    let h = '';
+    try { h = await sha(code); } catch (e) { err.textContent = 'Open this page over https to unlock it.'; return; }
+    if (h !== HASH) {
+      form.classList.remove('is--shake'); void form.offsetWidth; form.classList.add('is--shake');
+      inp.value = ''; paint(); err.textContent = 'Wrong code. Try again.';
+      return;
+    }
+    try { localStorage.setItem(KEY, HASH); } catch (e) { /* remembered for this visit only */ }
+    html.classList.remove('is-gated');
+    gate.classList.add('is--out');
+    setTimeout(() => gate.remove(), 600);
+    open();
+  }
+  inp.addEventListener('input', () => { inp.value = inp.value.replace(/\D/g, '').slice(0, 6); err.textContent = ''; paint(); if (inp.value.length === 6) check(inp.value); });
+  form.addEventListener('submit', e => { e.preventDefault(); check(inp.value); });
+  paint();
+  inp.focus({ preventScroll: true });
+})();
+</script>
+
 <a class="skip-link" href="#main">Skip to content</a>
 
 __SPRITE__
@@ -24,26 +91,26 @@ __SPRITE__
         <div class="nav__panel-inner">
           <div class="nav__panel-grid">
             <div>
-              <span class="nav__col-title eyebrow">The product</span>
-              <nav class="nav__links" aria-label="The product">
-                <a href="#gap">The gap <span class="eyebrow">01</span></a>
+              <span class="nav__col-title eyebrow">Problem to answer</span>
+              <nav class="nav__links" aria-label="Problem to answer">
+                <a href="#gap">The problem <span class="eyebrow">01</span></a>
                 <a href="#today">Today’s software <span class="eyebrow">02</span></a>
-                <a href="#flow">One flow <span class="eyebrow">03</span></a>
-                <a href="#try">Try it <span class="eyebrow">04</span></a>
-                <a href="#distributor">The distributor <span class="eyebrow">05</span></a>
+                <a href="#distributor">The whole chain <span class="eyebrow">03</span></a>
+                <a href="#flow">One flow <span class="eyebrow">04</span></a>
+                <a href="#try">Try it <span class="eyebrow">05</span></a>
                 <a href="#platform">One platform <span class="eyebrow">06</span></a>
                 <a href="#stores">One store or many <span class="eyebrow">07</span></a>
                 <a href="#customers">Customers <span class="eyebrow">08</span></a>
               </nav>
             </div>
             <div>
-              <span class="nav__col-title eyebrow">The case</span>
-              <nav class="nav__links" aria-label="The case">
+              <span class="nav__col-title eyebrow">Product to plan</span>
+              <nav class="nav__links" aria-label="Product to plan">
                 <a href="#app">Owner app <span class="eyebrow">09</span></a>
                 <a href="#ux">Design for fifty-plus <span class="eyebrow">10</span></a>
-                <a href="#money">What it gives back <span class="eyebrow">11</span></a>
-                <a href="#costs">Our costs <span class="eyebrow">12</span></a>
-                <a href="#why">Why they will switch <span class="eyebrow">13</span></a>
+                <a href="#why">Why they will switch <span class="eyebrow">11</span></a>
+                <a href="#money">What it gives back <span class="eyebrow">12</span></a>
+                <a href="#costs">Our costs <span class="eyebrow">13</span></a>
                 <a href="#now">Why now <span class="eyebrow">14</span></a>
                 <a href="#care">Build with care <span class="eyebrow">15</span></a>
                 <a href="#plan">The plan <span class="eyebrow">16</span></a>
@@ -82,12 +149,12 @@ __SPRITE__
       <div class="marquee" style="--marquee-dur:38s" aria-hidden="true">
         <div class="marquee__list">
           <span class="marquee__item eyebrow">Pharmacy OS by One Stop Solutions <svg viewBox="0 0 80 80"><use href="#i-capsule"/></svg></span>
-          <span class="marquee__item eyebrow">Order, receive, sell, remind <svg viewBox="0 0 80 80"><use href="#i-capsule"/></svg></span>
+          <span class="marquee__item eyebrow">Store, distributor, accountant <svg viewBox="0 0 80 80"><use href="#i-capsule"/></svg></span>
           <span class="marquee__item eyebrow">Investor preview · October 2026 <svg viewBox="0 0 80 80"><use href="#i-capsule"/></svg></span>
         </div>
         <div class="marquee__list">
           <span class="marquee__item eyebrow">Pharmacy OS by One Stop Solutions <svg viewBox="0 0 80 80"><use href="#i-capsule"/></svg></span>
-          <span class="marquee__item eyebrow">Order, receive, sell, remind <svg viewBox="0 0 80 80"><use href="#i-capsule"/></svg></span>
+          <span class="marquee__item eyebrow">Store, distributor, accountant <svg viewBox="0 0 80 80"><use href="#i-capsule"/></svg></span>
           <span class="marquee__item eyebrow">Investor preview · October 2026 <svg viewBox="0 0 80 80"><use href="#i-capsule"/></svg></span>
         </div>
       </div>
@@ -101,7 +168,7 @@ __SPRITE__
         <svg class="hero__glyph" viewBox="0 0 80 80" aria-hidden="true" data-hero-fade><use href="#i-capsule"/></svg>
         <span class="line-mask"><span data-hero-line>Typed Once</span></span>
       </h1>
-      <p class="hero__desc p-l" data-hero-fade>One app for the medical store. Order from the <span class="u-nowrap"><span class="hl">distributor</span>,</span> receive his bill in <span class="hl is--round">one click</span>, sell, remind. Nothing is typed twice.</p>
+      <p class="hero__desc p-l" data-hero-fade>One system for the medical store, its <span class="u-nowrap"><span class="hl">distributors</span></span> and its <span class="hl is--round">accountant</span>. Order, receive in one click, sell, track every parcel. Nothing is typed twice.</p>
       <div class="btn-row hero__cta" data-hero-fade>
         <button class="btn" type="button" data-theme="ink" data-size="l" data-reel-open><span class="btn__label">Watch the flow</span><svg class="btn__icon" viewBox="0 0 12 12" aria-hidden="true"><use href="#i-play"/></svg></button>
         <a class="btn" data-theme="volt" data-shape="round" data-size="l" href="#try"><span class="btn__label">Try the demo</span></a>
@@ -128,6 +195,17 @@ __SPRITE__
   </div>
 </div>
 
+<!-- ============ AT A GLANCE ============ -->
+<section class="glance" aria-labelledby="glance-title">
+  <div class="container is--m">
+    <div class="glance__head">
+      <span class="eyebrow">The pitch at a glance</span>
+      <h2 class="h-m" id="glance-title">Six chapters. <em>One story, from the problem to the plan.</em></h2>
+    </div>
+    <ol class="glance__list" id="glance"></ol>
+  </div>
+</section>
+
 <!-- ============ REEL ============ -->
 <section class="reel" id="reel">
   <div class="container is--m">
@@ -151,19 +229,27 @@ __SPRITE__
   </div>
 </section>
 
+<!-- Chapter 1 -->
+<div class="chap" id="chapter-1" data-chap="1"></div>
+
 <!-- ============ 01 THE GAP ============ -->
 <section class="section gap" id="gap">
   <div class="container is--m">
     <div class="split-head">
       <div>
-        <div class="tag-pair" data-reveal><span class="tag">01</span><span class="tag" data-shape="round">The gap</span></div>
-        <h2 class="h-l" data-reveal>One medicine. <em>Typed three times.</em></h2>
-        <p class="p-l split-head__lead" data-reveal>We talked with store owners in October 2026. Their software works. The typing never ends.</p>
+        <div class="tag-pair" data-reveal><span class="tag">01</span><span class="tag" data-shape="round">The problem</span></div>
+        <h2 class="h-l" data-reveal>One bill, three people. <em>Everyone types it again.</em></h2>
+        <p class="p-l split-head__lead" data-reveal>We talked with store owners in October 2026. Their software works. The typing never ends, and it does not stop at the store: the distributor and the accountant type the same bill again.</p>
       </div>
       <figure class="fig" data-reveal>
         <div class="fig__plate" data-hl="strip" data-hl-label="A blister strip of ten tablets. The tablet under the pointer presses in."></div>
         <figcaption class="fig__cap"><span class="eyebrow">One strip</span><span class="eyebrow fig__read" data-hl-read>rest</span></figcaption>
       </figure>
+    </div>
+
+    <div class="pains" data-reveal>
+      <div class="pains__head"><span class="eyebrow">Where it hurts, person by person</span><p class="pains__note">From our first store visits and the personas we will test in interviews. The hours are an estimate from the calculator in section 12.</p></div>
+      <ol class="pains__list" id="pains"></ol>
     </div>
 
     <div class="chainbox" data-mode="today" data-reveal>
@@ -191,6 +277,9 @@ __SPRITE__
   </div>
 </section>
 
+<!-- Chapter 2 -->
+<div class="chap" id="chapter-2" data-chap="2"></div>
+
 <!-- ============ 02 TODAY'S SOFTWARE ============ -->
 <section class="section is--dark today" id="today">
   <div class="container is--m">
@@ -201,7 +290,7 @@ __SPRITE__
     </div>
 
     <div class="stack" data-reveal>
-      <div class="stack__head"><h3 class="h-s">What one store runs on today</h3><p class="p-m">Five kinds of tool. Five places to type.</p></div>
+      <div class="stack__head"><h3 class="h-s">What the chain runs on today</h3><p class="p-m">Seven kinds of tool, across the store, the distributor and the accountant. Seven places to type.</p></div>
       <ul class="stack__list" id="stack"></ul>
     </div>
 
@@ -256,12 +345,66 @@ __SPRITE__
   </div>
 </section>
 
-<!-- ============ 03 ONE FLOW ============ -->
+<!-- Chapter 3 -->
+<div class="chap" id="chapter-3" data-chap="3"></div>
+
+<!-- ============ 03 THE DISTRIBUTOR ============ -->
+<section class="section dist" id="distributor">
+  <div class="container is--m">
+    <div class="split-head">
+      <div>
+        <div class="tag-pair" data-reveal><span class="tag">03</span><span class="tag" data-shape="round">The whole chain</span></div>
+        <h2 class="h-l" data-reveal>One system for the sector. <em>Store, distributor, accountant.</em></h2>
+      </div>
+      <p class="p-l split-head__lead" data-reveal>Today each of them types the same bill into a different tool. In Pharmacy OS the order, the bill, the parcel, the payment and the GST file pass between them by themselves. One store or forty branches, it is the same system.</p>
+    </div>
+    <ol class="eco" id="eco" data-reveal-group></ol>
+    <div class="eco__flow" data-reveal><span class="eyebrow">What passes between them, by itself</span><ul id="eco-flow"></ul></div>
+
+    <div class="ux__label dist__label" data-reveal><span class="tag" data-theme="haze">The distributor</span><h3 class="h-m">Free for him. <em>Nothing to install.</em></h3></div>
+    <div class="dist__grid">
+      <ol class="ladder" id="ladder" data-reveal-group></ol>
+      <div class="dist__phone" data-reveal>
+        <div class="media is--phone"><span class="s is--m" data-screen="dlink"></span></div>
+        <p class="dist__cap"><span class="eyebrow">What the distributor sees first</span>A link. No login. Three taps.</p>
+      </div>
+    </div>
+
+    <div class="desk" data-reveal>
+      <div class="desk__head">
+        <div>
+          <span class="eyebrow">The free distributor desk</span>
+          <h3 class="h-m">What he sees <em>when he signs in.</em></h3>
+          <p class="p-m">A web page, in Telugu or English. Orders, dispatch and payments for every store on Pharmacy OS.</p>
+          <div class="seg desk__seg" role="group" aria-label="Distributor desk screens"><button type="button" data-desk="desk" aria-pressed="true">Orders</button><button type="button" data-desk="dispatch" aria-pressed="false">Dispatch</button><button type="button" data-desk="dpay" aria-pressed="false">Payments</button></div>
+        </div>
+        <ul class="desk__pts" id="desk-pts"></ul>
+      </div>
+      <p class="eyebrow desk__swipe" aria-hidden="true">Swipe the screen sideways to see all of it</p>
+      <div class="desk__screen" tabindex="0" role="region" aria-label="The distributor’s desk"><div class="media"><span class="s" id="desk-screen" data-screen="desk"></span></div></div>
+    </div>
+
+    <div class="acct" data-reveal>
+      <div class="acct__head">
+        <div>
+          <span class="eyebrow">The accountant</span>
+          <h3 class="h-m">Invited from the store. <em>Free for him.</em></h3>
+          <p class="p-m">The owner gives access once. The accountant sees every store and branch he serves, in one login.</p>
+        </div>
+        <ul class="desk__pts" id="acc-pts"></ul>
+      </div>
+      <p class="eyebrow desk__swipe" aria-hidden="true">Swipe the screen sideways to see all of it</p>
+      <div class="desk__screen" tabindex="0" role="region" aria-label="The accountant’s portal"><div class="media"><span class="s" data-screen="cahome"></span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 ONE FLOW ============ -->
 <section class="section journey flow" id="flow">
   <div class="container is--m">
     <div class="journey__head">
       <div>
-        <div class="tag-pair" data-reveal><span class="tag">03</span><span class="tag" data-shape="round">One flow</span></div>
+        <div class="tag-pair" data-reveal><span class="tag">04</span><span class="tag" data-shape="round">One flow</span></div>
         <h2 class="h-l" data-reveal>Follow the medicine. <em>Buy, stock, sell, grow.</em></h2>
       </div>
       <p class="p-l" data-reveal>Eight steps. One entry. Drag the cards, or tap a step.</p>
@@ -289,11 +432,11 @@ __SPRITE__
   </div>
 </section>
 
-<!-- ============ 04 TRY IT ============ -->
+<!-- ============ 05 TRY IT ============ -->
 <section class="section is--dark try" id="try">
   <div class="container is--m">
     <div class="section-head">
-      <div class="tag-pair" data-reveal><span class="tag" data-theme="glass">04</span><span class="tag" data-theme="glass" data-shape="round">Try it</span></div>
+      <div class="tag-pair" data-reveal><span class="tag" data-theme="glass">05</span><span class="tag" data-theme="glass" data-shape="round">Try it</span></div>
       <h2 class="h-l" data-reveal>Import, or tick. <em>Don’t type.</em></h2>
       <p class="p-l" data-reveal>A working sketch of two screens. Use it the way an owner would.</p>
     </div>
@@ -310,38 +453,8 @@ __SPRITE__
   </div>
 </section>
 
-<!-- ============ 05 THE DISTRIBUTOR ============ -->
-<section class="section dist" id="distributor">
-  <div class="container is--m">
-    <div class="split-head">
-      <div>
-        <div class="tag-pair" data-reveal><span class="tag">05</span><span class="tag" data-shape="round">The distributor</span></div>
-        <h2 class="h-l" data-reveal>A desk for the distributor. <em>Free, nothing to install.</em></h2>
-      </div>
-      <p class="p-l split-head__lead" data-reveal>A distributor already runs his own software and several ordering apps. So the order reaches him where he already is: WhatsApp. The desk is the same link, grown up.</p>
-    </div>
-    <div class="dist__grid">
-      <ol class="ladder" id="ladder" data-reveal-group></ol>
-      <div class="dist__phone" data-reveal>
-        <div class="media is--phone"><span class="s is--m" data-screen="dlink"></span></div>
-        <p class="dist__cap"><span class="eyebrow">What the distributor sees first</span>A link. No login. Three taps.</p>
-      </div>
-    </div>
-
-    <div class="desk" data-reveal>
-      <div class="desk__head">
-        <div>
-          <span class="eyebrow">The free order desk</span>
-          <h3 class="h-m">What he sees <em>when he signs in.</em></h3>
-          <p class="p-m">A web page, in Telugu or English. No app to install, nothing to pay.</p>
-        </div>
-        <ul class="desk__pts" id="desk-pts"></ul>
-      </div>
-      <p class="eyebrow desk__swipe" aria-hidden="true">Swipe the screen sideways to see all of it</p>
-      <div class="desk__screen" tabindex="0" role="region" aria-label="The distributor’s order desk"><div class="media"><span class="s" data-screen="desk"></span></div></div>
-    </div>
-  </div>
-</section>
+<!-- Chapter 4 -->
+<div class="chap" id="chapter-4" data-chap="4"></div>
 
 <!-- ============ 06 ONE PLATFORM ============ -->
 <section class="section platform" id="platform">
@@ -349,7 +462,7 @@ __SPRITE__
     <div class="section-head">
       <div class="tag-pair" data-reveal><span class="tag">06</span><span class="tag" data-shape="round">One platform</span></div>
       <h2 class="h-l" data-reveal>Only for pharmacies. <em>End to end.</em></h2>
-      <p class="p-l" data-reveal>Seven jobs, one app. Thirty-five features, and every one has a screen.</p>
+      <p class="p-l" data-reveal>Eight jobs, one app. Thirty-nine features, and every one has a screen.</p>
     </div>
     <div class="trio" data-reveal>
       <div class="trio__desk"><div class="media"><span class="s" data-screen="home"></span></div></div>
@@ -364,7 +477,7 @@ __SPRITE__
 
     <div class="plat-head" data-reveal><h3 class="h-m">Every job has <em>its own screen</em></h3><p class="p-m">Pick a job, then a feature. Each one is drawn.</p></div>
     <div class="plat" data-reveal>
-      <div class="plat__tabs" id="job-tabs" role="tablist" aria-label="The seven jobs"></div>
+      <div class="plat__tabs" id="job-tabs" role="tablist" aria-label="The eight jobs"></div>
       <div class="plat__panel">
         <div class="plat__feats" id="job-feats"></div>
         <p class="eyebrow plat__swipe" aria-hidden="true">Swipe the screen sideways to see all of it</p>
@@ -551,7 +664,7 @@ __SPRITE__
     <div class="ux__label" data-reveal><span class="tag" data-theme="haze">Accessibility</span><h3 class="h-m">Measured, <em>not promised</em></h3></div>
     <div class="a11y" data-reveal>
       <table class="a11y__table"><thead><tr><th scope="col">What we checked</th><th scope="col">In the demo above</th><th scope="col">The web standard asks</th></tr></thead><tbody id="a11y"></tbody></table>
-      <p class="a11y__note">Measured on the working demo in section 04, against WCAG 2.2. The same parts make every screen on this page.</p>
+      <p class="a11y__note">Measured on the working demo in section 05, against WCAG 2.2. The same parts make every screen on this page.</p>
     </div>
 
     <div class="ux__label" data-reveal><span class="tag" data-theme="haze">UI</span><h3 class="h-m">The kit <em>the screens are made of</em></h3></div>
@@ -590,11 +703,45 @@ __SPRITE__
   </div>
 </section>
 
-<!-- ============ 11 WHAT IT GIVES BACK ============ -->
+<!-- Chapter 5 -->
+<div class="chap" id="chapter-5" data-chap="5"></div>
+
+<!-- ============ 11 WHY THEY WILL SWITCH ============ -->
+<section class="section why" id="why">
+  <div class="container is--m">
+    <div class="section-head">
+      <div class="tag-pair" data-reveal><span class="tag">11</span><span class="tag" data-shape="round">Why they will switch</span></div>
+      <h2 class="h-l" data-reveal>Many strong products. <em>Why ours?</em></h2>
+      <p class="p-l" data-reveal>Most of our features exist somewhere. Here is what an owner gets from us that he does not get today.</p>
+    </div>
+    <ol class="whys" id="whys" data-reveal-group></ol>
+
+    <div class="diff" data-reveal>
+      <div class="diff__head">
+        <span class="eyebrow">The same feature, a different product</span>
+        <h3 class="h-m">They have it too. <em>Here is the difference.</em></h3>
+        <p class="p-m">Feature lists look alike. What an owner lives with every day does not. From public material, October 2026.</p>
+      </div>
+      <div class="diff__scroll">
+        <table class="diff__table"><thead><tr><th scope="col"><span class="sr-only">Job</span></th><th scope="col">In today’s software</th><th scope="col">In Pharmacy OS</th></tr></thead><tbody id="diff"></tbody></table>
+      </div>
+    </div>
+    <div class="moats" data-reveal>
+      <div class="moats__head"><span class="eyebrow">Hard to copy, hard to leave</span><h3 class="h-m">Four things that <em>grow with every store</em></h3></div>
+      <ul class="moats__list" id="moats"></ul>
+    </div>
+    <div class="qa" data-reveal>
+      <div class="qa__head"><span class="eyebrow">Questions investors ask</span><h3 class="h-m">Short answers</h3></div>
+      <div class="qa__list" id="asks"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 12 WHAT IT GIVES BACK ============ -->
 <section class="section money" id="money">
   <div class="container is--m">
     <div class="section-head">
-      <div class="tag-pair" data-reveal><span class="tag">11</span><span class="tag" data-shape="round">What it gives back</span></div>
+      <div class="tag-pair" data-reveal><span class="tag">12</span><span class="tag" data-shape="round">What it gives back</span></div>
       <h2 class="h-l" data-reveal>Time, money and <em>a quieter evening.</em></h2>
       <p class="p-l" data-reveal>Set the store’s own numbers. Every figure on the right follows them.</p>
     </div>
@@ -645,11 +792,14 @@ __SPRITE__
   </div>
 </section>
 
-<!-- ============ 12 OUR COSTS ============ -->
+<!-- Chapter 6 -->
+<div class="chap" id="chapter-6" data-chap="6"></div>
+
+<!-- ============ 13 OUR COSTS ============ -->
 <section class="section is--dark costs" id="costs">
   <div class="container is--m">
     <div class="section-head">
-      <div class="tag-pair" data-reveal><span class="tag" data-theme="glass">12</span><span class="tag" data-theme="glass" data-shape="round">Our costs</span></div>
+      <div class="tag-pair" data-reveal><span class="tag" data-theme="glass">13</span><span class="tag" data-theme="glass" data-shape="round">Our costs</span></div>
       <h2 class="h-l" data-reveal>What one store <em>costs us.</em></h2>
       <p class="p-l" data-reveal>Planning numbers from October 2026. Pilots will correct every one of them.</p>
     </div>
@@ -691,7 +841,7 @@ __SPRITE__
       </div>
       <div class="cbox">
         <span class="eyebrow">The team behind that number</span>
-        <h3 class="h-s">Eleven people</h3>
+        <h3 class="h-s">Thirteen people</h3>
         <table class="ctable" id="team"></table>
       </div>
       <div class="cbox">
@@ -705,40 +855,9 @@ __SPRITE__
       <div class="pr__text">
         <span class="eyebrow">What stores pay today</span>
         <h3 class="h-m">Our plan: <em>under ₹6,000 a year.</em></h3>
-        <p class="p-m">Before GST, for every feature on this page. WhatsApp messages are charged as used, at Meta’s rate, with no setup fee. Pilots will test the number.</p>
+        <p class="p-m">Before GST, for every feature on this page. WhatsApp messages are charged as used, at Meta’s rate, with no setup fee. Distributors and accountants use it free. Pilots will test the number.</p>
       </div>
       <ul class="pr__list" id="prices"></ul>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 13 WHY THEY WILL SWITCH ============ -->
-<section class="section why" id="why">
-  <div class="container is--m">
-    <div class="section-head">
-      <div class="tag-pair" data-reveal><span class="tag">13</span><span class="tag" data-shape="round">Why they will switch</span></div>
-      <h2 class="h-l" data-reveal>Many strong products. <em>Why ours?</em></h2>
-      <p class="p-l" data-reveal>Most of our features exist somewhere. Here is what an owner gets from us that he does not get today.</p>
-    </div>
-    <ol class="whys" id="whys" data-reveal-group></ol>
-
-    <div class="diff" data-reveal>
-      <div class="diff__head">
-        <span class="eyebrow">The same feature, a different product</span>
-        <h3 class="h-m">They have it too. <em>Here is the difference.</em></h3>
-        <p class="p-m">Feature lists look alike. What an owner lives with every day does not. From public material, October 2026.</p>
-      </div>
-      <div class="diff__scroll">
-        <table class="diff__table"><thead><tr><th scope="col"><span class="sr-only">Job</span></th><th scope="col">In today’s software</th><th scope="col">In Pharmacy OS</th></tr></thead><tbody id="diff"></tbody></table>
-      </div>
-    </div>
-    <div class="moats" data-reveal>
-      <div class="moats__head"><span class="eyebrow">Hard to copy, hard to leave</span><h3 class="h-m">Four things that <em>grow with every store</em></h3></div>
-      <ul class="moats__list" id="moats"></ul>
-    </div>
-    <div class="qa" data-reveal>
-      <div class="qa__head"><span class="eyebrow">Questions investors ask</span><h3 class="h-m">Short answers</h3></div>
-      <div class="qa__list" id="asks"></div>
     </div>
   </div>
 </section>
