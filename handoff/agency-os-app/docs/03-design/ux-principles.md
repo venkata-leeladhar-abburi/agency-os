@@ -2,6 +2,8 @@
 
 The rules every Agency OS screen must follow. Built from the founder's notes and a full read of the reference articles (listed at the end). Where articles agreed, the rule appears once.
 
+How the rest of the pack applies them: the design system (`design-system.md`) turns sections 3, 4 and 8 into tokens and components; the PRD (`../02-product/prd-mvp.md`) makes sections 2, 7 and 9 part of every acceptance criterion; the usability plan (`../01-research/usability-testing.md`) and metrics (`../02-product/metrics.md`) cover section 13.
+
 **Goal:** less mental effort, value in the first session, low churn.
 **Test every screen with three questions:** Where am I? What matters most here? What do I do next?
 
@@ -106,7 +108,7 @@ The rules every Agency OS screen must follow. Built from the founder's notes and
 
 ## Copy rules
 
-- Never mention the clienter or say features come from another product; describe every feature as ours.
+- Describe every feature as an Agency OS feature. Never say a feature comes from, copies or replaces another product.
 - No made-up metrics, testimonials or claims.
 - Short, plain sentences; label things with words users already use.
 

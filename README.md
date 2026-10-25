@@ -22,6 +22,8 @@ Each page has its own colours:
 
 The pitch and the playbook share their sources with the Agency OS deck; `source/build2.py` recolours them (`PALETTES`), so the deck keeps its own look.
 
+`handoff/agency-os-app/` is not a page: it is the build pack for the Agency OS product (research, product spec, design system, engineering plan) to upload to its own repository. Start with its `START-HERE.md`. It is excluded from deploys.
+
 ## View them
 
 Open `index.html` in a browser for the agency website, or any page's `index.html`. Fonts and the animation libraries load from public CDNs, so an internet connection gives the full experience. Without one, every section still renders and the sliders fall back to native scrolling.

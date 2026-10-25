@@ -1,6 +1,6 @@
 # Agency OS: product flows
 
-Taken from the Agency OS deck (`source/src/data.js`). Status tags from the deck: **Live** (live today), **Roadmap** (on the roadmap), **Edge** (new, our edge).
+Taken from the Agency OS pitch deck. Everything here is built new in this repository; the release each part ships in is set in `roadmap.md`.
 
 ## The shape of the product
 
