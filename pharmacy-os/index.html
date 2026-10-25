@@ -4932,13 +4932,15 @@ function renderToday() {
 /* Their real screen, beside the same job in ours */
 function initRivals() {
   const tabs = $('#rv-tabs'), stage = $('#rv-stage');
+  /* The page may be opened as /pharmacy-os or /pharmacy-os/: build the image path from where it really is */
+  const base = location.pathname.replace(/\/(index\.html)?$/, '') + '/img/rivals/';
   tabs.innerHTML = C.rivalUI.map((r, i) => `<button type="button" role="tab" id="rv-t${i}" aria-controls="rv-stage" data-rv="${i}" aria-selected="${i === 0}" tabindex="${i ? -1 : 0}">${esc(r.n)}</button>`).join('');
   const paint = i => {
     const r = C.rivalUI[i];
     $$('[data-rv]', tabs).forEach((b, k) => { b.setAttribute('aria-selected', String(k === i)); b.tabIndex = k === i ? 0 : -1; });
     stage.setAttribute('aria-labelledby', 'rv-t' + i);
     stage.innerHTML = `<div class="rv2__pair">
-      <figure class="rv2__theirs${r.phone ? ' is--phone' : ''}"><figcaption><span class="tag" data-theme="glass" data-shape="round">${esc(r.n)}</span><span>${esc(r.job)}</span></figcaption><div class="rv2__img"><img src="img/rivals/${esc(r.img)}" alt="${esc(r.n)}: ${esc(r.job)}, as shown in its public listing" decoding="async"></div><p class="rv2__src">Their screen, from <a href="${esc(r.src[1])}" target="_blank" rel="noopener">${esc(r.src[0])}</a></p></figure>
+      <figure class="rv2__theirs${r.phone ? ' is--phone' : ''}"><figcaption><span class="tag" data-theme="glass" data-shape="round">${esc(r.n)}</span><span>${esc(r.job)}</span></figcaption><div class="rv2__img"><img src="${base}${esc(r.img)}" alt="${esc(r.n)}: ${esc(r.job)}, as shown in its public listing" decoding="async"></div><p class="rv2__src">Their screen, from <a href="${esc(r.src[1])}" target="_blank" rel="noopener">${esc(r.src[0])}</a></p></figure>
       <figure class="rv2__ours"><figcaption><span class="tag" data-theme="volt" data-shape="round">Pharmacy OS</span><span>The same job</span></figcaption><div class="media">${screen(r.ours)}</div><p class="rv2__src">Our design, with sample data</p></figure></div>
       <ul class="rv2__vs">${r.vs.map(([k, a, b]) => `<li><span class="eyebrow">${esc(k)}</span><p class="is--them">${esc(a)}</p><p class="is--us">${esc(b)}</p></li>`).join('')}</ul>
       <p class="rv2__meta"><span><b>Best at</b>${esc(r.best)}</span><span><b>Price</b>${esc(r.price)}</span></p>`;
