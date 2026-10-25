@@ -82,27 +82,27 @@ The page is told as one pitch in six chapters. An "at a glance" map under the he
 
 | Section | What it shows |
 | --- | --- |
-| Hero | "Pharmacy OS. Typed once." with a rotating ring of the eight steps and a stat bar, then the six chapters at a glance |
+| Hero | "Pharmacy OS. Typed once." with a rotating ring of the eight steps, a stat bar and a "Try the live demo" button, then the six chapters at a glance. The top bar links each chapter and lights the one you are in; a floating "Try the live demo" button and a back-to-top button follow you down the page |
 | Walkthrough | An eight-step player, one screen per step |
-| 01 The problem | One bill, three people: where it hurts for the store owner, the distributor and the accountant; the chain today and with Pharmacy OS; notes from store visits; the trade's 2021 letter |
-| 02 Today's software | What the store, the distributor and the accountant run today, a drag slider between a typical screen and ours, eight products (best at, weak at, how we win, price), a twenty-row feature table and a map of the open corner |
-| 03 The whole chain | One system for store, distributor and accountant: what each pays (store under ₹6,000 a year, distributor and accountant free) and what passes between them; the distributor's free desk (orders, dispatch, payments) and free billing at launch; the accountant's portal, invited from the store |
-| 04 One flow | Eight steps as draggable cards, then a day at the store: what runs by itself |
+| 01 The problem | A chain that leaks at every link: sixteen leaks in eight links (order to accountant), drawn as a chain a light runs along; five real incidents from 2025 and 2026 (the Coldrif recall, Telangana raids, expired and fake medicine) with what Pharmacy OS does about each; five personas told as a day in their life |
+| 02 Today's software | Eight products, each with a real screen from its own site, app-store page or directory listing, beside the same job in Pharmacy OS, with three side-by-side comparisons, what it is best at and its price; then the feature table |
+| 03 The whole chain | The same chain, fixed, link by link; one system for store, distributor and accountant and what each pays (store under ₹6,000 a year, distributor and accountant free); the distributor's free dashboard (orders, dispatch, payments) and free billing at launch; the accountant's portal, invited from the store |
+| 04 One flow | Eight steps as draggable cards, a day at the store (what runs by itself), and four user flows before and after: buying, a sale, the distributor's order to cash, the accountant's month end |
 | 05 Try it | A working demo: order, send, then receive by importing the bill file or ticking. English or తెలుగు, three text sizes |
-| 06 One platform | The overview on a counter screen, a tablet and a phone; eight jobs and thirty-nine features, each on its own screen; moving in; what runs by itself |
+| 06 One platform | The overview on a counter screen, a tablet and a phone; eight jobs and forty-one features, each on its own screen; moving in from old software |
 | 07 One store or many | Separate stock, each store's own distributors, rules set once |
-| 08 Customers | WhatsApp bills, refill reminders and a campaign estimator |
+| 08 Customers | WhatsApp bills, refill reminders, a campaign estimator, and the store's own online shop (an add-on, three steps) |
 | 09 Owner app | What the owner sees on the phone |
-| 10 Design for fifty-plus | Evidence, research, personas, flows, design rules, annotated screen, language, measured accessibility, the UI kit |
-| 11 Why they will switch | Six reasons, the same feature in today's software and in ours, what gets harder to copy, investor questions |
-| 12 What it gives back | Hours, money and typing saved, and what reminders can earn |
-| 13 Our costs | Cost to serve, the price plan, year-one cost, the team, unit prices, break-even |
+| 10 Design for fifty-plus | Evidence on ageing eyes, eight design rules with live examples, the annotated overview screen, the language choice, measured accessibility |
+| 11 Why they will switch | Six reasons, each with a small picture; the same feature in today's software and in ours, marked ✕ and ✓; what gets harder to copy; eight investor questions |
+| 12 What it gives back | Three sliders (distributor bills a day, stock that expires, regular customers) and three answers (hours back, money saved, extra sales), with savings drawn against the price |
+| 13 Price and costs | One store's ₹5,500 split into what it costs us and what is left; who pays (store, distributor free, accountant free); a break-even slider; year-one cost and the team; what stores pay today |
 | 14 Why now | Market numbers and a timeline |
 | 15 Build with care | Ten things we must get right |
 | 16 The plan | Roadmap with gates, open questions and the raise |
 | Start | Contact details and every source |
 
-Our planned price is stated as under ₹6,000 a store a year before GST, with WhatsApp messages charged as used; the page shows what competitors publish beside it and says pilots will test the number. The feature set and the price were agreed with the owner on 10 October 2026, after a fresh check of the competitors' public pages: one-click import of the distributor's bill file, comparing distributors by rate, scheme and credit, an optional order-bill-goods check, short items sent to the next distributor, asking the app a question, and pay-later credit through a partner are in; voice billing, prescription photo reading, bill photo reading and approval from WhatsApp are out. The page opens behind a 6-digit code (a SHA-256 hash in `po.html`; the browser remembers it once entered). Every market and competitor fact names its source at the end of the page; competitor features come from public material and are marked as such. Products, stores, medicines and amounts inside the screens are samples. The "typical screen today" is our own drawing of a common layout, not a screenshot of any product. The personas are first sketches with stock photos from Pexels, to be replaced by real interviews. The Telugu wording needs a check by a native speaker before it is shown to store owners.
+Our planned price is stated as under ₹6,000 a store a year before GST, with WhatsApp messages charged as used; the page shows what competitors publish beside it and says pilots will test the number. The feature set and the price were agreed with the owner on 10 October 2026, after a fresh check of the competitors' public pages: one-click import of the distributor's bill file, comparing distributors by rate, scheme and credit, an optional order-bill-goods check, short items sent to the next distributor, asking the app a question, and pay-later credit through a partner are in; voice billing, prescription photo reading, bill photo reading and approval from WhatsApp are out. Competitor screenshots live in `pharmacy-os/img/rivals/`, each credited to the page it came from (`C.rivalUI` in `content.js`). The page opens behind a 6-digit code (a SHA-256 hash in `po.html`; the browser remembers it once entered). Every market and competitor fact names its source at the end of the page; competitor features come from public material and are marked as such. Products, stores, medicines and amounts inside the screens are samples. The "typical screen today" is our own drawing of a common layout, not a screenshot of any product. The personas are first sketches with stock photos from Pexels, to be replaced by real interviews. The Telugu wording needs a check by a native speaker before it is shown to store owners.
 
 ### The product screens
 
@@ -114,7 +114,7 @@ Every Pharmacy OS screen on the page is drawn from one kit: `source/src6/poui.cs
 - **The demo** in section 05 is real HTML in the same look (`initDemo` in `po.js`, `.dm__*` in `po.css`).
 - **Measured, not promised.** The accessibility table in section 10 comes from measuring the demo in every state, at desktop and phone widths: lowest text contrast 4.5 : 1, smallest button 44 × 44 px, smallest text 14 px, and every control reachable by keyboard with a visible focus ring. Measure again after changing the demo's colours or sizes, and update `C.a11y` in `content.js`.
 
-The five line figures come from [Hairline](https://github.com/lucasmarkes/hairline) (MIT). Four load from jsDelivr; the blister strip is our own figure on the same engine, in `source/src6/hairline/` (`kernel.js` is Hairline's engine, unchanged, with its `LICENSE` beside it and on the page; `host.js` mounts our figure on the page; `strip.js` is the figure). If the library cannot load, those figures hide and the page still works.
+The three line figures come from [Hairline](https://github.com/lucasmarkes/hairline) (MIT). Two load from jsDelivr; the blister strip is our own figure on the same engine, in `source/src6/hairline/` (`kernel.js` is Hairline's engine, unchanged, with its `LICENSE` beside it and on the page; `host.js` mounts our figure on the page; `strip.js` is the figure). If the library cannot load, those figures hide and the page still works.
 
 ## Team playbook (`playbook/`)
 
@@ -140,7 +140,7 @@ The shared version of the playbook is a Claude artifact with a shared database, 
 
 | Section | What it shows |
 | --- | --- |
-| Hero | Agency OS, end to end, with a rotating ring of product screens |
+| Hero | "Pharmacy OS. Typed once." with a rotating ring of the eight steps, a stat bar and a "Try the live demo" button, then the six chapters at a glance. The top bar links each chapter and lights the one you are in; a floating "Try the live demo" button and a back-to-top button follow you down the page |
 | Journey reel | A ten-stage walkthrough player |
 | Intro | Who builds it, and what is live in Agency OS today |
 | The problem | Scattered tools versus one platform (flip between the two) and eight pains solved |

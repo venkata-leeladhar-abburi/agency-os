@@ -484,6 +484,27 @@ const V = {
         [ROWI('box', 'A fast seller ran out', 'Paracetamol 650 mg, asked 3 times'), 'Sales lost while it is out', 'Main road', '11:20 am', BTN('Add to order', 'is--ghost is--sm', 'plus')]], 'is--tall'), { lead: 1, cls: 'is--fill', right: CHIP('Needs you', 1, 2) + CHIP('All', 0, 6) })}
     ${BAR('<b>You choose what counts as unusual:</b> discount limits, cash differences, late parcels.<small>Alerts also reach your phone. Nothing is hidden from the owner.</small>', BTN('Alert settings', 'is--ghost', 'sliders') + BTN('Mark all seen', '', 'tick'))}</div>`, 'rao'),
 
+  /* ----- Safety: a recalled batch, stopped everywhere ----- */
+  recall: () => LIST('reports', '', 'Recall: stop batch CS1102', 'Notice at 10:05 am. Every counter stopped it at 10:06.', [['Blocked at', 'lock', '3 counters', 'All', 'ok', 'stores, in a minute'], ['On the shelf', 'box', '14', 'bottles', 'bad', 'moved to returns'], ['Sold before the notice', 'users', '6', 'customers', 'bad', 'to reach'], ['Distributor told', 'truck', 'Godavari', 'Return', 'ok', 'note sent']], 'Who bought this batch', 'users', STAT('bad', 'lock', 'Cannot be billed anywhere'), 'minmax(0,1.2fr) .7fr .8fr .9fr 1.4fr 18px', ['Customer', 'Bought', 'Store', 'Bill', 'Status', ''],
+    [[PERSON('Venkatesh', 'ink'), '1 bottle', 'Main road', '2241, 2 Oct', STAT('ok', 'tick', 'Called. Bringing it back.'), MORE], [PERSON('Anitha', 'ok'), '1 bottle', 'Bus stand', '2198, 28 Sep', STAT('warn', 'clock', 'Message sent, 10:07 am'), MORE], { c: 'is--bad', v: [PERSON('Suresh', 'vio'), '2 bottles', 'Main road', '2150, 24 Sep', STAT('bad', 'alert', 'Not reached yet'), MORE] }, [PERSON('Lakshmi', 'amber'), '1 bottle', 'Hospital gate', '2133, 22 Sep', STAT('ok', 'tick', 'Returned'), MORE]],
+    BAR('<b>Batch CS1102 cannot be billed at any counter.</b><small>The notice, the stock moved and every call made are kept for the inspector.</small>', BTN('Call the next customer', 'is--ghost', 'call') + BTN('Download the recall record', '', 'download')), 'rao'),
+
+  /* ----- The store's own online shop, an add-on ----- */
+  shop: () => APP('cust', '', `${HD('Your online store', 'Three steps. Regulars order from you, not from an app.')}
+    <div class="a-body">${KPIS([['Orders this week', 'list', '38', '+12', 'ok', 'vs last week', [3, 4, 4, 6, 5, 7, 9]], ['Online sales', 'rupee', '₹14,600', '12%', 'ink', 'of all sales'], ['Waiting for the pharmacist', 'clock', '2', 'With', 'bad', 'a prescription'], ['Delivery area', 'pin', '3 km', 'From', 'ink', 'the shop']])}
+    <div class="a-split" style="--side:560px">
+      ${TRAY('Set it up once', 'store', `<div class="u-card u-col">${STEPS([['Name and link', 'shop link: /ananya-medicals', 'on'], ['Your stock shows itself', '1,284 medicines, never above MRP', 'on'], ['Share the link', 'On WhatsApp, to the 214 regulars who said yes', 'is--now']])}
+        <div class="u-tbl is--rules" style="padding:0;margin:0 -10px"><div class="u-rule"><span class="u-ico">${KI('truck')}</span><div><b>Home delivery, 3 km</b><small>Or pickup at the counter</small></div><span class="u-tog"></span></div><div class="u-rule"><span class="u-ico">${KI('rupee')}</span><div><b>UPI, or pay at the door</b><small>The bill goes on WhatsApp</small></div><span class="u-tog"></span></div></div></div>`, { lead: 1, cls: 'is--fill' })}
+      ${TRAY('Orders from the store', 'list', TBL('.6fr minmax(0,1.1fr) .55fr minmax(0,1.6fr)', ['Order', 'Customer', 'Items', 'Status'], [{ c: 'is--warn', v: ['W-118', PERSON('Lakshmi', 'amber'), '3', STAT('warn', 'clock', 'Prescription to check')] }, ['W-117', PERSON('Ravi', 'vio'), '2', STAT('ok', 'truck', 'Packed. Delivery at 6 pm.')], ['W-116', PERSON('Anitha', 'ok'), '1', STAT('pri', 'store', 'Pickup at the counter')], ['W-115', PERSON('Venkatesh', 'ink'), '4', STAT('ok', 'tick', 'Delivered, paid by UPI')]], 'is--tall'), { lead: 1, cls: 'is--fill' })}
+    </div>
+    ${BAR('<b>Online orders arrive at the counter, like a bill.</b> Stock, register and WhatsApp bill follow by themselves.<small>Prescription medicines are packed only after the pharmacist checks the prescription.</small>', BTN('See the store', 'is--ghost', 'link') + BTN('Share on WhatsApp', '', 'send'))}</div>`, 'rao'),
+
+  shopm: () => `<div class="m-url">${KI('lock')}Your link. Opens in the browser.</div><div class="m-top" style="padding-top:14px"><div><small>Main road · Open till 10 pm</small><b class="m-big">${STORE}</b><small>Delivery in 3 km, or pickup.</small></div></div><div class="m-body">
+    ${INP('Search medicines')}
+    ${TRAY('Your regular medicines', 'repeat', `<div class="u-card m-list" style="padding:2px 12px">${[[3, '₹118'], [2, '₹44'], [0, '₹36']].map(([k, p]) => `<div>${PH(MED[k])}<span><b>${MED[k].n}</b>${p} a strip</span>${BTN('Add', 'is--ghost is--sm', 'plus')}</div>`).join('')}</div>`)}
+    ${TRAY('Prescription', 'file', `<div class="u-card m-list" style="padding:2px 12px"><div><i style="--c:var(--u-blue)">${KI('camera')}</i><span><b>Upload a photo</b>The pharmacist checks it first</span>${KI('chev')}</div></div>`)}</div>
+    <div class="m-act">${BTN('Order 3 items · ₹486', 'is--wide is--lg', '', KI('arrow'))}</div>`,
+
   /* ----- Phone-only artboards ----- */
   dlink: () => DLINK,
   wabillm: () => WA_BILL,

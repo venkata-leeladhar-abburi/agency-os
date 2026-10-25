@@ -82,6 +82,9 @@ __SPRITE__
           <svg class="nav__mark" viewBox="0 0 80 80" aria-hidden="true"><use href="#i-capsule"/></svg>
           <span class="nav__brand"><b>Pharmacy OS</b><small>Pitch · by One Stop</small></span>
         </a>
+        <nav class="nav__chap" aria-label="Chapters">
+          <a href="#gap">Problem</a><a href="#today">Today</a><a href="#distributor">Our answer</a><a href="#try" class="is--demo">Demo</a><a href="#platform">Product</a><a href="#why">Why us</a><a href="#costs">Business</a>
+        </nav>
         <div class="nav__buttons">
           <a class="btn" data-theme="steel" data-shape="round" href="#try" data-hide-mobile><span class="btn__label">Try it</span></a>
           <a class="btn" data-theme="volt" href="#start"><span class="btn__label">Let’s talk</span></a>
@@ -110,7 +113,7 @@ __SPRITE__
                 <a href="#ux">Design for fifty-plus <span class="eyebrow">10</span></a>
                 <a href="#why">Why they will switch <span class="eyebrow">11</span></a>
                 <a href="#money">What it gives back <span class="eyebrow">12</span></a>
-                <a href="#costs">Our costs <span class="eyebrow">13</span></a>
+                <a href="#costs">Price and costs <span class="eyebrow">13</span></a>
                 <a href="#now">Why now <span class="eyebrow">14</span></a>
                 <a href="#care">Build with care <span class="eyebrow">15</span></a>
                 <a href="#plan">The plan <span class="eyebrow">16</span></a>
@@ -170,8 +173,8 @@ __SPRITE__
       </h1>
       <p class="hero__desc p-l" data-hero-fade>One system for the medical store, its <span class="u-nowrap"><span class="hl">distributors</span></span> and its <span class="hl is--round">accountant</span>. Order, receive in one click, sell, track every parcel. Nothing is typed twice.</p>
       <div class="btn-row hero__cta" data-hero-fade>
-        <button class="btn" type="button" data-theme="ink" data-size="l" data-reel-open><span class="btn__label">Watch the flow</span><svg class="btn__icon" viewBox="0 0 12 12" aria-hidden="true"><use href="#i-play"/></svg></button>
-        <a class="btn" data-theme="volt" data-shape="round" data-size="l" href="#try"><span class="btn__label">Try the demo</span></a>
+        <button class="btn" type="button" data-theme="ink" data-size="l" data-reel-open><span class="btn__label">Watch the 1-minute flow</span><svg class="btn__icon" viewBox="0 0 12 12" aria-hidden="true"><use href="#i-play"/></svg></button>
+        <a class="btn" data-theme="volt" data-shape="round" data-size="l" href="#try"><span class="btn__label">Try the live demo</span></a>
         <span class="scribble-note hero__note" aria-hidden="true"><svg class="arrow-scribble" viewBox="0 0 40 40"><use href="#i-scribble-arrow"/></svg><span class="scribble">It really works!</span></span>
       </div>
     </div>
@@ -189,8 +192,8 @@ __SPRITE__
     <div class="stat"><span class="eyebrow stat__l">Chemists in India</span><b class="stat__v">12.4 lakh</b><span class="stat__c">Counted by their own association</span></div>
     <div class="stat"><span class="eyebrow stat__l">AP + Telangana</span><b class="stat__v">45,000+</b><span class="stat__c">Medical shops. Our first market.</span></div>
     <div class="stat"><span class="eyebrow stat__l">Still independent</span><b class="stat__v">~80%</b><span class="stat__c">Of pharmacy sales in India</span></div>
-    <div class="stat"><span class="eyebrow stat__l">Typed today</span><b class="stat__v"><s>3×</s></b><span class="stat__c">Order, purchase entry, register</span></div>
-    <div class="stat"><span class="eyebrow stat__l">Typed with us</span><b class="stat__v">1×</b><span class="stat__c">Then it flows everywhere</span></div>
+    <div class="stat"><span class="eyebrow stat__l">Leaks in the chain</span><b class="stat__v">16</b><span class="stat__c">From the order to the accountant</span></div>
+    <div class="stat"><span class="eyebrow stat__l">Telangana, one day</span><b class="stat__v">158</b><span class="stat__c">Shops served notices, Sep 2026</span></div>
     <a class="stat is--go" href="#try"><span class="eyebrow stat__l">Try it</span><b class="stat__v">0</b><span class="stat__c">Fields typed to receive a bill <svg viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-ur"/></svg></span></a>
   </div>
 </div>
@@ -238,8 +241,8 @@ __SPRITE__
     <div class="split-head">
       <div>
         <div class="tag-pair" data-reveal><span class="tag">01</span><span class="tag" data-shape="round">The problem</span></div>
-        <h2 class="h-l" data-reveal>One bill, three people. <em>Everyone types it again.</em></h2>
-        <p class="p-l split-head__lead" data-reveal>We talked with store owners in October 2026. Their software works. The typing never ends, and it does not stop at the store: the distributor and the accountant type the same bill again.</p>
+        <h2 class="h-l" data-reveal>A chain that leaks <em>at every link.</em></h2>
+        <p class="p-l split-head__lead" data-reveal>Typing the same bill again is only the first leak. Orders get lost, parcels go untracked, expired and recalled stock reaches the counter, money slips at the drawer, and the accountant starts from photos.</p>
       </div>
       <figure class="fig" data-reveal>
         <div class="fig__plate" data-hl="strip" data-hl-label="A blister strip of ten tablets. The tablet under the pointer presses in."></div>
@@ -247,34 +250,40 @@ __SPRITE__
       </figure>
     </div>
 
-    <div class="pains" data-reveal>
-      <div class="pains__head"><span class="eyebrow">Where it hurts, person by person</span><p class="pains__note">From our first store visits and the personas we will test in interviews. The hours are an estimate from the calculator in section 12.</p></div>
-      <ol class="pains__list" id="pains"></ol>
+    <div class="leak" data-reveal>
+      <div class="leak__top"><span class="eyebrow">Follow one bill along the chain</span><p class="leak__sum"><b>16</b> leaks in eight links. Each one costs time, money or a patient’s trust.</p></div>
+      <ol class="leak__chain" id="leaks"></ol>
     </div>
 
-    <div class="chainbox" data-mode="today" data-reveal>
-      <div class="chainbox__top">
-        <div class="seg on-dark" role="group" aria-label="Compare today with Pharmacy OS">
-          <button type="button" data-chain="today" aria-pressed="true">Today</button>
-          <button type="button" data-chain="os" aria-pressed="false">With Pharmacy OS</button>
-        </div>
-        <p class="chainbox__count" aria-live="polite">Typed <b id="chain-n">3</b> <span id="chain-w">times</span></p>
-      </div>
-      <ol class="chain" id="chain"></ol>
-      <p class="chainbox__note">Today’s steps come from our first store visits and the products’ own guides. Yours may differ.</p>
-    </div>
-
-    <div class="notes" id="notes" data-reveal-group></div>
-
-    <div class="trade" data-reveal>
-      <div class="trade__text">
-        <span class="eyebrow">The trade asked for this in 2021</span>
-        <h3 class="h-m">Send a file, the chemists wrote, “to avoid manual punching.”</h3>
-        <p class="p-m">The All India Organisation of Chemists &amp; Druggists, in a letter to drug makers on 20 January 2021. It also asked that the batch number on the bill match the stock in the carton. Five years on, shops still type.</p>
-      </div>
-      <a class="btn" data-theme="white" data-shape="round" href="https://medicaldialogues.in/pdf_upload/issues-causing-concerns-to-trade-members-146429.pdf" target="_blank" rel="noopener"><span class="btn__label">Read the letter</span><svg class="btn__icon" viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+    <div class="inc" data-reveal>
+      <div class="inc__head"><span class="eyebrow">When the chain breaks, patients pay</span><h3 class="h-m">Not just typing. <em>A safety problem.</em></h3><p class="p-m">From news reports in 2025 and 2026. Each card says what Pharmacy OS does about it.</p></div>
+      <ol class="inc__list" id="incidents"></ol>
     </div>
   </div>
+
+  <div class="portals people" id="people">
+    <div class="container is--m">
+      <div class="people__head">
+        <div class="tag-pair"><span class="tag" data-theme="glass">Their stories</span><span class="tag" data-theme="glass" data-shape="round">A day in their life</span></div>
+        <h3 class="h-l">Five people, one chain. <em>Each one loses a day.</em></h3>
+        <p class="p-l">Sketches from our first store visits, to be tested in interviews. Photos are stock images, not real customers. Open a card for the story.</p>
+      </div>
+    </div>
+    <div class="flick" data-flick data-cursor="drag" data-cursor-tone="light">
+      <div class="flick__bg" aria-hidden="true"><svg class="dots-circle" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5"/></svg></div>
+      <div class="flick__list" id="people-list"></div>
+    </div>
+    <div class="container is--m">
+      <div class="portals__controls">
+        <button class="icon-btn" type="button" data-theme="glass" data-shape="round" data-flick-prev aria-label="Previous person"><svg viewBox="0 0 12 12"><use href="#i-arrow-l"/></svg></button>
+        <div class="faces" id="people-faces" role="group" aria-label="Choose a person"></div>
+        <button class="icon-btn" type="button" data-theme="glass" data-shape="round" data-flick-next aria-label="Next person"><svg viewBox="0 0 12 12"><use href="#i-arrow-r"/></svg></button>
+        <button class="btn" type="button" data-theme="volt" data-shape="round" data-flick-open><span class="btn__label">Read Subba Rao’s story</span></button>
+      </div>
+      <p class="portals__count sr-only" id="people-count" aria-live="polite"></p>
+    </div>
+  </div>
+
 </section>
 
 <!-- Chapter 2 -->
@@ -285,43 +294,14 @@ __SPRITE__
   <div class="container is--m">
     <div class="section-head">
       <div class="tag-pair" data-reveal><span class="tag" data-theme="glass">02</span><span class="tag" data-theme="glass" data-shape="round">Today’s software</span></div>
-      <h2 class="h-l" data-reveal>Strong products. <em>None built for the owner’s eyes.</em></h2>
-      <p class="p-l" data-reveal>Most stores already pay for software. That is good news. They know what it is worth, and where it hurts.</p>
+      <h2 class="h-l" data-reveal>Strong products. <em>None built for the whole chain.</em></h2>
+      <p class="p-l" data-reveal>The real screens that owners, counters and distributors use today, beside the same job in Pharmacy OS.</p>
     </div>
 
-    <div class="stack" data-reveal>
-      <div class="stack__head"><h3 class="h-s">What the chain runs on today</h3><p class="p-m">Seven kinds of tool, across the store, the distributor and the accountant. Seven places to type.</p></div>
-      <ul class="stack__list" id="stack"></ul>
+    <div class="rv2" data-reveal>
+      <div class="rv2__tabs" id="rv-tabs" role="tablist" aria-label="Choose a product"></div>
+      <div class="rv2__stage" id="rv-stage" role="tabpanel"></div>
     </div>
-
-    <div class="cmp-wrap" data-reveal>
-      <div class="cmp-head">
-        <h3 class="h-m">Their screen. <em>Our screen.</em></h3>
-        <p class="p-m">The same job: stock has arrived from a distributor. Drag the handle.</p>
-      </div>
-      <div class="cmp__labs" aria-hidden="true"><span class="eyebrow cmp__lab is--l">A typical screen today</span><span class="eyebrow cmp__lab is--r">Pharmacy OS</span></div>
-      <div class="cmp" id="cmp" style="--x:50%">
-        <div class="cmp__side is--new"><div class="media"><span class="s" data-screen="check"></span></div></div>
-        <div class="cmp__side is--old" aria-hidden="true"><div class="media"><span class="s is--old" data-screen="legacy"></span></div></div>
-        <button class="cmp__handle" type="button" role="slider" aria-label="Compare a typical screen today with Pharmacy OS" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" data-cursor="drag"><i aria-hidden="true"></i><svg viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-l"/></svg><svg viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-r"/></svg></button>
-      </div>
-      <div class="cmp__notes" aria-hidden="true">
-        <span class="scribble-note"><svg class="arrow-scribble" viewBox="0 0 40 40" style="transform:rotate(200deg)"><use href="#i-scribble-arrow"/></svg><span class="scribble">Twelve columns, small text, function keys.</span></span>
-        <span class="scribble-note"><span class="scribble">One job. Big ticks. Nothing to type.</span><svg class="arrow-scribble" viewBox="0 0 40 40" style="transform:scaleX(-1) rotate(200deg)"><use href="#i-scribble-arrow"/></svg></span>
-      </div>
-      <p class="cmp__foot">The left screen is our drawing of the layout common to desktop billing tools. It is not a screenshot of any product. See the real ones:
-        <a href="https://margcompusoft.com/" target="_blank" rel="noopener">Marg</a>
-        <a href="https://www.daxinsoft.com/" target="_blank" rel="noopener">Profitmaker</a>
-        <a href="https://www.gofrugal.com/pharmacy-software.html" target="_blank" rel="noopener">GoFrugal</a>
-        <a href="https://www.evitalrx.in/" target="_blank" rel="noopener">eVitalRx</a>
-      </p>
-    </div>
-
-    <div class="rivals-head" data-reveal>
-      <h3 class="h-m">Eight names a store owner knows</h3>
-      <p class="p-m">What each is best at, where it is weak, and how we win. From public material, checked in October 2026.</p>
-    </div>
-    <ul class="rivals" id="rivals" data-reveal-group></ul>
 
     <div class="mx" data-reveal>
       <div class="mx__head">
@@ -333,15 +313,6 @@ __SPRITE__
       <p class="mx__note">An empty circle means we could not find it in public material, not that it does not exist. We will confirm each one in a live demo before any investor meeting. WhatsApp messages cost money in every product, ours too: the half circle there marks a paid add-on.</p>
     </div>
 
-    <div class="map" data-reveal>
-      <div class="map__text">
-        <span class="eyebrow">The open corner</span>
-        <h3 class="h-m">Little typing, <em>at a small-store price.</em></h3>
-        <p class="p-m">Up: how much typing each product removes when stock arrives. Right: what a store pays in a year, from published prices and guides.</p>
-        <p class="map__note">Our zone is the plan: under ₹6,000 a year. Pilots will test it.</p>
-      </div>
-      <div class="map__plot" id="map" role="img" aria-label="Chart: typing removed against yearly price. Pharmacy OS aims for the corner with the least typing and a low price."></div>
-    </div>
   </div>
 </section>
 
@@ -358,6 +329,10 @@ __SPRITE__
       </div>
       <p class="p-l split-head__lead" data-reveal>Today each of them types the same bill into a different tool. In Pharmacy OS the order, the bill, the parcel, the payment and the GST file pass between them by themselves. One store or forty branches, it is the same system.</p>
     </div>
+    <div class="leak is--fixed" data-reveal>
+      <div class="leak__top"><span class="eyebrow">The same chain, fixed</span><p class="leak__sum">Every leak from section 01 has an answer, and the bill moves along by itself.</p></div>
+      <ol class="leak__chain" id="fixes"></ol>
+    </div>
     <ol class="eco" id="eco" data-reveal-group></ol>
     <div class="eco__flow" data-reveal><span class="eyebrow">What passes between them, by itself</span><ul id="eco-flow"></ul></div>
 
@@ -373,8 +348,8 @@ __SPRITE__
     <div class="desk" data-reveal>
       <div class="desk__head">
         <div>
-          <span class="eyebrow">The free distributor desk</span>
-          <h3 class="h-m">What he sees <em>when he signs in.</em></h3>
+          <span class="eyebrow">The distributor’s dashboard, free</span>
+          <h3 class="h-m">Orders, dispatch, payments. <em>One screen.</em></h3>
           <p class="p-m">A web page, in Telugu or English. Orders, dispatch and payments for every store on Pharmacy OS.</p>
           <div class="seg desk__seg" role="group" aria-label="Distributor desk screens"><button type="button" data-desk="desk" aria-pressed="true">Orders</button><button type="button" data-desk="dispatch" aria-pressed="false">Dispatch</button><button type="button" data-desk="dpay" aria-pressed="false">Payments</button></div>
         </div>
@@ -429,6 +404,10 @@ __SPRITE__
       <div class="day__cols" aria-hidden="true"><span class="eyebrow">When</span><span class="eyebrow">What happens</span><span class="eyebrow">The app does this by itself</span><span class="eyebrow">You do this</span></div>
       <ol class="day__list" id="day-list"></ol>
     </div>
+
+    <div class="ux__label" data-reveal><span class="tag" data-theme="haze">User flows</span><h3 class="h-m">Every user’s job, <em>in fewer steps.</em></h3></div>
+    <div class="flows" id="flows" data-reveal-group></div>
+
   </div>
 </section>
 
@@ -437,10 +416,10 @@ __SPRITE__
   <div class="container is--m">
     <div class="section-head">
       <div class="tag-pair" data-reveal><span class="tag" data-theme="glass">05</span><span class="tag" data-theme="glass" data-shape="round">Try it</span></div>
-      <h2 class="h-l" data-reveal>Import, or tick. <em>Don’t type.</em></h2>
-      <p class="p-l" data-reveal>A working sketch of two screens. Use it the way an owner would.</p>
+      <h2 class="h-l" data-reveal>Try the product. <em>It really works.</em></h2>
+      <p class="p-l" data-reveal>Order from a distributor, then receive his bill in one click. Two minutes, in English or తెలుగు.</p>
     </div>
-    <div class="demo-wrap" data-reveal>
+    <div class="demo-wrap is--hero" data-reveal>
       <span class="scribble-note demo__note" aria-hidden="true"><span class="scribble">Go on,<br>try it!</span><svg class="arrow-scribble" viewBox="0 0 40 40" style="transform:rotate(15deg)"><use href="#i-scribble-arrow"/></svg></span>
       <div class="demo" id="demo" data-lang="en" style="--z:1"></div>
     </div>
@@ -462,7 +441,7 @@ __SPRITE__
     <div class="section-head">
       <div class="tag-pair" data-reveal><span class="tag">06</span><span class="tag" data-shape="round">One platform</span></div>
       <h2 class="h-l" data-reveal>Only for pharmacies. <em>End to end.</em></h2>
-      <p class="p-l" data-reveal>Eight jobs, one app. Thirty-nine features, and every one has a screen.</p>
+      <p class="p-l" data-reveal>Eight jobs, one app. Forty-one features, and every one has a screen.</p>
     </div>
     <div class="trio" data-reveal>
       <div class="trio__desk"><div class="media"><span class="s" data-screen="home"></span></div></div>
@@ -494,16 +473,6 @@ __SPRITE__
         <p class="movein__note">Planned for the first release: Marg, Profitmaker and Excel. Others we move by hand, on a call.</p>
       </div>
       <div class="movein__screen"><div class="media"><span class="s is--zoom" style="--zm:1.25;--fx:1;--fy:.12" data-screen="migrate"></span></div></div>
-    </div>
-    <div class="autos" data-reveal>
-      <figure class="fig is--light">
-        <div class="fig__plate" data-hl="drawer" data-hl-theme="light" data-hl-label="A cabinet of three drawers. The pointer's height picks one and it slides out."></div>
-        <figcaption class="fig__cap"><span class="eyebrow">Every drawer, known</span><span class="eyebrow fig__read" data-hl-read>rest</span></figcaption>
-      </figure>
-      <div class="autos__body">
-        <h3 class="h-m">Reminders that <em>run themselves</em></h3>
-        <ul class="autos__list" id="autos"></ul>
-      </div>
     </div>
   </div>
 </section>
@@ -537,7 +506,7 @@ __SPRITE__
   <div class="container is--m">
     <div class="section-head">
       <div class="tag-pair" data-reveal><span class="tag">08</span><span class="tag" data-shape="round">Customers</span></div>
-      <h2 class="h-l" data-reveal>Every bill builds <em>the customer list.</em></h2>
+      <h2 class="h-l" data-reveal>Keep the customer. <em>Online too.</em></h2>
       <p class="p-l" data-reveal>Bills, reminders and offers go out on WhatsApp. With consent, and inside the rules.</p>
     </div>
     <div class="serve__grid" data-reveal-group>
@@ -565,6 +534,19 @@ __SPRITE__
           <li>“STOP” ends it, for good</li>
         </ul>
         <p class="camp__note">₹0.86 a message plus GST, Meta’s India price from 1 January 2026.</p>
+      </div>
+    </div>
+
+    <div class="shop" data-reveal>
+      <div class="shop__text">
+        <span class="eyebrow">Add-on: the store’s own online shop</span>
+        <h3 class="h-m">Online in three steps. <em>Orders come to the counter.</em></h3>
+        <ol class="shop__steps"><li><b>Pick a name</b><span>The shop gets its own link.</span></li><li><b>Stock shows itself</b><span>Prices never above MRP. Nothing to upload.</span></li><li><b>Share it on WhatsApp</b><span>With the regulars who said yes.</span></li></ol>
+        <p class="shop__note">Prescription medicines are packed only after the pharmacist checks the prescription. The rules for selling medicines online are still being written; the add-on follows them as they are notified.</p>
+      </div>
+      <div class="shop__screens">
+        <div class="shop__desk"><div class="media"><span class="s" data-screen="shop"></span></div></div>
+        <div class="shop__phone"><div class="media is--phone"><span class="s is--m" data-screen="shopm"></span></div></div>
       </div>
     </div>
   </div>
@@ -602,44 +584,8 @@ __SPRITE__
       <p class="p-l" data-reveal>The owners we met are past forty-five. So are their eyes. The design starts there, and everyone else gets an easier app too.</p>
     </div>
 
-    <div class="ux__label" data-reveal><span class="tag" data-theme="haze">User research</span><h3 class="h-m">What we know, and how we know it</h3></div>
+    <div class="ux__label" data-reveal><span class="tag" data-theme="haze">Why it matters</span><h3 class="h-m">Eyes and hands, <em>past forty-five</em></h3></div>
     <ul class="evi" id="evidence" data-reveal-group></ul>
-    <div class="rs" data-reveal>
-      <div class="rs__col"><span class="eyebrow">Done so far</span><ul id="rs-done"></ul></div>
-      <div class="rs__col is--next"><span class="eyebrow">Next, before we build</span><ul id="rs-next"></ul></div>
-      <figure class="fig is--light">
-        <div class="fig__plate" data-hl="loupe" data-hl-theme="light" data-hl-label="A stand loupe on a ruled sheet. The pointer drags it across."></div>
-        <figcaption class="fig__cap"><span class="eyebrow">Look closer</span><span class="eyebrow fig__read" data-hl-read>rest</span></figcaption>
-      </figure>
-    </div>
-  </div>
-
-  <div class="portals people" id="people">
-    <div class="container is--m">
-      <div class="people__head">
-        <div class="tag-pair"><span class="tag" data-theme="glass">User personas</span><span class="tag" data-theme="glass" data-shape="round">To test in interviews</span></div>
-        <h3 class="h-l">Five people. <em>One order.</em></h3>
-        <p class="p-l">First sketches from our first store visits and desk research. Photos are stock images, not real customers.</p>
-      </div>
-    </div>
-    <div class="flick" data-flick data-cursor="drag" data-cursor-tone="light">
-      <div class="flick__bg" aria-hidden="true"><svg class="dots-circle" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5"/></svg></div>
-      <div class="flick__list" id="people-list"></div>
-    </div>
-    <div class="container is--m">
-      <div class="portals__controls">
-        <button class="icon-btn" type="button" data-theme="glass" data-shape="round" data-flick-prev aria-label="Previous person"><svg viewBox="0 0 12 12"><use href="#i-arrow-l"/></svg></button>
-        <div class="faces" id="people-faces" role="group" aria-label="Choose a person"></div>
-        <button class="icon-btn" type="button" data-theme="glass" data-shape="round" data-flick-next aria-label="Next person"><svg viewBox="0 0 12 12"><use href="#i-arrow-r"/></svg></button>
-        <button class="btn" type="button" data-theme="volt" data-shape="round" data-flick-open><span class="btn__label">Meet Subba Rao</span></button>
-      </div>
-      <p class="portals__count sr-only" id="people-count" aria-live="polite"></p>
-    </div>
-  </div>
-
-  <div class="container is--m">
-    <div class="ux__label" data-reveal><span class="tag" data-theme="haze">User flows</span><h3 class="h-m">Fewer steps, <em>counted.</em></h3></div>
-    <div class="flows" id="flows" data-reveal-group></div>
 
     <div class="ux__label" data-reveal><span class="tag" data-theme="haze">UX strategy</span><h3 class="h-m">Eight rules <em>for every screen</em></h3></div>
     <ul class="uxr" id="ux-rules" data-reveal-group></ul>
@@ -667,39 +613,6 @@ __SPRITE__
       <p class="a11y__note">Measured on the working demo in section 05, against WCAG 2.2. The same parts make every screen on this page.</p>
     </div>
 
-    <div class="ux__label" data-reveal><span class="tag" data-theme="haze">UI</span><h3 class="h-m">The kit <em>the screens are made of</em></h3></div>
-    <div class="kit u" data-reveal>
-      <div class="kit__cell is--type">
-        <span class="eyebrow">Type</span>
-        <p class="kit__big">Aa <span lang="te">అ</span></p>
-        <p class="kit__p">Inter for English, Anek Telugu for <span lang="te">తెలుగు</span>. Both drawn for screens. Numbers line up in columns.</p>
-        <div class="kit__sizes"><span style="font-size:1.0625rem">17 Body</span><span style="font-size:1.25rem">20 Large</span><span style="font-size:1.375rem">22 Largest</span></div>
-      </div>
-      <div class="kit__cell is--colour">
-        <span class="eyebrow">Colour means one thing</span>
-        <ul class="kit__swatches">
-          <li><i class="is--navy"></i><b>Navy</b><span>Chosen, or the next step</span></li>
-          <li><i class="is--green"></i><b>Green</b><span>Fine</span></li>
-          <li><i class="is--amber"></i><b>Amber</b><span>Soon</span></li>
-          <li><i class="is--red"></i><b>Red</b><span>Stop, expired, short</span></li>
-        </ul>
-        <p class="kit__p">Everything else is white on a quiet grey.</p>
-      </div>
-      <div class="kit__cell is--btn">
-        <span class="eyebrow">Buttons and tabs</span>
-        <div class="kit__btns"><span class="u-btn is--lg">Add to stock<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#k-arrow"/></svg></span><span class="u-btn is--ghost"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#k-qr"/></svg>Scan a pack</span><span class="u-seg"><span class="on">English</span><span lang="te">తెలుగు</span></span></div>
-        <p class="kit__p">44 px tall or more. One dark button on a screen: the next step.</p>
-      </div>
-      <div class="kit__cell is--state">
-        <span class="eyebrow">A row, in every state</span>
-        <ul class="kit__rows">
-          <li><span class="u-bdg is--ok"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#k-tick"/></svg>Matches the order</span></li>
-          <li><span class="u-bdg is--warn"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#k-clock"/></svg>Expires in 4 months</span></li>
-          <li><span class="u-bdg is--bad"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#k-alert"/></svg>Short by 4</span></li>
-        </ul>
-        <p class="kit__p">An icon and a word with every colour.</p>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -742,51 +655,28 @@ __SPRITE__
   <div class="container is--m">
     <div class="section-head">
       <div class="tag-pair" data-reveal><span class="tag">12</span><span class="tag" data-shape="round">What it gives back</span></div>
-      <h2 class="h-l" data-reveal>Time, money and <em>a quieter evening.</em></h2>
-      <p class="p-l" data-reveal>Set the store’s own numbers. Every figure on the right follows them.</p>
+      <h2 class="h-l" data-reveal>What one store <em>gets back.</em></h2>
+      <p class="p-l" data-reveal>Move three sliders to the store’s own numbers.</p>
     </div>
-    <div class="calc" data-reveal>
-      <div class="calc__in">
-        <h3 class="h-s">The store today</h3>
+    <div class="gb" data-reveal>
+      <div class="gb__in">
+        <h3 class="h-s">Your store</h3>
         <div class="rng"><label for="r-bills">Distributor bills a day</label><output id="v-bills" for="r-bills"></output><input type="range" id="r-bills" min="1" max="30" step="1" value="6"></div>
-        <div class="rng"><label for="r-lines">Lines on a bill</label><output id="v-lines" for="r-lines"></output><input type="range" id="r-lines" min="5" max="60" step="1" value="20"></div>
-        <div class="rng"><label for="r-sec">Seconds to type one line</label><output id="v-sec" for="r-sec"></output><input type="range" id="r-sec" min="8" max="60" step="1" value="20"></div>
-        <div class="rng"><label for="r-wage">Staff cost an hour</label><output id="v-wage" for="r-wage"></output><input type="range" id="r-wage" min="40" max="250" step="5" value="70"></div>
         <div class="rng"><label for="r-exp">Stock that expires in a year</label><output id="v-exp" for="r-exp"></output><input type="range" id="r-exp" min="0" max="300000" step="5000" value="50000"></div>
-        <div class="rng"><label for="r-cut">Share of that we help save</label><output id="v-cut" for="r-cut"></output><input type="range" id="r-cut" min="10" max="80" step="5" value="40"></div>
-        <p class="calc__note">26 working days a month. Ticking a line takes about two seconds, and a one-click import takes less. An estimate from your inputs, not a promise.</p>
-      </div>
-      <div class="calc__out">
-        <div class="win">
-          <span class="win__tag"><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#i-check"/></svg>Won back every year</span>
-          <b class="win__big tnum" id="o-year">₹0</b>
-          <p class="win__sub">That is <span id="o-split"></span>.</p>
-          <p class="win__pay">Against a price under ₹6,000 a year, that is <b id="o-pay">5×</b> back.</p>
-          <div class="win__bars" aria-hidden="true">
-            <div class="wbar"><span class="wbar__l">Typing a bill, today</span><span class="wbar__t"><i id="b-today"></i></span><span class="wbar__v" id="b-today-v"></span></div>
-            <div class="wbar is--us"><span class="wbar__l">Ticking it, with us</span><span class="wbar__t"><i id="b-us"></i></span><span class="wbar__v" id="b-us-v"></span></div>
-          </div>
-        </div>
-        <div class="tiles">
-          <div class="tile"><span class="eyebrow">Hours back a month</span><b class="tnum" id="o-hours">0</b></div>
-          <div class="tile"><span class="eyebrow">Fields not typed a month</span><b class="tnum" id="o-fields">0</b></div>
-          <div class="tile"><span class="eyebrow">Steps to buy stock</span><b class="tnum"><s>9</s> 4</b></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="earn" data-reveal>
-      <div class="earn__in">
-        <span class="eyebrow">And what it can earn</span>
-        <h3 class="h-s">Regulars who come back</h3>
         <div class="rng"><label for="r-reg">Customers on monthly medicines</label><output id="v-reg" for="r-reg"></output><input type="range" id="r-reg" min="20" max="600" step="10" value="150"></div>
-        <div class="rng"><label for="r-bas">Their monthly bill</label><output id="v-bas" for="r-bas"></output><input type="range" id="r-bas" min="200" max="4000" step="50" value="900"></div>
-        <div class="rng"><label for="r-back">Extra who return after a reminder</label><output id="v-back" for="r-back"></output><input type="range" id="r-back" min="2" max="30" step="1" value="10"></div>
+        <p class="calc__note">We assume 20 lines a bill, 20 seconds to type a line, staff at ₹70 an hour and 26 days a month; that we help save 40% of stock that would expire; and that one regular in ten more comes back, spending ₹900 a month. An estimate, not a promise.</p>
       </div>
-      <div class="earn__out">
-        <span class="eyebrow">Extra sales a year</span>
-        <b class="earn__big tnum" id="o-earn">₹0</b>
-        <p class="p-m">From <span id="o-earn-n">0</span> regulars who would have bought elsewhere. Sales, not profit.</p>
+      <div class="gb__out">
+        <ul class="gb__tiles">
+          <li><span class="eyebrow">Hours back</span><b class="tnum" id="o-hours">0</b><small>every month</small></li>
+          <li><span class="eyebrow">Money saved</span><b class="tnum" id="o-save">₹0</b><small>a year, from typing and expiry</small></li>
+          <li><span class="eyebrow">Extra sales</span><b class="tnum" id="o-earn">₹0</b><small>a year, from regulars who return</small></li>
+        </ul>
+        <div class="gb__vs" aria-hidden="true">
+          <div class="gb__bar is--back"><span>Saved in a year</span><i><em id="b-back"></em></i><b id="b-back-v"></b></div>
+          <div class="gb__bar is--cost"><span>What Pharmacy OS costs</span><i><em id="b-cost"></em></i><b>under ₹6,000</b></div>
+        </div>
+        <p class="gb__read" id="o-pay"></p>
       </div>
     </div>
   </div>
@@ -799,41 +689,36 @@ __SPRITE__
 <section class="section is--dark costs" id="costs">
   <div class="container is--m">
     <div class="section-head">
-      <div class="tag-pair" data-reveal><span class="tag" data-theme="glass">13</span><span class="tag" data-theme="glass" data-shape="round">Our costs</span></div>
-      <h2 class="h-l" data-reveal>What one store <em>costs us.</em></h2>
+      <div class="tag-pair" data-reveal><span class="tag" data-theme="glass">13</span><span class="tag" data-theme="glass" data-shape="round">Price and costs</span></div>
+      <h2 class="h-l" data-reveal>Under ₹6,000 to the store. <em>₹1,800 to serve it.</em></h2>
       <p class="p-l" data-reveal>Planning numbers from October 2026. Pilots will correct every one of them.</p>
     </div>
 
-    <div class="serve-cost" data-reveal data-meter="1">
-      <div class="serve-cost__head">
-        <div><span class="eyebrow">To keep one store running, a year</span><p class="serve-cost__big"><b class="tnum" id="o-serve">₹1,800</b><span>about ₹<span id="o-serve-m">150</span> a month</span></p></div>
-        <div class="seg on-dark" role="group" aria-label="How WhatsApp messages are paid for">
-          <button type="button" data-meter="1" aria-pressed="true">Store pays per message</button>
-          <button type="button" data-meter="0" aria-pressed="false">We pay</button>
-        </div>
+    <div class="pc" data-reveal>
+      <div class="pc__price">
+        <span class="eyebrow">One store, one year, before GST</span>
+        <p class="pc__big"><b class="tnum">₹5,500</b><span>the price we will test, under ₹6,000</span></p>
+        <div class="pc__bar" id="pc-bar" aria-hidden="true"></div>
+        <ul class="pc__leg" id="pc-leg"></ul>
+        <p class="pc__note">WhatsApp messages are paid by the store as they are sent, at Meta’s rate: about ₹0.115 a bill or reminder. No setup fee.</p>
       </div>
-      <div class="sbar" id="serve-bar" aria-hidden="true"></div>
-      <ul class="sleg" id="serve-leg"></ul>
+      <ul class="pc__who" id="pc-who"></ul>
     </div>
 
-    <div class="xp" data-reveal>
-      <div class="xp__in">
-        <span class="eyebrow">The plan is under ₹6,000 a year. Test it.</span>
-        <h3 class="h-s">Price, stores and the team</h3>
-        <div class="rng"><label for="r-price">Price a store pays a year</label><output id="v-price" for="r-price"></output><input type="range" id="r-price" min="3000" max="15000" step="500" value="5500"></div>
-        <div class="rng"><label for="r-stores">Paying stores</label><output id="v-stores" for="r-stores"></output><input type="range" id="r-stores" min="100" max="10000" step="100" value="1000"></div>
-        <div class="rng"><label for="r-fixed">Team and running cost a month</label><output id="v-fixed" for="r-fixed"></output><input type="range" id="r-fixed" min="300000" max="3000000" step="100000" value="1800000"></div>
-        <p class="calc__note">This is a calculator, not a price list. It uses the cost to serve shown above.</p>
+    <div class="be" data-reveal>
+      <div class="be__in">
+        <span class="eyebrow">When it pays for itself</span>
+        <h3 class="h-s">Stores needed to cover the team</h3>
+        <div class="rng"><label for="r-stores">Paying stores</label><output id="v-stores" for="r-stores"></output><input type="range" id="r-stores" min="500" max="10000" step="100" value="3000"></div>
+        <p class="calc__note">At ₹5,500 a store, and a team and running cost of ₹18 lakh a month.</p>
       </div>
-      <div class="xp__out">
-        <div class="xp__tile"><span class="eyebrow">Left from each store, a year</span><b class="tnum" id="o-gp">₹0</b><span id="o-gm"></span></div>
-        <div class="xp__tile"><span class="eyebrow">Revenue a year</span><b class="tnum" id="o-rev">₹0</b><span id="o-rev-s"></span></div>
-        <div class="xp__tile is--key"><span class="eyebrow">Stores needed to cover the team</span><b class="tnum" id="o-be">0</b><span id="o-be-s"></span></div>
-        <p class="xp__read" id="o-read"></p>
+      <div class="be__out">
+        <div class="be__track" aria-hidden="true"><i id="be-fill"></i><span class="be__line" id="be-line"><b id="be-n"></b></span></div>
+        <p class="be__read" id="be-read"></p>
       </div>
     </div>
 
-    <div class="cost3" data-reveal-group>
+    <div class="cost3 is--two" data-reveal-group>
       <div class="cbox">
         <span class="eyebrow">Year one, to build and launch</span>
         <h3 class="h-s">About ₹2 to 3 crore</h3>
@@ -844,18 +729,13 @@ __SPRITE__
         <h3 class="h-s">Thirteen people</h3>
         <table class="ctable" id="team"></table>
       </div>
-      <div class="cbox">
-        <span class="eyebrow">Unit prices we checked</span>
-        <h3 class="h-s">What each thing costs</h3>
-        <table class="ctable" id="unit"></table>
-      </div>
     </div>
 
     <div class="pr" data-reveal>
       <div class="pr__text">
         <span class="eyebrow">What stores pay today</span>
         <h3 class="h-m">Our plan: <em>under ₹6,000 a year.</em></h3>
-        <p class="p-m">Before GST, for every feature on this page. WhatsApp messages are charged as used, at Meta’s rate, with no setup fee. Distributors and accountants use it free. Pilots will test the number.</p>
+        <p class="p-m">For every feature on this page. Distributors and accountants use it free.</p>
       </div>
       <ul class="pr__list" id="prices"></ul>
     </div>
@@ -920,7 +800,7 @@ __SPRITE__
           <li style="--w:5%"><span>Legal, compliance, data</span><b>5%</b></li>
           <li style="--w:5%"><span>Reserve</span><b>5%</b></li>
         </ul>
-        <p class="raise__note">The amount follows the price we settle on. See the calculator in Our costs.</p>
+        <p class="raise__note">The amount follows the price we settle on. See Price and costs, section 13.</p>
       </div>
     </div>
   </div>
@@ -975,7 +855,7 @@ __SPRITE__
       </div>
       <div class="footer__cols">
         <div><h3 class="h-xs">The product</h3><ul><li><a href="#gap">The gap</a></li><li><a href="#flow">One flow</a></li><li><a href="#try">Try it</a></li><li><a href="#platform">One platform</a></li><li><a href="#app">Owner app</a></li></ul></div>
-        <div><h3 class="h-xs">The case</h3><ul><li><a href="#today">Today’s software</a></li><li><a href="#ux">Design for fifty-plus</a></li><li><a href="#costs">Our costs</a></li><li><a href="#why">Why they will switch</a></li><li><a href="#plan">The plan</a></li></ul></div>
+        <div><h3 class="h-xs">The case</h3><ul><li><a href="#today">Today’s software</a></li><li><a href="#ux">Design for fifty-plus</a></li><li><a href="#costs">Price and costs</a></li><li><a href="#why">Why they will switch</a></li><li><a href="#plan">The plan</a></li></ul></div>
         <div><h3 class="h-xs">One Stop</h3><ul><li><a href="https://www.onestop-solutions.in/">Agency website</a></li><li><a href="https://www.onestop-solutions.in/#work">Our work</a></li><li><a href="https://www.onestop-solutions.in/heaven-gadgets/">Heaven Gadgets plan</a></li><li><a href="https://www.onestop-solutions.in/beere-kesava/">Silk ERP deck</a></li><li><a href="https://www.onestop-solutions.in/agency-os/">Agency OS deck</a></li></ul></div>
       </div>
       <div class="footer__buttons">
@@ -1014,6 +894,11 @@ __SPRITE__
     <button class="modal__close" type="button" data-modal-close><span class="modal__close-x"><svg viewBox="0 0 10 10" aria-hidden="true"><use href="#i-x"/></svg></span>Close</button>
     <div class="modal__scroll" id="person-body" data-lenis-prevent></div>
   </div>
+</div>
+
+<div class="fab" id="fab">
+  <a class="fab__demo" href="#try"><svg viewBox="0 0 12 12" aria-hidden="true"><use href="#i-play"/></svg>Try the live demo</a>
+  <button class="fab__top" type="button" id="to-top" aria-label="Back to top"><svg viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-ur"/></svg></button>
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>

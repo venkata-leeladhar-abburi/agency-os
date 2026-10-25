@@ -1,7 +1,7 @@
 /* ===== Pharmacy OS pitch ===== */
 const ST = C.steps, ACT = id => C.acts.find(a => a.id === id);
 const kicon = (id, cls = 'ki') => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true"><use href="#k-${id}"/></svg>`;
-const PHONES = ['dlink', 'wabillm', 'remindm', 'ownerm', 'needsm'], TABLETS = ['billt'];
+const PHONES = ['dlink', 'wabillm', 'remindm', 'ownerm', 'needsm', 'shopm'], TABLETS = ['billt'];
 /* A product screen. With a zoom [times, x, y] it is shown enlarged about that point, so a small card stays readable. */
 const screen = (v, zoom) => { const big = !PHONES.includes(v) && !TABLETS.includes(v) && zoom; return `<span class="s${PHONES.includes(v) ? ' is--m' : TABLETS.includes(v) ? ' is--t' : ''}${v === 'legacy' ? ' is--old' : ''}${big ? ' is--zoom' : ''}"${big ? ` style="--zm:${zoom[0]};--fx:${zoom[1]};--fy:${zoom[2]}"` : ''}>${V[v] ? V[v]() : ''}</span>`; };
 const near = z => z && [1 + (z[0] - 1) * 0.45, z[1], z[2]];
@@ -37,73 +37,57 @@ function renderTicker() {
   }, 2000);
 }
 
-/* ---------- 01 The gap ---------- */
-function renderChain(mode) {
-  const os = mode === 'os', rows = C.chain[mode];
-  $('#chain').innerHTML = rows.map((r, i) => {
-    const mark = r.typed
-      ? (os ? `<span class="chain__mark is--once">${kicon('keyboard', '')}Typed once</span>` : `<span class="chain__mark is--typed">${i ? 'typed again!' : 'typed'}</span>`)
-      : (os ? `<span class="chain__mark is--flow"><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#i-check"/></svg>Flows by itself</span>` : '');
-    return `<li class="${r.typed ? 'is--typed' : ''}" style="--k:${i}"><span class="chain__n">${pad(i + 1)}</span><h3>${esc(r.t)}</h3><p>${esc(r.s)}</p>${mark}</li>`;
-  }).join('');
-  const n = rows.filter(r => r.typed).length;
-  $('#chain-n').textContent = n;
-  $('#chain-w').textContent = n === 1 ? 'time' : 'times';
+/* ---------- 01 The problem: the chain, link by link ---------- */
+const leakHTML = fixed => C.leaks.map((l, i) => `<li class="lk"><span class="lk__n">${pad(i + 1)}</span><span class="lk__ic">${kicon(l.icon, '')}</span><b class="lk__at">${esc(l.at)}</b>${fixed ? `<p class="lk__fix">${esc(l.fix)}</p>` : `<ul class="lk__p">${l.p.map(x => `<li>${esc(x)}</li>`).join('')}</ul>`}</li>`).join('');
+function renderProblem() {
+  $('#leaks').innerHTML = leakHTML(0);
+  $('#fixes').innerHTML = leakHTML(1);
+  $('#incidents').innerHTML = C.incidents.map(x => `<li class="ic"><div class="ic__top"><time>${esc(x.when)}</time><span>${esc(x.where)}</span></div><h4>${esc(x.t)}</h4><p>${esc(x.s)}</p><p class="ic__fix"><b>With Pharmacy OS</b>${esc(x.fix)}</p><p class="ic__src">${srcA(x.src)}</p></li>`).join('');
 }
-function initChain() {
-  const box = $('.chainbox');
-  $$('[data-chain]', box).forEach(b => b.addEventListener('click', () => {
-    const m = b.dataset.chain;
-    box.dataset.mode = m;
-    $$('[data-chain]', box).forEach(x => x.setAttribute('aria-pressed', String(x === b)));
-    renderChain(m);
-  }));
+/* A light moves along the chain, one link at a time, like a bill travelling through it */
+function initLeaks() {
+  if (reduce) return;
+  $$('.leak__chain').forEach(list => {
+    const items = $$('.lk', list);
+    let i = -1, t = 0;
+    onVisible(list, v => {
+      clearInterval(t);
+      if (!v) return;
+      t = setInterval(() => { i = (i + 1) % (items.length + 2); items.forEach((it, k) => it.classList.toggle('is--on', k === i)); }, 1100);
+    }, { threshold: 0.25 });
+  });
 }
 
 /* ---------- 02 Today's software ---------- */
 function renderToday() {
-  $('#notes').innerHTML = C.notes.map(n => `<div class="note"><span class="tag" data-theme="haze">${esc(n.k)}</span><h3 class="h-xs">${esc(n.t)}</h3><p>${esc(n.s)}</p></div>`).join('');
-  $('#stack').innerHTML = C.stack.map(s => `<li><span class="eyebrow">${esc(s.k)}</span><div class="stack__chips">${s.v.map(v => `<span>${esc(v)}</span>`).join('')}</div></li>`).join('');
-  $('#rivals').innerHTML = C.rivals.map(r => `<li class="rv"><div class="rv__top"><span class="tag" data-theme="glass" data-shape="round">${esc(r.kind)}</span><h4 class="h-s">${esc(r.n)}</h4><p class="p-s">${esc(r.from)}</p></div>
-    <div class="rv__big"><b>${esc(r.big)}</b><span>${esc(r.bigL)}</span></div>
-    <dl><div><dt>Best at</dt><dd>${esc(r.best)}</dd></div><div><dt>Weak spot</dt><dd>${esc(r.weak)}</dd></div><div class="is--win"><dt>We win on</dt><dd>${esc(r.win)}</dd></div></dl>
-    <div class="rv__foot"><p class="rv__price"><b>Price, published</b>${esc(r.price)}</p><p class="srcs">${r.src.map(srcA).join('')}</p></div></li>`).join('');
   const word = ['Not found in public material', 'Partial, add-on or higher plan', 'Documented'];
   $('#matrix').innerHTML = `<thead><tr><th scope="col"><span class="sr-only">Feature</span></th>${C.matrixCols.map((c, i) => `<th scope="col"${i === 0 ? ' class="is--us"' : ''}>${esc(c)}</th>`).join('')}</tr></thead><tbody>${C.matrix.map(([f, v]) => `<tr><th scope="row">${esc(f)}</th>${v.map((x, i) => `<td${i === 0 ? ' class="is--us"' : ''}><i class="dotm is--${x}" role="img" aria-label="${word[x]}"></i></td>`).join('')}</tr>`).join('')}</tbody>`;
-  /* Map: one row per level of typing removed (top = most), bars are published yearly price ranges on a ₹0 to ₹50,000 scale */
-  const MAX = 50;
-  const rows = [3, 2, 1, 0].map(y => {
-    const bars = C.map.filter(m => m.y === y).map(m => {
-      const l = m.lo / MAX * 100, w = (m.hi - m.lo) / MAX * 100;
-      const inside = l + w > 72;
-      return `<div class="mp__bar${m.us ? ' is--us' : ''}${inside ? ' is--in' : ''}" style="--l:${l.toFixed(1)}%;--w:${w.toFixed(1)}%"><span>${esc(m.n)}${m.us ? ' · target' : ''}</span></div>`;
-    }).join('');
-    return `<div class="mp__row"><p class="mp__lvl"><b>Level ${y}</b>${esc(C.mapY[y])}</p><div class="mp__track">${bars}</div></div>`;
-  }).join('');
-  $('#map').innerHTML = `<div class="mp">${rows}<div class="mp__axis"><span>Price a store, a year</span><div class="mp__ticks"><span>₹0</span><span>₹10k</span><span>₹20k</span><span>₹30k</span><span>₹40k</span><span>₹50k</span></div></div></div>`;
 }
-/* Compare slider: drag, or use the arrow keys */
-function initCmp() {
-  const el = $('#cmp'), h = $('.cmp__handle', el);
-  let x = 50, drag = false;
-  const set = v => { x = clamp(v, 4, 96); el.style.setProperty('--x', x + '%'); h.setAttribute('aria-valuenow', String(Math.round(x))); h.setAttribute('aria-valuetext', `${Math.round(x)}% typical screen, ${Math.round(100 - x)}% Pharmacy OS`); };
-  const at = e => { const r = el.getBoundingClientRect(); set((e.clientX - r.left) / r.width * 100); };
-  el.addEventListener('pointerdown', e => { if (e.button !== 0) return; drag = true; el.setPointerCapture(e.pointerId); at(e); });
-  el.addEventListener('pointermove', e => { if (drag) at(e); });
-  const end = () => { drag = false; };
-  el.addEventListener('pointerup', end); el.addEventListener('pointercancel', end);
-  h.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') { e.preventDefault(); set(x - 5); } if (e.key === 'ArrowRight') { e.preventDefault(); set(x + 5); } if (e.key === 'Home') { e.preventDefault(); set(4); } if (e.key === 'End') { e.preventDefault(); set(96); } });
-  set(50);
-  /* A slow sweep the first time it is seen, so nobody misses that it moves */
-  if (!reduce) onVisible(el, (v, io) => {
-    if (!v) return; io.disconnect();
-    const t0 = performance.now(), dur = 2200;
-    const step = now => { if (drag) return; const p = Math.min(1, (now - t0) / dur); set(50 + Math.sin(p * Math.PI * 2) * 22 * (1 - p * 0.3)); if (p < 1) requestAnimationFrame(step); else set(50); };
-    requestAnimationFrame(step);
-  }, { threshold: 0.6 });
+/* Their real screen, beside the same job in ours */
+function initRivals() {
+  const tabs = $('#rv-tabs'), stage = $('#rv-stage');
+  tabs.innerHTML = C.rivalUI.map((r, i) => `<button type="button" role="tab" id="rv-t${i}" aria-controls="rv-stage" data-rv="${i}" aria-selected="${i === 0}" tabindex="${i ? -1 : 0}">${esc(r.n)}</button>`).join('');
+  const paint = i => {
+    const r = C.rivalUI[i];
+    $$('[data-rv]', tabs).forEach((b, k) => { b.setAttribute('aria-selected', String(k === i)); b.tabIndex = k === i ? 0 : -1; });
+    stage.setAttribute('aria-labelledby', 'rv-t' + i);
+    stage.innerHTML = `<div class="rv2__pair">
+      <figure class="rv2__theirs${r.phone ? ' is--phone' : ''}"><figcaption><span class="tag" data-theme="glass" data-shape="round">${esc(r.n)}</span><span>${esc(r.job)}</span></figcaption><div class="rv2__img"><img src="img/rivals/${esc(r.img)}" alt="${esc(r.n)}: ${esc(r.job)}, as shown in its public listing" decoding="async"></div><p class="rv2__src">Their screen, from <a href="${esc(r.src[1])}" target="_blank" rel="noopener">${esc(r.src[0])}</a></p></figure>
+      <figure class="rv2__ours"><figcaption><span class="tag" data-theme="volt" data-shape="round">Pharmacy OS</span><span>The same job</span></figcaption><div class="media">${screen(r.ours)}</div><p class="rv2__src">Our design, with sample data</p></figure></div>
+      <ul class="rv2__vs">${r.vs.map(([k, a, b]) => `<li><span class="eyebrow">${esc(k)}</span><p class="is--them">${esc(a)}</p><p class="is--us">${esc(b)}</p></li>`).join('')}</ul>
+      <p class="rv2__meta"><span><b>Best at</b>${esc(r.best)}</span><span><b>Price</b>${esc(r.price)}</span></p>`;
+  };
+  tabs.addEventListener('click', e => { const b = e.target.closest('[data-rv]'); if (b) paint(+b.dataset.rv); });
+  tabs.addEventListener('keydown', e => {
+    const n = C.rivalUI.length, cur = +(document.activeElement.dataset.rv || 0);
+    const to = e.key === 'ArrowRight' ? (cur + 1) % n : e.key === 'ArrowLeft' ? (cur - 1 + n) % n : -1;
+    if (to < 0) return;
+    e.preventDefault(); paint(to); $(`[data-rv="${to}"]`, tabs).focus();
+  });
+  paint(0);
 }
 
-/* ---------- 03 One flow ---------- */
+/* ---------- 04 One flow ---------- */
 function renderStages() {
   $('#stage-nav').innerHTML = ST.map((s, i) => `<button class="btn" type="button" data-theme="haze" data-go-stage="${i}" aria-pressed="false"><span class="btn__label"><span class="eyebrow">${s.n}</span> ${esc(s.name)}</span></button>`).join('');
   $('#stage-cards').innerHTML = ST.map((s, i) => `<div class="gslider__item" data-i="${i}"><article class="stage-card is--${ACT_THEME[s.act]}" aria-label="Step ${s.n}: ${esc(s.name)}"><span class="media">${screen(s.vis, s.zoom)}</span><div class="stage-card__top"><div class="tag-pair"><span class="tag">${esc(ACT(s.act).name)}</span><span class="tag" data-shape="round">${s.n} / 08</span></div>${kicon(s.icon)}</div><div class="stage-card__num" aria-hidden="true">${s.n}</div><div class="stage-card__body"><h3 class="h-m">${esc(s.name)}</h3><p class="p-m">${esc(s.line)}</p><p class="stage-card__out">${esc(s.gives)}</p></div></article></div>`).join('');
@@ -319,7 +303,6 @@ function initJobs() {
   tabs.addEventListener('click', e => { const b = e.target.closest('[data-job]'); if (!b) return; job = +b.dataset.job; feat = 0; paint(); });
   feats.addEventListener('click', e => { const b = e.target.closest('[data-feat]'); if (!b) return; feat = +b.dataset.feat; paint(); });
   paint();
-  $('#autos').innerHTML = C.autos.map(([a, b]) => `<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join('');
 }
 
 /* ---------- 07 One store or many ---------- */
@@ -373,8 +356,6 @@ const UXD = {
 function renderUX() {
   $('#evidence').innerHTML = C.evidence.map(e => `<li class="ev${e.big.length > 6 ? ' is--q' : ''}"><b class="ev__big">${esc(e.big)}</b><h4>${esc(e.t)}</h4><p>${esc(e.s)}</p>${srcA(e.src)}</li>`).join('');
   const li = ([a, b]) => `<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`;
-  $('#rs-done').innerHTML = C.research.done.map(li).join('');
-  $('#rs-next').innerHTML = C.research.next.map(li).join('');
   $('#people-list').innerHTML = C.people.map((p, i) => `<div class="flick__item" data-i="${i}"><article class="person-card" aria-label="${esc(p.first)}, ${p.at}: ${esc(p.name)}"><div class="person-card__photo">${photo(p)}<span class="person-card__age">${esc(p.first)}, ${p.at}</span><span class="person-card__go" aria-hidden="true"><svg viewBox="0 0 12 12"><use href="#i-arrow-ur"/></svg></span><p class="person-card__q">“${esc(p.quote)}”</p></div><div class="person-card__body"><h4 class="person-card__name">${esc(p.name)}</h4><p class="person-card__type">${esc(p.where)}</p><p class="person-card__where">Uses: ${esc(p.uses)}</p></div></article></div>`).join('');
   $('#people-faces').innerHTML = C.people.map((p, i) => `<button class="face" type="button" data-face="${i}" aria-pressed="false" aria-label="${esc(p.first)}, ${esc(p.name)}"><span style="background-image:url(${esc(portrait(p, 120, 120))})"></span></button>`).join('');
   $('#flows').innerHTML = C.flows.map(f => `<div class="fl"><div class="fl__head"><h4 class="h-s">${esc(f.name)}</h4><p class="fl__count"><s>${f.today.length}</s>${f.os.length}<span>steps</span></p></div><div class="fl__cols"><div class="fl__col"><span class="eyebrow">Today</span><ol>${f.today.map(s => `<li><span>${esc(s)}</span></li>`).join('')}</ol></div><div class="fl__col is--os"><span class="eyebrow">With Pharmacy OS</span><ol>${f.os.map(s => `<li><span>${esc(s)}</span></li>`).join('')}</ol></div></div></div>`).join('');
@@ -385,6 +366,7 @@ function personHTML(i) {
   const facts = [['Where', p.where], ['Uses today', p.uses], ['Works on', p.device], ['Speaks', p.lang]];
   return `<div class="pmod"><div class="pmod__top"><div class="pmod__id"><div class="pmod__photo">${photo(p)}<p class="pmod__name">${esc(p.first)}, ${p.at}</p></div><dl class="pfacts">${facts.map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></div>
     <div class="pmod__main"><div class="pmod__head"><div class="tag-pair"><span class="tag">Persona ${pad(i + 1)} / ${pad(n)}</span><span class="tag" data-theme="haze" data-shape="round">To test in interviews</span></div><h2 class="h-l" id="person-title">${esc(p.name)}</h2><p class="pmod__q">“${esc(p.quote)}”</p></div>
+    <div class="pmod__story"><span class="eyebrow">A day in their life, today</span><ol>${p.story.map(([t, x]) => `<li><time>${esc(t)}</time><span>${esc(x)}</span></li>`).join('')}</ol></div>
     <div class="pmod__cols"><div class="pmod__box"><span class="eyebrow">What they want</span><ul class="pmod__list is--want">${p.wants.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div><div class="pmod__box"><span class="eyebrow">What hurts today</span><ul class="pmod__list is--pain">${p.pains.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div></div>
     <div class="pmod__win"><span class="eyebrow">How we win them</span><p class="h-xs">${esc(p.win)}</p></div></div></div>
     <p class="pmod__note">A first sketch from store visits and desk research. The photo is a stock image, not a real customer.</p>
@@ -479,75 +461,71 @@ function initFlick() {
 /* ---------- 11 What it gives back ---------- */
 function initCalc() {
   const g = id => +$('#' + id).value;
-  bindRanges(['r-bills', 'r-lines', 'r-sec', 'r-wage', 'r-exp', 'r-cut'], () => {
-    const bills = g('r-bills'), lines = g('r-lines'), sec = g('r-sec'), wage = g('r-wage'), exp = g('r-exp'), cut = g('r-cut') / 100;
-    $('#v-bills').textContent = bills; $('#v-lines').textContent = lines; $('#v-sec').textContent = sec + ' s'; $('#v-wage').textContent = rs(wage); $('#v-exp').textContent = rs(exp); $('#v-cut').textContent = Math.round(cut * 100) + '%';
-    const TICK = 2, days = 26;
-    const perBillToday = lines * sec / 60, perBillUs = lines * TICK / 60;
-    const hours = bills * lines * Math.max(sec - TICK, 0) * days / 3600;
-    const timeYear = hours * wage * 12, expYear = exp * cut, year = timeYear + expYear;
-    tweenText($('#o-year'), year, rs);
-    $('#o-split').textContent = `${rs(timeYear)} of staff time and ${rs(expYear)} of stock that does not expire`;
-    const back = year / 6000;
-    $('#o-pay').textContent = (back >= 10 ? String(Math.round(back)) : back.toFixed(1).replace(/\.0$/, '')) + '×';
+  bindRanges(['r-bills', 'r-exp', 'r-reg'], () => {
+    const bills = g('r-bills'), exp = g('r-exp'), reg = g('r-reg');
+    $('#v-bills').textContent = bills; $('#v-exp').textContent = rs(exp); $('#v-reg').textContent = fmtIN(reg);
+    const hours = bills * 20 * (20 - 2) * 26 / 3600, save = hours * 70 * 12 + exp * 0.4, earn = reg * 0.1 * 900 * 12;
     tweenText($('#o-hours'), hours, v => String(Math.round(v)));
-    tweenText($('#o-fields'), bills * lines * 7 * days, fmtIN);
-    const max = Math.max(perBillToday, 1);
-    $('#b-today').style.width = '100%';
-    $('#b-us').style.width = (perBillUs / max * 100).toFixed(1) + '%';
-    const mins = v => (v >= 1 ? `${v.toFixed(v >= 10 ? 0 : 1).replace(/\.0$/, '')} min` : `${Math.round(v * 60)} sec`);
-    $('#b-today-v').textContent = mins(perBillToday);
-    $('#b-us-v').textContent = mins(perBillUs);
-  });
-  bindRanges(['r-reg', 'r-bas', 'r-back'], () => {
-    const reg = g('r-reg'), bas = g('r-bas'), back = g('r-back') / 100;
-    $('#v-reg').textContent = fmtIN(reg); $('#v-bas').textContent = rs(bas); $('#v-back').textContent = Math.round(back * 100) + '%';
-    tweenText($('#o-earn'), reg * back * bas * 12, rs);
-    $('#o-earn-n').textContent = String(Math.round(reg * back));
+    tweenText($('#o-save'), save, rs);
+    tweenText($('#o-earn'), earn, rs);
+    const max = Math.max(save, 6000);
+    $('#b-back').style.width = (save / max * 100).toFixed(1) + '%';
+    $('#b-cost').style.width = (6000 / max * 100).toFixed(1) + '%';
+    $('#b-back-v').textContent = rs(save);
+    const x = save / 6000;
+    $('#o-pay').innerHTML = `Savings alone are about <b>${x >= 10 ? Math.round(x) : x.toFixed(1).replace(/\.0$/, '')}×</b> the price, before the extra sales.`;
   });
 }
 
-/* ---------- 12 Our costs ---------- */
+/* ---------- 13 Price and costs ---------- */
 function initCosts() {
-  const box = $('.serve-cost');
-  let meter = 1;
-  const direct = () => C.serve.reduce((s, x) => s + (meter && x.meter ? 0 : x.v), 0);
-  $('#serve-leg').innerHTML = C.serve.map(x => `<li class="${x.meter ? 'is--meter' : ''}"><b>${esc(x.k)}<em>${rs(x.v)}</em></b><span>${esc(x.s)}</span></li>`).join('');
+  const PRICE = 5500, COST = 1800, parts = [['Cloud', 600, 'Database, files and backups in India'], ['Support', 1000, 'Phone and WhatsApp help in Telugu'], ['Payments, other', 200, 'Payment links, SMS when WhatsApp fails'], ['Left for us', PRICE - COST, 'Pays the team, then profit']];
+  $('#pc-bar').innerHTML = parts.map(([k, v], i) => `<i class="${i === 3 ? 'is--us' : ''}" style="flex-grow:${v}"><span>${esc(k)}</span><b>${rs(v)}</b></i>`).join('');
+  $('#pc-leg').innerHTML = parts.map(([k, v, t], i) => `<li class="${i === 3 ? 'is--us' : ''}"><b>${esc(k)}<em>${rs(v)}</em></b><span>${esc(t)}</span></li>`).join('');
+  $('#pc-who').innerHTML = [['The store', 'Under ₹6,000', 'a year, every feature', 'store'], ['The distributor', 'Free', 'dashboard, and billing at launch', 'truck'], ['The accountant', 'Free', 'invited by the store', 'file']].map(([a, b, c, ic], i) => `<li class="${i ? '' : 'is--pay'}"><i>${kicon(ic, '')}</i><span class="eyebrow">${a}</span><b>${b}</b><small>${c}</small></li>`).join('');
   $('#build').innerHTML = C.build.map(([k, v, n]) => `<li><span>${esc(k)}</span><b>${esc(v)}</b><i style="--w:${(n / 180 * 100).toFixed(0)}%"></i></li>`).join('');
   $('#team').innerHTML = C.team.map(([k, n, v]) => `<tr><td>${esc(k)}</td><td>${esc(n)}</td><td>${esc(v)}</td></tr>`).join('');
-  const unit = $('#unit'); unit.classList.add('is--unit');
-  unit.innerHTML = C.unit.map(([k, v, s]) => `<tr><td>${esc(k)}</td><td>${esc(v)}</td><td>${esc(s)}</td></tr>`).join('');
   const PMAX = 50000;
   $('#prices').innerHTML = C.prices.map(p => `<li><b>${esc(p.n)}</b><div class="pr__track"><i style="--l:${(p.lo / PMAX * 100).toFixed(1)}%;--w:${((p.hi - p.lo) / PMAX * 100).toFixed(1)}%"></i></div><small>${rs(p.lo)} to ${rs(p.hi)} ${esc(p.s)}</small></li>`).join('')
     + `<li class="is--us"><b>Pharmacy OS</b><div class="pr__track"><i style="--l:0%;--w:12%"></i></div><small>Under ₹6,000 a year, the plan. WhatsApp messages as used.</small></li>`;
-  const g = id => +$('#' + id).value;
-  const update = () => {
-    const d = direct();
-    $('#serve-bar').innerHTML = C.serve.map(x => `<i style="flex-grow:${meter && x.meter ? 300 : x.v}">${esc(x.k)}${meter && x.meter ? ' · store pays' : ''}</i>`).join('');
-    tweenText($('#o-serve'), d, rs);
-    $('#o-serve-m').textContent = fmtIN(d / 12);
-    const price = g('r-price'), stores = g('r-stores'), fixed = g('r-fixed');
-    $('#v-price').textContent = rs(price); $('#v-stores').textContent = fmtIN(stores); $('#v-fixed').textContent = lakh(fixed);
-    const gp = price - d, rev = price * stores, be = gp > 0 ? Math.ceil(fixed * 12 / gp) : Infinity;
-    tweenText($('#o-gp'), gp, rs);
-    $('#o-gm').textContent = `${Math.round(gp / price * 100)}% of the price`;
-    $('#o-rev').textContent = lakh(rev);
-    $('#o-rev-s').textContent = `from ${fmtIN(stores)} stores`;
-    $('#o-be').textContent = isFinite(be) ? fmtIN(be) : 'Never';
-    const share = isFinite(be) ? be / 45000 * 100 : 0;
-    $('#o-be-s').textContent = isFinite(be) ? `That is ${share < 1 ? 'under 1' : Math.round(share)}% of the 45,000 shops in AP and Telangana` : 'The price is below the cost to serve';
-    const left = gp * stores - fixed * 12;
-    $('#o-read').innerHTML = !isFinite(be) ? 'At this price a store pays no more than it costs to serve.'
-      : left >= 0 ? `At <b>${fmtIN(stores)}</b> stores this covers the team and leaves <b>${lakh(left)}</b> a year.`
-      : `At <b>${fmtIN(stores)}</b> stores this is <b>${lakh(-left)}</b> a year short of the team’s cost. It needs more stores, or a leaner team.`;
-  };
-  $$('[data-meter]', box).forEach(b => b.tagName === 'BUTTON' && b.addEventListener('click', () => { meter = +b.dataset.meter; box.dataset.meter = String(meter); $$('button[data-meter]', box).forEach(x => x.setAttribute('aria-pressed', String(x === b))); update(); }));
-  bindRanges(['r-price', 'r-stores', 'r-fixed'], update);
+  const FIX = 1800000 * 12, GP = PRICE - COST, BE = Math.ceil(FIX / GP), MAXS = 10000;
+  $('#be-line').style.left = (BE / MAXS * 100).toFixed(1) + '%';
+  $('#be-n').textContent = `${fmtIN(BE)} stores cover the team`;
+  bindRanges(['r-stores'], () => {
+    const n = +$('#r-stores').value, left = n * GP - FIX;
+    $('#v-stores').textContent = fmtIN(n);
+    $('#be-fill').style.width = (n / MAXS * 100).toFixed(1) + '%';
+    $('#be-fill').classList.toggle('is--over', n >= BE);
+    $('#be-read').innerHTML = left >= 0
+      ? `At <b>${fmtIN(n)}</b> stores: <b>${lakh(n * PRICE)}</b> a year, and <b>${lakh(left)}</b> left after the team.`
+      : `At <b>${fmtIN(n)}</b> stores: <b>${lakh(n * PRICE)}</b> a year, <b>${lakh(-left)}</b> short of the team’s cost. ${fmtIN(BE)} stores is ${Math.round(BE / 45000 * 100)}% of the shops in AP and Telangana.`;
+  });
+}
+
+/* ---------- Top: try the demo, back to top ---------- */
+function initFab() {
+  const fab = $('#fab'), demo = $('#try');
+  const upd = () => { fab.classList.toggle('is--on', scrollY > innerHeight * 0.8); const r = demo.getBoundingClientRect(); fab.classList.toggle('is--atdemo', r.top < innerHeight * 0.7 && r.bottom > innerHeight * 0.3); };
+  /* The chapter you are in lights up in the top bar */
+  const links = $$('.nav__chap a'), map = { gap: 0, today: 1, distributor: 2, flow: 2, try: 3, platform: 4, stores: 4, customers: 4, app: 4, ux: 4, why: 5, money: 5, costs: 6, now: 6, care: 6, plan: 6, start: 6 };
+  const secs = Object.keys(map).map(id => $('#' + id)).filter(Boolean);
+  const lite = () => { let on = -1; secs.forEach(el => { if (el.getBoundingClientRect().top < innerHeight * 0.4) on = map[el.id]; }); links.forEach((a, i) => a.classList.toggle('is--on', i === on)); };
+  addEventListener('scroll', () => { upd(); lite(); }, { passive: true });
+  upd(); lite();
+  $('#to-top').addEventListener('click', () => { if (lenis) lenis.scrollTo(0); else scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); });
 }
 
 /* ---------- 13 to 16: lists ---------- */
 function renderLists() {
-  $('#whys').innerHTML = C.whys.map(w => `<li class="wy"><span class="wy__n" aria-hidden="true">${w.n}</span><h3>${esc(w.t)}</h3><p>${esc(w.s)}</p><a class="btn" data-theme="${w.n === '1' ? 'ink' : 'cloud'}" data-shape="round" data-size="s" href="${esc(w.go)}"><span class="btn__label">${esc(w.cta)}</span></a></li>`).join('');
+  const WV = {
+    typed: '<div class="wv wv--typed"><s>42</s><b>0</b><small>fields typed to receive one bill</small></div>',
+    aa: '<div class="wv wv--aa"><i>Aa</i><i>Aa</i><i>Aa</i></div>',
+    shield: `<div class="wv wv--shield">${kicon('shield', '')}<span>Expired: stopped</span><span>Recalled: stopped</span></div>`,
+    bell: `<div class="wv wv--bell">${kicon('bell', '')}<span>Bill deleted</span><span>15% discount</span><span>₹50 short</span></div>`,
+    price: '<div class="wv wv--price"><i style="--w:100%"><span>Others, up to ₹50,000</span></i><i class="is--us" style="--w:12%"><span>Us, under ₹6,000</span></i></div>',
+    chain: '<div class="wv wv--chain"><span>Store</span><i></i><span>Distributor</span><i></i><span>Accountant</span></div>'
+  };
+  $('#whys').innerHTML = C.whys.map(w => `<li class="wy"><div class="wy__vis" aria-hidden="true">${WV[w.vis] || ''}</div><span class="wy__n" aria-hidden="true">${w.n}</span><h3>${esc(w.t)}</h3><p>${esc(w.s)}</p><a class="btn" data-theme="${w.n === '1' ? 'ink' : 'cloud'}" data-shape="round" data-size="s" href="${esc(w.go)}"><span class="btn__label">${esc(w.cta)}</span></a></li>`).join('');
   $('#moats').innerHTML = C.moats.map(([a, b]) => `<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join('');
   $('#asks').innerHTML = C.asks.map(([q, a], i) => `<details${i === 0 ? ' open' : ''}><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('');
   $('#market-stats').innerHTML = C.marketStats.map(([b, t, s]) => `<li><b>${esc(b)}</b><span>${esc(t)}</span>${srcA(s)}</li>`).join('');
@@ -567,7 +545,6 @@ function renderLists() {
   $('#desk-pts').innerHTML = C.deskPts.map(([a, b]) => `<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join('');
   $('#glance').innerHTML = C.chapters.map(c => `<li><a class="gl" href="${esc(c.go)}"><span class="gl__n">Chapter ${c.n}</span><b class="gl__t">${esc(c.t)}</b><span class="gl__line">${esc(c.line)}</span><span class="gl__big"><b>${esc(c.big)}</b><small>${esc(c.bigL)}</small></span><span class="gl__secs">${c.secs.map(x => `<i>${esc(x)}</i>`).join('')}</span></a></li>`).join('');
   $$('[data-chap]').forEach(el => { const c = C.chapters[+el.dataset.chap - 1]; el.innerHTML = `<div class="container is--m chap__in"><span class="chap__n" aria-hidden="true">${c.n}</span><div><span class="eyebrow">Chapter ${c.n} of 6</span><h2 class="chap__t">${esc(c.t)}</h2><p class="chap__p">${esc(c.line)}</p></div><ul class="chap__secs">${c.secs.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>`; });
-  $('#pains').innerHTML = C.pains.map((x, i) => `<li class="pn${i === 0 ? ' is--store' : ''}"><span class="eyebrow">${esc(x.who)}</span><p class="pn__q">“${esc(x.q)}”</p><ul>${x.pts.map(t => `<li>${esc(t)}</li>`).join('')}</ul><p class="pn__cost"><b>${esc(x.cost)}</b><span>${esc(x.costL)}</span></p></li>`).join('');
   $('#acc-pts').innerHTML = C.accPts.map(([a, b]) => `<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join('');
   $('#eco').innerHTML = C.eco.map((e, i) => `<li class="ec${i === 0 ? ' is--store' : ''}"><div class="ec__top"><span class="tag" data-shape="round"${i ? ' data-theme="volt"' : ''}>${esc(e.price)}</span></div><h3 class="h-s">${esc(e.who)}</h3><p class="ec__sub">${esc(e.sub)}</p><ul>${e.uses.map(u => `<li>${esc(u)}</li>`).join('')}</ul><p class="ec__rep"><span>Replaces</span>${esc(e.replaces)}</p></li>`).join('');
   $('#eco-flow').innerHTML = C.ecoFlow.map(([a, b]) => `<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join('');
@@ -651,14 +628,15 @@ function initRadialMotion() {
 }
 
 /* ---------- Boot ---------- */
-safe('render', () => { renderRadial(); renderTicker(); renderChain('today'); renderToday(); renderStages(); renderLadder(); renderUX(); renderLists(); });
+safe('render', () => { renderRadial(); renderTicker(); renderProblem(); renderToday(); renderStages(); renderLadder(); renderUX(); renderLists(); });
 safe('buttons', () => initButtons());
 safe('lenis', initLenis);
 if (lenis && window.planGate) { lenis.stop(); window.planGate.then(() => lenis.start()); }
 safe('nav', initNav);
 safe('events', initGlobalEvents);
-safe('chain', initChain);
-safe('cmp', initCmp);
+safe('leaks', initLeaks);
+safe('rivals', initRivals);
+safe('fab', initFab);
 safe('stages', () => { stageSlider = initStageSlider(); });
 safe('radial-links', initRadialLinks);
 safe('demo', initDemo);
