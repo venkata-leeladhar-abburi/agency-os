@@ -416,19 +416,44 @@ __SPRITE__
   <div class="container is--m">
     <div class="section-head">
       <div class="tag-pair" data-reveal><span class="tag" data-theme="glass">05</span><span class="tag" data-theme="glass" data-shape="round">Try it</span></div>
-      <h2 class="h-l" data-reveal>Try the product. <em>It really works.</em></h2>
-      <p class="p-l" data-reveal>Order from a distributor, then receive his bill in one click. Two minutes, in English or తెలుగు.</p>
+      <h2 class="h-l" data-reveal>Try the product. <em>All of it.</em></h2>
+      <p class="p-l" data-reveal>Play the tour, or click the menu inside any screen. Then do an order and a receive yourself.</p>
     </div>
-    <div class="demo-wrap is--hero" data-reveal>
+    <div class="seg on-dark try__mode" role="tablist" aria-label="How to try it" data-reveal>
+      <button type="button" role="tab" id="mode-tour" aria-controls="tour" data-mode="tour" aria-selected="true">Tour every screen</button>
+      <button type="button" role="tab" id="mode-hands" aria-controls="hands" data-mode="hands" aria-selected="false" tabindex="-1">Do it yourself: order and receive</button>
+    </div>
+
+    <div class="tour" id="tour" role="tabpanel" aria-labelledby="mode-tour" data-reveal>
+      <div class="tour__bar">
+        <div class="tour__now" aria-live="polite"><span class="eyebrow" id="tour-grp"></span><b id="tour-t"></b><span id="tour-line"></span></div>
+        <div class="tour__ctl">
+          <button class="icon-btn" type="button" data-theme="glass" data-shape="round" id="tour-prev" aria-label="Previous screen"><svg viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-l"/></svg></button>
+          <span class="tour__n tnum" id="tour-n"></span>
+          <button class="icon-btn" type="button" data-theme="glass" data-shape="round" id="tour-next" aria-label="Next screen"><svg viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-r"/></svg></button>
+          <button class="btn" type="button" data-theme="volt" data-shape="round" id="tour-play"><span class="btn__label">Play the tour</span></button>
+        </div>
+      </div>
+      <div class="tour__progress" aria-hidden="true"><i id="tour-bar"></i></div>
+      <div class="tour__body">
+        <ol class="tour__list" id="tour-list" aria-label="Every screen"></ol>
+        <div class="tour__stage" id="tour-stage" tabindex="0" role="region" aria-label="The screen. Use the left and right arrow keys to move, or click the menu inside it."></div>
+      </div>
+      <p class="tour__hint">Click the menu or the main buttons inside a screen: they open the screen they lead to. All names and numbers are samples.</p>
+    </div>
+
+    <div class="hands" id="hands" role="tabpanel" aria-labelledby="mode-hands" hidden>
+    <div class="demo-wrap is--hero">
       <span class="scribble-note demo__note" aria-hidden="true"><span class="scribble">Go on,<br>try it!</span><svg class="arrow-scribble" viewBox="0 0 40 40" style="transform:rotate(15deg)"><use href="#i-scribble-arrow"/></svg></span>
       <div class="demo" id="demo" data-lang="en" style="--z:1"></div>
     </div>
-    <ul class="try__points" data-reveal-group>
+    <ul class="try__points">
       <li><b>One click, if a file comes</b><span>The distributor’s Excel or CSV bill is read and matched to the order. Try “Import the bill file”.</span></li>
       <li><b>Your own order, if not</b><span>The list on screen is what the store asked for. So only the differences need a look.</span></li>
       <li><b>The pack tells the rest</b><span>Since August 2023 the top 300 brands carry a QR code with batch and expiry inside.</span></li>
       <li><b>History, not a blank box</b><span>Type three letters. Medicines the shop has used come first. A new one is saved.</span></li>
     </ul>
+    </div>
   </div>
 </section>
 

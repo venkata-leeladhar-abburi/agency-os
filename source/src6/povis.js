@@ -27,10 +27,10 @@ const WHO = { imran: ['Imran', 'Counter 1, Main road'], rao: ['Subba Rao', 'Owne
 
 /* The distributor's free desk and the accountant's portal have their own short menus */
 const SIDEX = (search, groups, user) => `<div class="a-side"><div class="a-brand"><i class="a-logo">${CAP}</i><b>Pharmacy OS</b>${KI('panel')}</div><div class="a-dash"></div>${INP(search, 'Ctrl K')}
-    ${groups.map(([cap, items]) => `<div class="a-cap">${cap}</div>${items.map(([ic, t, n, on]) => `<span class="a-nav${on ? ' on' : ''}">${KI(ic)}${t}${n ? `<em>${n}</em>` : ''}</span>`).join('')}`).join('')}
+    ${groups.map(([cap, items]) => `<div class="a-cap">${cap}</div>${items.map(([ic, t, n, on, go]) => `<span class="a-nav${on ? ' on' : ''}"${go ? ` data-go="${go}"` : ''}>${KI(ic)}${t}${n ? `<em>${n}</em>` : ''}</span>`).join('')}`).join('')}
     <div class="a-user">${user}${KI('updown')}</div></div>`;
-const DSIDE = on => SIDEX('Search orders', [['Order desk, free', [['list', 'Orders', 7, on === 'orders'], ['truck', 'Dispatch', 0, on === 'dispatch'], ['file', 'Bills sent'], ['tag', 'Rates and schemes'], ['rupee', 'Payments and stores', 0, on === 'pay']]], ['Support', [['headset', 'Help in Telugu'], ['gear', 'Settings']]]], `${AV('', '', FACE.ramesh)}<span><b>Ramesh</b>${DSHORT}</span>`);
-const ASIDE = () => SIDEX('Search stores', [['Accountant, free', [['store', 'My stores', 24, 1], ['file', 'GST this month'], ['download', 'Files and Tally'], ['chat', 'Questions to owners', 2]]], ['Support', [['headset', 'Help in Telugu'], ['gear', 'Settings']]]], `${AV('RK', 'amber')}<span><b>Ravi Kumar</b>Accountant</span>`);
+const DSIDE = on => SIDEX('Search orders', [['Order desk, free', [['list', 'Orders', 7, on === 'orders', 'desk'], ['truck', 'Dispatch', 0, on === 'dispatch', 'dispatch'], ['file', 'Bills sent', 0, 0, 'dispatch'], ['tag', 'Rates and schemes', 0, 0, 'desk'], ['rupee', 'Payments and stores', 0, on === 'pay', 'dpay']]], ['Support', [['headset', 'Help in Telugu'], ['gear', 'Settings']]]], `${AV('', '', FACE.ramesh)}<span><b>Ramesh</b>${DSHORT}</span>`);
+const ASIDE = () => SIDEX('Search stores', [['Accountant, free', [['store', 'My stores', 24, 1, 'cahome'], ['file', 'GST this month', 0, 0, 'gst'], ['download', 'Files and Tally', 0, 0, 'ca'], ['chat', 'Questions to owners', 2, 0, 'cahome']]], ['Support', [['headset', 'Help in Telugu'], ['gear', 'Settings']]]], `${AV('RK', 'amber')}<span><b>Ravi Kumar</b>Accountant</span>`);
 
 /* Parts */
 const BTN = (t, cls = '', icon = '', after = '') => `<span class="u-btn ${cls}">${icon ? KI(icon) : ''}${t}${after}</span>`;
@@ -80,10 +80,12 @@ const MENU = [
   ['Money, team and reports', [['money', 'rupee', 'Day book'], ['gst', 'file', 'GST and accountant'], ['team', 'user', 'Team'], ['reports', 'chart', 'Reports']]],
   ['Support', [['help', 'headset', 'Help in Telugu'], ['set', 'gear', 'Settings']]]
 ];
+/* Where each menu item leads in the live demo */
+const GO = { home: 'home', bill: 'sell', buy: 'order', stock: 'stock', cust: 'customer', money: 'accounts', gst: 'gst', team: 'staffperf', reports: 'score', set: 'rules' };
 const SIDE = (on, sub, who = 'imran') => {
   const open = on === 'home' || on === 'cust' ? 'bill' : on;
   return `<div class="a-side"><div class="a-brand"><i class="a-logo">${CAP}</i><b>Pharmacy OS</b>${KI('panel')}</div><div class="a-dash"></div>${INP('Search or ask', 'Ctrl K')}
-    ${MENU.map(([cap, items]) => `<div class="a-cap">${cap}</div>${items.map(([k, ic, t, n, subs]) => `<span class="a-nav${k === on && !sub ? ' on' : ''}">${KI(ic)}${t}${n ? `<em>${n}</em>` : ''}${subs ? KI(k === open ? 'chevu' : 'chevd', 'chev') : ''}</span>${subs && k === open ? subs.map(([sk, st]) => `<span class="a-sub${sk === sub ? ' on' : ''}">${st}</span>`).join('') : ''}`).join('')}`).join('')}
+    ${MENU.map(([cap, items]) => `<div class="a-cap">${cap}</div>${items.map(([k, ic, t, n, subs]) => `<span class="a-nav${k === on && !sub ? ' on' : ''}"${GO[k] ? ` data-go="${GO[k]}"` : ''}>${KI(ic)}${t}${n ? `<em>${n}</em>` : ''}${subs ? KI(k === open ? 'chevu' : 'chevd', 'chev') : ''}</span>${subs && k === open ? subs.map(([sk, st]) => `<span class="a-sub${sk === sub ? ' on' : ''}" data-go="${sk}">${st}</span>`).join('') : ''}`).join('')}`).join('')}
     <div class="a-user">${AV('', '', FACE[who])}<span><b>${WHO[who][0]}</b>${WHO[who][1]}</span>${KI('updown')}</div></div>`;
 };
 const HD = (t, sub, right = '') => `<div class="a-hd"><div><b class="a-t">${t}</b>${sub ? `<small>${sub}</small>` : ''}</div><div class="u-row">${LANG()}${SIZE()}${right}</div></div>`;

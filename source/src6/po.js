@@ -285,6 +285,77 @@ function initDemo() {
   shell();
 }
 
+/* ---------- 05 The live demo: every screen, in the order a day runs, and clickable ---------- */
+function initTour() {
+  const T = C.tour, list = $('#tour-list'), stage = $('#tour-stage'), bar = $('#tour-bar'), playB = $('#tour-play');
+  if (!list || !stage) return;
+  /* Buttons inside a screen that open the screen they lead to */
+  const HOT = { 'Send on WhatsApp': 'send', 'Compare distributors': 'compare', 'Send both orders': 'send', 'Send to Godavari': 'compare', 'Add to stock': 'stock', 'Receive order 1042': 'check', 'Send the claim': 'watch', 'Remind all three': 'watch', 'New bill': 'sell', 'New bill for her': 'sell', 'Take ₹486': 'wabill', 'Mark as sent': 'track', 'Upload the bill file': 'dispatch', 'Post a scheme': 'desk', 'Send reply': 'desk', 'Remind the late ones': 'dpay', 'Close the day': 'dayclose', 'Pay ₹18,200': 'dues', 'Plan the payments': 'dues', 'Share on WhatsApp': 'shopm', 'See the store': 'shopm', 'Add all to the order': 'order', 'Add all 7 to the order': 'order', 'See the order': 'order', 'Send today’s reminders': 'remind', 'Approve order 1057': 'needsm', 'Start the returns': 'returns', 'Send back to distributor': 'returns', 'Download the recall record': 'inspect', 'Download the pack': 'inspect', 'GST summary for all': 'gst', 'Tally files for all': 'ca', 'Add a person': 'staff', 'Alert settings': 'rules', 'Move my data': 'home' };
+  const FEAT = {};
+  C.jobs.forEach(j => j.f.forEach(([t, k, d]) => { if (!FEAT[k]) FEAT[k] = [j.name, t, d]; }));
+  let last = '', html = '';
+  T.forEach(([g, , t], i) => { if (g !== last) { html += `<li class="tour__grp" aria-hidden="true">${esc(g)}</li>`; last = g; } html += `<li><button type="button" data-ti="${i}" aria-current="false"><span class="tnum">${pad(i + 1)}</span>${esc(t)}</button></li>`; });
+  list.innerHTML = html;
+  let cur = 0, raf = 0, t0 = 0, playing = false;
+  const DUR = 5200, label = $('.btn__label', playB);
+  const paintScreen = k => {
+    const kind = PHONES.includes(k) ? 'phone' : TABLETS.includes(k) ? 'tab' : 'desk';
+    stage.dataset.kind = kind;
+    stage.innerHTML = `<div class="media${kind === 'phone' ? ' is--phone' : kind === 'tab' ? ' is--tab' : ''}">${screen(k)}</div>`;
+    $$('.u-btn', stage).forEach(b => { const go = HOT[b.textContent.replace(/\s+/g, ' ').trim()]; if (go && V[go]) b.dataset.go = go; });
+  };
+  const caption = (g, t, line, n) => { $('#tour-grp').textContent = g; $('#tour-t').textContent = t; $('#tour-line').textContent = line; $('#tour-n').textContent = n; };
+  const show = (i, keepList) => {
+    cur = (i + T.length) % T.length;
+    const [g, k, t, line] = T[cur];
+    caption(g, t, line, `${pad(cur + 1)} / ${T.length}`);
+    $$('[data-ti]', list).forEach((b, n) => b.setAttribute('aria-current', String(n === cur)));
+    paintScreen(k);
+    const li = $(`[data-ti="${cur}"]`, list);
+    if (li && !keepList) { const a = li.getBoundingClientRect(), r = list.getBoundingClientRect(); list.scrollTo({ top: list.scrollTop + a.top - r.top - (list.clientHeight - a.height) / 2, left: list.scrollLeft + a.left - r.left - (list.clientWidth - a.width) / 2, behavior: reduce ? 'auto' : 'smooth' }); }
+    t0 = performance.now();
+  };
+  const stop = () => { playing = false; cancelAnimationFrame(raf); label.textContent = 'Play the tour'; bar.style.transform = 'scaleX(0)'; };
+  const loop = now => {
+    if (!playing) return;
+    const p = (now - t0) / DUR;
+    bar.style.transform = `scaleX(${Math.min(p, 1)})`;
+    if (p >= 1) { if (cur === T.length - 1) { stop(); return; } show(cur + 1); }
+    raf = requestAnimationFrame(loop);
+  };
+  const play = () => { playing = true; label.textContent = 'Pause'; t0 = performance.now(); raf = requestAnimationFrame(loop); };
+  playB.addEventListener('click', () => (playing ? stop() : play()));
+  $('#tour-prev').addEventListener('click', () => { stop(); show(cur - 1); });
+  $('#tour-next').addEventListener('click', () => { stop(); show(cur + 1); });
+  list.addEventListener('click', e => { const b = e.target.closest('[data-ti]'); if (b) { stop(); show(+b.dataset.ti, true); } });
+  /* A click on a menu item or a main button inside the screen opens where it leads */
+  stage.addEventListener('click', e => {
+    const el = e.target.closest('[data-go]');
+    if (!el || !V[el.dataset.go]) return;
+    stop();
+    const k = el.dataset.go, i = T.findIndex(x => x[1] === k);
+    if (i >= 0) { show(i); return; }
+    paintScreen(k);
+    $$('[data-ti]', list).forEach(b => b.setAttribute('aria-current', 'false'));
+    const f = FEAT[k] || ['Pharmacy OS', 'Another screen', ''];
+    caption(f[0], f[1], f[2], 'Off the tour');
+  });
+  stage.addEventListener('keydown', e => { if (e.key === 'ArrowRight') { e.preventDefault(); stop(); show(cur + 1); } if (e.key === 'ArrowLeft') { e.preventDefault(); stop(); show(cur - 1); } });
+  onVisible($('#tour'), v => { if (!v) stop(); }, { threshold: 0 });
+  /* The two ways to try it */
+  const modes = $$('.try__mode [data-mode]');
+  const setMode = b => {
+    const m = b.dataset.mode;
+    modes.forEach(x => { const on = x === b; x.setAttribute('aria-selected', String(on)); x.tabIndex = on ? 0 : -1; });
+    $('#tour').hidden = m !== 'tour';
+    $('#hands').hidden = m !== 'hands';
+    if (m !== 'tour') stop();
+  };
+  modes.forEach(b => b.addEventListener('click', () => setMode(b)));
+  $('.try__mode').addEventListener('keydown', e => { if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return; e.preventDefault(); const i = modes.indexOf(document.activeElement), n = modes[(i + 1) % modes.length]; n.focus(); setMode(n); });
+  show(0, true);
+}
+
 /* ---------- 05 Distributor ---------- */
 function renderLadder() {
   $('#ladder').innerHTML = C.ladder.map((l, i) => `<li class="ld${i === 0 ? ' is--now' : ''}"><span class="ld__n" aria-hidden="true">${l.n}</span><div class="ld__body"><div class="ld__head"><span class="tag"${i === 0 ? ' data-theme="volt"' : ' data-theme="haze"'} data-shape="round">${esc(l.tag)}</span><h3 class="h-s">${esc(l.t)}</h3><span class="p-s">${esc(l.when)}</span></div><p class="ld__line">${esc(l.line)}</p><ul class="ld__pts">${l.pts.map(p => `<li>${esc(p)}</li>`).join('')}</ul><dl class="ld__for"><div><dt>For the store</dt><dd>${esc(l.store)}</dd></div><div><dt>For the distributor</dt><dd>${esc(l.dist)}</dd></div><div><dt>For us</dt><dd>${esc(l.us)}</dd></div></dl></div></li>`).join('');
@@ -642,6 +713,7 @@ safe('fab', initFab);
 safe('stages', () => { stageSlider = initStageSlider(); });
 safe('radial-links', initRadialLinks);
 safe('demo', initDemo);
+safe('tour', initTour);
 safe('jobs', initJobs);
 safe('stores', initStores);
 safe('camp', initCamp);

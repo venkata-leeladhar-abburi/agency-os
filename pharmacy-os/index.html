@@ -2566,6 +2566,64 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
 .cost3.is--two{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:.5rem}
 @media (max-width:991px){.pc,.be,.cost3.is--two{grid-template-columns:minmax(0,1fr)}.pc__leg{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:767px){.pc__price,.be__in,.be__out{padding:1.2rem}.pc__big b{font-size:4.2rem}.be__out{padding-top:2.4rem}.be__line b{transform:translateX(-90%)}}
+
+/* ---------- 05 The live demo: a tour of every screen ---------- */
+.try__mode{display:flex;width:fit-content;max-width:100%;margin:0 auto 1.25rem}
+.try__mode button[aria-selected="true"]{background:var(--c-volt);color:var(--c-ink)}
+.tour{display:grid;gap:.75rem;max-width:calc((100svh - 17rem) * 1.6 + 17rem);margin-inline:auto;padding:1rem;border:2px solid transparent;border-radius:1.4rem;background:linear-gradient(var(--c-card),var(--c-card)) padding-box,linear-gradient(135deg,var(--c-volt),var(--c-violet)) border-box;box-shadow:0 30px 80px rgba(61,43,219,.3)}
+.tour[hidden],.hands[hidden]{display:none}
+.tour__bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.75rem 1.5rem;padding:.2rem .25rem 0}
+.tour__now{display:grid;gap:.15rem;min-width:0;flex:1 1 20rem}
+.tour__now .eyebrow{color:var(--c-volt)}
+.tour__now b{font-family:var(--font-display);font-stretch:84%;font-size:1.7rem;font-weight:600;line-height:1.05;letter-spacing:-.02em;color:var(--c-concrete)}
+.tour__now span:last-child{font-size:1rem;color:var(--c-smoke)}
+.tour__ctl{display:flex;align-items:center;gap:.5rem}
+.tour__n{min-width:4.6rem;text-align:center;font-family:var(--font-mono);font-size:.8125rem;color:var(--c-smoke)}
+.tour__progress{height:3px;border-radius:2px;background:rgba(255,255,255,.1);overflow:hidden}
+.tour__progress i{display:block;height:100%;background:var(--c-volt);transform:scaleX(0);transform-origin:left}
+.tour__body{display:grid;grid-template-columns:15.5rem minmax(0,1fr);gap:.75rem;align-items:stretch}
+.tour__list{contain:size;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.2) transparent;display:flex;flex-direction:column;gap:.1rem;padding-right:.3rem}
+.tour__grp{padding:.75rem .55rem .25rem;font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.06em;text-transform:uppercase;color:var(--c-volt)}
+.tour__grp:first-child{padding-top:.1rem}
+.tour__list button{display:flex;gap:.55rem;width:100%;padding:.45rem .55rem;border-radius:.5rem;text-align:left;font-size:.9375rem;line-height:1.3;color:var(--c-smoke);transition:background-color .2s,color .2s}
+.tour__list button span{flex:none;padding-top:.15rem;font-family:var(--font-mono);font-size:.6875rem;color:var(--c-steel)}
+.tour__list button:hover{background:rgba(255,255,255,.07);color:var(--c-concrete)}
+.tour__list button[aria-current="true"]{background:var(--c-concrete);color:var(--c-ink);font-weight:500}
+.tour__list button[aria-current="true"] span{color:var(--c-violet)}
+.tour__stage{position:relative;display:grid;place-items:center;aspect-ratio:16/10;border-radius:.9rem;background:radial-gradient(120% 90% at 50% 0%,#2b2650,#16131f);overflow:hidden}
+.tour__stage:focus-visible{outline:2px solid var(--c-volt);outline-offset:3px}
+.tour__stage[data-kind="desk"] .media{width:100%;border-radius:.9rem}
+.tour__stage[data-kind="phone"] .media{height:94%;width:auto;aspect-ratio:9/17.6}
+.tour__stage[data-kind="tab"] .media{height:94%;width:auto;aspect-ratio:3/4;border-radius:1.2rem;border:.4rem solid #141A27}
+.tour__stage[data-kind="tab"] .media .s{border-radius:.8rem}
+.tour__stage .media{animation:scr-in .45s var(--ease-out)}
+.tour__stage .s{pointer-events:auto}
+.tour__stage .s [data-go]{cursor:pointer;transition:background-color .2s,box-shadow .2s}
+.tour__stage .s .a-nav[data-go]:hover,.tour__stage .s .a-sub[data-go]:hover{background:rgba(26,34,51,.08);border-radius:10px}
+.tour__stage .s .u-btn[data-go]{animation:hot 2.4s infinite}
+@keyframes hot{0%,100%{box-shadow:0 0 0 0 rgba(255,178,36,.0)}50%{box-shadow:0 0 0 4px rgba(255,178,36,.75)}}
+.tour__hint{padding:0 .25rem;font-size:.875rem;color:var(--c-steel)}
+.hands{display:grid;gap:1rem}
+@media (max-width:991px){
+  .tour{max-width:none}
+  .tour__body{grid-template-columns:minmax(0,1fr)}
+  .tour__list{contain:none;flex-direction:row;overflow-x:auto;padding:0 0 .3rem;scrollbar-width:none}
+  .tour__list::-webkit-scrollbar{display:none}
+  .tour__grp{display:none}
+  .tour__list button{white-space:nowrap;background:rgba(255,255,255,.06)}
+}
+@media (max-width:767px){
+  .tour{padding:.6rem}
+  .try__mode{display:grid;grid-template-columns:minmax(0,1fr);width:100%}
+  .tour__now b{font-size:1.35rem}
+  .tour__ctl .btn{flex:1}
+  .tour__stage{aspect-ratio:auto;display:block;place-items:normal;overflow-x:auto;scrollbar-width:thin}
+  .tour__stage[data-kind="desk"] .media{min-width:54rem}
+  .tour__stage[data-kind="phone"],.tour__stage[data-kind="tab"]{display:grid;place-items:center;padding:1rem 0}
+  .tour__stage[data-kind="phone"] .media{height:auto;width:min(17rem,78%)}
+  .tour__stage[data-kind="tab"] .media{height:auto;width:min(22rem,92%)}
+}
+@media (prefers-reduced-motion:reduce){.tour__stage .s .u-btn[data-go],.tour__stage .media{animation:none}}
 </style>
 </head>
 <body>
@@ -3093,19 +3151,44 @@ html.is-gated body > :not(.gate){visibility:hidden}
   <div class="container is--m">
     <div class="section-head">
       <div class="tag-pair" data-reveal><span class="tag" data-theme="glass">05</span><span class="tag" data-theme="glass" data-shape="round">Try it</span></div>
-      <h2 class="h-l" data-reveal>Try the product. <em>It really works.</em></h2>
-      <p class="p-l" data-reveal>Order from a distributor, then receive his bill in one click. Two minutes, in English or తెలుగు.</p>
+      <h2 class="h-l" data-reveal>Try the product. <em>All of it.</em></h2>
+      <p class="p-l" data-reveal>Play the tour, or click the menu inside any screen. Then do an order and a receive yourself.</p>
     </div>
-    <div class="demo-wrap is--hero" data-reveal>
+    <div class="seg on-dark try__mode" role="tablist" aria-label="How to try it" data-reveal>
+      <button type="button" role="tab" id="mode-tour" aria-controls="tour" data-mode="tour" aria-selected="true">Tour every screen</button>
+      <button type="button" role="tab" id="mode-hands" aria-controls="hands" data-mode="hands" aria-selected="false" tabindex="-1">Do it yourself: order and receive</button>
+    </div>
+
+    <div class="tour" id="tour" role="tabpanel" aria-labelledby="mode-tour" data-reveal>
+      <div class="tour__bar">
+        <div class="tour__now" aria-live="polite"><span class="eyebrow" id="tour-grp"></span><b id="tour-t"></b><span id="tour-line"></span></div>
+        <div class="tour__ctl">
+          <button class="icon-btn" type="button" data-theme="glass" data-shape="round" id="tour-prev" aria-label="Previous screen"><svg viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-l"/></svg></button>
+          <span class="tour__n tnum" id="tour-n"></span>
+          <button class="icon-btn" type="button" data-theme="glass" data-shape="round" id="tour-next" aria-label="Next screen"><svg viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-r"/></svg></button>
+          <button class="btn" type="button" data-theme="volt" data-shape="round" id="tour-play"><span class="btn__label">Play the tour</span></button>
+        </div>
+      </div>
+      <div class="tour__progress" aria-hidden="true"><i id="tour-bar"></i></div>
+      <div class="tour__body">
+        <ol class="tour__list" id="tour-list" aria-label="Every screen"></ol>
+        <div class="tour__stage" id="tour-stage" tabindex="0" role="region" aria-label="The screen. Use the left and right arrow keys to move, or click the menu inside it."></div>
+      </div>
+      <p class="tour__hint">Click the menu or the main buttons inside a screen: they open the screen they lead to. All names and numbers are samples.</p>
+    </div>
+
+    <div class="hands" id="hands" role="tabpanel" aria-labelledby="mode-hands" hidden>
+    <div class="demo-wrap is--hero">
       <span class="scribble-note demo__note" aria-hidden="true"><span class="scribble">Go on,<br>try it!</span><svg class="arrow-scribble" viewBox="0 0 40 40" style="transform:rotate(15deg)"><use href="#i-scribble-arrow"/></svg></span>
       <div class="demo" id="demo" data-lang="en" style="--z:1"></div>
     </div>
-    <ul class="try__points" data-reveal-group>
+    <ul class="try__points">
       <li><b>One click, if a file comes</b><span>The distributor’s Excel or CSV bill is read and matched to the order. Try “Import the bill file”.</span></li>
       <li><b>Your own order, if not</b><span>The list on screen is what the store asked for. So only the differences need a look.</span></li>
       <li><b>The pack tells the rest</b><span>Since August 2023 the top 300 brands carry a QR code with batch and expiry inside.</span></li>
       <li><b>History, not a blank box</b><span>Type three letters. Medicines the shop has used come first. A new one is saved.</span></li>
     </ul>
+    </div>
   </div>
 </section>
 
@@ -3694,6 +3777,50 @@ const C = {
   ],
 
   /* Feature matrix: 2 = documented, 1 = partial, add-on or higher plan, 0 = not found in public material */
+  /* 05 The live demo: every screen, in the order a day runs. [chapter, screen key, title, what it shows] */
+  tour: [
+    ['The morning', 'home', 'The owner’s overview', 'Sales, what happened and what to watch, in one look.'],
+    ['The morning', 'order', 'The morning order', 'Drafted overnight from sales and stock. One tap sends it.'],
+    ['The morning', 'compare', 'Compare distributors', 'Rate, scheme and credit side by side. The best is picked.'],
+    ['The morning', 'send', 'The order goes out', 'A WhatsApp message, a PDF and a link. Short items go to the next distributor.'],
+    ['The distributor', 'dlink', 'What the distributor gets', 'A link, no login. He taps what he can send.'],
+    ['The distributor', 'desk', 'The distributor’s dashboard', 'Every order from every store, in one list. Free.'],
+    ['The distributor', 'dispatch', 'Dispatch', 'The vehicle, the slip or LR, and the e-way bill, with each parcel.'],
+    ['Stock arrives', 'track', 'Parcels on the way', 'From packed to the door. The OTP closes the delivery.'],
+    ['Stock arrives', 'check', 'Receive in one click', 'The bill file beside the order. Only the differences need a look.'],
+    ['Stock arrives', 'watch', 'Rate and scheme watch', 'Overcharges and missing free strips, claimed in one tap.'],
+    ['Stock arrives', 'stock', 'On the shelf', 'Every batch, with its expiry and how fast it sells.'],
+    ['Stock arrives', 'expiry', 'Expiring', 'Sell first or send back, while it still counts.'],
+    ['Stock arrives', 'recall', 'A recall, blocked', 'A recalled batch stops at every counter. Buyers are listed.'],
+    ['At the counter', 'sell', 'A new bill', 'Scan the pack or type three letters. The oldest batch goes first.'],
+    ['At the counter', 'billt', 'The tablet counter', 'The same bill, with bigger buttons for fingers.'],
+    ['At the counter', 'blocked', 'Expired, stopped', 'An expired strip cannot go on a bill, at any counter.'],
+    ['At the counter', 'missed', 'Not in stock', 'One tap records the missed sale and orders it.'],
+    ['At the counter', 'substitute', 'Same salt, in stock', 'When one runs out, the pharmacist sees what can replace it.'],
+    ['At the counter', 'h1', 'The H1 register', 'Written from the bill. Nothing by hand.'],
+    ['The customer', 'wabill', 'The bill on WhatsApp', 'Sent to the buyer as the sale closes.'],
+    ['The customer', 'remind', 'A refill reminder', 'Three days before the strip runs out.'],
+    ['The customer', 'shop', 'The store’s online shop', 'An add-on. Orders arrive at the counter.'],
+    ['The customer', 'shopm', 'What the customer sees', 'Their regular medicines, and a prescription upload.'],
+    ['The customer', 'customer', 'One customer’s page', 'Visits, refills, dues and the family’s medicines.'],
+    ['Money and the team', 'dayclose', 'Close the day', 'Cash counted against the bills, by person. Every edit shown.'],
+    ['Money and the team', 'dues', 'Pay distributors', 'Due dates, with a reminder three days before.'],
+    ['Money and the team', 'cash', 'The cash calendar', 'What goes out and comes in, day by day.'],
+    ['Money and the team', 'staffperf', 'The team', 'Sales, discounts and edits, person by person.'],
+    ['Money and the team', 'alerts', 'Alerts for the owner', 'Deleted bills, big discounts, short deliveries.'],
+    ['Money and the team', 'ownerm', 'The owner’s phone', 'Every store, every bill, from anywhere.'],
+    ['Looking ahead', 'score', 'The weekly score', 'Four numbers, and one thing to do for each.'],
+    ['Looking ahead', 'ask', 'Ask the app', 'Tap a question. Get a number and a list.'],
+    ['Looking ahead', 'forecast', 'Next week, worked out', 'From the shop’s own bills, with the season learnt.'],
+    ['The accountant', 'ca', 'Access, from the store', 'The owner adds the accountant once. Read-only.'],
+    ['The accountant', 'cahome', 'The accountant’s portal', 'Every store he serves, in one login. Free.'],
+    ['The accountant', 'gst', 'GST, worked out', 'From every bill and purchase. Nothing to add up.'],
+    ['The distributor gets paid', 'dpay', 'Payments and stores', 'What each store buys, owes and has paid.'],
+    ['Many stores', 'multi', 'All stores, one view', 'Sales, margin, stock and expiry for each store.'],
+    ['Many stores', 'transfer', 'Stock between stores', 'On the way until the other store ticks it in.'],
+    ['Moving in', 'migrate', 'Moving in from old software', 'Marg, Profitmaker or Excel, moved by us, free.']
+  ],
+
   matrixCols: ['Us (plan)', 'Marg', 'Profitmaker', 'GoFrugal', 'eVitalRx', 'Vyapar'],
   matrix: [
     ['Order to the distributor from the app', [2, 2, 2, 2, 2, 1]],
@@ -4376,10 +4503,10 @@ const WHO = { imran: ['Imran', 'Counter 1, Main road'], rao: ['Subba Rao', 'Owne
 
 /* The distributor's free desk and the accountant's portal have their own short menus */
 const SIDEX = (search, groups, user) => `<div class="a-side"><div class="a-brand"><i class="a-logo">${CAP}</i><b>Pharmacy OS</b>${KI('panel')}</div><div class="a-dash"></div>${INP(search, 'Ctrl K')}
-    ${groups.map(([cap, items]) => `<div class="a-cap">${cap}</div>${items.map(([ic, t, n, on]) => `<span class="a-nav${on ? ' on' : ''}">${KI(ic)}${t}${n ? `<em>${n}</em>` : ''}</span>`).join('')}`).join('')}
+    ${groups.map(([cap, items]) => `<div class="a-cap">${cap}</div>${items.map(([ic, t, n, on, go]) => `<span class="a-nav${on ? ' on' : ''}"${go ? ` data-go="${go}"` : ''}>${KI(ic)}${t}${n ? `<em>${n}</em>` : ''}</span>`).join('')}`).join('')}
     <div class="a-user">${user}${KI('updown')}</div></div>`;
-const DSIDE = on => SIDEX('Search orders', [['Order desk, free', [['list', 'Orders', 7, on === 'orders'], ['truck', 'Dispatch', 0, on === 'dispatch'], ['file', 'Bills sent'], ['tag', 'Rates and schemes'], ['rupee', 'Payments and stores', 0, on === 'pay']]], ['Support', [['headset', 'Help in Telugu'], ['gear', 'Settings']]]], `${AV('', '', FACE.ramesh)}<span><b>Ramesh</b>${DSHORT}</span>`);
-const ASIDE = () => SIDEX('Search stores', [['Accountant, free', [['store', 'My stores', 24, 1], ['file', 'GST this month'], ['download', 'Files and Tally'], ['chat', 'Questions to owners', 2]]], ['Support', [['headset', 'Help in Telugu'], ['gear', 'Settings']]]], `${AV('RK', 'amber')}<span><b>Ravi Kumar</b>Accountant</span>`);
+const DSIDE = on => SIDEX('Search orders', [['Order desk, free', [['list', 'Orders', 7, on === 'orders', 'desk'], ['truck', 'Dispatch', 0, on === 'dispatch', 'dispatch'], ['file', 'Bills sent', 0, 0, 'dispatch'], ['tag', 'Rates and schemes', 0, 0, 'desk'], ['rupee', 'Payments and stores', 0, on === 'pay', 'dpay']]], ['Support', [['headset', 'Help in Telugu'], ['gear', 'Settings']]]], `${AV('', '', FACE.ramesh)}<span><b>Ramesh</b>${DSHORT}</span>`);
+const ASIDE = () => SIDEX('Search stores', [['Accountant, free', [['store', 'My stores', 24, 1, 'cahome'], ['file', 'GST this month', 0, 0, 'gst'], ['download', 'Files and Tally', 0, 0, 'ca'], ['chat', 'Questions to owners', 2, 0, 'cahome']]], ['Support', [['headset', 'Help in Telugu'], ['gear', 'Settings']]]], `${AV('RK', 'amber')}<span><b>Ravi Kumar</b>Accountant</span>`);
 
 /* Parts */
 const BTN = (t, cls = '', icon = '', after = '') => `<span class="u-btn ${cls}">${icon ? KI(icon) : ''}${t}${after}</span>`;
@@ -4429,10 +4556,12 @@ const MENU = [
   ['Money, team and reports', [['money', 'rupee', 'Day book'], ['gst', 'file', 'GST and accountant'], ['team', 'user', 'Team'], ['reports', 'chart', 'Reports']]],
   ['Support', [['help', 'headset', 'Help in Telugu'], ['set', 'gear', 'Settings']]]
 ];
+/* Where each menu item leads in the live demo */
+const GO = { home: 'home', bill: 'sell', buy: 'order', stock: 'stock', cust: 'customer', money: 'accounts', gst: 'gst', team: 'staffperf', reports: 'score', set: 'rules' };
 const SIDE = (on, sub, who = 'imran') => {
   const open = on === 'home' || on === 'cust' ? 'bill' : on;
   return `<div class="a-side"><div class="a-brand"><i class="a-logo">${CAP}</i><b>Pharmacy OS</b>${KI('panel')}</div><div class="a-dash"></div>${INP('Search or ask', 'Ctrl K')}
-    ${MENU.map(([cap, items]) => `<div class="a-cap">${cap}</div>${items.map(([k, ic, t, n, subs]) => `<span class="a-nav${k === on && !sub ? ' on' : ''}">${KI(ic)}${t}${n ? `<em>${n}</em>` : ''}${subs ? KI(k === open ? 'chevu' : 'chevd', 'chev') : ''}</span>${subs && k === open ? subs.map(([sk, st]) => `<span class="a-sub${sk === sub ? ' on' : ''}">${st}</span>`).join('') : ''}`).join('')}`).join('')}
+    ${MENU.map(([cap, items]) => `<div class="a-cap">${cap}</div>${items.map(([k, ic, t, n, subs]) => `<span class="a-nav${k === on && !sub ? ' on' : ''}"${GO[k] ? ` data-go="${GO[k]}"` : ''}>${KI(ic)}${t}${n ? `<em>${n}</em>` : ''}${subs ? KI(k === open ? 'chevu' : 'chevd', 'chev') : ''}</span>${subs && k === open ? subs.map(([sk, st]) => `<span class="a-sub${sk === sub ? ' on' : ''}" data-go="${sk}">${st}</span>`).join('') : ''}`).join('')}`).join('')}
     <div class="a-user">${AV('', '', FACE[who])}<span><b>${WHO[who][0]}</b>${WHO[who][1]}</span>${KI('updown')}</div></div>`;
 };
 const HD = (t, sub, right = '') => `<div class="a-hd"><div><b class="a-t">${t}</b>${sub ? `<small>${sub}</small>` : ''}</div><div class="u-row">${LANG()}${SIZE()}${right}</div></div>`;
@@ -5151,6 +5280,77 @@ function initDemo() {
   shell();
 }
 
+/* ---------- 05 The live demo: every screen, in the order a day runs, and clickable ---------- */
+function initTour() {
+  const T = C.tour, list = $('#tour-list'), stage = $('#tour-stage'), bar = $('#tour-bar'), playB = $('#tour-play');
+  if (!list || !stage) return;
+  /* Buttons inside a screen that open the screen they lead to */
+  const HOT = { 'Send on WhatsApp': 'send', 'Compare distributors': 'compare', 'Send both orders': 'send', 'Send to Godavari': 'compare', 'Add to stock': 'stock', 'Receive order 1042': 'check', 'Send the claim': 'watch', 'Remind all three': 'watch', 'New bill': 'sell', 'New bill for her': 'sell', 'Take ₹486': 'wabill', 'Mark as sent': 'track', 'Upload the bill file': 'dispatch', 'Post a scheme': 'desk', 'Send reply': 'desk', 'Remind the late ones': 'dpay', 'Close the day': 'dayclose', 'Pay ₹18,200': 'dues', 'Plan the payments': 'dues', 'Share on WhatsApp': 'shopm', 'See the store': 'shopm', 'Add all to the order': 'order', 'Add all 7 to the order': 'order', 'See the order': 'order', 'Send today’s reminders': 'remind', 'Approve order 1057': 'needsm', 'Start the returns': 'returns', 'Send back to distributor': 'returns', 'Download the recall record': 'inspect', 'Download the pack': 'inspect', 'GST summary for all': 'gst', 'Tally files for all': 'ca', 'Add a person': 'staff', 'Alert settings': 'rules', 'Move my data': 'home' };
+  const FEAT = {};
+  C.jobs.forEach(j => j.f.forEach(([t, k, d]) => { if (!FEAT[k]) FEAT[k] = [j.name, t, d]; }));
+  let last = '', html = '';
+  T.forEach(([g, , t], i) => { if (g !== last) { html += `<li class="tour__grp" aria-hidden="true">${esc(g)}</li>`; last = g; } html += `<li><button type="button" data-ti="${i}" aria-current="false"><span class="tnum">${pad(i + 1)}</span>${esc(t)}</button></li>`; });
+  list.innerHTML = html;
+  let cur = 0, raf = 0, t0 = 0, playing = false;
+  const DUR = 5200, label = $('.btn__label', playB);
+  const paintScreen = k => {
+    const kind = PHONES.includes(k) ? 'phone' : TABLETS.includes(k) ? 'tab' : 'desk';
+    stage.dataset.kind = kind;
+    stage.innerHTML = `<div class="media${kind === 'phone' ? ' is--phone' : kind === 'tab' ? ' is--tab' : ''}">${screen(k)}</div>`;
+    $$('.u-btn', stage).forEach(b => { const go = HOT[b.textContent.replace(/\s+/g, ' ').trim()]; if (go && V[go]) b.dataset.go = go; });
+  };
+  const caption = (g, t, line, n) => { $('#tour-grp').textContent = g; $('#tour-t').textContent = t; $('#tour-line').textContent = line; $('#tour-n').textContent = n; };
+  const show = (i, keepList) => {
+    cur = (i + T.length) % T.length;
+    const [g, k, t, line] = T[cur];
+    caption(g, t, line, `${pad(cur + 1)} / ${T.length}`);
+    $$('[data-ti]', list).forEach((b, n) => b.setAttribute('aria-current', String(n === cur)));
+    paintScreen(k);
+    const li = $(`[data-ti="${cur}"]`, list);
+    if (li && !keepList) { const a = li.getBoundingClientRect(), r = list.getBoundingClientRect(); list.scrollTo({ top: list.scrollTop + a.top - r.top - (list.clientHeight - a.height) / 2, left: list.scrollLeft + a.left - r.left - (list.clientWidth - a.width) / 2, behavior: reduce ? 'auto' : 'smooth' }); }
+    t0 = performance.now();
+  };
+  const stop = () => { playing = false; cancelAnimationFrame(raf); label.textContent = 'Play the tour'; bar.style.transform = 'scaleX(0)'; };
+  const loop = now => {
+    if (!playing) return;
+    const p = (now - t0) / DUR;
+    bar.style.transform = `scaleX(${Math.min(p, 1)})`;
+    if (p >= 1) { if (cur === T.length - 1) { stop(); return; } show(cur + 1); }
+    raf = requestAnimationFrame(loop);
+  };
+  const play = () => { playing = true; label.textContent = 'Pause'; t0 = performance.now(); raf = requestAnimationFrame(loop); };
+  playB.addEventListener('click', () => (playing ? stop() : play()));
+  $('#tour-prev').addEventListener('click', () => { stop(); show(cur - 1); });
+  $('#tour-next').addEventListener('click', () => { stop(); show(cur + 1); });
+  list.addEventListener('click', e => { const b = e.target.closest('[data-ti]'); if (b) { stop(); show(+b.dataset.ti, true); } });
+  /* A click on a menu item or a main button inside the screen opens where it leads */
+  stage.addEventListener('click', e => {
+    const el = e.target.closest('[data-go]');
+    if (!el || !V[el.dataset.go]) return;
+    stop();
+    const k = el.dataset.go, i = T.findIndex(x => x[1] === k);
+    if (i >= 0) { show(i); return; }
+    paintScreen(k);
+    $$('[data-ti]', list).forEach(b => b.setAttribute('aria-current', 'false'));
+    const f = FEAT[k] || ['Pharmacy OS', 'Another screen', ''];
+    caption(f[0], f[1], f[2], 'Off the tour');
+  });
+  stage.addEventListener('keydown', e => { if (e.key === 'ArrowRight') { e.preventDefault(); stop(); show(cur + 1); } if (e.key === 'ArrowLeft') { e.preventDefault(); stop(); show(cur - 1); } });
+  onVisible($('#tour'), v => { if (!v) stop(); }, { threshold: 0 });
+  /* The two ways to try it */
+  const modes = $$('.try__mode [data-mode]');
+  const setMode = b => {
+    const m = b.dataset.mode;
+    modes.forEach(x => { const on = x === b; x.setAttribute('aria-selected', String(on)); x.tabIndex = on ? 0 : -1; });
+    $('#tour').hidden = m !== 'tour';
+    $('#hands').hidden = m !== 'hands';
+    if (m !== 'tour') stop();
+  };
+  modes.forEach(b => b.addEventListener('click', () => setMode(b)));
+  $('.try__mode').addEventListener('keydown', e => { if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return; e.preventDefault(); const i = modes.indexOf(document.activeElement), n = modes[(i + 1) % modes.length]; n.focus(); setMode(n); });
+  show(0, true);
+}
+
 /* ---------- 05 Distributor ---------- */
 function renderLadder() {
   $('#ladder').innerHTML = C.ladder.map((l, i) => `<li class="ld${i === 0 ? ' is--now' : ''}"><span class="ld__n" aria-hidden="true">${l.n}</span><div class="ld__body"><div class="ld__head"><span class="tag"${i === 0 ? ' data-theme="volt"' : ' data-theme="haze"'} data-shape="round">${esc(l.tag)}</span><h3 class="h-s">${esc(l.t)}</h3><span class="p-s">${esc(l.when)}</span></div><p class="ld__line">${esc(l.line)}</p><ul class="ld__pts">${l.pts.map(p => `<li>${esc(p)}</li>`).join('')}</ul><dl class="ld__for"><div><dt>For the store</dt><dd>${esc(l.store)}</dd></div><div><dt>For the distributor</dt><dd>${esc(l.dist)}</dd></div><div><dt>For us</dt><dd>${esc(l.us)}</dd></div></dl></div></li>`).join('');
@@ -5508,6 +5708,7 @@ safe('fab', initFab);
 safe('stages', () => { stageSlider = initStageSlider(); });
 safe('radial-links', initRadialLinks);
 safe('demo', initDemo);
+safe('tour', initTour);
 safe('jobs', initJobs);
 safe('stores', initStores);
 safe('camp', initCamp);
