@@ -28,6 +28,10 @@ Next.js App Router + TypeScript · pnpm + Turborepo · shadcn/ui (Radix) + Tailw
 - Each milestone meets the definition of done in `docs/04-engineering/testing.md`.
 - Follow `docs/04-engineering/conventions.md` (naming, Conventional Commits, PR contents).
 
+## Built-in content
+
+Templates, defaults, empty states, notification copy and plan limits come from `docs/02-product/defaults-and-content.md`. Tax and money tests start from `docs/04-engineering/tax-test-cases.md`. Don't invent other defaults; propose them to the founder.
+
 ## Content rules
 
 - Describe every feature as an Agency OS feature. Never say a feature comes from, copies or replaces another product.

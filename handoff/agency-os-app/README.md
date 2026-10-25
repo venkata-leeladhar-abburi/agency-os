@@ -12,9 +12,9 @@ This repository starts as a **build pack**: the research, product spec, design s
 | `CLAUDE.md` | Rules every Claude Code session follows | — |
 | `docs/00-plan/` | Build plan, gates, milestones, decisions, open questions, progress | `build-plan.md` |
 | `docs/01-research/` | UX research: India and international users, personas, journeys, competitors, assumptions, interview guides, survey, usability tests | `README.md` |
-| `docs/02-product/` | Product brief, flows, roadmap R0 to R7, MVP PRD, information architecture, screen inventory, metrics | `product-brief.md` |
+| `docs/02-product/` | Product brief, flows, roadmap R0 to R7, MVP PRD, information architecture, screen inventory, metrics, built-in defaults and content | `product-brief.md` |
 | `docs/03-design/` | UX rulebook, design system spec, content style, accessibility checklist, design process | `design-system.md` |
-| `docs/04-engineering/` | Architecture, data model, integrations, security and compliance, conventions, testing, environments | `architecture.md` |
+| `docs/04-engineering/` | Architecture, data model, integrations, security and compliance, conventions, testing, GST test cases, environments | `architecture.md` |
 | `tokens/` | `tokens.json` (source of truth), `globals.css` (Tailwind v4 + shadcn theme), `tokens.css` | `README.md` |
 | `design/` | The approved design reference: `showcase.html`, screenshots, components, fonts, icons, logos | `README.md` |
 

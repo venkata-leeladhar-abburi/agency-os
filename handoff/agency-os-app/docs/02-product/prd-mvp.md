@@ -38,6 +38,7 @@ Every story follows the UX rulebook (`../03-design/ux-principles.md`): each scre
 - **Settings:** workspace profile, branding (logo, brand colour for the client portal), members, billing and plan, tax and invoice settings, notifications, data export, audit log.
 
 ### E0.4 Onboarding checklist
+- Default content for every epic (templates, stages, empty states, notifications, limits) is in `defaults-and-content.md`.
 - A new workspace sees a checklist: add your logo, add a lead, send a quote, invite a client, create an invoice. Optionally load sample data, clearly marked "Example", that can be removed in one click.
   - **AC:** the checklist shows progress; it can be dismissed; it comes back from the Help menu.
 

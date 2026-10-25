@@ -4,7 +4,7 @@ Tests prove the product works before anyone sees it. CI runs everything below on
 
 | Layer | Tool | What | When |
 | --- | --- | --- | --- |
-| Unit | Vitest | `packages/core`: money, tax (GST intra-state, inter-state, export with and without LUT, unregistered supplier, rounding, round-off), GSTIN validation, invoice numbering and financial year, amount in words (Indian and international), permissions, date and currency formatting for en-IN, en-US, en-GB | Every PR; 100% line coverage for `core/tax` and `core/money` |
+| Unit | Vitest | `packages/core` (start from the worked cases in `tax-test-cases.md`): money, tax (GST intra-state, inter-state, export with and without LUT, unregistered supplier, rounding, round-off), GSTIN validation, invoice numbering and financial year, amount in words (Indian and international), permissions, date and currency formatting for en-IN, en-US, en-GB | Every PR; 100% line coverage for `core/tax` and `core/money` |
 | Component | Vitest + Testing Library | `packages/ui` components: states, keyboard behaviour, ARIA | Every PR |
 | Visual | Storybook + Playwright screenshots | Each story in light and dark compared with the approved baseline; at M2 and M3 also compared by eye with `design/screens/` | Every PR touching `ui` |
 | Database | Vitest against a test Postgres (Supabase CLI locally, or a dedicated test project) | RLS: a member of workspace A cannot read or write workspace B for every table; portal contacts see only their client; roles get exactly their permissions; audit log is insert-only | Every PR touching `db` |

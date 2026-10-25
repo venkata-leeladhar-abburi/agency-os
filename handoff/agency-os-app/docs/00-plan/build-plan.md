@@ -56,6 +56,8 @@ Each milestone is one or a few pull requests. Size: one to three Claude Code ses
 | M15 | Dashboard and Today (E1.9) | Metrics, at-risk projects, team load, Today | Numbers match test data; each links to its list |
 | M16 | Hardening → **G3** | Emails and notification settings, performance, accessibility pass, security review, CA and legal items, production setup, dogfooding by One Stop | G3 pass lines |
 
+Built-in content (phase template, pipeline defaults, proposal template, invoice defaults, onboarding, empty states, notifications, plan limits) comes from `../02-product/defaults-and-content.md`; the tax and money unit tests start from `../04-engineering/tax-test-cases.md`.
+
 After G4, each release (R2 to R7 in `../02-product/roadmap.md`) runs the same loop at a smaller scale: short spec → wireframes → founder check → build → test → release.
 
 ## How Claude works on its own
