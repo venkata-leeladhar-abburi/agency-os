@@ -532,46 +532,335 @@ function initFlick() {
 }
 
 /* ---------- 11 What it gives back ---------- */
+/* The price is set in section 13. Anything that shows it listens here. */
+const PRICE = { v: C.model.price, subs: [] };
+const setPrice = v => { if (v === PRICE.v) return; PRICE.v = v; PRICE.subs.forEach(f => f()); };
 function initCalc() {
   const g = id => +$('#' + id).value;
-  bindRanges(['r-bills', 'r-exp', 'r-reg'], () => {
-    const bills = g('r-bills'), exp = g('r-exp'), reg = g('r-reg');
+  const update = () => {
+    const bills = g('r-bills'), exp = g('r-exp'), reg = g('r-reg'), price = PRICE.v;
     $('#v-bills').textContent = bills; $('#v-exp').textContent = rs(exp); $('#v-reg').textContent = fmtIN(reg);
     const hours = bills * 20 * (20 - 2) * 26 / 3600, save = hours * 70 * 12 + exp * 0.4, earn = reg * 0.1 * 900 * 12;
     tweenText($('#o-hours'), hours, v => String(Math.round(v)));
     tweenText($('#o-save'), save, rs);
     tweenText($('#o-earn'), earn, rs);
-    const max = Math.max(save, 6000);
+    const max = Math.max(save, price);
     $('#b-back').style.width = (save / max * 100).toFixed(1) + '%';
-    $('#b-cost').style.width = (6000 / max * 100).toFixed(1) + '%';
+    $('#b-cost').style.width = (price / max * 100).toFixed(1) + '%';
     $('#b-back-v').textContent = rs(save);
-    const x = save / 6000;
+    const x = save / price;
     $('#o-pay').innerHTML = `Savings alone are about <b>${x >= 10 ? Math.round(x) : x.toFixed(1).replace(/\.0$/, '')}×</b> the price, before the extra sales.`;
-  });
+  };
+  bindRanges(['r-bills', 'r-exp', 'r-reg'], update);
+  PRICE.subs.push(update);
 }
 
-/* ---------- 13 Price and costs ---------- */
+/* ---------- 13 Price and costs: a model anyone with the code can change ----------
+   Defaults live in C.model. Changes are kept in this browser, and a scenario can be shared as a link (?s=...). */
 function initCosts() {
-  const PRICE = 5500, COST = 1800, parts = [['Cloud', 600, 'Database, files and backups in India'], ['Support', 1000, 'Phone and WhatsApp help in Telugu'], ['Payments, other', 200, 'Payment links, SMS when WhatsApp fails'], ['Left for us', PRICE - COST, 'Pays the team, then profit']];
-  $('#pc-bar').innerHTML = parts.map(([k, v], i) => `<i class="${i === 3 ? 'is--us' : ''}" style="flex-grow:${v}"><span>${esc(k)}</span><b>${rs(v)}</b></i>`).join('');
-  $('#pc-leg').innerHTML = parts.map(([k, v, t], i) => `<li class="${i === 3 ? 'is--us' : ''}"><b>${esc(k)}<em>${rs(v)}</em></b><span>${esc(t)}</span></li>`).join('');
-  $('#pc-who').innerHTML = [['The store', 'Under ₹6,000', 'a year, every feature', 'store'], ['The distributor', 'Free', 'dashboard, and billing at launch', 'truck'], ['The accountant', 'Free', 'invited by the store', 'file']].map(([a, b, c, ic], i) => `<li class="${i ? '' : 'is--pay'}"><i>${kicon(ic, '')}</i><span class="eyebrow">${a}</span><b>${b}</b><small>${c}</small></li>`).join('');
-  $('#build').innerHTML = C.build.map(([k, v, n]) => `<li><span>${esc(k)}</span><b>${esc(v)}</b><i style="--w:${(n / 180 * 100).toFixed(0)}%"></i></li>`).join('');
-  $('#team').innerHTML = C.team.map(([k, n, v]) => `<tr><td>${esc(k)}</td><td>${esc(n)}</td><td>${esc(v)}</td></tr>`).join('');
-  const PMAX = 50000;
-  $('#prices').innerHTML = C.prices.map(p => `<li><b>${esc(p.n)}</b><div class="pr__track"><i style="--l:${(p.lo / PMAX * 100).toFixed(1)}%;--w:${((p.hi - p.lo) / PMAX * 100).toFixed(1)}%"></i></div><small>${rs(p.lo)} to ${rs(p.hi)} ${esc(p.s)}</small></li>`).join('')
-    + `<li class="is--us"><b>Pharmacy OS</b><div class="pr__track"><i style="--l:0%;--w:12%"></i></div><small>Under ₹6,000 a year, the plan. WhatsApp messages as used.</small></li>`;
-  const FIX = 1800000 * 12, GP = PRICE - COST, BE = Math.ceil(FIX / GP), MAXS = 10000;
-  $('#be-line').style.left = (BE / MAXS * 100).toFixed(1) + '%';
-  $('#be-n').textContent = `${fmtIN(BE)} stores cover the team`;
-  bindRanges(['r-stores'], () => {
-    const n = +$('#r-stores').value, left = n * GP - FIX;
-    $('#v-stores').textContent = fmtIN(n);
-    $('#be-fill').style.width = (n / MAXS * 100).toFixed(1) + '%';
-    $('#be-fill').classList.toggle('is--over', n >= BE);
-    $('#be-read').innerHTML = left >= 0
-      ? `At <b>${fmtIN(n)}</b> stores: <b>${lakh(n * PRICE)}</b> a year, and <b>${lakh(left)}</b> left after the team.`
-      : `At <b>${fmtIN(n)}</b> stores: <b>${lakh(n * PRICE)}</b> a year, <b>${lakh(-left)}</b> short of the team’s cost. ${fmtIN(BE)} stores is ${Math.round(BE / 45000 * 100)}% of the shops in AP and Telangana.`;
+  const KEY = 'po-model-v1', GROUPS = ['store', 'team', 'office', 'product', 'mkt', 'win'], FIXED = ['team', 'office', 'product', 'mkt'];
+  const LEVERS = { price: 'r-price', stores: 'r-stores', perMonth: 'r-new', churn: 'r-churn', build: 'r-build', raise: 'r-raise' };
+  const SHOPS = 45000, MONTHS = 60;
+  const BLANK = { store: { n: 'New cost', v: 100 }, team: { n: 'New role', q: 1, v: 30000 }, office: { n: 'New cost', v: 5000 }, product: { n: 'New cost', v: 5000 }, mkt: { n: 'New cost', v: 10000 }, win: { n: 'New cost', v: 500 } };
+  const clone = o => JSON.parse(JSON.stringify(o));
+  const num = (v, lo, hi, d) => { v = +v; return Number.isFinite(v) ? clamp(v, lo, hi) : d; };
+  const DEF = clone(C.model);
+
+  /* Anything read from a link or storage is checked field by field */
+  const clean = raw => {
+    const out = clone(DEF);
+    if (!raw || typeof raw !== 'object') return out;
+    Object.keys(LEVERS).forEach(k => { const el = $('#' + LEVERS[k]); if (raw[k] != null) out[k] = num(raw[k], +el.min, +el.max, out[k]); });
+    GROUPS.forEach(g => {
+      if (!Array.isArray(raw[g])) return;
+      out[g] = raw[g].slice(0, 40).filter(r => r && typeof r === 'object').map(r => {
+        const row = { n: String(r.n == null ? '' : r.n).slice(0, 60), v: num(r.v, 0, r.p ? 100 : 1e8, 0) };
+        if (r.p) row.p = 1;
+        if (g === 'team') row.q = num(r.q, 0, 99, 1);
+        if (r.s) row.s = String(r.s).slice(0, 120);
+        return row;
+      });
+    });
+    return out;
+  };
+  const enc = o => btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  const dec = t => JSON.parse(decodeURIComponent(escape(atob(t.replace(/-/g, '+').replace(/_/g, '/')))));
+  const strip = o => { const c = clone(o); GROUPS.forEach(g => c[g].forEach(r => delete r.s)); return c; };
+  const same = (a, b) => JSON.stringify(strip(a)) === JSON.stringify(strip(b));
+
+  let S = clone(DEF), from = 'plan';
+  try {
+    const q = new URLSearchParams(location.search).get('s');
+    if (q) { S = clean(dec(q)); from = 'link'; }
+    else { const saved = localStorage.getItem(KEY); if (saved) { S = clean(JSON.parse(saved)); from = 'saved'; } }
+  } catch (e) { S = clone(DEF); from = 'plan'; }
+
+  /* ----- The sums ----- */
+  const amt = (r, price) => (r.p ? price * r.v / 100 : r.v);
+  const sumG = g => S[g].reduce((t, r) => t + amt(r, S.price) * (g === 'team' ? r.q : 1), 0);
+  const calc = () => {
+    const price = S.price, serve = sumG('store'), win = sumG('win'), groups = {};
+    FIXED.forEach(g => { groups[g] = sumG(g); });
+    const fixed = FIXED.reduce((t, g) => t + groups[g], 0);
+    const contrib = price - serve, grow = S.perMonth * win;   /* winning new stores, every month we keep growing */
+    const runM = fixed + grow;
+    const be = contrib > 0 ? Math.ceil(runM * 12 / contrib) : Infinity;
+    const n = S.stores, inM = n * price / 12, outM = runM + n * serve / 12, profM = inM - outM;
+    const cac = (S.perMonth ? groups.mkt / S.perMonth : 0) + win;
+    const life = S.churn > 0 ? Math.min(100 / S.churn, 5) : 5;
+    const ltv = contrib * life, payback = contrib > 0 ? cac / (contrib / 12) : Infinity;
+    /* Five years, month by month, from today */
+    const sim = [];
+    let st = 0, cum = 0, beM = null, out = null, low = 0, y1 = 0;
+    for (let m = 1; m <= MONTHS; m++) {
+      const add = m > S.build ? S.perMonth : 0;
+      st = st * (1 - S.churn / 1200) + add;
+      const i = st * price / 12, o = fixed + st * serve / 12 + add * win;
+      cum += i - o;
+      if (m <= 12) y1 += o;
+      if (beM == null && m > S.build && i >= o) beM = m;
+      if (out == null && S.raise + cum < 0) out = m;
+      low = Math.min(low, cum);
+      sim.push({ m, st, i, o, cash: S.raise + cum });
+    }
+    const team = S.team.reduce((t, r) => t + r.q, 0);
+    return { price, serve, win, groups, fixed, contrib, grow, runM, be, n, inM, outM, profM, cac, life, ltv, payback, sim, beM, out, need: -low, y1, team };
+  };
+
+  /* ----- Editable lists ----- */
+  const UNIT = { store: 'a year', team: 'each, a month', office: 'a month', product: 'a month', mkt: 'a month', win: 'once' };
+  const rowHTML = (g, r, i) => `<div class="med__row${g === 'team' ? ' is--team' : ''}" data-i="${i}">
+      <input class="med__n" type="text" value="${esc(r.n)}" maxlength="60" aria-label="Name">
+      ${g === 'team' ? `<label class="med__q"><input type="text" inputmode="numeric" value="${r.q}" data-f="q" data-step="1" aria-label="${esc(r.n)}: people"><span>×</span></label>` : ''}
+      <label class="med__v${r.p ? ' is--pct' : ''}">${r.p ? '' : '<span>₹</span>'}<input type="text" inputmode="decimal" value="${r.p ? r.v : fmtIN(r.v)}" data-f="v" data-step="${r.p ? 0.5 : FIXED.includes(g) ? 1000 : 10}" aria-label="${esc(r.n)}: ${r.p ? 'percent of the price' : 'rupees ' + UNIT[g]}">${r.p ? '<span>% of price</span>' : ''}</label>
+      <button type="button" class="med__x" aria-label="Remove ${esc(r.n)}">×</button>
+      ${r.s ? `<small>${esc(r.s)}</small>` : ''}
+    </div>`;
+  const lim = (r, f) => (f === 'q' ? 99 : r.p ? 100 : 1e8);
+  const renderGroup = g => {
+    const box = $('#g-' + g);
+    box.innerHTML = S[g].length ? S[g].map((r, i) => rowHTML(g, r, i)).join('') : '<p class="med__empty">Nothing here. Add a row below.</p>';
+  };
+  GROUPS.forEach(g => {
+    const box = $('#g-' + g);
+    renderGroup(g);
+    box.addEventListener('input', e => {
+      const row = e.target.closest('.med__row'); if (!row) return;
+      const r = S[g][+row.dataset.i];
+      if (e.target.classList.contains('med__n')) { r.n = e.target.value.slice(0, 60); delete r.s; save(); return; }
+      const f = e.target.dataset.f; if (!f) return;
+      r[f] = num(e.target.value.replace(/[^\d.]/g, '') || 0, 0, lim(r, f), 0);
+      update();
+    });
+    /* Typed amounts show with Indian commas once you leave the box; arrow keys step them */
+    const show = (r, f) => (f === 'v' && !r.p ? fmtIN(r.v) : String(r[f]));
+    box.addEventListener('change', e => { const f = e.target.dataset.f; if (f) e.target.value = show(S[g][+e.target.closest('.med__row').dataset.i], f); });
+    box.addEventListener('keydown', e => {
+      const f = e.target.dataset.f; if (!f || (e.key !== 'ArrowUp' && e.key !== 'ArrowDown')) return;
+      e.preventDefault();
+      const r = S[g][+e.target.closest('.med__row').dataset.i], st = +e.target.dataset.step * (e.shiftKey ? 10 : 1);
+      r[f] = clamp(Math.round((r[f] + (e.key === 'ArrowUp' ? st : -st)) / st) * st, 0, lim(r, f));
+      e.target.value = show(r, f);
+      update();
+    });
+    box.addEventListener('click', e => {
+      const x = e.target.closest('.med__x'); if (!x) return;
+      const i = +x.closest('.med__row').dataset.i;
+      S[g].splice(i, 1);
+      renderGroup(g); update();
+      const next = box.querySelectorAll('.med__x')[Math.min(i, S[g].length - 1)];
+      (next || box.parentElement.querySelector('.med__add')).focus();
+    });
+  });
+  $$('[data-add]').forEach(b => b.addEventListener('click', () => {
+    const g = b.dataset.add;
+    S[g].push(clone(BLANK[g]));
+    renderGroup(g); update();
+    const inp = $$('#g-' + g + ' .med__n').pop();
+    if (inp) { inp.focus(); inp.select(); }
+  }));
+
+  /* ----- Levers ----- */
+  const fmtL = { price: rs, stores: fmtIN, perMonth: fmtIN, churn: v => v + '%', build: v => v + (v === 1 ? ' month' : ' months'), raise: v => (v ? lakh(v) : 'None') };
+  const setLevers = () => Object.keys(LEVERS).forEach(k => { const el = $('#' + LEVERS[k]); el.value = S[k]; fillRange(el); });
+  setLevers();
+
+  /* ----- Charts: plain SVG, one axis each, a crosshair on hover ----- */
+  const W = 640, H = 260, PAD = { l: 58, r: 16, t: 14, b: 30 };
+  const nice = v => { if (v <= 0) return 1; const p = Math.pow(10, Math.floor(Math.log10(v))), f = v / p; return (f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10) * p; };
+  const short = v => { const a = Math.abs(v), s = v < 0 ? '−' : ''; return a >= 1e7 ? s + '₹' + +(a / 1e7).toFixed(1) + ' Cr' : a >= 1e5 ? s + '₹' + +(a / 1e5).toFixed(1) + ' L' : a >= 1e3 ? s + '₹' + +(a / 1e3).toFixed(0) + 'k' : s + '₹' + Math.round(a); };
+  const chart = (fig, { xMax, yMin, yMax, series, xFmt, xLabel, marks = [], tip }) => {
+    const plot = $('.chart__plot', fig), iw = W - PAD.l - PAD.r, ih = H - PAD.t - PAD.b;
+    const step = nice((yMax - yMin) / 4), y0 = Math.floor(yMin / step) * step, y1 = Math.ceil(yMax / step) * step || step;
+    const X = v => PAD.l + v / xMax * iw, Y = v => PAD.t + (1 - (v - y0) / (y1 - y0)) * ih;
+    let g = '';
+    for (let v = y0; v <= y1 + step / 2; v += step) g += `<line class="ch__grid${Math.abs(v) < step / 2 ? ' is--zero' : ''}" x1="${PAD.l}" x2="${W - PAD.r}" y1="${Y(v)}" y2="${Y(v)}"/><text class="ch__ax" x="${PAD.l - 8}" y="${Y(v) + 4}" text-anchor="end">${short(v)}</text>`;
+    const xs = nice(xMax / 5);
+    for (let v = 0; v <= xMax + 1e-9; v += xs) g += `<text class="ch__ax" x="${X(v)}" y="${H - 8}" text-anchor="middle">${xFmt(v)}</text>`;
+    g += `<text class="ch__ax is--title" x="${W - PAD.r}" y="${H - 8 - 14}" text-anchor="end">${esc(xLabel)}</text>`;
+    marks.forEach(mk => { if (mk.x >= 0 && mk.x <= xMax) g += `<line class="ch__mark${mk.cls ? ' ' + mk.cls : ''}" x1="${X(mk.x)}" x2="${X(mk.x)}" y1="${PAD.t}" y2="${PAD.t + ih}"/><text class="ch__ax is--mark" x="${X(mk.x) + (X(mk.x) > W * 0.8 ? -6 : 6)}" y="${PAD.t + 12}" text-anchor="${X(mk.x) > W * 0.8 ? 'end' : 'start'}">${esc(mk.label)}</text>`; });
+    series.forEach(s => {
+      const d = s.pts.map((p, i) => `${i ? 'L' : 'M'}${X(p[0]).toFixed(1)} ${Y(clamp(p[1], y0, y1)).toFixed(1)}`).join('');
+      g += `<path class="ch__line ${s.cls}" d="${d}"/>`;
+      if (s.label) { const p = s.pts[s.pts.length - 1]; g += `<text class="ch__lab" x="${X(p[0]) - 4}" y="${Y(clamp(p[1], y0, y1)) + (s.below ? 16 : -8)}" text-anchor="end">${esc(s.label)}</text>`; }
+    });
+    plot.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(fig.querySelector('.eyebrow').textContent)}">${g}<g class="ch__hover"><line class="ch__cross" y1="${PAD.t}" y2="${PAD.t + ih}"/>${series.map(s => `<circle class="ch__dot ${s.cls}" r="4.5"/>`).join('')}</g><rect class="ch__hit" x="${PAD.l}" y="${PAD.t}" width="${iw}" height="${ih}"/></svg><div class="ch__tip" hidden></div>`;
+    const svg = $('svg', plot), hov = $('.ch__hover', svg), tipEl = $('.ch__tip', plot), dots = $$('.ch__dot', svg), cross = $('.ch__cross', svg);
+    const move = e => {
+      const r = svg.getBoundingClientRect(), sx = (e.clientX - r.left) / r.width * W;
+      const xv = clamp((sx - PAD.l) / iw * xMax, 0, xMax), t = tip(xv);
+      hov.classList.add('is--on'); tipEl.hidden = false;
+      cross.setAttribute('x1', X(t.x)); cross.setAttribute('x2', X(t.x));
+      t.ys.forEach((y, i) => { dots[i].setAttribute('cx', X(t.x)); dots[i].setAttribute('cy', Y(clamp(y, y0, y1))); });
+      tipEl.innerHTML = t.html;
+      const px = X(t.x) / W * r.width;
+      tipEl.style.left = clamp(px, 70, r.width - 70) + 'px';
+    };
+    const leave = () => { hov.classList.remove('is--on'); tipEl.hidden = true; };
+    const hit = $('.ch__hit', svg);
+    hit.addEventListener('pointermove', move); hit.addEventListener('pointerdown', move); hit.addEventListener('pointerleave', leave);
+  };
+
+  /* ----- Draw everything ----- */
+  const signed = v => (v < 0 ? '−' : '') + lakh(Math.abs(v));
+  const monthTxt = m => `month ${m}`;
+  let t = null;
+  function save() {
+    clearTimeout(t);
+    t = setTimeout(() => { try { if (same(S, DEF)) localStorage.removeItem(KEY); else localStorage.setItem(KEY, JSON.stringify(strip(S))); } catch (e) { /* private mode */ } }, 250);
+    $('#m-saved').textContent = same(S, DEF) ? 'Our plan, as written' : from === 'link' ? 'Opened from a shared link. Your changes stay in this browser.' : 'Your changes, kept in this browser';
+  }
+
+  function update() {
+    const R = calc(), p = R.price;
+    setPrice(p);
+    $$('[data-m="price"]').forEach(e => { e.textContent = rs(p); });
+    $$('[data-m="serve"]').forEach(e => { e.textContent = rs(R.serve); });
+
+    /* Where one store's money goes */
+    const parts = S.store.map(r => [r.n, amt(r, p), r.s || '']).concat([[R.contrib >= 0 ? 'Left for us' : 'Short on each store', Math.abs(R.contrib), R.contrib >= 0 ? 'Pays the team, the office and marketing, then profit' : 'Costs more to serve than the price. Raise the price or cut a cost.']]);
+    const last = parts.length - 1;
+    $('#pc-bar').innerHTML = parts.map(([k, v], i) => `<i class="${i === last ? (R.contrib >= 0 ? 'is--us' : 'is--short') : ''}${v < p * 0.05 ? ' is--tiny' : ''}" style="flex-grow:${Math.max(v, 1)}" title="${esc(k)}: ${rs(v)}"><span>${esc(k)}</span><b>${rs(v)}</b></i>`).join('');
+    $('#t-store').textContent = rs(R.serve);
+    $('#pc-who').innerHTML = [['The store', rs(p), `a year, every feature. About ${rs(p / 12)} a month, ${rs(p * 1.18)} with GST.`, 'store'], ['The distributor', 'Free', 'dashboard, and billing at launch', 'truck'], ['The accountant', 'Free', 'invited by the store', 'file']].map(([a, b, c, ic], i) => `<li class="${i ? '' : 'is--pay'}"><i>${kicon(ic, '')}</i><span class="eyebrow">${a}</span><b>${b}</b><small>${c}</small></li>`).join('');
+
+    /* Group totals and the split of monthly costs */
+    const GN = { team: 'Team', office: 'Office', product: 'Software', mkt: 'Marketing' };
+    FIXED.forEach(g => { $('#t-' + g).textContent = rs(R.groups[g]) + ' a month'; });
+    $('#t-team').textContent = `${R.team} ${R.team === 1 ? 'person' : 'people'}, ${rs(R.groups.team)} a month`;
+    $('#t-win').textContent = rs(R.win) + ' a store';
+    $('#t-fixed').textContent = lakh(R.fixed);
+    $('#t-fixed-y').textContent = `· ${lakh(R.fixed * 12)} a year`;
+    $('#m-split').innerHTML = FIXED.map(g => `<i style="flex-grow:${Math.max(R.groups[g], 1)}"><span>${GN[g]}</span><b>${R.fixed ? Math.round(R.groups[g] / R.fixed * 100) : 0}%</b></i>`).join('');
+
+    /* Income tracker tiles */
+    const beTxt = Number.isFinite(R.be) ? fmtIN(R.be) : 'Never';
+    $('#m-tiles').innerHTML = [
+      ['Income a month', rs(R.inM), `${lakh(R.n * p)} a year`, ''],
+      ['Costs a month', rs(R.outM), 'team, office, software, marketing, serving stores', ''],
+      [R.profM >= 0 ? 'Profit a month' : 'Loss a month', rs(Math.abs(R.profM)), R.profM >= 0 ? `${R.inM ? Math.round(R.profM / R.inM * 100) : 0}% of income` : R.inM ? `costs are ${(R.outM / R.inM).toFixed(1)}× income` : 'no income yet', R.profM >= 0 ? 'is--pos' : 'is--neg'],
+      ['Stores to break even', beTxt, Number.isFinite(R.be) ? `${(R.be / SHOPS * 100).toFixed(1)}% of ${fmtIN(SHOPS)} shops in AP and Telangana` : 'each store costs more than it pays', '']
+    ].map(([a, b, c, cls]) => `<li class="${cls}"><span class="eyebrow">${a}</span><b class="tnum">${b}</b><small>${c}</small></li>`).join('');
+    $('#m-read').innerHTML = R.profM >= 0
+      ? `At <b>${fmtIN(R.n)}</b> stores and <b>${rs(p)}</b> a store: <b>${rs(R.inM)}</b> a month in, <b>${rs(R.outM)}</b> out. <b>${lakh(R.profM * 12)}</b> a year left over.`
+      : `At <b>${fmtIN(R.n)}</b> stores and <b>${rs(p)}</b> a store: <b>${rs(R.inM)}</b> a month in, <b>${rs(R.outM)}</b> out, <b>${rs(-R.profM)}</b> short each month. ${Number.isFinite(R.be) ? `<b>${beTxt}</b> stores cover every cost while adding ${fmtIN(S.perMonth)} a month.` : 'No number of stores covers the costs at this price.'}`;
+
+    /* Chart 1: by stores */
+    const xMax = Math.max(10000, Number.isFinite(R.be) ? Math.min(50000, Math.ceil(R.be * 1.2 / 1000) * 1000) : 10000);
+    const inc = x => x * p / 12, cost = x => R.runM + x * R.serve / 12;
+    chart($('#ch-stores'), {
+      xMax, yMin: 0, yMax: Math.max(inc(xMax), cost(xMax)), xFmt: v => (v >= 1000 ? +(v / 1000).toFixed(1) + 'k' : String(v)), xLabel: 'paying stores',
+      series: [{ cls: 'is--out', pts: [[0, cost(0)], [xMax, cost(xMax)]], label: 'Costs', below: inc(xMax) > cost(xMax) }, { cls: 'is--in', pts: [[0, 0], [xMax, inc(xMax)]], label: 'Income', below: inc(xMax) <= cost(xMax) }],
+      marks: [{ x: R.n, label: `${fmtIN(R.n)} stores`, cls: 'is--you' }].concat(Number.isFinite(R.be) && Math.abs(R.be - R.n) > xMax * 0.08 ? [{ x: R.be, label: 'Break even' }] : []),
+      tip: x => { x = Math.round(x / 50) * 50; const a = inc(x), b = cost(x); return { x, ys: [b, a], html: `<b>${fmtIN(x)} stores</b><span><i class="is--in"></i>Income ${rs(a)}</span><span><i class="is--out"></i>Costs ${rs(b)}</span><span>${a >= b ? 'Profit' : 'Loss'} ${rs(Math.abs(a - b))} a month</span>` }; }
+    });
+
+    /* Chart 2: cash over five years */
+    const cashes = R.sim.map(s => s.cash);
+    chart($('#ch-cash'), {
+      xMax: MONTHS, yMin: Math.min(0, ...cashes), yMax: Math.max(S.raise, ...cashes, 1), xFmt: v => (v ? 'M' + v : 'Now'), xLabel: 'months from today',
+      series: [{ cls: 'is--in', pts: [[0, S.raise]].concat(R.sim.map(s => [s.m, s.cash])) }],
+      marks: [].concat(S.build ? [{ x: S.build, label: 'First store' }] : []).concat(R.beM ? [{ x: R.beM, label: 'Break even', cls: 'is--you' }] : []).concat(R.out ? [{ x: R.out, label: 'Cash runs out', cls: 'is--neg' }] : []),
+      tip: x => { const m = clamp(Math.round(x), 1, MONTHS), s = R.sim[m - 1]; return { x: m, ys: [s.cash], html: `<b>Month ${m}</b><span>${fmtIN(s.st)} paying stores</span><span>In ${rs(s.i)} · out ${rs(s.o)}</span><span><i class="is--in"></i>Cash ${signed(s.cash)}</span>` }; }
+    });
+    const covers = !R.out;
+    $('#m-run').innerHTML = (R.beM
+      ? `Adding <b>${fmtIN(S.perMonth)}</b> stores a month after <b>${S.build}</b> months of building, the plan breaks even in <b>${monthTxt(R.beM)}</b> with about <b>${fmtIN(R.sim[R.beM - 1].st)}</b> paying stores. `
+      : `Adding <b>${fmtIN(S.perMonth)}</b> stores a month after <b>${S.build}</b> months of building, the plan does not break even within five years. `)
+      + `It needs about <b>${lakh(R.need)}</b> to get through the low point. `
+      + (covers ? `<b>${S.raise ? lakh(S.raise) : 'No money'}</b> raised covers it${S.raise > R.need ? `, with about <b>${lakh(S.raise - R.need)}</b> to spare` : ''}.` : `<b>${S.raise ? lakh(S.raise) : 'No money'}</b> raised runs out in <b>${monthTxt(R.out)}</b>, with ${fmtIN(R.sim[R.out - 1].st)} stores.`);
+
+    /* What an investor asks */
+    const ratio = R.cac > 0 ? R.ltv / R.cac : 0;
+    $('#m-kpi').innerHTML = [
+      ['Revenue a year', lakh(R.n * p), `at ${fmtIN(R.n)} stores`],
+      ['Gross margin a store', `${rs(R.contrib)}`, p ? `${Math.round(R.contrib / p * 100)}% of the price, after serving it` : ''],
+      ['Cost to win a store', rs(R.cac), `marketing ÷ ${fmtIN(S.perMonth)} new stores, plus ${rs(R.win)} once`],
+      ['Value of a store', rs(R.ltv), `margin over ${+R.life.toFixed(1)} years${S.churn > 0 && 100 / S.churn > 5 ? ', capped at 5' : ''}`],
+      ['Value ÷ cost to win', ratio ? ratio.toFixed(1) + '×' : '–', ratio >= 3 ? 'healthy, above 3×' : 'below 3×: win stores for less, or keep them longer'],
+      ['Pays back the cost to win', Number.isFinite(R.payback) ? `${Math.max(1, Math.round(R.payback))} months` : 'Never', 'from the store’s margin'],
+      ['Spend before the first store', lakh(R.fixed * S.build), `${S.build} months at ${lakh(R.fixed)} a month`],
+      ['Spend in year one', lakh(R.y1), 'every cost, first 12 months'],
+      ['Break even', R.beM ? monthTxt(R.beM) : 'Not in 5 years', R.beM ? `about ${Math.round(R.beM / 12 * 10) / 10} years from today` : 'raise the price, add stores faster or cut costs'],
+      ['Money needed', lakh(R.need), 'the deepest point of the cash line'],
+      ['Runway', covers ? 'Covered' : `${R.out - 1} months`, covers ? `${S.raise ? lakh(S.raise) : 'Nothing'} raised lasts past the low point` : `on ${lakh(S.raise)} raised`],
+      ['Team', `${R.team} ${R.team === 1 ? 'person' : 'people'}`, `${lakh(R.groups.team)} a month`]
+    ].map(([a, b, c]) => `<li><span class="eyebrow">${a}</span><b class="tnum">${b}</b><small>${esc(c)}</small></li>`).join('');
+
+    /* The rival prices, with ours where the slider puts it */
+    const PMAX = 50000;
+    $('#prices').innerHTML = C.prices.map(q => `<li><b>${esc(q.n)}</b><div class="pr__track"><i style="--l:${(q.lo / PMAX * 100).toFixed(1)}%;--w:${((q.hi - q.lo) / PMAX * 100).toFixed(1)}%"></i></div><small>${rs(q.lo)} to ${rs(q.hi)} ${esc(q.s)}</small></li>`).join('')
+      + `<li class="is--us"><b>Pharmacy OS</b><div class="pr__track"><i style="--l:0%;--w:${(Math.min(p, PMAX) / PMAX * 100).toFixed(1)}%"></i></div><small>${rs(p)} a year, the test price. WhatsApp messages as used.</small></li>`;
+
+    /* Section 16 follows the raise */
+    $$('[data-m="raise"]').forEach(e => { e.textContent = S.raise ? lakh(S.raise) : 'To be set'; });
+    $$('[data-m="raise-read"]').forEach(e => {
+      e.textContent = !S.raise ? 'Set the amount in section 13.' : covers
+        ? (R.beM ? `Enough to reach break even in ${monthTxt(R.beM)}, at about ${fmtIN(R.sim[R.beM - 1].st)} paying stores.` : 'Enough to cover five years at this plan.')
+        : `For ${R.out - 1} months, to reach about ${fmtIN(R.sim[R.out - 1].st)} paying stores.`;
+    });
+    save();
+  }
+
+  /* ----- Share, download, reset ----- */
+  const flash = (b, txt) => { const o = b.dataset.txt || (b.dataset.txt = b.textContent); b.textContent = txt; clearTimeout(b._t); b._t = setTimeout(() => { b.textContent = o; }, 2200); };
+  $$('[data-m-act]').forEach(b => b.addEventListener('click', () => {
+    const act = b.dataset.mAct;
+    if (act === 'reset') {
+      S = clone(DEF); from = 'plan';
+      try { localStorage.removeItem(KEY); } catch (e) { /* private mode */ }
+      if (location.search) history.replaceState(null, '', location.pathname + location.hash);
+      GROUPS.forEach(renderGroup); setLevers();
+      Object.keys(LEVERS).forEach(k => { $('#v-' + LEVERS[k].slice(2)).textContent = fmtL[k](S[k]); });
+      update(); flash(b, 'Back to our plan');
+    }
+    if (act === 'share') {
+      const url = location.origin + location.pathname + '?s=' + enc(strip(S)) + '#costs';
+      const done = () => flash(b, 'Link copied');
+      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(url).then(done, () => prompt('Copy this link', url));
+      else prompt('Copy this link', url);
+    }
+    if (act === 'csv') {
+      const R = calc(), q = v => `"${String(v).replace(/"/g, '""')}"`;
+      const NAME = { store: 'Serving one store (a year)', team: 'Team (a month, each)', office: 'Office and infrastructure (a month)', product: 'Keeping the software running (a month)', mkt: 'Marketing (a month)', win: 'Winning one store (once)' };
+      const rows = [['Section', 'Item', 'People', 'Amount', 'Unit']];
+      rows.push(['Levers', 'Price a store a year', '', S.price, '₹'], ['Levers', 'Paying stores', '', S.stores, 'stores'], ['Levers', 'New stores a month', '', S.perMonth, 'stores'], ['Levers', 'Stores that leave a year', '', S.churn, '%'], ['Levers', 'Months to build', '', S.build, 'months'], ['Levers', 'Money raised', '', S.raise, '₹']);
+      GROUPS.forEach(g => S[g].forEach(r => rows.push([NAME[g], r.n, g === 'team' ? r.q : '', r.v, r.p ? '% of price' : '₹'])));
+      rows.push(['Results', 'Cost to serve a store a year', '', Math.round(R.serve), '₹'], ['Results', 'Monthly costs before stores', '', Math.round(R.fixed), '₹'], ['Results', 'Stores to break even', '', Number.isFinite(R.be) ? R.be : 'never', 'stores'], ['Results', 'Break-even month', '', R.beM || 'not in 5 years', 'month'], ['Results', 'Money needed', '', Math.round(R.need), '₹'], ['Results', 'Cost to win a store', '', Math.round(R.cac), '₹'], ['Results', 'Value of a store', '', Math.round(R.ltv), '₹']);
+      rows.push([], ['Month', 'Paying stores', 'Income', 'Costs', 'Cash left']);
+      R.sim.forEach(s => rows.push([s.m, Math.round(s.st), Math.round(s.i), Math.round(s.o), Math.round(s.cash)]));
+      const blob = new Blob(['﻿' + rows.map(r => r.map(q).join(',')).join('\n')], { type: 'text/csv;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob); a.download = 'pharmacy-os-plan.csv';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+      flash(b, 'Downloaded');
+    }
+  }));
+
+  bindRanges(Object.values(LEVERS), () => {
+    Object.keys(LEVERS).forEach(k => { S[k] = +$('#' + LEVERS[k]).value; $('#v-' + LEVERS[k].slice(2)).textContent = fmtL[k](S[k]); });
+    update();
   });
 }
 
@@ -595,7 +884,7 @@ function renderLists() {
     aa: '<div class="wv wv--aa"><i>Aa</i><i>Aa</i><i>Aa</i></div>',
     shield: `<div class="wv wv--shield">${kicon('shield', '')}<span>Expired: stopped</span><span>Recalled: stopped</span></div>`,
     bell: `<div class="wv wv--bell">${kicon('bell', '')}<span>Bill deleted</span><span>15% discount</span><span>₹50 short</span></div>`,
-    price: '<div class="wv wv--price"><i style="--w:100%"><span>Others, up to ₹50,000</span></i><i class="is--us" style="--w:12%"><span>Us, under ₹6,000</span></i></div>',
+    price: '<div class="wv wv--price"><i style="--w:100%"><span>Others, up to ₹50,000</span></i><i class="is--us" style="--w:12%"><span>Us, <span data-m="price">₹5,500</span></span></i></div>',
     chain: '<div class="wv wv--chain"><span>Store</span><i></i><span>Distributor</span><i></i><span>Accountant</span></div>'
   };
   $('#whys').innerHTML = C.whys.map(w => `<li class="wy"><div class="wy__vis" aria-hidden="true">${WV[w.vis] || ''}</div><span class="wy__n" aria-hidden="true">${w.n}</span><h3>${esc(w.t)}</h3><p>${esc(w.s)}</p><a class="btn" data-theme="${w.n === '1' ? 'ink' : 'cloud'}" data-shape="round" data-size="s" href="${esc(w.go)}"><span class="btn__label">${esc(w.cta)}</span></a></li>`).join('');

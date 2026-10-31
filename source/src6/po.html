@@ -699,7 +699,7 @@ __SPRITE__
         </ul>
         <div class="gb__vs" aria-hidden="true">
           <div class="gb__bar is--back"><span>Saved in a year</span><i><em id="b-back"></em></i><b id="b-back-v"></b></div>
-          <div class="gb__bar is--cost"><span>What Pharmacy OS costs</span><i><em id="b-cost"></em></i><b>under ₹6,000</b></div>
+          <div class="gb__bar is--cost"><span>What Pharmacy OS costs</span><i><em id="b-cost"></em></i><b data-m="price">₹5,500</b></div>
         </div>
         <p class="gb__read" id="o-pay"></p>
       </div>
@@ -715,51 +715,89 @@ __SPRITE__
   <div class="container is--m">
     <div class="section-head">
       <div class="tag-pair" data-reveal><span class="tag" data-theme="glass">13</span><span class="tag" data-theme="glass" data-shape="round">Price and costs</span></div>
-      <h2 class="h-l" data-reveal>Under ₹6,000 to the store. <em>₹1,800 to serve it.</em></h2>
-      <p class="p-l" data-reveal>Planning numbers from October 2026. Pilots will correct every one of them.</p>
+      <h2 class="h-l" data-reveal><span data-m="price">₹5,500</span> to the store. <em><span data-m="serve">₹1,550</span> to serve it.</em></h2>
+      <p class="p-l" data-reveal>The price is not fixed yet. Every number here is a lever: move the price, the stores and the costs, and the plan redraws. Planning numbers from October 2026, at Andhra Pradesh and Telangana rates. Pilots will correct them.</p>
+    </div>
+
+    <div class="mbar" data-reveal>
+      <p class="mbar__txt"><span class="eyebrow">Your scenario</span><span id="m-saved">Our plan, as written</span></p>
+      <div class="mbar__btns">
+        <button type="button" class="mbtn" data-m-act="share">Copy a link to this scenario</button>
+        <button type="button" class="mbtn" data-m-act="csv">Download the numbers</button>
+        <button type="button" class="mbtn is--ghost" data-m-act="reset">Back to our plan</button>
+      </div>
     </div>
 
     <div class="pc" data-reveal>
       <div class="pc__price">
         <span class="eyebrow">One store, one year, before GST</span>
-        <p class="pc__big"><b class="tnum">₹5,500</b><span>the price we will test, under ₹6,000</span></p>
+        <div class="rng is--price"><label for="r-price">The price we test</label><output id="v-price" for="r-price"></output><input type="range" id="r-price" min="1500" max="15000" step="100" value="5500"></div>
         <div class="pc__bar" id="pc-bar" aria-hidden="true"></div>
-        <ul class="pc__leg" id="pc-leg"></ul>
-        <p class="pc__note">WhatsApp messages are paid by the store as they are sent, at Meta’s rate: about ₹0.115 a bill or reminder. No setup fee.</p>
+        <details class="med" open>
+          <summary><span>What one store costs us, a year</span><b id="t-store"></b></summary>
+          <div class="med__rows" id="g-store"></div>
+          <button type="button" class="med__add" data-add="store">+ Add a cost</button>
+        </details>
+        <p class="pc__note">WhatsApp messages are paid by the store as they are sent, at Meta’s rate: about ₹0.115 a bill or reminder. GST of 18% is added on top of the price. No setup fee.</p>
       </div>
       <ul class="pc__who" id="pc-who"></ul>
     </div>
 
-    <div class="be" data-reveal>
-      <div class="be__in">
-        <span class="eyebrow">When it pays for itself</span>
-        <h3 class="h-s">Stores needed to cover the team</h3>
-        <div class="rng"><label for="r-stores">Paying stores</label><output id="v-stores" for="r-stores"></output><input type="range" id="r-stores" min="500" max="10000" step="100" value="3000"></div>
-        <p class="calc__note">At ₹5,500 a store, and a team and running cost of ₹18 lakh a month.</p>
+    <div class="trk" data-reveal>
+      <div class="trk__in">
+        <span class="eyebrow">Income tracker</span>
+        <h3 class="h-s">Slide the stores. Watch the month.</h3>
+        <div class="rng"><label for="r-stores">Paying stores</label><output id="v-stores" for="r-stores"></output><input type="range" id="r-stores" min="0" max="10000" step="50" value="1000"></div>
+        <div class="rng"><label for="r-new">New stores a month, after launch</label><output id="v-new" for="r-new"></output><input type="range" id="r-new" min="10" max="500" step="5" value="100"></div>
+        <div class="rng"><label for="r-churn">Stores that leave, a year</label><output id="v-churn" for="r-churn"></output><input type="range" id="r-churn" min="0" max="40" step="1" value="12"></div>
+        <div class="rng"><label for="r-build">Months to build before the first store</label><output id="v-build" for="r-build"></output><input type="range" id="r-build" min="0" max="18" step="1" value="6"></div>
+        <div class="rng"><label for="r-raise">Money raised</label><output id="v-raise" for="r-raise"></output><input type="range" id="r-raise" min="0" max="100000000" step="2500000" value="40000000"></div>
       </div>
-      <div class="be__out">
-        <div class="be__track" aria-hidden="true"><i id="be-fill"></i><span class="be__line" id="be-line"><b id="be-n"></b></span></div>
-        <p class="be__read" id="be-read"></p>
+      <div class="trk__out">
+        <ul class="trk__tiles" id="m-tiles"></ul>
+        <figure class="chart" id="ch-stores">
+          <figcaption class="chart__head"><span class="eyebrow">Money in and out each month, by paying stores</span><span class="chart__key"><i class="is--in"></i>Income<i class="is--out"></i>Costs</span></figcaption>
+          <div class="chart__plot"></div>
+        </figure>
+        <p class="trk__read" id="m-read"></p>
       </div>
     </div>
 
-    <div class="cost3 is--two" data-reveal-group>
-      <div class="cbox">
-        <span class="eyebrow">Year one, to build and launch</span>
-        <h3 class="h-s">About ₹2 to 3 crore</h3>
-        <ul class="cbars" id="build"></ul>
+    <div class="kpi" data-reveal>
+      <div class="kpi__head"><span class="eyebrow">What an investor asks</span><h3 class="h-s">The numbers behind the plan</h3></div>
+      <ul class="kpi__list" id="m-kpi"></ul>
+    </div>
+
+    <div class="run" data-reveal>
+      <figure class="chart" id="ch-cash">
+        <figcaption class="chart__head"><span class="eyebrow">Cash left from the money raised, month by month for five years</span></figcaption>
+        <div class="chart__plot"></div>
+      </figure>
+      <div class="run__txt">
+      <p class="trk__read" id="m-run"></p>
+      <p class="calc__note">Stores are counted as paying one twelfth of the price each month; in practice most pay for the year up front, which helps cash. All monthly costs run from the first month, a cautious view.</p>
       </div>
-      <div class="cbox">
-        <span class="eyebrow">The team behind that number</span>
-        <h3 class="h-s">Thirteen people</h3>
-        <table class="ctable" id="team"></table>
+    </div>
+
+    <div class="mcost" data-reveal>
+      <div class="mcost__head">
+        <div><span class="eyebrow">Our monthly costs, before the first store</span><h3 class="h-s"><span id="t-fixed"></span> a month <small id="t-fixed-y"></small></h3></div>
+        <div class="mcost__split" id="m-split" aria-hidden="true"></div>
       </div>
+      <div class="mcost__grid">
+        <details class="med" open><summary><span>The team, cost to company a month</span><b id="t-team"></b></summary><div class="med__rows is--team" id="g-team"></div><button type="button" class="med__add" data-add="team">+ Add a role</button></details>
+        <details class="med" open><summary><span>Office and infrastructure</span><b id="t-office"></b></summary><div class="med__rows" id="g-office"></div><button type="button" class="med__add" data-add="office">+ Add a cost</button></details>
+        <details class="med" open><summary><span>Keeping the software running</span><b id="t-product"></b></summary><div class="med__rows" id="g-product"></div><button type="button" class="med__add" data-add="product">+ Add a cost</button></details>
+        <details class="med" open><summary><span>Marketing</span><b id="t-mkt"></b></summary><div class="med__rows" id="g-mkt"></div><button type="button" class="med__add" data-add="mkt">+ Add a cost</button></details>
+        <details class="med" open><summary><span>Winning one new store, once</span><b id="t-win"></b></summary><div class="med__rows" id="g-win"></div><button type="button" class="med__add" data-add="win">+ Add a cost</button></details>
+      </div>
+      <p class="calc__note">Salaries are cost to company for a small team in Vijayawada or Hyderabad in 2026, with PF included. Type over any name or amount, change the headcount, remove a row with ×, or add your own. Your changes stay in this browser.</p>
     </div>
 
     <div class="pr" data-reveal>
       <div class="pr__text">
         <span class="eyebrow">What stores pay today</span>
-        <h3 class="h-m">Our plan: <em>under ₹6,000 a year.</em></h3>
+        <h3 class="h-m">Our test price: <em data-m="price">₹5,500</em> <em>a year.</em></h3>
         <p class="p-m">For every feature on this page. Distributors and accountants use it free.</p>
       </div>
       <ul class="pr__list" id="prices"></ul>
@@ -816,8 +854,8 @@ __SPRITE__
       </div>
       <div class="raise" data-reveal>
         <span class="eyebrow">Proposed raise, from our blueprint</span>
-        <p class="raise__big">₹4 crore</p>
-        <p class="p-m">For 18 months, to reach about 700 paying stores.</p>
+        <p class="raise__big" data-m="raise">₹4 crore</p>
+        <p class="p-m" data-m="raise-read">For 18 months, to reach about 700 paying stores.</p>
         <ul class="raise__bars">
           <li style="--w:55%"><span>Product and engineering</span><b>55%</b></li>
           <li style="--w:25%"><span>Sales, dealers, onboarding</span><b>25%</b></li>
@@ -825,7 +863,7 @@ __SPRITE__
           <li style="--w:5%"><span>Legal, compliance, data</span><b>5%</b></li>
           <li style="--w:5%"><span>Reserve</span><b>5%</b></li>
         </ul>
-        <p class="raise__note">The amount follows the price we settle on. See Price and costs, section 13.</p>
+        <p class="raise__note">The amount follows the price and costs set in section 13. Change them there and this follows.</p>
       </div>
     </div>
   </div>

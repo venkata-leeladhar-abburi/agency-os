@@ -191,7 +191,7 @@ const C = {
   ],
   /* 05 The whole chain: who uses it, what for, what it replaces, what it costs */
   eco: [
-    { who: 'The store', price: 'Under ₹6,000 a year', sub: 'One counter, many counters, or many branches', uses: ['Order, receive, bill, remind', 'Team, alerts and every branch on the owner’s phone', 'Gives the accountant access'], replaces: 'Billing software, ordering apps, the H1 book, phone calls' },
+    { who: 'The store', price: 'One yearly price, set in the pilots', sub: 'One counter, many counters, or many branches', uses: ['Order, receive, bill, remind', 'Team, alerts and every branch on the owner’s phone', 'Gives the accountant access'], replaces: 'Billing software, ordering apps, the H1 book, phone calls' },
     { who: 'The distributor', price: 'Free', sub: 'Order desk, dispatch and payments', uses: ['Takes orders from every store in one list', 'Sends the bill file and the parcel’s journey', 'Collects payments, matched to bills'], replaces: 'Order calls, chat groups, three ordering apps, “where is my parcel” calls' },
     { who: 'The accountant', price: 'Free, invited by the store', sub: 'Every store he serves, in one login', uses: ['Sales, purchases and GST, ready each month', 'Tally files for every store and branch', 'Asks the owner about a missing bill'], replaces: 'Bill photos on WhatsApp, Excel, typing purchases again into Tally' }
   ],
@@ -343,14 +343,55 @@ const C = {
     { n: '08', t: 'Nothing moves', s: 'A button learnt once stays in its place after every update.', demo: 'still' }
   ],
 
-  /* 13 Costs. Planning assumptions, October 2026 */
-  build: [
-    ['Salaries, 12 months', '₹145–215 L', 180], ['Sales and dealers', '₹30–50 L', 40], ['Cloud and tools', '₹6–18 L', 12], ['Medicine data', '₹5–15 L', 10], ['Legal and setup', '₹5–10 L', 7.5]
-  ],
-  team: [
-    ['Tech lead', '1', '₹2.5–3.5 L a month'], ['Full-stack developers', '4', '₹1–1.7 L each'], ['Mobile developer', '1', '₹1–1.5 L'], ['UI/UX designer', '1', '₹0.8–1.2 L'],
-    ['QA tester', '1', '₹0.6–0.9 L'], ['Distributor billing developers', '2', '₹1–1.7 L each'], ['Pharmacist, part-time', '1', '₹0.4–0.6 L'], ['Onboarding and support', '2', 'From month 6']
-  ],
+  /* 13 Costs. Planning assumptions, October 2026, at Andhra Pradesh and Telangana rates. Every value can be changed on the page.
+     n: name, v: rupees (a month for fixed costs, a year for a store, once for winning a store), q: headcount, p: a percent of the price instead of rupees, s: why */
+  model: {
+    price: 5500, stores: 1000, perMonth: 100, churn: 12, build: 6, raise: 40000000,
+    store: [
+      { n: 'Cloud and storage', v: 420, s: 'Database, files and backups in India, for one more store' },
+      { n: 'Support as stores grow', v: 900, s: 'One person at ₹22,000 a month for every 300 stores' },
+      { n: 'Payment gateway', v: 2, p: 1, s: 'About 2% of what the store pays' },
+      { n: 'SMS and OTP', v: 120, s: 'When WhatsApp fails, at about ₹0.20 a message' }
+    ],
+    team: [
+      { n: 'Tech lead', q: 1, v: 120000, s: '6 to 8 years, owns the build' },
+      { n: 'Full-stack developer', q: 3, v: 65000 },
+      { n: 'Mobile developer', q: 1, v: 60000 },
+      { n: 'Distributor billing developer', q: 1, v: 60000 },
+      { n: 'UI/UX designer', q: 1, v: 45000 },
+      { n: 'QA tester', q: 1, v: 35000 },
+      { n: 'Pharmacist, part-time', q: 1, v: 25000 },
+      { n: 'Onboarding and support', q: 2, v: 22000 },
+      { n: 'Field sales', q: 2, v: 28000 }
+    ],
+    office: [
+      { n: 'Office rent, about 1,200 sq ft', v: 45000 },
+      { n: 'Electricity and power backup', v: 9000 },
+      { n: 'Internet, two lines', v: 4000 },
+      { n: 'Laptops and phones, over 3 years', v: 22000 },
+      { n: 'Upkeep, cleaning and supplies', v: 8000 },
+      { n: 'Accountant, legal and filings', v: 15000 }
+    ],
+    product: [
+      { n: 'Cloud base: servers, database, backups', v: 30000 },
+      { n: 'Medicine database and updates', v: 40000 },
+      { n: 'Tools: code, design, email, monitoring', v: 12000 },
+      { n: 'Security tests, spread over the year', v: 10000 },
+      { n: 'WhatsApp and SMS platform fees', v: 4000 },
+      { n: 'App stores, domains, certificates', v: 1500 }
+    ],
+    mkt: [
+      { n: 'Ads in Telugu: Meta, Google, YouTube', v: 60000 },
+      { n: 'Chemist and distributor association meets', v: 40000 },
+      { n: 'Field travel and demo kits', v: 25000 },
+      { n: 'Videos and content', v: 15000 },
+      { n: 'Print, brochures and shop standees', v: 10000 }
+    ],
+    win: [
+      { n: 'Moving the data and training on site', v: 1200 },
+      { n: 'Dealer commission, first year', v: 20, p: 1 }
+    ]
+  },
   prices: [
     { n: 'Vyapar, myBillBook', lo: 399, hi: 4299, s: 'a year' },
     { n: 'eVitalRx', lo: 7500, hi: 50000, s: 'a year' },
@@ -364,7 +405,7 @@ const C = {
     { n: '2', t: 'The owner can read it', s: 'Large text, big buttons, plain words, Telugu.', go: '#ux', cta: 'See the rules', vis: 'aa' },
     { n: '3', t: 'It keeps the shop safe', s: 'Expired and recalled stock stopped at the counter. Every sale on record.', go: '#gap', cta: 'The incidents', vis: 'shield' },
     { n: '4', t: 'It watches the shop for him', s: 'Deleted bills, big discounts, cash differences and late parcels, in one list.', go: '#platform', cta: 'See the screens', vis: 'bell' },
-    { n: '5', t: 'One price, on the page', s: 'Under ₹6,000 a year for every feature here. WhatsApp messages are extra, at cost.', go: '#costs', cta: 'The costs', vis: 'price' },
+    { n: '5', t: 'One price, on the page', s: 'One yearly price for every feature here, set in the pilots. WhatsApp messages are extra, at cost.', go: '#costs', cta: 'The costs', vis: 'price' },
     { n: '6', t: 'The whole chain comes with it', s: 'His distributor and accountant join free. Nobody types the same bill twice.', go: '#distributor', cta: 'See the chain', vis: 'chain' }
   ],
   /* 13 The same feature, a different product: [what, in today's software, in Pharmacy OS] */
@@ -374,7 +415,7 @@ const C = {
     ['Checking the bill', 'A separate app or a paid add-on, where it exists.', 'Order, bill and goods side by side as stock is received. Differences shown in rupees.'],
     ['WhatsApp bills', 'Often a paid add-on. One product lists ₹25,000 to switch it on, with messages on top.', 'On from the first day. No setup fee. The store pays only for messages sent.'],
     ['Reading the screen', 'We found no pharmacy product that documents Telugu screens or a text-size control.', 'Telugu or English, three text sizes and 44px buttons, on every screen.'],
-    ['The price', 'Often quoted by a dealer, with renewals and add-ons on top.', 'One price on the website: under ₹6,000 a year.'],
+    ['The price', 'Often quoted by a dealer, with renewals and add-ons on top.', 'One yearly price on the website, set in the pilots.'],
     ['Moving in', 'Charged for, where a price is listed: ₹3,000 to ₹5,000 at one product.', 'Done by our team, free. One tap takes it back in the first 30 days.'],
     ['The distributor', 'His own billing software, plus calls, chat groups and ordering apps to take orders.', 'A free desk for orders, dispatch, tracking and payments, linked to every store.'],
     ['The accountant', 'Bill photos on WhatsApp, typed again into Tally.', 'Free access from the store: every branch, GST and Tally files ready, nothing to type.'],
@@ -392,8 +433,8 @@ const C = {
     ['Marg already imports the distributor’s bill in one click.', 'Yes, and so do we. What we add is the store’s own order beside the bill, so only the differences need a look, plus recalls, tracking and the accountant, on screens an owner over fifty can read.'],
     ['A Marg store renews for ₹2,500 to ₹5,000 a year. Why pay more?', 'We do not beat a renewal on price. We win on hours and on money found: no purchase typing, no register by hand, overcharges and expiry caught. Section 12 shows the store’s own number.'],
     ['Distributors already run Marg or Unisolve. Why open yours?', 'They do not have to leave it. The free dashboard takes orders, sends the bill file and tracks dispatch beside their billing. Free billing is there at launch for those who want it.'],
-    ['If distributors and accountants pay nothing, who pays?', 'The store, under ₹6,000 a year. Each distributor and accountant who joins brings his stores with him. Later: the online store add-on, payments, and credit through a lending partner.'],
-    ['How do you earn at under ₹6,000 a year?', 'A store costs us about ₹1,800 a year to serve: cloud, support and payments. WhatsApp messages are paid by the store as used. At ₹5,500 that leaves about ₹3,700 from each store.'],
+    ['If distributors and accountants pay nothing, who pays?', 'The store, one yearly price. Each distributor and accountant who joins brings his stores with him. Later: the online store add-on, payments, and credit through a lending partner.'],
+    ['How do you earn at a low yearly price?', 'A store costs us about ₹1,550 a year to serve: cloud, support as stores grow, payment fees and SMS. WhatsApp messages are paid by the store as used. At a ₹5,500 test price that leaves about ₹3,950 from each store. Section 13 lets you change every number.'],
     ['Will owners over fifty change software?', 'They will if the first day is easier than their last one. We move the data in one or two days, keep the old software readable for thirty, and sit with them in Telugu.'],
     ['Can a pharmacy sell online?', 'The online store lets regulars order from their own shop. Prescription medicines are packed only after the pharmacist sees the prescription. The rules for online sale are still being written, and the add-on follows them as they are notified.']
   ],
@@ -436,7 +477,7 @@ const C = {
     ['Months 12–36', 'Scale', ['Demand forecast, expiry risk', 'Ask the app, store score', 'Links to distributors’ old software', 'Pay-later credit, with a lending partner', 'GST filing', 'Karnataka next'], '3,000 stores']
   ],
   open: [
-    ['Yearly or monthly', 'The plan is under ₹6,000 a year. Should a store pay once a year, or about ₹500 a month?'],
+    ['Yearly or monthly', 'The price is still open. Should a store pay once a year, or monthly? Section 13 shows what each price does to the plan.'],
     ['When to open the free order desk', 'How many of a distributor’s chemists must use us first?'],
     ['Desktop app or browser', 'Which one stays fast and offline on old shop PCs?'],
     ['Medicine list: buy or build', 'Licence a database, or build ours from bills?'],
