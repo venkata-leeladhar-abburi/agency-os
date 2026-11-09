@@ -3715,12 +3715,11 @@ html.is-gated body > :not(.gate){visibility:hidden}
       </div>
       <p class="calc__note">Salaries are cost to company for a small team in Vijayawada or Hyderabad in 2026, with PF included. Type over any name or amount, change the headcount, remove a row with ×, or add your own. Your changes stay in this browser.</p>
     </div>
-
     <div class="mvc" data-reveal>
       <div class="mvc__text">
         <span class="eyebrow">Moving in, running costs</span>
         <h3 class="h-s">About ₹50 once, then ₹5 a month a store.</h3>
-        <p>What it costs to bring a shop in from its old software and keep its old bills: servers, database, storage and AI. <b>It fits inside the ₹600 a year of cloud already counted in the ₹1,800 to serve a store.</b> The move stays free to the store.</p>
+        <p>What it costs to bring a shop in from its old software and keep its old bills: servers, database, storage and AI. <b>It fits inside what the cost model already counts: ₹420 a year of cloud for each store, and ₹1,200 once for moving the data in.</b> The two shared costs are rows in “Keeping the software running”. The move stays free to the store.</p>
         <p>Planning numbers. The real ones come from the first pilot shops.</p>
       </div>
       <div class="mvc__lists">
@@ -3744,7 +3743,7 @@ html.is-gated body > :not(.gate){visibility:hidden}
           <ul>
             <li>Import server<b>₹3,000–6,000 a month</b><span>One machine that works through the files as shops upload them</span></li>
             <li>Helper app signing and updates<b>₹25,000–40,000 a year</b><span>The certificate that lets Windows trust the helper app, and its downloads</span></li>
-            <li>Medicine list<b>counted above</b><span>The master list of medicines is already in “Medicine data” in the year-one cost</span></li>
+            <li>Medicine list<b>counted above</b><span>Already counted in “Medicine database and updates”</span></li>
           </ul>
         </div>
       </div>
@@ -4311,7 +4310,9 @@ const C = {
       { n: 'Tools: code, design, email, monitoring', v: 12000 },
       { n: 'Security tests, spread over the year', v: 10000 },
       { n: 'WhatsApp and SMS platform fees', v: 4000 },
-      { n: 'App stores, domains, certificates', v: 1500 }
+      { n: 'App stores, domains, certificates', v: 1500 },
+      { n: 'Import server for moving in', v: 4500, s: 'Reads the old software files shops upload' },
+      { n: 'Helper app signing and updates', v: 2700, s: 'About ₹32,000 a year, so Windows trusts the Tally and Marg helper' }
     ],
     mkt: [
       { n: 'Ads in Telugu: Meta, Google, YouTube', v: 60000 },

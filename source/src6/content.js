@@ -378,7 +378,9 @@ const C = {
       { n: 'Tools: code, design, email, monitoring', v: 12000 },
       { n: 'Security tests, spread over the year', v: 10000 },
       { n: 'WhatsApp and SMS platform fees', v: 4000 },
-      { n: 'App stores, domains, certificates', v: 1500 }
+      { n: 'App stores, domains, certificates', v: 1500 },
+      { n: 'Import server for moving in', v: 4500, s: 'Reads the old software files shops upload' },
+      { n: 'Helper app signing and updates', v: 2700, s: 'About ₹32,000 a year, so Windows trusts the Tally and Marg helper' }
     ],
     mkt: [
       { n: 'Ads in Telugu: Meta, Google, YouTube', v: 60000 },
