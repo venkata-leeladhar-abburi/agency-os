@@ -42,5 +42,22 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/pharmacyos/pitch",
+      "destination": "/pharmacy-os/pitch/",
+      "permanent": false
+    },
+    {
+      "source": "/pharmacyos/pitch/",
+      "destination": "/pharmacy-os/pitch/",
+      "permanent": false
+    },
+    {
+      "source": "/pharmacy-os-pitch",
+      "destination": "/pharmacy-os/pitch/",
+      "permanent": false
+    }
   ]
 }

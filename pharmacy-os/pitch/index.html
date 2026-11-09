@@ -1,0 +1,1309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pharmacy OS · Investor pitch</title>
+<meta name="description" content="Pharmacy OS by One Stop Solutions: the problem in India's medical stores, the size of the market, who pays, our product and the numbers. Every number can be changed.">
+<meta property="og:title" content="Pharmacy OS · Investor pitch">
+<meta property="og:description" content="8 lakh medical stores run on software built for the 1990s. Here is the problem, the market and our answer.">
+<meta property="og:image" content="https://www.onestop-solutions.in/pharmacy-os/pitch/img/product/home.webp">
+<meta name="theme-color" content="#151313">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' rx='18' fill='%23201d1d'/%3E%3Cg transform='rotate(-45 40 40)'%3E%3Cpath d='M40 24H26a16 16 0 0 0 0 32h14z' fill='%23A99DFF'/%3E%3Cpath d='M40 24h14a16 16 0 0 1 0 32H40z' fill='%23FFB224'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4F4F2;--ash:#EAEAE7;--bone:#DEDDD9;--white:#fff;
+  --ink:#1B1919;--graphite:#4A4747;--steel:#6B6868;--smoke:#A9A6A6;
+  --night:#151313;--night2:#1F1C1C;--night3:#2A2626;
+  --indigo:#3D2BDB;--indigo-l:#A99DFF;--indigo-t:#ECE9FF;
+  --amber:#FFB224;--amber-ink:#6E4700;--amber-t:#FFF2D6;
+  --red:#E8412C;--red-t:#FDE7E3;--green:#178A4F;
+  --line:rgba(27,25,25,.12);--line-s:rgba(27,25,25,.22);--line-d:rgba(244,244,242,.14);
+  --f:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'Geist Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --r:14px;--r-s:10px;--pad-x:clamp(20px,5vw,84px);--pad-t:clamp(22px,5.2vh,60px);--bar:64px;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--night);color:var(--ink);font-family:var(--f);font-size:17px;line-height:1.4;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img{display:block;max-width:100%}
+a{color:inherit}
+button,input{font:inherit;color:inherit}
+h1,h2,h3,h4,p,ul,ol,figure{margin:0}
+ul,ol{padding:0;list-style:none}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:2px solid var(--indigo);outline-offset:3px;border-radius:6px}
+
+/* ---------- Deck shell ---------- */
+.deck{position:relative}
+.sl{position:relative;min-height:100svh;padding:var(--pad-t) var(--pad-x) calc(var(--bar) + 28px);background:var(--paper);display:flex;flex-direction:column;gap:clamp(16px,3vh,32px);overflow:hidden}
+.sl.is-dark{background:var(--night);color:var(--paper)}
+.sl.is-indigo{background:var(--indigo);color:#fff}
+.sl.is-amber{background:var(--amber);color:var(--ink)}
+html.is-deck,html.is-deck body{overflow:hidden}
+html.is-deck .deck{position:fixed;inset:0}
+html.is-deck .sl{position:absolute;inset:0;min-height:0;overflow-y:auto;overscroll-behavior:contain;opacity:0;visibility:hidden;transform:translateX(3%);transition:opacity .5s var(--ease),transform .6s var(--ease),visibility 0s .6s;scrollbar-width:thin}
+@media (min-width:900px) and (max-height:820px){.sl{gap:14px;padding-top:28px}.head{gap:10px}}
+html.is-deck .sl.is-prev{transform:translateX(-3%)}
+html.is-deck .sl.is-on{opacity:1;visibility:visible;transform:none;transition:opacity .5s var(--ease),transform .6s var(--ease),visibility 0s}
+@media (prefers-reduced-motion:reduce){html.is-deck .sl{transition:opacity .2s linear,visibility 0s .2s!important;transform:none!important}html.is-deck .sl.is-on{transition:opacity .2s linear!important}}
+
+/* Bottom bar */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:50;height:var(--bar);display:flex;align-items:center;gap:14px;padding:0 var(--pad-x);pointer-events:none}
+.bar>*{pointer-events:auto}
+.bar__brand{display:flex;align-items:center;gap:9px;font-weight:600;font-size:15px;letter-spacing:-.01em;text-decoration:none;margin-right:auto;padding:7px 12px 7px 8px;border-radius:999px;background:rgba(21,19,19,.86);color:var(--paper);backdrop-filter:blur(10px)}
+.bar__brand svg{width:22px;height:22px}
+.bar__title{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--paper);padding:9px 14px;border-radius:999px;background:rgba(21,19,19,.86);backdrop-filter:blur(10px);max-width:34vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar__ctrl{display:flex;align-items:center;gap:4px;padding:4px;border-radius:999px;background:rgba(21,19,19,.86);backdrop-filter:blur(10px);color:var(--paper)}
+.bar__ctrl button{display:grid;place-items:center;width:40px;height:40px;border:0;border-radius:50%;background:transparent;cursor:pointer;transition:background .2s}
+.bar__ctrl button:hover{background:rgba(255,255,255,.12)}
+.bar__ctrl button:disabled{opacity:.3;cursor:default;background:transparent}
+.bar__ctrl svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.bar__count{min-width:62px;text-align:center;font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums}
+.prog{position:fixed;left:0;top:0;right:0;height:3px;z-index:51;background:transparent}
+.prog i{display:block;height:100%;width:0;background:var(--amber);transition:width .5s var(--ease)}
+html:not(.is-deck) .bar__count,html:not(.is-deck) [data-act="prev"],html:not(.is-deck) [data-act="next"],html:not(.is-deck) [data-act="full"]{display:none}
+html:not(.is-deck) .bar__title{display:none}
+
+/* Overview */
+.ov{position:fixed;inset:0;z-index:60;background:rgba(21,19,19,.97);color:var(--paper);padding:48px var(--pad-x) 90px;overflow-y:auto;opacity:0;visibility:hidden;transition:opacity .3s,visibility 0s .3s}
+.ov.is-open{opacity:1;visibility:visible;transition:opacity .3s}
+.ov__head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:28px}
+.ov__head h2{font-size:clamp(28px,3.4vw,44px);font-weight:600;letter-spacing:-.03em;font-stretch:85%}
+.ov__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.ov__grid button{display:grid;gap:6px;align-content:start;text-align:left;padding:16px;border:0;border-radius:var(--r-s);background:var(--night2);cursor:pointer;min-height:104px;transition:background .2s}
+.ov__grid button:hover,.ov__grid button[aria-current="true"]{background:var(--night3)}
+.ov__grid button[aria-current="true"]{box-shadow:inset 0 0 0 1.5px var(--amber)}
+.ov__grid span{font-family:var(--mono);font-size:12px;color:var(--amber)}
+.ov__grid b{font-size:18px;font-weight:600;line-height:1.2;letter-spacing:-.01em}
+.ov__grid small{font-size:13.5px;color:var(--smoke);line-height:1.35}
+.ov__close{border:0;border-radius:999px;background:var(--paper);color:var(--ink);padding:10px 18px;font-weight:600;cursor:pointer}
+
+/* ---------- Type ---------- */
+.eb{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--steel)}
+.eb b{display:inline-grid;place-items:center;min-width:30px;height:24px;padding:0 7px;border-radius:6px;background:var(--ink);color:var(--paper);font-weight:500}
+.is-dark .eb,.is-indigo .eb{color:var(--smoke)}
+.is-indigo .eb{color:rgba(255,255,255,.75)}
+.is-dark .eb b{background:var(--amber);color:var(--ink)}
+.is-indigo .eb b{background:#fff;color:var(--indigo)}
+.is-amber .eb{color:var(--amber-ink)}
+.h1{font-size:clamp(46px,min(9.4vw,14.5vh),150px);line-height:.86;font-weight:600;letter-spacing:-.05em;font-stretch:78%}
+.h2{font-size:clamp(30px,min(5.1vw,7.4vh),80px);line-height:.94;font-weight:600;letter-spacing:-.04em;font-stretch:80%;max-width:20ch;text-wrap:balance}
+.h2.is-m{font-size:clamp(28px,min(4.3vw,6.4vh),66px);max-width:24ch}
+.h2 em,.h1 em{font-style:normal;color:var(--indigo)}
+.is-dark .h2 em,.is-dark .h1 em{color:var(--amber)}
+.is-indigo .h2 em{color:var(--amber)}
+.h3{font-size:clamp(21px,1.9vw,28px);line-height:1.08;font-weight:600;letter-spacing:-.02em;font-stretch:90%}
+.lead{font-size:clamp(17px,1.45vw,22px);line-height:1.4;color:var(--graphite);max-width:52ch;text-wrap:pretty}
+.is-dark .lead{color:var(--smoke)}
+.is-indigo .lead{color:rgba(255,255,255,.82)}
+.small{font-size:14px;line-height:1.4;color:var(--steel)}
+.is-dark .small{color:var(--smoke)}
+.num-xl{font-size:clamp(46px,min(8vw,12vh),128px);line-height:.85;font-weight:600;letter-spacing:-.05em;font-stretch:76%;font-variant-numeric:tabular-nums}
+.src{font-family:var(--mono);font-size:11.5px;letter-spacing:.02em;color:var(--steel);text-decoration:none;border-bottom:1px dotted currentColor}
+.src:hover{color:var(--indigo)}
+.is-dark .src{color:var(--smoke)}
+.is-dark .src:hover{color:var(--amber)}
+.tag{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;text-transform:uppercase;background:var(--ash);color:var(--graphite);white-space:nowrap}
+.tag.is-est{background:var(--amber-t);color:var(--amber-ink)}
+.tag.is-src{background:var(--indigo-t);color:var(--indigo)}
+.is-dark .tag{background:var(--night3);color:var(--smoke)}
+.is-dark .tag.is-est{background:rgba(255,178,36,.16);color:var(--amber)}
+.head{display:grid;gap:clamp(12px,2vh,20px)}
+.fill{flex:1;min-height:0}
+.foot{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;margin-top:auto}
+
+/* ---------- Editable numbers ---------- */
+.ed{display:inline-block;width:auto;min-width:3ch;padding:0 2px;border:0;border-bottom:2px dashed var(--indigo);border-radius:0;background:transparent;font:inherit;font-variant-numeric:tabular-nums;color:inherit;text-align:inherit;outline:none;cursor:text;transition:background .2s}
+.ed:hover{background:rgba(61,43,219,.07)}
+.ed:focus{background:var(--indigo-t);border-bottom-style:solid}
+.is-dark .ed{border-bottom-color:var(--amber)}
+.is-dark .ed:hover{background:rgba(255,178,36,.1)}
+.is-dark .ed:focus{background:rgba(255,178,36,.18);color:var(--paper)}
+.rg{display:grid;gap:8px}
+.rg__top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:15px}
+.rg__top b{font-size:17px;font-variant-numeric:tabular-nums}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;cursor:pointer;margin:0}
+input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:6px;background:linear-gradient(90deg,var(--indigo) var(--p,50%),var(--bone) 0)}
+input[type=range]::-moz-range-track{height:6px;border-radius:6px;background:var(--bone)}
+input[type=range]::-moz-range-progress{height:6px;border-radius:6px;background:var(--indigo)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;margin-top:-9px;border-radius:50%;background:#fff;border:2px solid var(--indigo);box-shadow:0 2px 8px rgba(0,0,0,.18)}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#fff;border:2px solid var(--indigo)}
+.is-dark input[type=range]::-webkit-slider-runnable-track{background:linear-gradient(90deg,var(--amber) var(--p,50%),var(--night3) 0)}
+.is-dark input[type=range]::-moz-range-track{background:var(--night3)}
+.is-dark input[type=range]::-moz-range-progress{background:var(--amber)}
+.is-dark input[type=range]::-webkit-slider-thumb{border-color:var(--amber)}
+.edit-hint{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;letter-spacing:.03em;text-transform:uppercase;color:var(--indigo)}
+.is-dark .edit-hint{color:var(--amber)}
+.edit-hint i{width:16px;border-bottom:2px dashed currentColor}
+.reset{border:0;background:none;padding:0;font-family:var(--mono);font-size:12px;letter-spacing:.03em;text-transform:uppercase;color:var(--steel);text-decoration:underline;cursor:pointer}
+.is-dark .reset{color:var(--smoke)}
+
+/* ---------- 01 Cover ---------- */
+.cover{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(24px,4vw,64px);align-items:stretch;flex:1}
+.cover__text{display:flex;flex-direction:column;justify-content:space-between;gap:28px;padding-top:2vh}
+.cover__logo{display:flex;align-items:center;gap:12px;font-weight:600;font-size:18px;letter-spacing:-.01em}
+.cover__logo svg{width:34px;height:34px}
+.cover__line{font-size:clamp(20px,2vw,30px);line-height:1.2;letter-spacing:-.015em;color:var(--smoke);max-width:24ch;font-weight:500}
+.cover__line b{color:var(--paper);font-weight:600}
+.cover__meta{display:flex;flex-wrap:wrap;gap:8px}
+.cover__pic{position:relative;border-radius:var(--r);overflow:hidden;min-height:340px}
+.cover__pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cover__chip{position:absolute;left:16px;right:16px;bottom:16px;display:flex;justify-content:space-between;align-items:end;gap:12px;padding:16px 18px;border-radius:var(--r-s);background:rgba(21,19,19,.82);backdrop-filter:blur(10px);color:var(--paper)}
+.cover__chip b{display:block;font-size:clamp(30px,3.4vw,52px);line-height:.9;font-weight:600;letter-spacing:-.04em;font-stretch:78%;color:var(--amber)}
+.cover__chip span{font-size:14px;color:var(--smoke)}
+.cover__keys{font-family:var(--mono);font-size:12px;color:var(--smoke);letter-spacing:.03em}
+.cover__keys kbd{display:inline-grid;place-items:center;min-width:24px;height:22px;padding:0 5px;margin:0 2px;border-radius:5px;border:1px solid var(--line-d);font-family:inherit}
+
+/* ---------- 02 Statement ---------- */
+.stmt{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);flex:1;align-items:center}
+.stmt__pic{position:relative;border-radius:var(--r);overflow:hidden;height:100%;min-height:320px;max-height:72vh}
+.stmt__pic img{width:100%;height:100%;object-fit:cover;object-position:50% 70%}
+.stmt__pic figcaption{position:absolute;left:12px;bottom:12px;padding:6px 10px;border-radius:6px;background:rgba(21,19,19,.7);color:#ddd;font-family:var(--mono);font-size:11px}
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.trio>div{display:grid;gap:8px;align-content:start;padding:18px;border-radius:var(--r-s);background:var(--white)}
+.trio b{font-size:clamp(30px,3.2vw,48px);line-height:.9;font-weight:600;letter-spacing:-.04em;font-stretch:78%}
+.trio span{font-size:15px;line-height:1.35;color:var(--graphite)}
+
+/* ---------- 03 Owner's day ---------- */
+.owner{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,4vw,64px);flex:1}
+.owner__pic{position:relative;border-radius:var(--r);overflow:hidden;min-height:320px}
+.owner__pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:35% 50%}
+.owner__id{position:absolute;left:14px;right:14px;bottom:14px;padding:14px 16px;border-radius:var(--r-s);background:rgba(255,255,255,.94);color:var(--ink)}
+.owner__id b{display:block;font-size:22px;letter-spacing:-.02em}
+.owner__id span{font-size:14px;color:var(--steel)}
+.dayl{display:grid;gap:0;align-content:start}
+.dayl li{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:16px;align-items:baseline;padding:14px 0;border-top:1px solid var(--line-d)}
+.dayl li:last-child{border-bottom:1px solid var(--line-d)}
+.dayl time{font-family:var(--mono);font-size:13px;color:var(--amber)}
+.dayl p{font-size:clamp(16px,1.35vw,20px);line-height:1.32;color:var(--paper)}
+.dayl p small{display:block;font-size:14px;color:var(--smoke);margin-top:3px}
+.dayl em{font-style:normal;font-family:var(--mono);font-size:12.5px;padding:4px 8px;border-radius:6px;background:rgba(232,65,44,.18);color:#FF8A78;white-space:nowrap}
+.repeat{font-size:clamp(20px,1.8vw,28px);font-weight:600;letter-spacing:-.02em;color:var(--paper)}
+.repeat span{color:var(--amber)}
+
+/* ---------- 04 Loss calculator ---------- */
+.loss{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(20px,3vw,48px);flex:1;align-items:start}
+.loss__rows{display:grid;gap:8px}
+.lr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 18px;align-items:center;padding:14px 16px;border-radius:var(--r-s);background:var(--white)}
+.lr h4{font-size:17px;font-weight:600;letter-spacing:-.01em}
+.lr p{grid-column:1;font-size:14.5px;line-height:1.45;color:var(--graphite)}
+.lr p .ed{font-weight:600;color:var(--ink)}
+.lr>b{grid-row:1/3;grid-column:2;font-size:22px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--red);text-align:right;white-space:nowrap}
+.lr>b small{display:block;font-size:12px;font-weight:400;color:var(--steel);font-family:var(--mono);letter-spacing:.02em}
+.loss__total{position:sticky;top:0;display:grid;gap:18px;padding:clamp(20px,2.4vw,32px);border-radius:var(--r);background:var(--night);color:var(--paper)}
+.loss__total .num-xl{color:var(--amber)}
+.loss__vs{display:grid;gap:10px}
+.vsbar{display:grid;grid-template-columns:120px minmax(0,1fr) auto;gap:12px;align-items:center;font-size:14px}
+.vsbar i{display:block;height:14px;border-radius:4px;background:var(--red);min-width:3px;transition:width .5s var(--ease)}
+.vsbar.is-us i{background:var(--amber)}
+.vsbar b{font-variant-numeric:tabular-nums;white-space:nowrap}
+.loss__x{font-size:clamp(19px,1.6vw,24px);line-height:1.3;font-weight:500}
+.loss__x b{color:var(--amber)}
+
+/* ---------- 05 Typed three times ---------- */
+.chain{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;position:relative;flex:1;align-content:center}
+.ch{position:relative;display:grid;gap:14px;align-content:start;padding:22px;margin:0 6px;border-radius:var(--r);background:var(--white)}
+.ch__who{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.ch__who b{font-size:20px;letter-spacing:-.015em}
+.ch__n{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--red);color:#fff;font-size:22px;font-weight:700}
+.ch__bill{display:grid;gap:5px;padding:12px;border-radius:8px;background:var(--paper);font-family:var(--mono);font-size:11.5px;color:var(--graphite)}
+.ch__bill div{display:flex;justify-content:space-between;gap:8px;border-bottom:1px dashed var(--line-s);padding-bottom:4px}
+.ch__bill div:last-child{border:0}
+.ch p{font-size:15px;line-height:1.4;color:var(--graphite)}
+.ch p b{color:var(--ink)}
+.ch__arrow{position:absolute;top:50%;right:-19px;z-index:2;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--ink);color:#fff;transform:translateY(-50%)}
+.ch__arrow svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.gaps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.gaps li{display:grid;gap:4px;padding:14px 16px;border-radius:var(--r-s);background:var(--ash)}
+.gaps b{font-size:15.5px}
+.gaps span{font-size:14px;line-height:1.35;color:var(--graphite)}
+
+/* ---------- 06 Law ---------- */
+.law{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;flex:1;align-content:center}
+.lw{display:grid;grid-template-rows:auto auto 1fr auto;gap:12px;padding:20px;border-radius:var(--r);background:var(--night2);min-height:280px}
+.lw time{font-family:var(--mono);font-size:12px;color:var(--smoke)}
+.lw b{font-size:clamp(34px,3.6vw,56px);line-height:.88;font-weight:600;letter-spacing:-.04em;font-stretch:78%;color:var(--amber)}
+.lw h4{font-size:18px;line-height:1.2;letter-spacing:-.01em;font-weight:600;color:var(--paper)}
+.lw p{font-size:14.5px;line-height:1.4;color:var(--smoke)}
+.lw .src{align-self:end}
+
+/* ---------- 07 Today's software ---------- */
+.soft{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;align-content:start}
+.sw{display:flex;flex-direction:column;border-radius:var(--r);background:var(--white);overflow:hidden}
+.sw__img{position:relative;flex:none;height:clamp(96px,16vh,170px);background:#e4e3df;overflow:hidden}
+.sw__img img{width:100%;height:100%;object-fit:cover;object-position:0 0}
+.sw__img.is-phone img{object-fit:contain;background:#d8d7d3}
+.sw__yr{position:absolute;top:10px;left:10px;padding:4px 8px;border-radius:6px;background:var(--ink);color:var(--amber);font-family:var(--mono);font-size:11.5px}
+.sw__body{display:grid;gap:5px;align-content:start;padding:12px 14px 14px}
+.sw__body b{font-size:16.5px;letter-spacing:-.01em}
+.sw__body span{font-size:13.5px;line-height:1.38;color:var(--graphite)}
+.sw__body .src{margin-top:4px;justify-self:start}
+
+/* ---------- 08 Timeline ---------- */
+.tl{position:relative;flex:1;display:grid;align-content:center;gap:28px}
+.tl__axis{position:relative;height:300px}
+.tl__line{position:absolute;left:0;right:0;top:150px;height:2px;background:var(--line-d)}
+.tl__line i{position:absolute;top:0;bottom:0;background:var(--amber)}
+.tlp{position:absolute;width:150px;transform:translateX(-50%);display:grid;gap:5px;text-align:center}
+.tlp.is-up{bottom:160px}
+.tlp.is-down{top:162px}
+.tlp::after{content:'';position:absolute;left:50%;width:2px;background:var(--line-d)}
+.tlp.is-up::after{bottom:-10px;height:10px}
+.tlp.is-down::after{top:-12px;height:12px}
+.tlp time{font-family:var(--mono);font-size:13px;color:var(--smoke)}
+.tlp b{font-size:15px;line-height:1.25;color:var(--paper);font-weight:600}
+.tlp span{font-size:12.5px;line-height:1.3;color:var(--smoke)}
+.tlp.is-them b{color:var(--amber)}
+.tlp.is-them time{color:var(--amber)}
+.tl__dot{position:absolute;top:145px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--paper)}
+.tl__dot.is-them{background:var(--amber);box-shadow:0 0 0 5px rgba(255,178,36,.2)}
+.signs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.signs li{padding:14px 16px;border-radius:var(--r-s);background:var(--night2);font-size:15px;line-height:1.35;color:var(--smoke)}
+.signs b{display:block;color:var(--paper);margin-bottom:3px}
+
+/* ---------- 09 Size ---------- */
+.size{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto;gap:10px;flex:1;align-content:center}
+.sz{display:grid;gap:12px;align-content:space-between;padding:clamp(18px,2vw,28px);border-radius:var(--r);background:rgba(255,255,255,.1)}
+.sz.is-big{grid-row:span 2;background:#fff;color:var(--ink)}
+.sz.is-big .num-xl{font-size:clamp(64px,9vw,150px);color:var(--indigo)}
+.sz .num-xl{font-size:clamp(44px,5vw,84px)}
+.sz p{font-size:16px;line-height:1.38}
+.sz.is-big p{color:var(--graphite)}
+.sz:not(.is-big) p{color:rgba(255,255,255,.82)}
+.is-indigo .src{color:rgba(255,255,255,.75)}
+.sz.is-big .src{color:var(--steel)}
+
+/* ---------- 10 Funnel ---------- */
+.fun{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(20px,3vw,48px);flex:1;align-items:center}
+.fn{display:grid;gap:8px}
+.fn__row{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:16px;align-items:center}
+.fn__bar{position:relative;height:58px;border-radius:8px;background:var(--ash);overflow:hidden}
+.fn__bar i{position:absolute;inset:0 auto 0 0;border-radius:8px;background:var(--ink);transition:width .6s var(--ease)}
+.fn__bar span{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-weight:600;font-size:16px;color:#fff;mix-blend-mode:normal;z-index:1;white-space:nowrap}
+.fn__row.is-out .fn__bar i{background:var(--bone)}
+.fn__row.is-out .fn__bar span{color:var(--graphite)}
+.fn__row.is-us .fn__bar i{background:var(--indigo)}
+.fn__val{display:grid;gap:2px;font-variant-numeric:tabular-nums}
+.fn__val b{font-size:22px;letter-spacing:-.02em}
+.fn__val small{font-size:12.5px;color:var(--steel)}
+.fn__row .ed{font-size:22px;font-weight:600;letter-spacing:-.02em;width:7ch}
+.share{display:grid;gap:14px;padding:clamp(20px,2.4vw,30px);border-radius:var(--r);background:var(--night);color:var(--paper)}
+.share__bar{display:flex;height:44px;border-radius:8px;overflow:hidden}
+.share__bar i{display:grid;place-items:center;font-style:normal;font-size:13px;font-weight:600;color:var(--ink)}
+.share__leg{display:grid;gap:6px;font-size:14.5px;color:var(--smoke)}
+.share__leg b{color:var(--paper)}
+.share__leg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:8px}
+
+/* ---------- 11 Educated & paying ---------- */
+.pay3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;flex:1;align-content:center}
+.py{display:grid;grid-template-rows:auto auto 1fr auto;gap:14px;padding:clamp(20px,2.4vw,30px);border-radius:var(--r);background:var(--white);min-height:300px}
+.py .num-xl{font-size:clamp(46px,5.6vw,92px);color:var(--indigo)}
+.py h4{font-size:20px;line-height:1.2;letter-spacing:-.015em}
+.py p{font-size:15px;line-height:1.42;color:var(--graphite)}
+.prices{display:grid;gap:6px}
+.prices li{display:grid;grid-template-columns:92px minmax(0,1fr);gap:10px;align-items:center;font-size:13px}
+.prices li i{display:block;height:10px;border-radius:3px;background:var(--indigo)}
+.prices li span{display:flex;justify-content:space-between;gap:8px}
+.replace{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;padding:18px 22px;border-radius:var(--r);background:var(--ink);color:var(--paper)}
+.replace b{font-size:clamp(20px,1.9vw,28px);letter-spacing:-.02em;font-weight:600}
+.replace span{color:var(--smoke);font-size:15.5px}
+
+/* ---------- 12 Store types ---------- */
+.st{display:grid;gap:12px;flex:1;align-content:start}
+.st__tbl{width:100%;border-collapse:separate;border-spacing:0 5px;font-size:15px}
+.st__tbl th{font-family:var(--mono);font-size:11.5px;font-weight:400;letter-spacing:.04em;text-transform:uppercase;color:var(--steel);text-align:right;padding:0 14px 2px}
+.st__tbl th:first-child{text-align:left}
+.st__tbl td{background:var(--white);padding:9px 14px;text-align:right;font-variant-numeric:tabular-nums;vertical-align:middle}
+.st__tbl td:first-child{text-align:left;border-radius:var(--r-s) 0 0 var(--r-s)}
+.st__tbl td:last-child{border-radius:0 var(--r-s) var(--r-s) 0}
+.st__tbl td b{font-weight:600;font-size:16px}
+.st__tbl td small{display:block;font-size:12.5px;color:var(--steel);font-weight:400;margin-top:2px}
+.st__tbl .ed{width:5.5ch;text-align:right;font-weight:600}
+.st__tbl tr.is-no td{background:var(--ash);color:var(--steel)}
+.fit{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;font-size:12.5px;font-weight:600;white-space:nowrap}
+.fit.is-yes{background:var(--indigo);color:#fff}
+.fit.is-no{background:var(--bone);color:var(--graphite)}
+.fit.is-paid{background:var(--amber);color:var(--ink)}
+.st__sum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.st__sum div{display:grid;gap:4px;padding:12px 16px;border-radius:var(--r-s);background:var(--night);color:var(--paper)}
+.st__sum div.is-key{background:var(--indigo)}
+.st__sum span{font-size:13.5px;line-height:1.35;color:var(--smoke)}
+.st__sum .is-key span{color:rgba(255,255,255,.8)}
+.st__sum b{font-size:clamp(24px,min(2.6vw,4.4vh),40px);line-height:.92;letter-spacing:-.04em;font-weight:600;font-stretch:80%;font-variant-numeric:tabular-nums}
+
+/* ---------- 13 Product ---------- */
+.prod{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(20px,3vw,44px);flex:1;align-items:center}
+.shot{position:relative;border-radius:var(--r);overflow:hidden;background:#fff;box-shadow:0 0 0 1px var(--line),0 30px 60px -30px rgba(0,0,0,.35)}
+.shot img{width:100%;height:auto}
+.is-dark .shot{box-shadow:0 0 0 1px var(--line-d),0 30px 60px -20px rgba(0,0,0,.6)}
+.who4{display:grid;gap:8px}
+.who4 li{display:grid;grid-template-columns:46px minmax(0,1fr) auto;gap:4px 14px;align-items:center;padding:14px 16px;border-radius:var(--r-s);background:var(--night2)}
+.who4 .av{grid-column:1;grid-row:1/3;display:grid;place-items:center;width:46px;height:46px;border-radius:12px;font-weight:700;font-size:15px}
+.who4 b{grid-column:2;grid-row:1;font-size:17px;color:var(--paper)}
+.who4 span:not(.av){grid-column:2;grid-row:2;font-size:14px;line-height:1.35;color:var(--smoke)}
+.who4 em{grid-row:1/3;grid-column:3;font-style:normal;font-family:var(--mono);font-size:11.5px;padding:5px 9px;border-radius:999px;white-space:nowrap}
+.once{display:flex;align-items:baseline;gap:14px;font-size:clamp(18px,1.6vw,23px);color:var(--paper);font-weight:500}
+.once b{font-size:clamp(40px,4vw,64px);line-height:.9;color:var(--amber);letter-spacing:-.04em;font-stretch:78%}
+
+/* ---------- 14 Solve tabs ---------- */
+.solve{display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.5fr);gap:clamp(18px,2.6vw,40px);flex:1;align-items:start}
+.tabs{display:grid;gap:6px}
+.tab{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 12px;text-align:left;padding:14px 16px;border:0;border-radius:var(--r-s);background:var(--white);cursor:pointer;transition:background .25s,color .25s}
+.tab b{font-size:17px;letter-spacing:-.01em}
+.tab span{grid-column:1;font-size:13.5px;line-height:1.35;color:var(--steel)}
+.tab span s{color:var(--red)}
+.tab em{grid-row:1/3;grid-column:2;align-self:center;font-style:normal;font-family:var(--mono);font-size:12px;color:var(--green);white-space:nowrap}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--paper)}
+.tab[aria-selected="true"] span{color:var(--smoke)}
+.tab[aria-selected="true"] span s{color:#FF8A78}
+.tab[aria-selected="true"] em{color:var(--amber)}
+.stage{display:grid;gap:14px}
+.stage__cap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.stage__cap div{padding:14px 16px;border-radius:var(--r-s);font-size:15px;line-height:1.38}
+.stage__cap .is-then{background:var(--red-t);color:#7A1E12}
+.stage__cap .is-now{background:var(--indigo-t);color:#24198A}
+.stage__cap b{display:block;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px}
+.stage .shot{aspect-ratio:16/10}
+.stage .shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:0 0;transition:opacity .35s}
+.stage .shot.is-phone{background:var(--ash);display:grid;place-items:center}
+.stage .shot.is-phone img{position:static;width:auto;height:94%;object-fit:contain;margin:auto}
+
+/* ---------- 15 Moving in ---------- */
+.move{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(20px,3vw,44px);flex:1;align-items:center}
+.mvl{display:grid;gap:6px}
+.mvl li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;align-items:center;padding:9px 14px;border-radius:var(--r-s);background:var(--white)}
+.mvl b{font-size:16px}
+.mvl span{grid-column:1;font-size:13.5px;color:var(--steel)}
+.mvl em{grid-row:1/3;grid-column:2;font-style:normal;font-size:12.5px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--ash);white-space:nowrap}
+.mvl em.is-now{background:var(--indigo);color:#fff}
+.steps3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.steps3 li{display:grid;gap:3px;align-content:start;padding:12px;border-radius:var(--r-s);background:var(--ink);color:var(--paper)}
+.steps3 b{font-size:15.5px}
+.steps3 span{font-size:13px;line-height:1.35;color:var(--smoke)}
+.steps3 i{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--amber)}
+
+/* ---------- 16 Matrix ---------- */
+.mx{width:100%;border-collapse:separate;border-spacing:0;font-size:15px}
+.mx th,.mx td{padding:min(11px,1.1vh) 12px;border-bottom:1px solid var(--line-d);text-align:center}
+.mx th{font-family:var(--mono);font-size:12px;font-weight:400;letter-spacing:.03em;text-transform:uppercase;color:var(--smoke);vertical-align:bottom}
+.mx th:first-child,.mx td:first-child{text-align:left;color:var(--paper)}
+.mx td:first-child{font-size:15.5px}
+.mx th.is-us{color:var(--amber)}
+.mx td.is-us{background:rgba(255,178,36,.08)}
+.mx .d{display:inline-block;width:14px;height:14px;border-radius:50%;background:var(--paper)}
+.mx .d.is-h{background:linear-gradient(90deg,var(--paper) 50%,transparent 0);box-shadow:inset 0 0 0 1.5px var(--paper)}
+.mx .d.is-n{width:12px;height:2px;border-radius:2px;background:var(--night3);vertical-align:middle}
+.mx td.is-us .d{background:var(--amber)}
+.mxkey{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13.5px;color:var(--smoke)}
+.mxkey span{display:inline-flex;align-items:center;gap:8px}
+.mxkey .d{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--paper)}
+.mxkey .d.is-h{background:linear-gradient(90deg,var(--paper) 50%,transparent 0);box-shadow:inset 0 0 0 1.5px var(--paper)}
+.mxkey .d.is-n{width:12px;height:2px;border-radius:2px;background:var(--smoke)}
+.mx-wrap{overflow-x:auto}
+
+/* ---------- 17 Business model ---------- */
+.bm{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;flex:1;align-content:center}
+.pl{display:grid;grid-template-rows:auto auto auto 1fr;gap:12px;padding:clamp(18px,2vw,26px);border-radius:var(--r);background:var(--white);min-height:330px}
+.pl.is-main{background:var(--indigo);color:#fff}
+.pl.is-free{background:var(--ash)}
+.pl__who{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--steel)}
+.pl.is-main .pl__who{color:rgba(255,255,255,.75)}
+.pl__price{font-size:clamp(38px,3.8vw,60px);line-height:.88;font-weight:600;letter-spacing:-.045em;font-stretch:78%;font-variant-numeric:tabular-nums}
+.pl__price .ed{width:5ch}
+.pl.is-main .ed{border-bottom-color:var(--amber)}
+.pl.is-main .ed:focus{background:rgba(255,255,255,.14);color:#fff}
+.pl__price small{display:block;font-size:14px;font-weight:400;letter-spacing:0;color:var(--steel);margin-top:8px;font-stretch:100%}
+.pl.is-main .pl__price small{color:rgba(255,255,255,.75)}
+.pl ul{display:grid;gap:7px;align-content:start}
+.pl li{position:relative;padding-left:18px;font-size:14.5px;line-height:1.38}
+.pl li::before{content:'';position:absolute;left:0;top:.55em;width:8px;height:8px;border-radius:2px;background:var(--indigo)}
+.pl.is-main li::before{background:var(--amber)}
+.unit{display:flex;flex-wrap:wrap;gap:10px}
+.unit div{flex:1 1 200px;display:grid;gap:4px;padding:14px 16px;border-radius:var(--r-s);background:var(--ink);color:var(--paper)}
+.unit span{font-size:13px;color:var(--smoke)}
+.unit b{font-size:24px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+
+/* ---------- 18 Costs ---------- */
+.costs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;flex:1;align-content:center}
+.cc{display:grid;gap:10px;align-content:start;padding:clamp(18px,2vw,26px);border-radius:var(--r);background:var(--night2)}
+.cc h4{font-size:19px;letter-spacing:-.015em;color:var(--paper)}
+.cc p{font-size:14.5px;line-height:1.4;color:var(--smoke)}
+.cc__v{font-size:clamp(34px,3.4vw,54px);line-height:.9;font-weight:600;letter-spacing:-.045em;font-stretch:78%;color:var(--paper)}
+.cc__v .ed{width:7ch}
+.cc__v small{font-size:14px;font-weight:400;letter-spacing:0;color:var(--smoke);margin-left:6px;font-stretch:100%}
+.cc.is-total{background:var(--amber);color:var(--ink)}
+.cc.is-total h4{color:var(--ink)}
+.cc.is-total p{color:var(--amber-ink)}
+.cc.is-total .cc__v{color:var(--ink)}
+.cc.is-total .cc__v small{color:var(--amber-ink)}
+
+/* ---------- 19 Earnings ---------- */
+.earn{display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);gap:clamp(18px,2.6vw,40px);flex:1;align-items:start}
+.earn__in{display:grid;gap:18px;padding:clamp(18px,2vw,26px);border-radius:var(--r);background:var(--white)}
+.earn__out{display:grid;gap:10px}
+.kp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.kp div{display:grid;gap:4px;padding:14px 16px;border-radius:var(--r-s);background:var(--white)}
+.kp div.is-key{background:var(--indigo);color:#fff}
+.kp span{font-size:13px;line-height:1.3;color:var(--steel)}
+.kp .is-key span{color:rgba(255,255,255,.8)}
+.kp b{font-size:clamp(24px,2.3vw,36px);line-height:.95;letter-spacing:-.035em;font-weight:600;font-stretch:84%;font-variant-numeric:tabular-nums}
+.chart{position:relative;padding:14px 16px 10px;border-radius:var(--r-s);background:var(--white)}
+.chart svg{display:block;width:100%;height:auto}
+.chart__leg{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--graphite);margin-bottom:6px}
+.chart__leg i{display:inline-block;width:14px;height:3px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.earn__note{font-size:14px;line-height:1.4;color:var(--graphite)}
+.earn__note b{color:var(--ink)}
+
+/* ---------- 20 See it ---------- */
+.see{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(20px,3vw,48px);flex:1;align-items:center}
+.see__btn{display:inline-flex;align-items:center;gap:12px;padding:18px 24px;border-radius:999px;background:var(--amber);color:var(--ink);font-weight:600;font-size:18px;text-decoration:none;transition:transform .2s var(--ease)}
+.see__btn:hover{transform:translateY(-2px)}
+.see__btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.see__url{font-family:var(--mono);font-size:14px;color:var(--smoke);word-break:break-all}
+.collage{position:relative;aspect-ratio:16/12}
+.collage .shot{position:absolute;width:74%}
+.collage .shot:nth-child(1){left:0;top:0}
+.collage .shot:nth-child(2){right:0;top:22%}
+.collage .shot:nth-child(3){left:10%;bottom:0;width:60%}
+.collage .ph{position:absolute;right:6%;bottom:2%;width:20%;border-radius:18px;overflow:hidden;border:5px solid #111;box-shadow:0 20px 40px -10px rgba(0,0,0,.6)}
+.contact{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:15px;color:var(--smoke)}
+.contact a{color:var(--paper)}
+
+/* ---------- 21 Sources ---------- */
+.srcs{columns:2;column-gap:40px;font-size:14px;line-height:1.45}
+.srcs li{break-inside:avoid;padding:8px 0;border-top:1px solid var(--line)}
+.srcs li b{font-weight:600}
+.srcs li a{color:var(--indigo);word-break:break-word}
+.srcs li span{color:var(--steel)}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1180px){
+  .soft{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .law{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bm{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .gaps,.signs{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .st__sum{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:899px){
+  :root{--bar:58px}
+  body{font-size:16px}
+  .sl{min-height:auto;padding-top:56px;padding-bottom:64px;border-bottom:1px solid var(--line)}
+  .sl.is-cover{min-height:100svh}
+  .cover,.stmt,.owner,.loss,.fun,.prod,.solve,.move,.earn,.see{grid-template-columns:minmax(0,1fr)}
+  .chain{grid-template-columns:minmax(0,1fr);gap:22px}
+  .ch{margin:0}
+  .ch__arrow{top:auto;bottom:-27px;right:50%;transform:translateX(50%) rotate(90deg)}
+  .trio,.pay3,.costs,.steps3{grid-template-columns:minmax(0,1fr)}
+  .size{grid-template-columns:minmax(0,1fr)}
+  .sz.is-big{grid-row:auto}
+  .soft{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .law,.bm{grid-template-columns:minmax(0,1fr)}
+  .kp{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tl__axis{height:auto;display:grid;gap:10px}
+  .tl__line,.tl__dot{display:none}
+  .tlp{position:static;width:auto;transform:none;text-align:left;padding:10px 14px;border-left:3px solid var(--night3)}
+  .tlp.is-them{border-left-color:var(--amber)}
+  .tlp::after{display:none}
+  .srcs{columns:1}
+  .loss__total{position:static}
+  .bar__title{display:none}
+  .dayl li{grid-template-columns:72px minmax(0,1fr)}
+  .who4 li{grid-template-columns:46px minmax(0,1fr)}
+  .who4 em{grid-column:2;grid-row:3;justify-self:start;margin-top:4px}
+  .dayl em{grid-column:2;justify-self:start}
+  .st-wrap{overflow-x:auto;margin:0 calc(var(--pad-x)*-1);padding:0 var(--pad-x)}
+  .st__tbl{min-width:760px}
+  .stage__cap{grid-template-columns:minmax(0,1fr)}
+  .fn__row{grid-template-columns:minmax(0,1fr) 112px}
+  .fn__bar span{font-size:14px}
+  .cover__pic{min-height:300px}
+}
+@media (max-width:560px){
+  .soft,.gaps,.signs,.st__sum{grid-template-columns:minmax(0,1fr)}
+  .kp{grid-template-columns:minmax(0,1fr)}
+  .vsbar{grid-template-columns:92px minmax(0,1fr) auto}
+}
+</style>
+</head>
+<body>
+<div class="prog" aria-hidden="true"><i id="prog"></i></div>
+<main class="deck" id="deck">
+
+<!-- 01 COVER -->
+<section class="sl is-dark is-cover" data-title="Pharmacy OS" data-sub="The cover">
+  <div class="cover">
+    <div class="cover__text">
+      <div class="cover__logo"><svg viewBox="0 0 80 80" aria-hidden="true"><rect width="80" height="80" rx="18" fill="#2A2626"/><g transform="rotate(-45 40 40)"><path d="M40 24H26a16 16 0 0 0 0 32h14z" fill="#A99DFF"/><path d="M40 24h14a16 16 0 0 1 0 32H40z" fill="#FFB224"/></g></svg>Pharmacy OS</div>
+      <div class="head">
+        <span class="eb"><b>Pitch</b> For investors · November 2026</span>
+        <h1 class="h1">The medical store, <em>rebuilt</em> for 2026.</h1>
+        <p class="cover__line"><b>One system for the store, its distributor and its accountant.</b> Built to replace the software India’s chemists have used since the 1990s.</p>
+      </div>
+      <div class="cover__meta">
+        <span class="tag">By One Stop Solutions</span><span class="tag">Starting in Andhra Pradesh and Telangana</span>
+      </div>
+      <p class="cover__keys">Use <kbd>←</kbd><kbd>→</kbd> or swipe to move. <kbd>G</kbd> for all slides. Numbers with a dashed line can be changed.</p>
+    </div>
+    <figure class="cover__pic">
+      <img src="/pharmacy-os/pitch/img/photo/strips.webp" alt="Strips of blue and red tablets on a pharmacy counter" fetchpriority="high">
+      <div class="cover__chip"><div><b data-o="indepIndia">7.5 lakh</b><span>independent medical stores in India</span></div><span class="tag is-est">The market</span></div>
+    </figure>
+  </div>
+</section>
+
+<!-- 02 STATEMENT -->
+<section class="sl" data-title="The problem in one line" data-sub="Why this matters">
+  <div class="head">
+    <span class="eb"><b>01</b> The problem</span>
+    <h2 class="h2">India’s medicines reach people through <em>small medical stores.</em> They run on software from another era.</h2>
+  </div>
+  <div class="stmt fill">
+    <figure class="stmt__pic"><img src="/pharmacy-os/pitch/img/photo/store-front.webp" alt="An owner reading the newspaper outside a small medical store in Bijapur" loading="lazy"><figcaption>A medical store in Bijapur, Karnataka</figcaption></figure>
+    <div style="display:grid;gap:14px;align-content:center">
+      <p class="lead">Nine of every ten medical stores are run by one owner. He orders, receives, bills, files GST and keeps the law, mostly by hand or in old desktop software. Every gap costs him money, and it can cost him his licence.</p>
+      <div class="trio">
+        <div><b>8 lakh</b><span>retail medical stores</span><a class="src" href="#src" data-s="tpk">Technopak</a></div>
+        <div><b>~54%</b><span>of medicine sales go through standalone stores</span><a class="src" href="#src" data-s="ipa">IPA 2024</a></div>
+        <div><b>3×</b><span>the same bill is typed, by three people</span><a class="src" href="#src" data-s="visits">Our visits</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 OWNER'S DAY -->
+<section class="sl is-dark" data-title="Meet the owner" data-sub="One day in a medical store">
+  <div class="head">
+    <span class="eb"><b>02</b> One store, one day</span>
+    <h2 class="h2">Meet Prasad. He runs <em>one medical store</em> in Vijayawada.</h2>
+  </div>
+  <div class="owner fill">
+    <figure class="owner__pic"><img src="/pharmacy-os/pitch/img/photo/owner-shelf.webp" alt="A pharmacist reaching for a box of medicine on a shelf" loading="lazy">
+      <figcaption class="owner__id"><b>Prasad, 38, D.Pharm</b><span>Owner for 12 years. 2 staff. Sells about ₹4 lakh a month. A typical owner, drawn from our store visits. Name and photo are illustrative.</span></figcaption></figure>
+    <div style="display:grid;gap:18px;align-content:start">
+      <ol class="dayl">
+        <li><time>8:00 am</time><p>Writes the want list in a notebook.<small>What sold yesterday, what ran out. From memory.</small></p><em>Guesswork</em></li>
+        <li><time>10:30 am</time><p>Orders by phone, WhatsApp and two apps.<small>Five distributors, five rates. He can’t compare them.</small></p><em>Overpays</em></li>
+        <li><time>2:00 pm</time><p>The parcel comes. He types 40 lines from the paper bill.<small>90 minutes. A wrong rate or a missing free strip goes unseen.</small></p><em>90 min lost</em></li>
+        <li><time>5:30 pm</time><p>A regular asks for her BP tablets. Out of stock.<small>She buys from an app this month. Maybe every month.</small></p><em>Sale lost</em></li>
+        <li><time>8:30 pm</time><p>Finds three expired strips on the shelf.<small>Past the return date. Written off.</small></p><em>₹1,140 gone</em></li>
+        <li><time>Month end</time><p>Sends bill photos to his accountant on WhatsApp.<small>Who types every one again into Tally.</small></p><em>Typed again</em></li>
+      </ol>
+      <p class="repeat">26 days a month. <span>Every month.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- 04 WHAT IT COSTS -->
+<section class="sl" data-title="What it costs him" data-sub="Money lost in one ordinary store">
+  <div class="head">
+    <span class="eb"><b>03</b> What it costs</span>
+    <h2 class="h2">An ordinary store quietly loses <em>lakhs</em> every year.</h2>
+    <span class="edit-hint"><i></i>Change any underlined number</span>
+  </div>
+  <div class="loss fill">
+    <div class="loss__rows">
+      <div class="lr"><h4>Medicines that expire on the shelf</h4><p>Sales of ₹<input class="ed" data-k="sales" aria-label="Monthly sales in rupees"> a month. <input class="ed" data-k="expiryPct" aria-label="Expiry loss percent"> % of stock bought expires before it sells.</p><b data-o="l_exp"></b></div>
+      <div class="lr"><h4>Hours spent typing distributors’ bills</h4><p><input class="ed" data-k="typeHrs" aria-label="Hours a day typing bills"> hours a day, at ₹<input class="ed" data-k="wage" aria-label="Cost of an hour"> an hour of staff time.</p><b data-o="l_type"></b></div>
+      <div class="lr"><h4>Sales lost when it isn’t in stock</h4><p><input class="ed" data-k="missed" aria-label="Missed sales a day"> customers a day turned away, ₹<input class="ed" data-k="ticket" aria-label="Average bill"> a bill, <input class="ed" data-k="margin" aria-label="Margin percent"> % margin.</p><b data-o="l_miss"></b></div>
+      <div class="lr"><h4>Wrong rates and missing free strips</h4><p><input class="ed" data-k="errPct" aria-label="Billing error percent"> % of purchases overcharged and never claimed.</p><b data-o="l_err"></b></div>
+      <div class="lr"><h4>Regular customers drifting to apps</h4><p><input class="ed" data-k="appPct" aria-label="Sales lost to apps percent"> % of sales lost to apps and chains, at the same margin.</p><b data-o="l_app"></b></div>
+    </div>
+    <div class="loss__total">
+      <span class="eb" style="color:var(--smoke)">One store loses, every year</span>
+      <div class="num-xl" data-o="l_total"></div>
+      <div class="loss__vs" aria-hidden="true">
+        <div class="vsbar"><span>Lost a year</span><i data-w="lost"></i><b data-o="l_total2"></b></div>
+        <div class="vsbar is-us"><span>Pharmacy OS</span><i data-w="price"></i><b data-o="priceY"></b></div>
+      </div>
+      <p class="loss__x">He loses <b data-o="l_times"></b> what our software costs him.</p>
+      <p class="small">Our estimate, built from store visits in October 2026. Your own numbers will differ; change them.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 05 TYPED THREE TIMES -->
+<section class="sl" data-title="Nobody is connected" data-sub="The same bill, typed three times">
+  <div class="head">
+    <span class="eb"><b>04</b> Why it happens</span>
+    <h2 class="h2">Nobody in the chain is connected. <em>One bill is typed three times.</em></h2>
+  </div>
+  <div class="chain fill">
+    <div class="ch">
+      <div class="ch__who"><b>The distributor</b><span class="ch__n">1</span></div>
+      <div class="ch__bill" aria-hidden="true"><div><span>PARACETAMOL 650</span><span>20 × ₹36</span></div><div><span>TELMA 40</span><span>12 × ₹118</span></div><div><span>PAN 40</span><span>10 × ₹58</span></div><div><span>+ 37 more lines</span><span>₹14,760</span></div></div>
+      <p>Types the order into <b>his</b> billing software. Prints a paper bill. Sends the parcel. Nobody knows where it is until it arrives.</p>
+      <span class="ch__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </div>
+    <div class="ch">
+      <div class="ch__who"><b>The store</b><span class="ch__n">2</span></div>
+      <div class="ch__bill" aria-hidden="true"><div><span>Paracetamol 650</span><span>typed…</span></div><div><span>Telmisartan 40</span><span>typed…</span></div><div><span>Pantoprazole 40</span><span>typed…</span></div><div><span>37 more to go</span><span>90 min</span></div></div>
+      <p>Types the <b>same bill</b> again into <b>his</b> software, line by line, batch by batch. Errors in rate or quantity slip through.</p>
+      <span class="ch__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </div>
+    <div class="ch">
+      <div class="ch__who"><b>The accountant</b><span class="ch__n">3</span></div>
+      <div class="ch__bill" aria-hidden="true"><div><span>Purchase: Krishna Pharma</span><span>typed…</span></div><div><span>GST 5%</span><span>typed…</span></div><div><span>40 stores × 200 bills</span><span>a month</span></div><div><span>Mismatch found</span><span>day 18</span></div></div>
+      <p>Gets <b>bill photos</b> on WhatsApp and types them a third time into Tally for GST. Mismatches surface weeks later.</p>
+    </div>
+  </div>
+  <ul class="gaps">
+    <li><b>No order tracking</b><span>“Where is my parcel?” Twelve calls a day.</span></li>
+    <li><b>No recall alert</b><span>A banned batch can still be sold at the counter.</span></li>
+    <li><b>No customer memory</b><span>No refill reminder. The regular drifts away.</span></li>
+    <li><b>No owner view</b><span>“How much today?” is a phone call to the shop.</span></li>
+  </ul>
+</section>
+
+<!-- 06 LAW -->
+<section class="sl is-dark" data-title="It is also the law" data-sub="Raids, recalls and licences">
+  <div class="head">
+    <span class="eb"><b>05</b> It is not only money</span>
+    <h2 class="h2">A missing register can <em>close the shop.</em> A missed recall can cost a life.</h2>
+  </div>
+  <div class="law fill">
+    <article class="lw"><time>2 Sep 2026 · Telangana</time><b>158</b><h4>shops got show-cause notices in one day of raids</h4><p>Missing bills and Schedule H1 records. Licences can be suspended.</p><a class="src" href="#src" data-s="raid">Telangana Today</a></article>
+    <article class="lw"><time>Apr 2025 · Andhra Pradesh</time><b>158</b><h4>stores faced legal action in Operation Garuda</h4><p>Prescription-only drugs sold without a prescription.</p><a class="src" href="#src" data-s="garuda">Pharmacy Pro</a></article>
+    <article class="lw"><time>Oct 2025 · Madhya Pradesh</time><b>14+</b><h4>children died from a contaminated cough syrup</h4><p>Every chemist was told to stop selling one batch. Paper and memory had to find it.</p><a class="src" href="#src" data-s="coldrif">Tribune</a></article>
+    <article class="lw"><time>Every year · India</time><b>₹48,000 cr</b><h4>leaks from the medicine supply chain</h4><p>Expiry, waste and gaps between maker, distributor and store.</p><a class="src" href="#src" data-s="primus">Primus Partners</a></article>
+  </div>
+</section>
+
+<!-- 07 TODAY'S SOFTWARE -->
+<section class="sl" data-title="The software they use today" data-sub="Real screens from today’s products">
+  <div class="head">
+    <span class="eb"><b>06</b> Today’s software</span>
+    <h2 class="h2">This is what stores pay for <em>today.</em></h2>
+  </div>
+  <div class="soft" id="soft"></div>
+  <p class="small">Screens and prices from each product’s own site, app-store page, SoftwareSuggest or Techjockey. <a class="src" href="#src" data-s="shots">Sources</a></p>
+</section>
+
+<!-- 08 HOW OLD -->
+<section class="sl is-dark" data-title="How old it is" data-sub="Built for a different shop">
+  <div class="head">
+    <span class="eb"><b>07</b> How old it is</span>
+    <h2 class="h2">The leading software is <em><span data-o="margAge">34</span> years old.</em> The shop around it has changed completely.</h2>
+  </div>
+  <div class="tl fill">
+    <div class="tl__axis" id="tl"></div>
+    <ul class="signs">
+      <li><b>Desktop first</b>Built for one PC at the counter. The owner can’t see his shop from his phone.</li>
+      <li><b>Keys and codes</b>Function keys, exact names and small type. A new helper needs weeks.</li>
+      <li><b>Sold by a dealer</b>Installed and renewed through a dealer, with add-ons priced one by one.</li>
+      <li><b>An island</b>No link to the distributor, the accountant or the customer.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 09 HOW BIG -->
+<section class="sl is-indigo" data-title="How big the industry is" data-sub="The size of the market">
+  <div class="head">
+    <span class="eb"><b>08</b> How big</span>
+    <h2 class="h2">A <em>₹2.46 lakh crore</em> market, still growing.</h2>
+  </div>
+  <div class="size fill">
+    <div class="sz is-big"><span class="eb" style="color:var(--steel)">Indian medicine market, a year</span><div class="num-xl">₹2,45,943</div><span class="h3" style="color:var(--indigo);margin-top:-6px">crore</span><p>Sales of medicines in India over the 12 months to March 2026, up 8.6% on the year before.</p><a class="src" href="#src" data-s="ipm">Pharmarack, Mar 2026</a></div>
+    <div class="sz"><div class="num-xl">12.4 lakh</div><p>chemists and distributors in the national chemists’ association</p><a class="src" href="#src" data-s="aiocd">AIOCD via Outlook</a></div>
+    <div class="sz"><div class="num-xl">8 lakh</div><p>retail medical stores across India</p><a class="src" href="#src" data-s="tpk">Technopak industry report</a></div>
+    <div class="sz"><div class="num-xl">68,000</div><p>medical shops in Andhra Pradesh (43,000) and Telangana (25,000), where we start</p><a class="src" href="#src" data-s="ap">APCDA</a> <a class="src" href="#src" data-s="ts">TCDA</a></div>
+    <div class="sz"><div class="num-xl">~11.5%</div><p>of sales go through organised chains. The rest is independents and hospitals.</p><a class="src" href="#src" data-s="ipa">IPA 2024</a></div>
+  </div>
+</section>
+
+<!-- 10 AFTER THE CHAINS -->
+<section class="sl" data-title="Who is left after the chains" data-sub="Chains are a small part of the stores">
+  <div class="head">
+    <span class="eb"><b>09</b> After Apollo and MedPlus</span>
+    <h2 class="h2">Take away every chain. <em><span data-o="indepPct">95</span>% of stores</em> are still independent.</h2>
+    <span class="edit-hint"><i></i>Change any underlined number</span>
+  </div>
+  <div class="fun fill">
+    <div class="fn" id="fn"></div>
+    <div class="share">
+      <span class="eb" style="color:var(--smoke)">Stores vs sales</span>
+      <p class="h3" style="color:var(--paper)">Chains are big brands, but a small share of the shops.</p>
+      <div class="share__bar" aria-hidden="true"><i data-w="chainShare" style="background:var(--indigo-l)"></i><i data-w="jakShare" style="background:var(--smoke)"></i><i data-w="indShare" style="background:var(--amber)">Independent</i></div>
+      <div class="share__leg">
+        <span><i style="background:var(--indigo-l)"></i><b data-o="chainStores"></b> chain stores: Apollo, MedPlus and others</span>
+        <span><i style="background:var(--smoke)"></i><b data-o="jakS"></b> Jan Aushadhi Kendras, the government’s generic stores</span>
+        <span><i style="background:var(--amber)"></i><b data-o="indepIndia2"></b> independent stores. <b>Our market.</b></span>
+      </div>
+      <p class="small">Apollo <a class="src" href="#src" data-s="apollo">Q4 FY26</a> · MedPlus <a class="src" href="#src" data-s="medplus">Q1 FY27</a> · Jan Aushadhi <a class="src" href="#src" data-s="jak">30 Jun 2026</a> · Other chains: our estimate</p>
+    </div>
+  </div>
+</section>
+
+<!-- 11 EDUCATED AND PAYING -->
+<section class="sl" data-title="Educated and already paying" data-sub="Who our buyer is">
+  <div class="head">
+    <span class="eb"><b>10</b> Who buys</span>
+    <h2 class="h2">Our buyers are trained, licensed, and <em>already pay for software.</em></h2>
+  </div>
+  <div class="pay3 fill">
+    <div class="py"><span class="eb">Trained</span><div class="num-xl">D.Pharm</div><h4>Every store must have a registered pharmacist</h4><p>A retail drug licence needs a pharmacist with a D.Pharm or B.Pharm. These are educated professionals, not first-time computer users.</p><a class="src" href="#src" data-s="licence">Delhi Drugs Control: licence rules</a></div>
+    <div class="py"><span class="eb">Already buying</span><div class="num-xl">1.75 lakh</div><h4>chemists use one product alone</h4><p>Marg ERP says it is trusted by over 1.75 lakh chemists and medical stores. The habit of paying for software already exists.</p><a class="src" href="#src" data-s="marg">Marg ERP, company claim</a></div>
+    <div class="py"><span class="eb">What they pay a year</span><ul class="prices" id="prices"></ul><h4>₹400 to ₹50,000 a year</h4><p>Plus dealers’ installation, yearly renewals and paid add-ons like WhatsApp bills.</p><a class="src" href="#src" data-s="prices">Vendor listings, 2026</a></div>
+  </div>
+  <div class="replace"><b>We don’t have to create a habit. We replace an old one.</b><span>A switch, not a first purchase. And we move their data for free.</span></div>
+</section>
+
+<!-- 12 STORE TYPES -->
+<section class="sl" data-title="Who can pay us" data-sub="Store types, in India, AP and Telangana">
+  <div class="head">
+    <span class="eb"><b>11</b> Store types</span>
+    <h2 class="h2 is-m">Who can pay us: <em><span data-o="payIndia"></span> stores and distributors</em> in India.</h2>
+    <span class="edit-hint"><i></i>Change any underlined number · <button class="reset" type="button" data-reset>Reset all numbers</button></span>
+  </div>
+  <div class="st fill">
+    <div class="st-wrap">
+      <table class="st__tbl">
+        <thead><tr><th>Type of store</th><th>Share of independents</th><th>India</th><th>AP + Telangana</th><th>Pay for software today</th><th>Spend a year, per store</th><th>Can pay us?</th></tr></thead>
+        <tbody>
+          <tr><td><b>Single-owner store</b><small>One shop, one owner</small></td><td><input class="ed" data-k="mixS" aria-label="Share single store">%</td><td><b data-o="cS_in"></b></td><td><b data-o="cS_ap"></b></td><td><input class="ed" data-k="payS" aria-label="Single stores paying percent">%</td><td>₹<input class="ed" data-k="spS" aria-label="Single store spend"></td><td><span class="fit is-yes">Yes · core</span></td></tr>
+          <tr><td><b>Owner with 2–5 branches</b><small>Stores counted, not owners</small></td><td><input class="ed" data-k="mixB" aria-label="Share small branch groups">%</td><td><b data-o="cB_in"></b></td><td><b data-o="cB_ap"></b></td><td><input class="ed" data-k="payB" aria-label="Branch stores paying percent">%</td><td>₹<input class="ed" data-k="spB" aria-label="Branch store spend"></td><td><span class="fit is-yes">Yes · best fit</span></td></tr>
+          <tr><td><b>Regional chain, 6–50 stores</b><small>City or district chains</small></td><td><input class="ed" data-k="mixR" aria-label="Share regional chains">%</td><td><b data-o="cR_in"></b></td><td><b data-o="cR_ap"></b></td><td><input class="ed" data-k="payR" aria-label="Regional paying percent">%</td><td>₹<input class="ed" data-k="spR" aria-label="Regional spend"></td><td><span class="fit is-yes">Yes</span></td></tr>
+          <tr><td><b>Distributors</b><small>Supply the stores</small></td><td>—</td><td><input class="ed" data-k="distIn" aria-label="Distributors in India"></td><td><input class="ed" data-k="distAp" aria-label="Distributors in AP and Telangana"></td><td><input class="ed" data-k="payD" aria-label="Distributors paying percent">%</td><td>₹<input class="ed" data-k="spD" aria-label="Distributor spend"></td><td><span class="fit is-paid">Yes · own plan</span></td></tr>
+          <tr class="is-no"><td><b>Big chains</b><small>Apollo, MedPlus and others</small></td><td>—</td><td><b data-o="chainStores2"></b></td><td>—</td><td>100%</td><td>Own software</td><td><span class="fit is-no">No</span></td></tr>
+          <tr class="is-no"><td><b>Jan Aushadhi Kendras</b><small>Government generic stores</small></td><td>—</td><td><b data-o="jakS2"></b></td><td>—</td><td>—</td><td>Scheme’s system</td><td><span class="fit is-no">Not at first</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="st__sum">
+      <div class="is-key"><span>Stores and distributors that pay for software today, India</span><b data-o="payIndia2"></b></div>
+      <div><span>…in Andhra Pradesh and Telangana</span><b data-o="payAp"></b></div>
+      <div><span>What they already spend on software a year, India</span><b data-o="spendIn"></b></div>
+      <div><span>…in AP and Telangana</span><b data-o="spendAp"></b></div>
+    </div>
+    <p class="small"><span class="tag is-est">Our estimate</span> No public count splits stores by size or software use. The split, the share paying and the spend are our estimates from store visits and vendor prices; AP + Telangana assumes <input class="ed" data-k="apChain" aria-label="Chain share in AP and Telangana">% of its 68,000 shops are chains or Jan Aushadhi. Totals: <a class="src" href="#src" data-s="tpk">Technopak</a>, <a class="src" href="#src" data-s="ap">APCDA</a>, <a class="src" href="#src" data-s="ts">TCDA</a>.</p>
+  </div>
+</section>
+
+<!-- 13 PRODUCT -->
+<section class="sl is-dark" data-title="Our product" data-sub="One system for the whole chain">
+  <div class="head">
+    <span class="eb"><b>12</b> Pharmacy OS</span>
+    <h2 class="h2 is-m">One system for the store, its distributor and its accountant. <em>Every bill typed once.</em></h2>
+  </div>
+  <div class="prod fill">
+    <figure class="shot"><img src="/pharmacy-os/pitch/img/product/home.webp" alt="Pharmacy OS overview screen: today’s sales, a sales chart, recent activity and medicines at risk" loading="lazy"></figure>
+    <div style="display:grid;gap:16px">
+      <ul class="who4">
+        <li><span class="av" style="background:var(--amber);color:var(--ink)">ST</span><b>The store owner</b><span>Billing, stock, orders, expiry, registers, staff and his whole shop on his phone.</span><em style="background:var(--amber);color:var(--ink)">Pays</em></li>
+        <li><span class="av" style="background:var(--indigo-l);color:var(--ink)">DI</span><b>The distributor</b><span>Every store’s order arrives in one place. His bill goes back as a file, not paper.</span><em style="background:var(--indigo-l);color:var(--ink)">Pays</em></li>
+        <li><span class="av" style="background:var(--paper);color:var(--ink)">AC</span><b>The accountant</b><span>Sees every store he serves in one login, given by the store. GST and Tally files ready on the 1st.</span><em style="background:var(--night3);color:var(--smoke)">Free</em></li>
+        <li><span class="av" style="background:var(--night3);color:var(--paper)">CU</span><b>The customer</b><span>Bill on WhatsApp. A reminder three days before her tablets run out.</span><em style="background:var(--night3);color:var(--smoke)">Free</em></li>
+      </ul>
+      <p class="once">Typed <b>1×</b> instead of 3×</p>
+    </div>
+  </div>
+</section>
+
+<!-- 14 WHAT WE SOLVE -->
+<section class="sl" data-title="What we solve" data-sub="Problem by problem, with the screens">
+  <div class="head">
+    <span class="eb"><b>13</b> What we solve</span>
+    <h2 class="h2">Every leak in Prasad’s day, <em>closed.</em></h2>
+  </div>
+  <div class="solve fill">
+    <div class="tabs" role="tablist" aria-label="Problems we solve" id="tabs"></div>
+    <div class="stage" role="tabpanel" id="stage">
+      <div class="stage__cap"><div class="is-then"><b>Today</b><span data-o="t_then"></span></div><div class="is-now"><b>With Pharmacy OS</b><span data-o="t_now"></span></div></div>
+      <figure class="shot" id="stage-shot"><img id="stage-img" src="/pharmacy-os/pitch/img/product/order.webp" alt=""></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 15 MOVING IN -->
+<section class="sl" data-title="Switching takes an afternoon" data-sub="Moving in from the old software">
+  <div class="head">
+    <span class="eb"><b>14</b> Switching</span>
+    <h2 class="h2 is-m">The real reason nobody switches is their data. <em>We move it in an afternoon.</em></h2>
+  </div>
+  <div class="move fill">
+    <figure class="shot"><img src="/pharmacy-os/pitch/img/product/migrate.webp" alt="Pharmacy OS screen for moving in from old software: choose Marg, check what was found, start" loading="lazy"></figure>
+    <div style="display:grid;gap:10px">
+      <ol class="steps3">
+        <li><i>Step 1</i><b>Bring the file</b><span>An Excel export or the backup. Nothing changes in the old software.</span></li>
+        <li><i>Step 2</i><b>Check what we found</b><span>Medicines with batch and expiry, customers, distributors, dues.</span></li>
+        <li><i>Step 3</i><b>Run both for a week</b><span>One tap takes it all back in the first 30 days.</span></li>
+      </ol>
+    <ul class="mvl">
+      <li><b>Marg ERP</b><span>Stock, batches, customers, dues and old bills</span><em class="is-now">First release</em></li>
+      <li><b>Profitmaker</b><span>Stock, parties, dues and old bills</span><em class="is-now">First release</em></li>
+      <li><b>Excel or Google Sheet</b><span>Any layout, columns matched for them</span><em class="is-now">First release</em></li>
+      <li><b>Tally</b><span>The accountant’s books, both ways</span><em>Second release</em></li>
+      <li><b>GoFrugal, Busy, Vyapar, eVitalRx</b><span>Excel or CSV exports from their reports</span><em>Second release</em></li>
+      <li><b>Paper registers</b><span>Our team, on a call or a visit</span><em>Any time</em></li>
+    </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 16 WHY ONLY US -->
+<section class="sl is-dark" data-title="Why only us" data-sub="Against the products stores use today">
+  <div class="head">
+    <span class="eb"><b>15</b> Why us</span>
+    <h2 class="h2">Others do parts of it. <em>Nobody connects the whole chain.</em></h2>
+  </div>
+  <div class="fill" style="display:grid;gap:14px;align-content:start">
+    <div class="mx-wrap"><table class="mx" id="mx"></table></div>
+    <div class="mxkey"><span><i class="d"></i>Documented</span><span><i class="d is-h"></i>Partly, add-on or higher plan</span><span><i class="d is-n"></i>Not found in public material</span><a class="src" href="#src" data-s="matrix">From each product’s public material, Oct 2026</a></div>
+  </div>
+</section>
+
+<!-- 17 BUSINESS MODEL -->
+<section class="sl" data-title="Business model" data-sub="Who pays, and how much">
+  <div class="head">
+    <span class="eb"><b>16</b> Business model</span>
+    <h2 class="h2">Stores and distributors pay a <em>yearly subscription.</em></h2>
+    <span class="edit-hint"><i></i>Change any underlined price</span>
+  </div>
+  <div class="bm fill">
+    <div class="pl is-main"><span class="pl__who">Store plan</span><div class="pl__price">₹<input class="ed" data-k="price" aria-label="Store plan price a year"><small>a store, a year, before GST</small></div><ul><li>Billing, stock, orders, expiry and registers</li><li>Owner app, staff logins, alerts</li><li>WhatsApp bills and refill reminders</li><li>Accountant’s login included</li><li>Data moved in for free</li></ul></div>
+    <div class="pl"><span class="pl__who">Each extra branch</span><div class="pl__price">₹<input class="ed" data-k="branch" aria-label="Extra branch price a year"><small>a branch, a year</small></div><ul><li>One owner view across every branch</li><li>Stock moves between branches</li><li>Rules: who can order, what needs approval</li></ul></div>
+    <div class="pl"><span class="pl__who">Distributor plan</span><div class="pl__price">₹<input class="ed" data-k="distPrice" aria-label="Distributor plan price a year"><small>a distributor, a year · set in pilots</small></div><ul><li>Orders from every store in one list</li><li>Bill sent back as a file, not paper</li><li>Dispatch, tracking and payments due</li></ul></div>
+    <div class="pl is-free"><span class="pl__who">Accountant</span><div class="pl__price">Free<small>a feature of the store plan</small></div><ul><li>Every store he serves, one login</li><li>GST summaries and Tally files on the 1st</li><li>He recommends us to his other stores</li></ul></div>
+  </div>
+  <div class="unit">
+    <div><span>Cost to serve one store a year</span><b data-o="serveY"></b></div>
+    <div><span>Kept from each store a year</span><b data-o="keepY"></b></div>
+    <div><span>Gross margin per store</span><b data-o="gm"></b></div>
+    <div><span>WhatsApp messages</span><b>At cost</b></div>
+  </div>
+</section>
+
+<!-- 18 COSTS -->
+<section class="sl is-dark" data-title="What it costs to run" data-sub="Five lines, each editable">
+  <div class="head">
+    <span class="eb"><b>17</b> Costs</span>
+    <h2 class="h2">What it costs us to run: <em><span data-o="burn"></span> a month.</em></h2>
+    <span class="edit-hint"><i></i>Change any underlined number</span>
+  </div>
+  <div class="costs fill">
+    <div class="cc"><h4>The team</h4><div class="cc__v">₹<input class="ed" data-k="team" aria-label="Team cost a month"><small>a month</small></div><p>Engineers, design, testing, a pharmacist, onboarding, support and field sales.</p></div>
+    <div class="cc"><h4>Office and infrastructure</h4><div class="cc__v">₹<input class="ed" data-k="office" aria-label="Office and infrastructure a month"><small>a month</small></div><p>Office, power, internet, laptops and phones, accounts and legal.</p></div>
+    <div class="cc"><h4>Keeping the software running</h4><div class="cc__v">₹<input class="ed" data-k="soft" aria-label="Software running a month"><small>a month</small></div><p>Cloud, medicine database, tools and security. Plus ₹<input class="ed" data-k="serve" aria-label="Cost to serve a store a year"> a store a year as stores grow.</p></div>
+    <div class="cc"><h4>Marketing</h4><div class="cc__v">₹<input class="ed" data-k="mkt" aria-label="Marketing a month"><small>a month</small></div><p>Telugu ads, chemist association meets, demos and print.</p></div>
+    <div class="cc"><h4>Winning one store</h4><div class="cc__v">₹<input class="ed" data-k="win" aria-label="Cost to win one store"><small>once</small></div><p>Moving its data, training on site and the dealer’s share.</p></div>
+    <div class="cc is-total"><h4>Every month, before stores</h4><div class="cc__v" data-o="burn2"></div><p>Planning numbers at Andhra Pradesh and Telangana rates, 2026.</p></div>
+  </div>
+</section>
+
+<!-- 19 EARNINGS -->
+<section class="sl" data-title="How it earns" data-sub="Slide the stores, watch the money">
+  <div class="head">
+    <span class="eb"><b>18</b> How it earns</span>
+    <h2 class="h2">Slide the stores. <em>Watch it earn.</em></h2>
+  </div>
+  <div class="earn fill">
+    <div class="earn__in">
+      <div class="rg"><div class="rg__top"><span>New stores a month</span><b data-o="perMonthV"></b></div><input type="range" data-k="perMonth" min="10" max="600" step="10" aria-label="New stores a month"></div>
+      <div class="rg"><div class="rg__top"><span>Months</span><b data-o="monthsV"></b></div><input type="range" data-k="months" min="12" max="60" step="6" aria-label="Months to show"></div>
+      <div class="rg"><div class="rg__top"><span>Store price a year</span><b data-o="priceV"></b></div><input type="range" data-k="price" min="1500" max="15000" step="500" aria-label="Store price a year"></div>
+      <div class="rg"><div class="rg__top"><span>Extra branches per 100 stores</span><b data-o="brPerV"></b></div><input type="range" data-k="brPer" min="0" max="60" step="5" aria-label="Extra branches per 100 stores"></div>
+      <div class="rg"><div class="rg__top"><span>Paying distributors per 100 stores</span><b data-o="dPerV"></b></div><input type="range" data-k="dPer" min="0" max="10" step="1" aria-label="Distributors per 100 stores"></div>
+      <div class="rg"><div class="rg__top"><span>Stores that leave a month</span><b data-o="churnV"></b></div><input type="range" data-k="churn" min="0" max="4" step="0.5" aria-label="Stores that leave a month, percent"></div>
+      <p class="earn__note">Costs come from the last slide. Prices from the business model. <button class="reset" type="button" data-reset>Reset</button></p>
+    </div>
+    <div class="earn__out">
+      <div class="kp">
+        <div class="is-key"><span>Paying stores at the end</span><b data-o="e_stores"></b></div>
+        <div><span>Income a year, at the end</span><b data-o="e_arr"></b></div>
+        <div><span>Profit a month, at the end</span><b data-o="e_profit"></b></div>
+        <div><span>Break-even</span><b data-o="e_be"></b></div>
+        <div><span>Cash needed before break-even</span><b data-o="e_cash"></b></div>
+        <div><span>Share of AP + TS paying stores</span><b data-o="e_share"></b></div>
+      </div>
+      <div class="chart">
+        <div class="chart__leg"><span><i style="background:var(--indigo)"></i>Income a month</span><span><i style="background:var(--red)"></i>Costs a month</span><span><i style="background:var(--amber);height:10px;opacity:.5"></i>Profit</span></div>
+        <svg id="chart" viewBox="0 0 800 300" role="img" aria-label="Monthly income and costs over time"></svg>
+      </div>
+      <p class="earn__note" data-o="e_read"></p>
+    </div>
+  </div>
+</section>
+
+<!-- 20 SEE IT -->
+<section class="sl is-dark" data-title="See the product" data-sub="Every screen, on one page">
+  <div class="see fill">
+    <div style="display:grid;gap:22px;align-content:center">
+      <span class="eb"><b>19</b> See it for yourself</span>
+      <h2 class="h2">Every screen and every feature, <em>on one page.</em></h2>
+      <p class="lead">The full product: the morning order, receiving in one click, the counter, the owner’s phone, the distributor and the accountant.</p>
+      <div><a class="see__btn" href="https://www.onestop-solutions.in/pharmacy-os/" target="_blank" rel="noopener">Open Pharmacy OS<svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+      <span class="see__url">onestop-solutions.in/pharmacy-os</span>
+      <div class="contact"><span>One Stop Solutions</span><a href="https://www.onestop-solutions.in/#contact">Talk to us</a></div>
+    </div>
+    <div class="collage" aria-hidden="true">
+      <figure class="shot"><img src="/pharmacy-os/pitch/img/product/order.webp" alt="" loading="lazy"></figure>
+      <figure class="shot"><img src="/pharmacy-os/pitch/img/product/check.webp" alt="" loading="lazy"></figure>
+      <figure class="shot"><img src="/pharmacy-os/pitch/img/product/sell.webp" alt="" loading="lazy"></figure>
+      <figure class="ph"><img src="/pharmacy-os/pitch/img/product/ownerm.webp" alt="" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 21 SOURCES -->
+<section class="sl" id="src" data-title="Sources" data-sub="Where every number comes from">
+  <div class="head">
+    <span class="eb"><b>20</b> Sources</span>
+    <h2 class="h2">Where every number <em>comes from.</em></h2>
+    <p class="lead">Checked in October and November 2026. Numbers marked “our estimate” are ours and can be changed on their slide.</p>
+  </div>
+  <ol class="srcs" id="srcs"></ol>
+</section>
+
+</main>
+
+<nav class="bar" aria-label="Slides">
+  <a class="bar__brand" href="https://www.onestop-solutions.in/pharmacy-os/" target="_blank" rel="noopener"><svg viewBox="0 0 80 80" aria-hidden="true"><rect width="80" height="80" rx="18" fill="#2A2626"/><g transform="rotate(-45 40 40)"><path d="M40 24H26a16 16 0 0 0 0 32h14z" fill="#A99DFF"/><path d="M40 24h14a16 16 0 0 1 0 32H40z" fill="#FFB224"/></g></svg>Pharmacy OS</a>
+  <span class="bar__title" id="bar-title"></span>
+  <div class="bar__ctrl">
+    <button type="button" data-act="prev" aria-label="Previous slide"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+    <span class="bar__count" id="count" aria-live="polite"></span>
+    <button type="button" data-act="next" aria-label="Next slide"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+    <button type="button" data-act="grid" aria-label="All slides"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5"/><rect x="4" y="14" width="6" height="6" rx="1.5"/><rect x="14" y="14" width="6" height="6" rx="1.5"/></svg></button>
+    <button type="button" data-act="full" aria-label="Full screen"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+  </div>
+</nav>
+
+<div class="ov" id="ov" role="dialog" aria-modal="true" aria-label="All slides">
+  <div class="ov__head"><h2>All slides</h2><button class="ov__close" type="button" data-act="close">Close</button></div>
+  <div class="ov__grid" id="ov-grid"></div>
+</div>
+
+<script>
+(() => {
+'use strict';
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+/* ===== Sources ===== */
+const SRC = {
+  ipm: ['Medical Dialogues, Pharmarack: Indian pharma market Rs 2,45,943 crore MAT, March 2026', 'https://medicaldialogues.in/amp/news/industry/pharma/indian-pharma-market-grows-101-to-rs-20012-cr-in-march-report-168487'],
+  aiocd: ['Outlook: AIOCD represents 12.4 lakh chemists and distributors', 'https://www.outlookindia.com/healthcare-spotlight/pharma-market-grows-104-but-chemists-flag-weak-volume-growth'],
+  tpk: ['Technopak industry report on pharmacy retail, Nov 2021 (in the MedPlus offer document): about 8 lakh retail pharmacies', 'https://www.medplusindia.com/pdf/Tpk-Industry-Report-Pharma-Retail-Consolidated-Report-19112021-FV.pdf'],
+  ipa: ['Indian Pharmaceutical Alliance: Changing Dynamics of the Indian Pharma Supply Chain, 2024 (standalone 54%, organised chains 11.5%)', 'https://www.ipa-india.org/sites/default/files/2025-07/ChangingDynamics-of-Indian-PharmaSupplychain-1.pdf'],
+  ap: ['Devdiscourse: nearly 43,000 medical shops in Andhra Pradesh (AP Chemists and Druggists Association), May 2026', 'https://www.devdiscourse.com/article/health/3914422-over-40000-chemists-to-observe-one-day-shutdown-in-andhra-on-may-20'],
+  ts: ['Siasat: over 25,000 medical shops shut across Telangana on 20 May 2026', 'https://www.siasat.com/over-25000-medical-shops-remain-shut-in-telangana-3474160/'],
+  apollo: ['Apollo Hospitals Q4 FY26: 7,289 pharmacy stores at 31 March 2026', 'https://www.multibagg.ai/market-pulse/articles/apollo-q4fy26-94450'],
+  medplus: ['MedPlus Q1 FY27 investor presentation: 5,476 stores', 'https://nsearchives.nseindia.com/corporate/MEDPLUS_21072026194228_Medplusinvestorpresentataion.pdf'],
+  jak: ['Drishti IAS, Parliament data: 20,149 Jan Aushadhi Kendras at 30 June 2026', 'https://www.drishtiias.com/state-pcs-current-affairs/uttar-pradesh-leads-india-with-4226-operational-jan-aushadhi-kendras'],
+  licence: ['Delhi Drugs Control Department: retail licence needs a registered pharmacist', 'https://drugs.delhi.gov.in/sites/default/files/drugs/rti-files/manual_17-signed.pdf'],
+  marg: ['Marg ERP: pharmacy software page, “trusted by 1.75 lakh+ chemists”; company since 1992', 'https://margcompusoft.com/pharmacy-software.html'],
+  gofrugal: ['YourStory: GoFrugal founded by Kumar Vembu in 2004', 'https://yourstory.com/2019/03/entrepreneur-kumar-vembu-gofrugal-journey-hfy9tvaxlw'],
+  vyapar: ['Inc42: Vyapar, founded 2017', 'https://inc42.com/company/vyapar-app/acquisitions/'],
+  prices: ['Nesayo: pharmacy software prices, checked 6 Sep 2026', 'https://nesayo.com/blog/best-pharmacy-software-india-2026'],
+  margprice: ['IT for SME: Marg ERP editions and prices', 'https://itforsme.in/pricing/marg-erp-india'],
+  evitalprice: ['eVitalRx: plans and prices', 'https://www.evitalrx.in/pricing'],
+  raid: ['Telangana Today: TG SAFE raids, 158 show-cause notices, 2 Sep 2026', 'https://telanganatoday.com/tg-safe-raids-medical-shops-over-illegal-sale-of-habit-forming-drugs'],
+  garuda: ['Pharmacy Pro: Andhra Pradesh crackdown across 158 medical shops, Operation Garuda', 'https://pharmacypro.io/news/andhra-pradesh-steps-up-crackdown-on-banned-drug-sales-across-158-medical-shops'],
+  coldrif: ['Tribune: Coldrif syrup batch linked to child deaths, Oct 2025', 'https://www.tribuneindia.com/news/india/maharashtra-fda-flags-coldrif-syrup-batch-linked-to-child-deaths'],
+  primus: ['BioSpectrum: Primus Partners report, nearly Rs 48,000 crore annual value leakage', 'https://www.biospectrumindia.com/news/16/28176/primus-partners-report-highlights-nearly-rs-48000-cr-annual-pharmaceutical-value-leakage.html'],
+  upi: ['NPCI: UPI product overview (launched 2016)', 'https://www.npci.org.in/what-we-do/upi/product-overview'],
+  qr: ['CDSCO: QR codes on the top 300 drug brands, from 1 August 2023', 'https://cdsco.gov.in/opencms/resources/UploadCDSCOWeb/2018/UploadPublic_NoticesFiles/Final%20FAQs%20on%20QR%20code%2021.07.2023.pdf'],
+  gst: ['Lakshmikumaran & Sridharan: GST on most medicines cut from 12% to 5%, 22 Sep 2025', 'https://lakshmisri.com/newsroom/news-briefings/impact-of-gst-rate-changes-on-the-health-and-pharma-sector'],
+  wa: ['AiSensy: WhatsApp per-message prices from 1 Jan 2026', 'https://news.aisensy.com/123053-whatsapp-per-message-pricing-update-effective-january-1-2026'],
+  matrix: ['Feature comparison: each product’s own site, listings and app-store pages, checked Oct 2026 (see the Pharmacy OS page for the full table)', 'https://www.onestop-solutions.in/pharmacy-os/'],
+  shots: ['Competitor screens: SoftwareSuggest, Techjockey, Google Play and each product’s own site', ''],
+  visits: ['Our store visits in Vijayawada and Hyderabad, October 2026', ''],
+  model: ['Costs and prices: One Stop Solutions planning model, AP and Telangana rates, October 2026', ''],
+  photos: ['Photos: Pexels (free licence), ids 28300482, 28688814, 13119976', 'https://www.pexels.com/']
+};
+
+/* ===== Data ===== */
+const RIVALS = [
+  { n: 'Marg ERP 9+', img: 'marg-purchase.jpg', yr: 'Since 1992', s: 'Dense forms and function keys. Distributor bills typed or imported.', p: '₹8,100–25,200 once + ₹2,500–5,000 a year', src: 'margprice' },
+  { n: 'GoFrugal', img: 'gofrugal-h1.jpg', yr: 'Since 2004', s: 'Built for chains. Small icons, grids of numbers.', p: 'Price not published', src: 'gofrugal' },
+  { n: 'eVitalRx', img: 'evitalrx-web.jpg', yr: 'Cloud', s: 'Modern, but WhatsApp bills are a paid add-on.', p: '₹7,500–50,000 a year', src: 'evitalprice' },
+  { n: 'Vyapar', img: 'vyapar-home.jpg', yr: 'Since 2017', s: 'Made for every kind of shop. No pharmacy registers.', p: '₹399–4,299 a year', src: 'vyapar' },
+  { n: 'Medeil', img: 'medeil-customer.jpg', yr: 'Desktop', s: 'Long forms to fill. Little on the phone.', p: '₹6,500–11,000 a user', src: 'prices' },
+  { n: 'RetailGraph', img: 'retailgraph-sales.jpg', yr: 'Desktop', s: 'Deep reports, rows of small numbers.', p: '₹12,000–27,000 once + yearly fee', src: 'prices' },
+  { n: 'Profitmaker', img: 'profitmaker-app.jpg', yr: 'Desktop + app', phone: 1, s: 'Ordering is a separate app.', p: 'Price not published', src: 'prices' },
+  { n: 'Pharmarack', img: 'pharmarack-app.jpg', yr: 'Ordering only', phone: 1, s: 'Orders out; stock still typed into billing software.', p: 'Free app; reviews report charges', src: 'prices' }
+];
+const TL = [
+  [1992, 'Marg starts', 'The software most stores know', 1, 'up'],
+  [1998, 'Google is founded', '', 0, 'down'],
+  [2004, 'GoFrugal starts', '', 1, 'up'],
+  [2007, 'Smartphones arrive', '', 0, 'down'],
+  [2016, 'UPI launches', 'Payments move to the phone', 0, 'up'],
+  [2017, 'GST begins', 'Every bill needs tax detail', 0, 'down'],
+  [2023, 'QR codes on medicines', 'Batch and expiry inside the code', 0, 'up'],
+  [2025, 'GST on medicines 12% → 5%', 'Every price changed overnight', 0, 'down'],
+  [2026, 'WhatsApp bills ₹0.115', 'Sending every bill is affordable', 0, 'up']
+];
+const TABS = [
+  { t: 'The morning order', then: 'A want list in a notebook. Five distributors called one by one.', now: 'Drafted at 6 am from sales and stock. The best rate and scheme picked. One tap sends it.', img: 'order', save: 'l_err' },
+  { t: 'Receiving the parcel', then: '40 lines typed from paper. 90 minutes. Errors unseen.', now: 'The distributor’s bill file in one click. Only the differences show, in rupees.', img: 'check', save: 'l_type' },
+  { t: 'Expiry on the shelf', then: 'Found when the customer finds it. Written off.', now: 'Every batch with its date. Sell first or send back while it still counts.', img: 'expiry', save: 'l_exp' },
+  { t: 'At the counter', then: 'Exact names, function keys, tiny text. Out of stock means a lost sale.', now: 'Scan the pack or type three letters. Expired stock can’t be billed. “Not in stock” joins the next order.', img: 'sell', save: 'l_miss' },
+  { t: 'Keeping regulars', then: 'No reminder. The regular buys from an app next month.', now: 'A WhatsApp reminder three days before the strip runs out. Reply YES and it’s packed.', img: 'score', save: 'l_app' },
+  { t: 'The owner’s phone', then: '“How much today?” is a call to the shop.', now: 'Sales, cash, alerts and every store, on his phone.', img: 'ownerm', phone: 1 },
+  { t: 'The accountant', then: 'Bill photos on WhatsApp, typed again into Tally.', now: 'Every store in one free login. GST and Tally files ready on the 1st.', img: 'cahome' }
+];
+const MXC = ['Pharmacy OS', 'Marg', 'GoFrugal', 'eVitalRx', 'Vyapar'];
+const MX = [
+  ['Billing, stock, GST and registers', [2, 2, 2, 2, 1]],
+  ['Distributor’s bill imported in one click', [2, 2, 2, 2, 0]],
+  ['Receive by ticking against your own order', [2, 1, 1, 1, 0]],
+  ['Batch and expiry from the pack’s QR code', [2, 1, 0, 0, 0]],
+  ['Works with no internet', [2, 2, 2, 0, 2]],
+  ['Owner’s phone app', [2, 1, 1, 2, 2]],
+  ['Telugu screens and large text', [2, 0, 0, 0, 1]],
+  ['Recalled batch blocked at every counter', [2, 0, 0, 0, 0]],
+  ['Parcel tracking, dispatch to door', [2, 0, 0, 0, 0]],
+  ['Distributor’s own desk, linked to every store', [2, 0, 0, 0, 0]],
+  ['Accountant sees every store in one login', [2, 0, 0, 0, 0]],
+  ['Data moved in free, undo for 30 days', [2, 0, 0, 0, 0]]
+];
+
+/* ===== State ===== */
+const DEF = {
+  sales: 400000, expiryPct: 1.5, typeHrs: 1.5, wage: 120, missed: 6, ticket: 250, margin: 20, errPct: 0.5, appPct: 2,
+  stores: 800000, apollo: 7289, medplus: 5476, otherChains: 4000, jak: 20149, ap: 43000, ts: 25000, apChain: 10,
+  mixS: 85, mixB: 12, mixR: 3, payS: 45, payB: 85, payR: 100, spS: 6000, spB: 12000, spR: 25000,
+  distIn: 60000, distAp: 5000, payD: 90, spD: 20000,
+  price: 5500, branch: 3500, distPrice: 15000,
+  team: 640000, office: 103000, soft: 105000, mkt: 150000, win: 2300, serve: 1550,
+  perMonth: 150, months: 48, brPer: 15, dPer: 2, churn: 1
+};
+const KEY = 'pos-pitch-v1';
+let S = { ...DEF };
+try { const q = new URLSearchParams(location.search).get('m'); const saved = q ? JSON.parse(atob(q)) : JSON.parse(localStorage.getItem(KEY) || 'null'); if (saved && typeof saved === 'object') for (const k in DEF) if (typeof saved[k] === 'number' && isFinite(saved[k])) S[k] = saved[k]; } catch (e) { /* defaults */ }
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* private mode */ } };
+
+/* ===== Formatting ===== */
+const IN = new Intl.NumberFormat('en-IN', { maximumFractionDigits: 2 });
+const n0 = v => new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0 }).format(Math.round(v));
+const r1 = v => (Math.round(v * 10) / 10).toString();
+const cnt = v => v >= 1e5 ? `${r1(v / 1e5)} lakh` : n0(v);
+const rsW = v => { const a = Math.abs(v); if (a >= 1e7) return `₹${r1(a / 1e7)} crore`; if (a >= 1e5) return `₹${r1(a / 1e5)} lakh`; return `₹${n0(a)}`; };
+const rs = v => { const a = Math.abs(v), s = v < 0 ? '−' : ''; if (a >= 1e7) return `${s}₹${r1(a / 1e7)} cr`; if (a >= 1e5) return `${s}₹${r1(a / 1e5)} L`; return `${s}₹${n0(a)}`; };
+
+/* ===== Model ===== */
+function calc() {
+  const o = {};
+  const buy = S.sales * 0.8;
+  o.l_exp = buy * S.expiryPct / 100 * 12;
+  o.l_type = S.typeHrs * S.wage * 26 * 12;
+  o.l_miss = S.missed * S.ticket * S.margin / 100 * 26 * 12;
+  o.l_err = buy * S.errPct / 100 * 12;
+  o.l_app = S.sales * S.appPct / 100 * S.margin / 100 * 12;
+  o.l_total = o.l_exp + o.l_type + o.l_miss + o.l_err + o.l_app;
+  o.chain = S.apollo + S.medplus + S.otherChains;
+  o.indep = Math.max(0, S.stores - o.chain - S.jak);
+  o.indepPct = S.stores ? o.indep / S.stores * 100 : 0;
+  const mixT = S.mixS + S.mixB + S.mixR || 1;
+  const apIndep = (S.ap + S.ts) * (1 - S.apChain / 100);
+  o.cat = { S: [o.indep * S.mixS / mixT, apIndep * S.mixS / mixT], B: [o.indep * S.mixB / mixT, apIndep * S.mixB / mixT], R: [o.indep * S.mixR / mixT, apIndep * S.mixR / mixT] };
+  const pay = (c, p) => c * p / 100;
+  o.payIn = pay(o.cat.S[0], S.payS) + pay(o.cat.B[0], S.payB) + pay(o.cat.R[0], S.payR) + pay(S.distIn, S.payD);
+  o.payAp = pay(o.cat.S[1], S.payS) + pay(o.cat.B[1], S.payB) + pay(o.cat.R[1], S.payR) + pay(S.distAp, S.payD);
+  o.payApStores = pay(o.cat.S[1], S.payS) + pay(o.cat.B[1], S.payB) + pay(o.cat.R[1], S.payR);
+  o.spendIn = pay(o.cat.S[0], S.payS) * S.spS + pay(o.cat.B[0], S.payB) * S.spB + pay(o.cat.R[0], S.payR) * S.spR + pay(S.distIn, S.payD) * S.spD;
+  o.spendAp = pay(o.cat.S[1], S.payS) * S.spS + pay(o.cat.B[1], S.payB) * S.spB + pay(o.cat.R[1], S.payR) * S.spR + pay(S.distAp, S.payD) * S.spD;
+  o.fixed = S.team + S.office + S.soft + S.mkt;
+  // Growth
+  let st = 0, cum = 0, low = 0, be = 0;
+  const rows = [];
+  for (let m = 1; m <= S.months; m++) {
+    st = st * (1 - S.churn / 100) + S.perMonth;
+    const inc = st * (S.price + S.brPer / 100 * S.branch + S.dPer / 100 * S.distPrice) / 12;
+    const cost = o.fixed + st * (1 + S.brPer / 100) * S.serve / 12 + S.perMonth * S.win;
+    cum += inc - cost; low = Math.min(low, cum);
+    if (!be && inc >= cost) be = m;
+    rows.push({ m, st, inc, cost });
+  }
+  o.rows = rows; o.end = rows[rows.length - 1]; o.be = be; o.cash = -low;
+  return o;
+}
+
+/* ===== Render ===== */
+const setO = (k, v) => $$(`[data-o="${k}"]`).forEach(el => { el.textContent = v; });
+const setW = (k, pct) => $$(`[data-w="${k}"]`).forEach(el => { el.style.width = `${Math.max(0, Math.min(100, pct))}%`; });
+function render() {
+  const o = calc();
+  ['l_exp', 'l_type', 'l_miss', 'l_err', 'l_app'].forEach(k => {
+    $$(`[data-o="${k}"]`).forEach(el => { el.innerHTML = `${esc(rs(o[k]))}<small>a year</small>`; });
+  });
+  setO('l_total', rsW(o.l_total)); setO('l_total2', rs(o.l_total)); setO('priceY', rs(S.price));
+  setO('l_times', `${Math.max(1, Math.round(o.l_total / Math.max(1, S.price)))}×`);
+  const mx = Math.max(o.l_total, S.price); setW('lost', o.l_total / mx * 100); setW('price', S.price / mx * 100);
+  setO('indepIndia', cnt(o.indep)); setO('indepIndia2', cnt(o.indep)); setO('indepPct', Math.round(o.indepPct));
+  setO('chainStores', n0(o.chain)); setO('chainStores2', n0(o.chain)); setO('jakS', n0(S.jak)); setO('jakS2', n0(S.jak));
+  setW('chainShare', o.chain / S.stores * 100); setW('jakShare', S.jak / S.stores * 100); setW('indShare', o.indep / S.stores * 100);
+  setO('margAge', new Date().getFullYear() - 1992);
+  // Funnel
+  const FN = [['All retail medical stores', S.stores, 'stores', '', 'tpk'], ['Apollo Pharmacy', S.apollo, 'apollo', 'is-out', 'apollo'], ['MedPlus', S.medplus, 'medplus', 'is-out', 'medplus'], ['Other chains', S.otherChains, 'otherChains', 'is-out', ''], ['Jan Aushadhi Kendras', S.jak, 'jak', 'is-out', 'jak'], ['Independent stores', o.indep, '', 'is-us', '']];
+  const fn = $('#fn');
+  if (!fn.dataset.built) {
+    fn.innerHTML = FN.map(([t, , k, c, sk]) => `<div class="fn__row ${c}"><div class="fn__bar"><i></i><span>${esc(t)}</span></div><div class="fn__val">${k ? `<input class="ed" data-k="${k}" aria-label="${esc(t)}">` : '<b data-o="fnIndep"></b>'}<small>${sk ? `<a class="src" href="#src" data-s="${sk}">source</a>` : (k ? '<span class="tag is-est" style="height:20px">our estimate</span>' : 'what is left')}</small></div></div>`).join('');
+    fn.dataset.built = 1; bindInputs(fn);
+  }
+  $$('.fn__row', fn).forEach((row, i) => { const v = FN[i][1]; const w = i === 0 || i === 5 ? v / S.stores * 100 : Math.max(1.2, v / S.stores * 100 * 6); $('i', row).style.width = `${Math.min(100, w)}%`; });
+  setO('fnIndep', n0(o.indep));
+  // Store types
+  ['S', 'B', 'R'].forEach(c => { setO(`c${c}_in`, n0(o.cat[c][0])); setO(`c${c}_ap`, n0(o.cat[c][1])); });
+  setO('payIndia', cnt(o.payIn)); setO('payIndia2', cnt(o.payIn)); setO('payAp', n0(o.payAp));
+  setO('spendIn', rs(o.spendIn)); setO('spendAp', rs(o.spendAp));
+  // Business
+  const serveY = S.serve, keep = S.price - serveY;
+  setO('serveY', rs(serveY)); setO('keepY', rs(keep)); setO('gm', `${Math.round(keep / Math.max(1, S.price) * 100)}%`);
+  setO('burn', rsW(o.fixed)); setO('burn2', rsW(o.fixed));
+  // Earnings
+  setO('perMonthV', n0(S.perMonth)); setO('monthsV', `${S.months} months`); setO('priceV', `₹${n0(S.price)}`);
+  setO('brPerV', n0(S.brPer)); setO('dPerV', n0(S.dPer)); setO('churnV', `${r1(S.churn)}%`);
+  const e = o.end;
+  setO('e_stores', n0(e.st)); setO('e_arr', rs(e.inc * 12)); setO('e_profit', rs(e.inc - e.cost));
+  setO('e_be', o.be ? `Month ${o.be}` : `After ${S.months} mo`); setO('e_cash', rs(o.cash));
+  setO('e_share', `${r1(e.st / Math.max(1, o.payApStores) * 100)}%`);
+  $$('[data-o="e_read"]').forEach(el => { el.innerHTML = `At <b>${n0(S.perMonth)} new stores a month</b>, Pharmacy OS has <b>${n0(e.st)} paying stores</b> after ${S.months} months: <b>${r1(e.st / Math.max(1, o.payApStores) * 100)}%</b> of the stores that already pay for software in AP and Telangana, and <b>${r1(e.st / Math.max(1, o.payIn) * 100)}%</b> of India’s.`; });
+  drawChart(o.rows);
+  $$('input[type=range]').forEach(r => { const v = S[r.dataset.k]; if (document.activeElement !== r) r.value = v; r.style.setProperty('--p', `${(r.value - r.min) / (r.max - r.min) * 100}%`); });
+  $$('.ed').forEach(i => { if (document.activeElement !== i) i.value = IN.format(S[i.dataset.k]); fitEd(i); });
+  renderTab();
+}
+const fitEd = i => { i.style.width = `${Math.max(2, String(i.value).length + .6)}ch`; };
+
+function drawChart(rows) {
+  const svg = $('#chart'); if (!svg) return;
+  const W = 800, H = 300, L = 58, R = 12, T = 12, B = 30;
+  const max = Math.max(...rows.map(r => Math.max(r.inc, r.cost))) * 1.08 || 1;
+  const x = i => L + (W - L - R) * (i / Math.max(1, rows.length - 1));
+  const y = v => T + (H - T - B) * (1 - v / max);
+  const path = k => rows.map((r, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)},${y(r[k]).toFixed(1)}`).join('');
+  let area = '';
+  rows.forEach((r, i) => { if (r.inc > r.cost) area += `<rect x="${(x(i) - (W - L - R) / rows.length / 2).toFixed(1)}" y="${y(r.inc).toFixed(1)}" width="${((W - L - R) / rows.length).toFixed(1)}" height="${(y(r.cost) - y(r.inc)).toFixed(1)}" fill="#FFB224" opacity=".35"/>`; });
+  const ticks = [0, .25, .5, .75, 1].map(f => max / 1.08 * f);
+  const grid = ticks.map(v => `<line x1="${L}" x2="${W - R}" y1="${y(v).toFixed(1)}" y2="${y(v).toFixed(1)}" stroke="rgba(27,25,25,.1)"/><text x="${L - 8}" y="${(y(v) + 4).toFixed(1)}" text-anchor="end" font-size="12" fill="#6B6868" font-family="Geist Mono, monospace">${rs(v)}</text>`).join('');
+  const step = rows.length > 36 ? 12 : 6;
+  const xl = rows.filter(r => r.m % step === 0).map(r => `<text x="${x(r.m - 1).toFixed(1)}" y="${H - 8}" text-anchor="middle" font-size="12" fill="#6B6868" font-family="Geist Mono, monospace">M${r.m}</text>`).join('');
+  const be = rows.findIndex(r => r.inc >= r.cost);
+  const beMark = be >= 0 ? `<line x1="${x(be).toFixed(1)}" x2="${x(be).toFixed(1)}" y1="${T}" y2="${H - B}" stroke="#1B1919" stroke-dasharray="4 4"/><text x="${(x(be) + 6).toFixed(1)}" y="${T + 14}" font-size="12.5" font-weight="600" fill="#1B1919" font-family="Instrument Sans, sans-serif">Break-even, month ${be + 1}</text>` : '';
+  svg.innerHTML = `${grid}${area}<path d="${path('cost')}" fill="none" stroke="#E8412C" stroke-width="2.5"/><path d="${path('inc')}" fill="none" stroke="#3D2BDB" stroke-width="3"/>${beMark}${xl}`;
+}
+
+/* ===== Inputs ===== */
+function bindInputs(root = document) {
+  $$('.ed', root).forEach(i => {
+    if (i.dataset.bound) return; i.dataset.bound = 1;
+    i.setAttribute('inputmode', 'decimal'); i.setAttribute('autocomplete', 'off'); i.spellcheck = false;
+    i.addEventListener('focus', () => { i.value = String(S[i.dataset.k]); fitEd(i); i.select(); });
+    i.addEventListener('input', () => { fitEd(i); const v = parseFloat(i.value.replace(/[^0-9.]/g, '')); if (isFinite(v)) { S[i.dataset.k] = v; save(); render(); } });
+    i.addEventListener('blur', () => { i.value = IN.format(S[i.dataset.k]); fitEd(i); });
+    i.addEventListener('keydown', e => { if (e.key === 'Enter') i.blur(); e.stopPropagation(); });
+  });
+  $$('input[type=range]', root).forEach(r => {
+    if (r.dataset.bound) return; r.dataset.bound = 1;
+    r.addEventListener('input', () => { S[r.dataset.k] = parseFloat(r.value); save(); render(); });
+    r.addEventListener('keydown', e => e.stopPropagation());
+  });
+}
+$$('[data-reset]').forEach(b => b.addEventListener('click', () => { S = { ...DEF }; try { localStorage.removeItem(KEY); } catch (e) { } render(); }));
+
+/* ===== Static content ===== */
+$('#soft').innerHTML = RIVALS.map(r => `<article class="sw"><div class="sw__img${r.phone ? ' is-phone' : ''}"><img src="/pharmacy-os/img/rivals/${r.img}" alt="${esc(r.n)} screen" loading="lazy"><span class="sw__yr">${esc(r.yr)}</span></div><div class="sw__body"><b>${esc(r.n)}</b><span>${esc(r.s)}</span><span><strong>${esc(r.p)}</strong></span><a class="src" href="#src" data-s="${r.src}">source</a></div></article>`).join('');
+const P = [['Vyapar', 399, 4299], ['eVitalRx', 7500, 50000], ['Marg', 8100, 25200], ['RetailGraph', 12000, 27000], ['Medeil', 6500, 11000]];
+$('#prices').innerHTML = P.map(([n, lo, hi]) => `<li><span>${n}</span><i style="width:${((hi - lo) / 50000 * 100).toFixed(1)}%;margin-left:${(lo / 50000 * 100).toFixed(1)}%;min-width:6px" title="₹${n0(lo)} to ₹${n0(hi)}"></i></li>`).join('');
+(() => { const tl = $('#tl'); const yrs = TL.map(t => t[0]); const pos = y => 5 + yrs.indexOf(y) / (yrs.length - 1) * 90;
+  tl.innerHTML = `<div class="tl__line"><i style="left:5%;right:5%;opacity:.25"></i></div>` + TL.map(([y, t, s, them, side]) => `<div class="tl__dot${them ? ' is-them' : ''}" style="left:${pos(y)}%"></div><div class="tlp is-${side}${them ? ' is-them' : ''}" style="left:${pos(y)}%"><time>${y}</time><b>${esc(t)}</b>${s ? `<span>${esc(s)}</span>` : ''}</div>`).join(''); })();
+$('#mx').innerHTML = `<thead><tr><th></th>${MXC.map((c, i) => `<th class="${i ? '' : 'is-us'}">${esc(c)}</th>`).join('')}</tr></thead><tbody>${MX.map(([t, v]) => `<tr><td>${esc(t)}</td>${v.map((d, i) => `<td class="${i ? '' : 'is-us'}"><span class="d${d === 1 ? ' is-h' : d === 0 ? ' is-n' : ''}" aria-label="${d === 2 ? 'Yes' : d === 1 ? 'Partly' : 'Not found'}"></span></td>`).join('')}</tr>`).join('')}</tbody>`;
+const used = new Set(); $$('[data-s]').forEach(a => used.add(a.dataset.s)); ['upi', 'qr', 'gst', 'wa', 'margprice', 'evitalprice', 'shots', 'model', 'photos', 'visits', 'matrix', 'gofrugal', 'vyapar'].forEach(k => used.add(k));
+$('#srcs').innerHTML = [...used].filter(k => SRC[k]).map(k => { const [t, u] = SRC[k]; return `<li id="s-${k}"><b>${esc(t)}</b><br>${u ? `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(u.replace(/^https?:\/\//, '').slice(0, 90))}</a>` : '<span>Our own work</span>'}</li>`; }).join('');
+
+/* Tabs */
+let tab = 0;
+$('#tabs').innerHTML = TABS.map((t, i) => `<button class="tab" role="tab" type="button" data-tab="${i}" aria-selected="${i === 0}"><b>${esc(t.t)}</b><span><s>${esc(t.then.split('.')[0])}</s></span>${t.save ? `<em data-o="sv${i}"></em>` : ''}</button>`).join('');
+$$('[data-tab]').forEach(b => b.addEventListener('click', () => { tab = +b.dataset.tab; renderTab(); }));
+function renderTab() {
+  const t = TABS[tab], o = calc();
+  $$('[data-tab]').forEach(b => b.setAttribute('aria-selected', String(+b.dataset.tab === tab)));
+  TABS.forEach((x, i) => { if (x.save) setO(`sv${i}`, `+${rs(o[x.save])}/yr`); });
+  setO('t_then', t.then); setO('t_now', t.now);
+  const shot = $('#stage-shot'), img = $('#stage-img');
+  shot.classList.toggle('is-phone', !!t.phone);
+  const src = `/pharmacy-os/pitch/img/product/${t.img}.webp`;
+  if (!img.src.endsWith(src)) { img.src = src; img.alt = `Pharmacy OS screen: ${t.t}`; }
+}
+
+/* ===== Deck navigation ===== */
+const slides = $$('.sl'), html = document.documentElement;
+let cur = 0, deckMode = false, lock = 0;
+const mq = () => innerWidth >= 900 && innerHeight >= 560;
+$('#ov-grid').innerHTML = slides.map((s, i) => `<button type="button" data-go="${i}"><span>${String(i + 1).padStart(2, '0')}</span><b>${esc(s.dataset.title)}</b><small>${esc(s.dataset.sub || '')}</small></button>`).join('');
+slides.forEach((s, i) => { s.setAttribute('aria-roledescription', 'slide'); s.setAttribute('aria-label', `${i + 1} of ${slides.length}: ${s.dataset.title}`); s.id = s.id || `s${i + 1}`; });
+function show(i, push = true) {
+  i = Math.max(0, Math.min(slides.length - 1, i));
+  cur = i;
+  if (deckMode) {
+    slides.forEach((s, k) => { s.classList.toggle('is-on', k === i); s.classList.toggle('is-prev', k < i); s.inert = k !== i; if (k === i) s.scrollTop = 0; });
+  }
+  $('#count').textContent = `${i + 1} / ${slides.length}`;
+  $('#bar-title').textContent = slides[i].dataset.title;
+  $('#prog').style.width = `${(i + 1) / slides.length * 100}%`;
+  $('[data-act="prev"]').disabled = i === 0; $('[data-act="next"]').disabled = i === slides.length - 1;
+  $$('#ov-grid button').forEach((b, k) => b.setAttribute('aria-current', String(k === i)));
+  if (push) history.replaceState(null, '', `#${i + 1}`);
+}
+function setMode() {
+  const want = mq();
+  if (want === deckMode && html.classList.contains('is-deck') === want) return;
+  deckMode = want; html.classList.toggle('is-deck', want);
+  if (!want) slides.forEach(s => { s.inert = false; s.classList.remove('is-on', 'is-prev'); });
+  show(cur, false);
+  if (!want && cur) slides[cur].scrollIntoView();
+}
+const go = d => { if (Date.now() < lock) return; lock = Date.now() + 380; if (deckMode) show(cur + d); else slides[Math.max(0, Math.min(slides.length - 1, cur + d))].scrollIntoView({ behavior: 'smooth' }); };
+const ov = $('#ov');
+const openOv = on => { ov.classList.toggle('is-open', on); if (on) { const b = $(`#ov-grid [data-go="${cur}"]`); b && b.focus(); } };
+document.addEventListener('click', e => {
+  const a = e.target.closest('[data-act]'); if (a) { const k = a.dataset.act; if (k === 'prev') go(-1); if (k === 'next') go(1); if (k === 'grid') openOv(true); if (k === 'close') openOv(false); if (k === 'full') { if (!document.fullscreenElement) document.documentElement.requestFullscreen?.(); else document.exitFullscreen?.(); } return; }
+  const g = e.target.closest('[data-go]'); if (g) { openOv(false); if (deckMode) show(+g.dataset.go); else slides[+g.dataset.go].scrollIntoView(); return; }
+  const s = e.target.closest('a[href="#src"]'); if (s) { e.preventDefault(); const idx = slides.findIndex(x => x.id === 'src'); if (deckMode) show(idx); else slides[idx].scrollIntoView(); const li = $(`#s-${s.dataset.s}`); if (li) { li.style.background = 'var(--amber-t)'; setTimeout(() => { li.style.background = ''; }, 1600); setTimeout(() => li.scrollIntoView({ block: 'center' }), 60); } }
+});
+document.addEventListener('keydown', e => {
+  if (e.target.matches('input, textarea')) return;
+  if (ov.classList.contains('is-open')) { if (e.key === 'Escape' || e.key.toLowerCase() === 'g') openOv(false); return; }
+  const k = e.key;
+  if (['ArrowRight', 'PageDown', ' '].includes(k) || (k === 'ArrowDown' && deckMode && !canScroll(1))) { if (deckMode) { e.preventDefault(); go(1); } }
+  else if (['ArrowLeft', 'PageUp'].includes(k) || (k === 'ArrowUp' && deckMode && !canScroll(-1))) { if (deckMode) { e.preventDefault(); go(-1); } }
+  else if (k === 'Home' && deckMode) { e.preventDefault(); show(0); }
+  else if (k === 'End' && deckMode) { e.preventDefault(); show(slides.length - 1); }
+  else if (k.toLowerCase() === 'g') openOv(true);
+  else if (k.toLowerCase() === 'f' && deckMode) { if (!document.fullscreenElement) document.documentElement.requestFullscreen?.(); else document.exitFullscreen?.(); }
+});
+const canScroll = d => { const s = slides[cur]; return d > 0 ? s.scrollTop + s.clientHeight < s.scrollHeight - 2 : s.scrollTop > 2; };
+let wheelAcc = 0, wheelT = 0;
+addEventListener('wheel', e => {
+  if (!deckMode || ov.classList.contains('is-open') || e.target.closest('input[type=range], .mx-wrap, .st-wrap')) return;
+  const d = Math.sign(e.deltaY); if (!d || Math.abs(e.deltaY) < Math.abs(e.deltaX)) return;
+  if (canScroll(d)) return;
+  const now = Date.now(); if (now - wheelT > 260) wheelAcc = 0; wheelT = now; wheelAcc += Math.abs(e.deltaY);
+  if (wheelAcc > 60) { wheelAcc = 0; go(d); }
+}, { passive: true });
+let tx = 0, ty = 0;
+addEventListener('touchstart', e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
+addEventListener('touchend', e => { if (!deckMode || e.target.closest('input')) return; const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty; if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.4) go(dx < 0 ? 1 : -1); }, { passive: true });
+if (!mq()) {
+  const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting && !deckMode) { cur = slides.indexOf(en.target); $('#prog').style.width = `${(cur + 1) / slides.length * 100}%`; } }), { rootMargin: '-45% 0px -45% 0px' });
+  slides.forEach(s => io.observe(s));
+}
+addEventListener('resize', setMode);
+addEventListener('hashchange', () => { const n = parseInt(location.hash.slice(1), 10); if (n && n - 1 !== cur) { if (deckMode) show(n - 1, false); else slides[n - 1]?.scrollIntoView(); } });
+
+bindInputs();
+const start = parseInt(location.hash.slice(1), 10);
+cur = start && start <= slides.length ? start - 1 : 0;
+render();
+setMode();
+if (!deckMode && cur) slides[cur].scrollIntoView();
+})();
+</script>
+</body>
+</html>
