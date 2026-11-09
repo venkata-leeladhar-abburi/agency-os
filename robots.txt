@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /playbook/
+Disallow: /source/
+
+Sitemap: https://www.onestop-solutions.in/sitemap.xml

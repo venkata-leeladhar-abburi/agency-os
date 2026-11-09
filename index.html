@@ -3,13 +3,30 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>One Stop Solutions — Design & Dev Studio</title>
-<meta name="description" content="One Stop Solutions designs, builds and scales websites, ERPs, dashboards and apps. A design and development studio from Andhra Pradesh, India.">
+<title>One Stop Solutions | Website, App & ERP Development Studio, India</title>
+<meta name="description" content="One Stop Solutions (Onestop) designs and builds websites, mobile apps, ERPs and dashboards for growing businesses. Design and development studio from Andhra Pradesh, India.">
 <meta name="theme-color" content="#0b0b0b">
-<meta property="og:title" content="One Stop Solutions — Design & Dev Studio">
-<meta property="og:description" content="One Stop Solutions designs, builds and scales websites, ERPs, dashboards and apps. A design and development studio from Andhra Pradesh, India.">
+<meta property="og:title" content="One Stop Solutions | Website, App & ERP Development Studio, India">
+<meta property="og:description" content="One Stop Solutions (Onestop) designs and builds websites, mobile apps, ERPs and dashboards for growing businesses. Design and development studio from Andhra Pradesh, India.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://www.onestop-solutions.in/">
 <meta property="og:type" content="website">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111'/%3E%3Ccircle cx='32' cy='32' r='14' fill='none' stroke='%23ff5a1f' stroke-width='7'/%3E%3C/svg%3E">
+<meta property="og:site_name" content="One Stop Solutions">
+<meta property="og:url" content="https://www.onestop-solutions.in/">
+<meta property="og:locale" content="en_IN">
+<meta property="og:image" content="https://www.onestop-solutions.in/img/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="One Stop Solutions: websites, ERPs, dashboards and apps">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="One Stop Solutions | Website, App & ERP Development Studio, India">
+<meta name="twitter:description" content="One Stop Solutions (Onestop) designs and builds websites, mobile apps, ERPs and dashboards for growing businesses. Design and development studio from Andhra Pradesh, India.">
+<meta name="twitter:image" content="https://www.onestop-solutions.in/img/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://www.onestop-solutions.in/#org", "name": "One Stop Solutions", "alternateName": ["Onestop", "OneStop Solutions", "Onestop Solutions Studio"], "url": "https://www.onestop-solutions.in/", "logo": "https://www.onestop-solutions.in/icon-512.png", "image": "https://www.onestop-solutions.in/img/og-image.png", "email": "workwithonestop@gmail.com", "description": "One Stop Solutions (Onestop) designs and builds websites, mobile apps, ERPs and dashboards for growing businesses. Design and development studio from Andhra Pradesh, India.", "founder": {"@type": "Person", "name": "Venkata Leeladhar Abburi", "sameAs": "https://www.linkedin.com/in/venkata-leeladhar-abburi"}, "address": {"@type": "PostalAddress", "addressRegion": "Andhra Pradesh", "addressCountry": "IN"}, "areaServed": ["IN", "Worldwide"], "knowsAbout": ["Website design", "Web development", "Mobile app development", "ERP software", "Dashboards", "UI/UX design", "Branding"], "sameAs": ["https://www.linkedin.com/company/onestop-solutions-studio"]}, {"@type": "WebSite", "@id": "https://www.onestop-solutions.in/#site", "url": "https://www.onestop-solutions.in/", "name": "One Stop Solutions", "alternateName": "Onestop", "publisher": {"@id": "https://www.onestop-solutions.in/#org"}, "inLanguage": "en"}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Caveat:wght@500;600&display=swap">
@@ -2081,7 +2098,7 @@ function initReveals() {
 const WA = '919014952056';
 const IMG = (k, n, full) => `img/${k}-${n}${full ? '-full' : ''}.webp`;
 const FR = 'https://framerusercontent.com/images/';
-const CREST = '<img class="crest" src="img/logo-bk.webp" alt="" loading="lazy">';
+const CREST = '<img class="crest" src="img/logo-bk.webp" alt="Beere Kesava and Brothers logo" loading="lazy">';
 const GLYPH = '<svg viewBox="0 0 80 80" aria-hidden="true"><use href="#i-glyph"/></svg>';
 
 /* ---------- Projects ----------
@@ -2292,16 +2309,16 @@ const initials = n => n.replace(/[^A-Za-z ]/g, '').split(' ').filter(Boolean).sl
 const face = (n, file) => `<span class="face"><b>${initials(n)}</b><img src="${FR}${file}?scale-down-to=512" alt="" loading="lazy" referrerpolicy="no-referrer" data-remote></span>`;
 const imgSrc = (p, n) => (typeof n === 'string' ? `img/${n}.webp` : IMG(p.key, n));
 const coverKind = p => (p.imgs ? (p.imgs.find(i => i[0] === p.cover) || p.imgs[0])[1] : '');
-const thumbOf = p => (p.key ? (coverKind(p) === 'phone' ? `<span class="thumb-phone"><img src="${imgSrc(p, p.cover)}" alt="" loading="lazy"></span>` : `<img src="${imgSrc(p, p.cover)}" alt="" loading="lazy">`) : p.logo ? `<span class="tile is--logo"><img src="img/logo-${p.logo}.webp" alt="" loading="lazy"></span>` : `<span class="tile"><b>${esc(p.mark || p.name)}</b></span>`);
+const thumbOf = p => (p.key ? (coverKind(p) === 'phone' ? `<span class="thumb-phone"><img src="${imgSrc(p, p.cover)}" alt="${esc(p.name)} app screen" loading="lazy"></span>` : `<img src="${imgSrc(p, p.cover)}" alt="${esc(p.name)} website screen" loading="lazy">`) : p.logo ? `<span class="tile is--logo"><img src="img/logo-${p.logo}.webp" alt="" loading="lazy"></span>` : `<span class="tile"><b>${esc(p.mark || p.name)}</b></span>`);
 const ext = u => (/^https?:/.test(u) ? ' target="_blank" rel="noopener"' : '');
 const arrow = '<svg class="btn__icon" viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-ur"/></svg>';
 
 /* A browser frame or phones with the project's own screens */
 function shot(p, n, kind, url) {
   const src = imgSrc(p, n);
-  if (kind === 'phone') return `<span class="phone"><img src="${src}" alt="" loading="lazy"></span>`;
+  if (kind === 'phone') return `<span class="phone"><img src="${src}" alt="${esc(p.name)} app screen" loading="lazy"></span>`;
   const tall = kind === 'tall';
-  return `<span class="frame${tall ? ' is--tall' : kind === 'wide' ? ' is--wide' : ''}"><span class="frame__bar"><i></i><i></i><i></i><em>${esc(url || p.url || '')}</em></span><span class="frame__view"><img src="${tall ? IMG(p.key, n, true) : src}" alt="" loading="lazy"></span></span>`;
+  return `<span class="frame${tall ? ' is--tall' : kind === 'wide' ? ' is--wide' : ''}"><span class="frame__bar"><i></i><i></i><i></i><em>${esc(url || p.url || '')}</em></span><span class="frame__view"><img src="${tall ? IMG(p.key, n, true) : src}" alt="${esc(p.name)} screen" loading="lazy"></span></span>`;
 }
 function stage(p) {
   const phones = p.imgs.filter(i => i[1] === 'phone');
@@ -2443,7 +2460,7 @@ function initLive() {
 
 /* ---------- Services, resources, products ---------- */
 function renderServices() {
-  $('#core').innerHTML = CORE.map(c => `<article class="svc"><div class="svc__img${c.phone ? ' is--phone' : ''}"><img src="${c.img}" alt="" loading="lazy"></div>
+  $('#core').innerHTML = CORE.map(c => `<article class="svc"><div class="svc__img${c.phone ? ' is--phone' : ''}"><img src="${c.img}" alt="${esc(c.name)} by One Stop Solutions: ${esc(c.work)}" loading="lazy"></div>
     <div class="svc__body"><div class="svc__head"><span class="svc__n tnum">${c.n}</span><h3 class="h-s">${esc(c.name)}</h3></div><p class="p-m svc__line">${esc(c.line)}</p>
     <ul class="ticks">${c.inc.map(t => `<li>${esc(t)}</li>`).join('')}</ul>
     <div class="svc__foot"><span class="svc__work">Seen in ${esc(c.work)}</span><a class="link-arrow" href="#contact" data-need="${esc(c.need)}">Start this project <svg viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-r"/></svg></a></div></div></article>`).join('');

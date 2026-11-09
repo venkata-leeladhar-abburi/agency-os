@@ -243,7 +243,15 @@ def build():
                                                           'to growth, with your sign-off at every gate.')
     proc, _ = page(ptitle, pdesc, proc_css, proc_body, js, GSAP + [LENIS],
                    f'<meta property="og:title" content="{ptitle}">\n<meta property="og:description" content="{pdesc}">\n'
-                   '<meta property="og:type" content="website">\n')
+                   '<meta property="og:type" content="website">\n'
+                   '<link rel="canonical" href="https://www.onestop-solutions.in/process">\n'
+                   '<meta property="og:url" content="https://www.onestop-solutions.in/process">\n'
+                   '<meta property="og:site_name" content="One Stop Solutions">\n'
+                   '<meta property="og:image" content="https://www.onestop-solutions.in/img/og-image.png">\n'
+                   '<meta name="twitter:card" content="summary_large_image">\n'
+                   '<link rel="icon" href="/favicon.ico" sizes="48x48">\n'
+                   '<link rel="icon" type="image/svg+xml" href="/favicon.svg">\n'
+                   '<link rel="apple-touch-icon" href="/apple-touch-icon.png">\n')
     proc = recolor(proc, 'pitch')
     write(os.path.join(REPO, 'process', 'index.html'), proc)
     print(f'process: {len(proc.encode()):,} bytes')

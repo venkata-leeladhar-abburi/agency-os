@@ -2,7 +2,7 @@
 const WA = '919014952056';
 const IMG = (k, n, full) => `img/${k}-${n}${full ? '-full' : ''}.webp`;
 const FR = 'https://framerusercontent.com/images/';
-const CREST = '<img class="crest" src="img/logo-bk.webp" alt="" loading="lazy">';
+const CREST = '<img class="crest" src="img/logo-bk.webp" alt="Beere Kesava and Brothers logo" loading="lazy">';
 const GLYPH = '<svg viewBox="0 0 80 80" aria-hidden="true"><use href="#i-glyph"/></svg>';
 
 /* ---------- Projects ----------
@@ -213,16 +213,16 @@ const initials = n => n.replace(/[^A-Za-z ]/g, '').split(' ').filter(Boolean).sl
 const face = (n, file) => `<span class="face"><b>${initials(n)}</b><img src="${FR}${file}?scale-down-to=512" alt="" loading="lazy" referrerpolicy="no-referrer" data-remote></span>`;
 const imgSrc = (p, n) => (typeof n === 'string' ? `img/${n}.webp` : IMG(p.key, n));
 const coverKind = p => (p.imgs ? (p.imgs.find(i => i[0] === p.cover) || p.imgs[0])[1] : '');
-const thumbOf = p => (p.key ? (coverKind(p) === 'phone' ? `<span class="thumb-phone"><img src="${imgSrc(p, p.cover)}" alt="" loading="lazy"></span>` : `<img src="${imgSrc(p, p.cover)}" alt="" loading="lazy">`) : p.logo ? `<span class="tile is--logo"><img src="img/logo-${p.logo}.webp" alt="" loading="lazy"></span>` : `<span class="tile"><b>${esc(p.mark || p.name)}</b></span>`);
+const thumbOf = p => (p.key ? (coverKind(p) === 'phone' ? `<span class="thumb-phone"><img src="${imgSrc(p, p.cover)}" alt="${esc(p.name)} app screen" loading="lazy"></span>` : `<img src="${imgSrc(p, p.cover)}" alt="${esc(p.name)} website screen" loading="lazy">`) : p.logo ? `<span class="tile is--logo"><img src="img/logo-${p.logo}.webp" alt="" loading="lazy"></span>` : `<span class="tile"><b>${esc(p.mark || p.name)}</b></span>`);
 const ext = u => (/^https?:/.test(u) ? ' target="_blank" rel="noopener"' : '');
 const arrow = '<svg class="btn__icon" viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-ur"/></svg>';
 
 /* A browser frame or phones with the project's own screens */
 function shot(p, n, kind, url) {
   const src = imgSrc(p, n);
-  if (kind === 'phone') return `<span class="phone"><img src="${src}" alt="" loading="lazy"></span>`;
+  if (kind === 'phone') return `<span class="phone"><img src="${src}" alt="${esc(p.name)} app screen" loading="lazy"></span>`;
   const tall = kind === 'tall';
-  return `<span class="frame${tall ? ' is--tall' : kind === 'wide' ? ' is--wide' : ''}"><span class="frame__bar"><i></i><i></i><i></i><em>${esc(url || p.url || '')}</em></span><span class="frame__view"><img src="${tall ? IMG(p.key, n, true) : src}" alt="" loading="lazy"></span></span>`;
+  return `<span class="frame${tall ? ' is--tall' : kind === 'wide' ? ' is--wide' : ''}"><span class="frame__bar"><i></i><i></i><i></i><em>${esc(url || p.url || '')}</em></span><span class="frame__view"><img src="${tall ? IMG(p.key, n, true) : src}" alt="${esc(p.name)} screen" loading="lazy"></span></span>`;
 }
 function stage(p) {
   const phones = p.imgs.filter(i => i[1] === 'phone');
@@ -364,7 +364,7 @@ function initLive() {
 
 /* ---------- Services, resources, products ---------- */
 function renderServices() {
-  $('#core').innerHTML = CORE.map(c => `<article class="svc"><div class="svc__img${c.phone ? ' is--phone' : ''}"><img src="${c.img}" alt="" loading="lazy"></div>
+  $('#core').innerHTML = CORE.map(c => `<article class="svc"><div class="svc__img${c.phone ? ' is--phone' : ''}"><img src="${c.img}" alt="${esc(c.name)} by One Stop Solutions: ${esc(c.work)}" loading="lazy"></div>
     <div class="svc__body"><div class="svc__head"><span class="svc__n tnum">${c.n}</span><h3 class="h-s">${esc(c.name)}</h3></div><p class="p-m svc__line">${esc(c.line)}</p>
     <ul class="ticks">${c.inc.map(t => `<li>${esc(t)}</li>`).join('')}</ul>
     <div class="svc__foot"><span class="svc__work">Seen in ${esc(c.work)}</span><a class="link-arrow" href="#contact" data-need="${esc(c.need)}">Start this project <svg viewBox="0 0 12 12" aria-hidden="true"><use href="#i-arrow-r"/></svg></a></div></div></article>`).join('');
