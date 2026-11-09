@@ -1667,6 +1667,58 @@ h1 em,h2 em,h3 em{font-style:normal;color:var(--c-violet)}
 .movein__steps span{font-size:.9375rem;line-height:1.38;color:var(--c-graphite)}
 .movein__note{font-size:.875rem;color:var(--c-steel)}
 .movein__screen .media{border-radius:.9rem;box-shadow:0 0 0 1px var(--c-line)}
+/* Moving in: what we can bring from each software */
+.mvx{margin-top:4rem;display:grid;gap:1.25rem}
+.mvx__head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:.75rem 2rem}
+.mvx__head .eyebrow{color:var(--c-violet)}
+.mvx__head p{max-width:34rem;font-size:.9375rem;line-height:1.45;color:var(--c-graphite)}
+.mvx__key{display:flex;flex-wrap:wrap;gap:.4rem 1rem;font-size:.8125rem;color:var(--c-graphite)}
+.mvx__key span{display:inline-flex;align-items:center;gap:.35rem}
+.mvx__tbl{display:grid;gap:3px;border-radius:var(--r-s);overflow:hidden}
+.mvx__row{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1.9fr) repeat(5,4.6rem) minmax(0,1.3fr) 7.2rem;gap:.9rem;align-items:center;padding:.85rem 1rem;background:var(--c-ash);font-size:.9375rem;line-height:1.38}
+.mvx__row.is--head{background:var(--c-ink);color:var(--c-concrete);font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.04em;text-transform:uppercase;line-height:1.25}
+.mvx__row.is--head span{text-align:center}
+.mvx__row.is--head span:nth-child(-n+2),.mvx__row.is--head span:nth-child(8){text-align:left}
+.mvx__row b{font-weight:600}
+.mvx__row small{display:block;font-size:.8125rem;color:var(--c-steel)}
+.mvx__how{color:var(--c-graphite)}
+.mvx__c{display:grid;place-items:center}
+.mvx__c i{display:block;width:.9rem;height:.9rem;border-radius:50%;background:var(--c-ink)}
+.mvx__c i.is--part{background:linear-gradient(90deg,var(--c-ink) 50%,transparent 0);box-shadow:inset 0 0 0 1.5px var(--c-ink)}
+.mvx__c i.is--no{width:.7rem;height:2px;border-radius:2px;background:var(--c-smoke)}
+.mvx__key i{display:inline-block;width:.75rem;height:.75rem;border-radius:50%;background:var(--c-ink)}
+.mvx__key i.is--part{background:linear-gradient(90deg,var(--c-ink) 50%,transparent 0);box-shadow:inset 0 0 0 1.5px var(--c-ink)}
+.mvx__key i.is--no{width:.7rem;height:2px;border-radius:2px;background:var(--c-smoke)}
+.mvx__do{color:var(--c-graphite)}
+.mvx__when{justify-self:start;display:inline-flex;align-items:center;height:1.6rem;padding-inline:.6rem;border-radius:var(--r-pill);background:var(--c-white);box-shadow:inset 0 0 0 1px var(--c-line-strong);font-size:.8125rem;font-weight:600;white-space:nowrap}
+.mvx__when.is--now{background:var(--c-violet);color:var(--c-white);box-shadow:none}
+.mvx__note{font-size:.875rem;color:var(--c-steel)}
+.mvx__cl{display:none}
+@media (max-width:991px){
+  .mvx__row.is--head{display:none}
+  .mvx__row{grid-template-columns:repeat(5,minmax(0,1fr));gap:.6rem .5rem;padding:1rem}
+  .mvx__row > :nth-child(1),.mvx__row > :nth-child(2),.mvx__row > :nth-child(8){grid-column:1/-1}
+  .mvx__row > :nth-child(9){grid-column:1/-1;grid-row:1;justify-self:end}
+  .mvx__row > :nth-child(1){grid-row:1;grid-column:1/5}
+  .mvx__c{align-self:stretch;grid-template-rows:1fr auto;gap:.35rem}
+  .mvx__cl{align-self:end}
+  .mvx__cl{display:block;font-family:var(--font-mono);font-size:.5625rem;letter-spacing:0;hyphens:manual;text-transform:uppercase;color:var(--c-steel);text-align:center}
+}
+/* Moving in: running costs (dark costs section) */
+.mvc{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:2rem;margin-top:.5rem;padding:1.75rem;border-radius:var(--r-s);background:var(--c-card)}
+.mvc .eyebrow{color:var(--c-volt)}
+.mvc__text{display:grid;align-content:start;gap:.8rem}
+.mvc__text p{font-size:.9375rem;line-height:1.45;color:var(--c-smoke)}
+.mvc__text p b{color:var(--c-white);font-weight:600}
+.mvc__lists{display:grid;gap:1.4rem}
+.mvc__lists h4{margin-bottom:.4rem;font-family:var(--font-mono);font-size:.6875rem;font-weight:400;letter-spacing:.05em;text-transform:uppercase;color:var(--c-smoke)}
+.mvc__lists ul{display:grid}
+.mvc__lists li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.15rem 1rem;padding:.65rem 0;border-top:1px solid var(--c-line-dark);font-size:.9375rem}
+.mvc__lists li b{font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--c-volt);text-align:right}
+.mvc__lists li span{grid-column:1/-1;font-size:.8125rem;line-height:1.38;color:var(--c-smoke)}
+.mvc__lists li.is--sum{border-top-color:var(--c-smoke)}
+.mvc__lists li.is--sum b{color:var(--c-white)}
+@media (max-width:991px){.mvc{grid-template-columns:minmax(0,1fr)}}
 .autos{display:grid;grid-template-columns:19rem minmax(0,1fr);gap:2.5rem;align-items:center;margin-top:5rem}
 .autos__body{display:grid;gap:1.5rem}
 .autos__list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.4rem}
@@ -3345,9 +3397,29 @@ html.is-gated body > :not(.gate){visibility:hidden}
         <h3 class="h-m">From the old software, <em>in an afternoon.</em></h3>
         <p class="p-m">A shop has years of stock, customers and dues in its old software. Leaving that behind is the real reason nobody switches. So moving in is a screen of its own.</p>
         <ol class="movein__steps" id="movein"></ol>
-        <p class="movein__note">Planned for the first release: Marg, Profitmaker and Excel. Others we move by hand, on a call.</p>
+        <p class="movein__note">First release: Marg, Profitmaker and Excel. Every other software is listed below.</p>
       </div>
       <div class="movein__screen"><div class="media"><span class="s is--zoom" style="--zm:1.25;--fx:1;--fy:.12" data-screen="migrate"></span></div></div>
+    </div>
+    <div class="mvx" data-reveal>
+      <div class="mvx__head">
+        <div><span class="eyebrow">Software by software</span><h3 class="h-s">What we can bring from each one.</h3></div>
+        <p>Most shops can export their main reports to Excel. That file is enough. The helper app comes later, for one click without any export.</p>
+      </div>
+      <div class="mvx__key" aria-hidden="true"><span><i></i>Comes over</span><span><i class="is--part"></i>Partly</span><span><i class="is--no"></i>Not kept there</span></div>
+      <div class="mvx__tbl" role="table" aria-label="What we can bring from each software">
+        <div class="mvx__row is--head" role="row"><span>Software</span><span>How the data comes out</span><span>Medicines</span><span>Stock, expiry</span><span>Customer dues</span><span>Distributor dues</span><span>Old bills</span><span>What the owner does</span><span>When</span></div>
+        <div class="mvx__row" role="row"><span><b>Marg ERP</b><small>Pharmacy and distributor editions</small></span><span class="mvx__how">Excel export of five reports: item list, batch stock, party outstanding and the sales register. Later, its backup file read directly.</span><span class="mvx__c"><span class="mvx__cl">Medicines</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Stock, expiry</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Customer dues</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Distri&shy;butor dues</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Old bills</span><i class="" aria-label="Yes"></i></span><span class="mvx__do">Export, drag in, check. About 15 minutes.</span><span class="mvx__when is--now">First release</span></div>
+        <div class="mvx__row" role="row"><span><b>Profitmaker</b><small>Pharmacy retail</small></span><span class="mvx__how">Excel export of the stock, party and outstanding reports, and the sales register.</span><span class="mvx__c"><span class="mvx__cl">Medicines</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Stock, expiry</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Customer dues</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Distri&shy;butor dues</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Old bills</span><i class="" aria-label="Yes"></i></span><span class="mvx__do">Export, drag in, check.</span><span class="mvx__when is--now">First release</span></div>
+        <div class="mvx__row" role="row"><span><b>Excel or Google Sheet</b><small>Any layout</small></span><span class="mvx__how">Any sheet the shop keeps. We match the columns ourselves, so no fixed format is needed.</span><span class="mvx__c"><span class="mvx__cl">Medicines</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Stock, expiry</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Customer dues</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Distri&shy;butor dues</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Old bills</span><i class="is--part" aria-label="Partly"></i></span><span class="mvx__do">Drag in, check.</span><span class="mvx__when is--now">First release</span></div>
+        <div class="mvx__row" role="row"><span><b>Tally Prime / ERP 9</b><small>The accountant’s books</small></span><span class="mvx__how">A small helper app on the accountant’s PC reads Tally while it is open. Or an Excel or XML export. Bills go back to Tally the same way.</span><span class="mvx__c"><span class="mvx__cl">Medicines</span><i class="is--part" aria-label="Partly"></i></span><span class="mvx__c"><span class="mvx__cl">Stock, expiry</span><i class="is--no" aria-label="No"></i></span><span class="mvx__c"><span class="mvx__cl">Customer dues</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Distri&shy;butor dues</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Old bills</span><i class="" aria-label="Yes"></i></span><span class="mvx__do">Install once, one click.</span><span class="mvx__when">Second release</span></div>
+        <div class="mvx__row" role="row"><span><b>GoFrugal</b><small>Retail and pharmacy</small></span><span class="mvx__how">Excel exports from its report screens: items, batch stock, outstanding and sales.</span><span class="mvx__c"><span class="mvx__cl">Medicines</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Stock, expiry</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Customer dues</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Distri&shy;butor dues</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Old bills</span><i class="" aria-label="Yes"></i></span><span class="mvx__do">Export, drag in, check.</span><span class="mvx__when">Second release</span></div>
+        <div class="mvx__row" role="row"><span><b>Busy</b><small>Accounting and stock</small></span><span class="mvx__how">Excel export of the item and party masters, stock and the outstanding list.</span><span class="mvx__c"><span class="mvx__cl">Medicines</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Stock, expiry</span><i class="is--part" aria-label="Partly"></i></span><span class="mvx__c"><span class="mvx__cl">Customer dues</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Distri&shy;butor dues</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Old bills</span><i class="is--part" aria-label="Partly"></i></span><span class="mvx__do">Export, drag in, check.</span><span class="mvx__when">Second release</span></div>
+        <div class="mvx__row" role="row"><span><b>Vyapar, myBillBook</b><small>Small shops</small></span><span class="mvx__how">Excel export of items and parties, with balances.</span><span class="mvx__c"><span class="mvx__cl">Medicines</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Stock, expiry</span><i class="is--part" aria-label="Partly"></i></span><span class="mvx__c"><span class="mvx__cl">Customer dues</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Distri&shy;butor dues</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Old bills</span><i class="is--part" aria-label="Partly"></i></span><span class="mvx__do">Export, drag in, check.</span><span class="mvx__when">Second release</span></div>
+        <div class="mvx__row" role="row"><span><b>eVitalRx</b><small>Cloud pharmacy</small></span><span class="mvx__how">Excel or CSV export from its web reports.</span><span class="mvx__c"><span class="mvx__cl">Medicines</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Stock, expiry</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Customer dues</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Distri&shy;butor dues</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Old bills</span><i class="is--part" aria-label="Partly"></i></span><span class="mvx__do">Export, drag in, check.</span><span class="mvx__when">Second release</span></div>
+        <div class="mvx__row" role="row"><span><b>Paper, or anything else</b><small>Registers and notebooks</small></span><span class="mvx__how">Our team on a call or a visit. Stock is counted by scanning the strips with the phone camera.</span><span class="mvx__c"><span class="mvx__cl">Medicines</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Stock, expiry</span><i class="" aria-label="Yes"></i></span><span class="mvx__c"><span class="mvx__cl">Customer dues</span><i class="is--part" aria-label="Partly"></i></span><span class="mvx__c"><span class="mvx__cl">Distri&shy;butor dues</span><i class="is--part" aria-label="Partly"></i></span><span class="mvx__c"><span class="mvx__cl">Old bills</span><i class="is--no" aria-label="No"></i></span><span class="mvx__do">Nothing. We do it.</span><span class="mvx__when">Any time</span></div>
+      </div>
+      <p class="mvx__note">Old bills come in as a read-only archive: searchable, never mixed into the new books. Until a software’s turn comes, our team moves that shop by hand, free. Each route is to be confirmed with a real export file from every software during the pilots.</p>
     </div>
   </div>
 </section>
@@ -3642,6 +3714,40 @@ html.is-gated body > :not(.gate){visibility:hidden}
         <details class="med" open><summary><span>Winning one new store, once</span><b id="t-win"></b></summary><div class="med__rows" id="g-win"></div><button type="button" class="med__add" data-add="win">+ Add a cost</button></details>
       </div>
       <p class="calc__note">Salaries are cost to company for a small team in Vijayawada or Hyderabad in 2026, with PF included. Type over any name or amount, change the headcount, remove a row with ×, or add your own. Your changes stay in this browser.</p>
+    </div>
+
+    <div class="mvc" data-reveal>
+      <div class="mvc__text">
+        <span class="eyebrow">Moving in, running costs</span>
+        <h3 class="h-s">About ₹50 once, then ₹5 a month a store.</h3>
+        <p>What it costs to bring a shop in from its old software and keep its old bills: servers, database, storage and AI. <b>It fits inside the ₹600 a year of cloud already counted in the ₹1,800 to serve a store.</b> The move stays free to the store.</p>
+        <p>Planning numbers. The real ones come from the first pilot shops.</p>
+      </div>
+      <div class="mvc__lists">
+        <div>
+          <h4>Once, for each store that moves in</h4>
+          <ul>
+            <li>Reading the files<b>₹2–5</b><span>Server time to read the Excel, Tally or backup files and check them</span></li>
+            <li>Matching medicine names<b>₹20–60</b><span>AI matches 3,000 to 8,000 old names to one medicine list. Only the doubtful ones go to the owner.</span></li>
+            <li>Keeping the files for undo<b>under ₹1</b><span>The uploaded files are kept 30 days, so one tap takes the move back</span></li>
+            <li class="is--sum">Once, in all<b>₹25–70</b></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Every month, for each store</h4>
+          <ul>
+            <li>Old bills archive<b>₹3–8</b><span>Two years of old bills in the database, in India, searchable, with backups</span></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Shared by all stores</h4>
+          <ul>
+            <li>Import server<b>₹3,000–6,000 a month</b><span>One machine that works through the files as shops upload them</span></li>
+            <li>Helper app signing and updates<b>₹25,000–40,000 a year</b><span>The certificate that lets Windows trust the helper app, and its downloads</span></li>
+            <li>Medicine list<b>counted above</b><span>The master list of medicines is already in “Medicine data” in the year-one cost</span></li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <div class="pr" data-reveal>
