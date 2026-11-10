@@ -151,7 +151,7 @@ def page(title, desc, css, body, js, scripts, extra_head=''):
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HW0ZNGX66F"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag(){{dataLayer.push(arguments);}}
   gtag('js', new Date());
   gtag('config', 'G-HW0ZNGX66F');
 </script>
